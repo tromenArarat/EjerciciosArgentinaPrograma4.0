@@ -4,7 +4,7 @@ Aquí hay algunos ejemplos de cómo se puede usar:
  */
 package ejemplos.string;
 
-public class EjemplosString {
+public class concat {
 
     public static void main(String[] args) {
         
@@ -24,12 +24,12 @@ public class EjemplosString {
         */
        
         String cadena3 = "El ";
-        String cadena4 = "rápido ";
-        String cadena5 = "zorro ";
-        String cadena6 = "marrón ";
-        String cadena7 = "saltó ";
-        String cadena8 = "sobre ";
-        String cadena9 = "el perro perezoso.";
+        String cadena4 = "imprevisible ";
+        String cadena5 = "pangolín ";
+        String cadena6 = "contagió ";
+        String cadena7 = "de ";
+        String cadena8 = "covid ";
+        String cadena9 = "a medio mundo.";
         String resultado2 = cadena3.concat(cadena4).concat(cadena5).concat(cadena6).concat(cadena7).concat(cadena8).concat(cadena9);
         System.out.println(resultado2); // Salida: "El rápido zorro marrón saltó sobre el perro perezoso."
         

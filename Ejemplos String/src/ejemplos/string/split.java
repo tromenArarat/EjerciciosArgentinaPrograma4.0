@@ -1,6 +1,6 @@
 /*
-    El método split en Java se utiliza para dividir una cadena 
-    en un arreglo de subcadenas, utilizando un separador especificado.
+    split retorna un arreglo de cadenas separadas por 
+    la cadena del parámetro.
     
     Este ejemplo crea una cadena cadena que contiene una lista de frutas 
     separadas por comas. Luego, utiliza el método split para dividir la cadena 
