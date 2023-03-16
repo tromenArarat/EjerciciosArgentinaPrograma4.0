@@ -31,7 +31,7 @@ public class Ejercicio6extra {
                 suma++;
             }
             sumaAlturas = sumaAlturaSope + sumaAlturaNoSope;
-            promedioGral = (sumaAlturas*100)/medidos;
+            promedioGral = sumaAlturas/medidos;
             promedioSopetis = (medidos*100)/sumaSopetis;
             
         }
