@@ -9,7 +9,7 @@ package ejerciciosguiaarreglos;
  *
  * @author Tomás
  */
-public class pruebas {
+public class ejercicio4nuevo {
 
     /**
      * @param args the command line arguments

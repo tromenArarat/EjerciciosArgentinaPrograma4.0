@@ -22,6 +22,10 @@ Por ejemplo, puedes hacer lo siguiente:
 int min = 1;
 int max = 28;
 int randomNum2 = min + (int)(Math.random() * ((max - min) + 1));
+
+
+// Random randomizate= new Random();
+// int (nombre int)= (nombre-random).nextInt(limite)
     }
     
 }
