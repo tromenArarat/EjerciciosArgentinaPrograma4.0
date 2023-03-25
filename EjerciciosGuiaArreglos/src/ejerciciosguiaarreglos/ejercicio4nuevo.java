@@ -19,18 +19,22 @@ package ejerciciosguiaarreglos;
 public class ejercicio4nuevo {
 
     public static void main(String[] args) {
+        // Creo una matriz para las notas y un vector para el promedio.
         int[][] notas=new int[10][4];
         int[] promedio=new int[notas.length];
-        
-// Cómo buscar la longitud de una matriz? .length para la 1era dimension
-// y [0].length para la segunda.
-// línea de comentario
+        int suma;
+        // Lleno las notas con número aleatorios entre 1 y 10.
+            // ¿Cómo buscar la longitud de la matriz notas? notas.length para la 1era dimension
+            // y notas[0].length para la segunda.
         for (int i = 0; i < notas.length; i++) {
             for (int j = 0; j < notas[0].length; j++) {
                 notas[i][j] = (int)(Math.random() *10);
+                
             }
+            promedio[i]= ((notas[i][0]*10)+(notas[i][1]*15)+(notas[i][2]*25)+(notas[i][3]*50))/100;
+                System.out.println("["+promedio[i]+"[");
         }
-        
+        // Cargo el vector promedio.
         
         
         

@@ -8,8 +8,8 @@ determinar su orden lexicográfico.
 Este ejemplo crea dos cadenas cadena1 y cadena2, 
 y luego utiliza el método compareTo para compararlas. 
 
-En este caso, la letra "H" en "Hola" tiene un valor 
-Unicode menor que la letra "A" en "Adiós", por lo que 
+En este caso, la letra "T" en "Tome" tiene un valor 
+Unicode menor que la letra "M" en "Más", por lo que 
 la cadena1 va antes de la cadena2 en el orden lexicográfico. 
 
 El método compareTo devuelve un número negativo 
@@ -33,8 +33,8 @@ package ejemplos.string;
 public class compareTo {
 
     public static void main(String[] args) {
-        String cadena1 = "Hola Mundo";
-        String cadena2 = "Adiós Mundo";
+        String cadena1 = "Tome y traiga";
+        String cadena2 = "Más vale solo que mal acompañado";
         int resultado = cadena1.compareTo(cadena2);
         if (resultado < 0) {
             System.out.println("La cadena1 va antes que la cadena2.");

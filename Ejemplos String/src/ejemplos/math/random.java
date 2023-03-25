@@ -3,6 +3,9 @@
  */
 package ejemplos.math;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class random {
 
     public static void main(String[] args) {
@@ -26,6 +29,12 @@ int randomNum2 = min + (int)(Math.random() * ((max - min) + 1));
 //NO CHEQUEADO
 // Random randomizate= new Random();
 // int (nombre int)= (nombre-random).nextInt(limite)
+    
+//  ASCII RANDOM
+    Scanner sc = new Scanner(System.in);
+    Random random = new Random();
+    char randomChar = (char) (random.nextInt(128)); // Rango de valores de ASCII: 0-127
+    System.out.println(randomChar);
     }
     
 }
