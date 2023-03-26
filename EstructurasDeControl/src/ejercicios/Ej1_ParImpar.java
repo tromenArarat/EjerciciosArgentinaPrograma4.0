@@ -1,7 +1,7 @@
 /*
  Crear un programa que dado un número determine si es par o impar.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 public class Ej1_ParImpar {
  

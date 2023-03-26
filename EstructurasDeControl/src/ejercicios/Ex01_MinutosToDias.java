@@ -3,11 +3,11 @@ Dado un tiempo en minutos, calcular su equivalente en días y horas. Por
 ejemplo, si el usuario ingresa 1600 minutos, el sistema debe calcular su
 equivalente: 1 día, 2 horas.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 
-public class Ejercicio1extra {
+public class Ex01_MinutosToDias {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

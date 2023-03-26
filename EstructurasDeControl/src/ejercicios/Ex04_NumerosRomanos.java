@@ -2,11 +2,11 @@
 Elaborar un algoritmo en el cual se ingrese un número entre 1 y 10 y se
 muestre su equivalente en romano.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 
-public class Ejercicio4extra {
+public class Ex04_NumerosRomanos {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

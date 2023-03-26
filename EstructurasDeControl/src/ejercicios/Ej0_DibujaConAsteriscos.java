@@ -8,7 +8,7 @@ ejemplo:
 2 **
 
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 

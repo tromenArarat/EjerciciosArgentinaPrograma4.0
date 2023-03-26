@@ -9,7 +9,7 @@ mensaje de confirmación: ¿Está seguro que desea salir del programa
 ՄS/NՅ? Si el usuario selecciona el carácter ‘S’ se sale del programa, caso
 contrario se vuelve a mostrar el menú.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 

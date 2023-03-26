@@ -9,7 +9,7 @@ lo siguiente:
 * * * *
 
 */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 

@@ -5,7 +5,7 @@ deberá de imprimir un mensaje por pantalla que diga “CORRECTO”, en
 caso contrario, se deberá imprimir “INCORRECTO”. Nota: investigar la
 función Lenght() en Java.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 

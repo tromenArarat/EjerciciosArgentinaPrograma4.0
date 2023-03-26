@@ -5,7 +5,7 @@ imprimir un mensaje por pantalla que diga “CORRECTO”, en caso
 contrario, se deberá imprimir “INCORRECTO”. Nota: investigar la función
 Substring y equals() de Java.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 

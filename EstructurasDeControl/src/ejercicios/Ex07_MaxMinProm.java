@@ -5,11 +5,11 @@ principio del programa y los números serán introducidos por el usuario.
 Realice dos versiones del programa, una usando el bucle “while” y otra
 con el bucle “do - while”.
 */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 
-public class Ejercicio7extra {
+public class Ex07_MaxMinProm {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

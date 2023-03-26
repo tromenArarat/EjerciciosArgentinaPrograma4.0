@@ -11,11 +11,11 @@ luego un valor real que represente el costo del tratamiento (previo
 al descuento) y determine el importe en efectivo a pagar por dicho
 socio.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 
-public class Ejercicio5extra {
+public class Ex05_DescuentoXmembresia {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -24,19 +24,15 @@ public class Ejercicio5extra {
         System.out.println("Ingrese tipo de socio A/B/C:");
         socioTipo = sc.next();
         System.out.println("Valor del tratamiento:");
-        int bruto = sc.nextInt();
+        double bruto = sc.nextInt();
         if("A".equalsIgnoreCase(socioTipo)){
-            System.out.println("El costo del tratamiento es "+bruto*0.5+" chelines");
-            continue;
+            System.out.println("El costo del tratamiento es: "+bruto*0.5+" chelines");
         }else if("B".equalsIgnoreCase(socioTipo)){
-            System.out.println("El costo del tratamiento es "+bruto*0.65+" chelines");
-            continue;
+            System.out.println("El costo del tratamiento es: "+bruto*0.65+" chelines");
         }else if("C".equalsIgnoreCase(socioTipo)){
-            System.out.println("No hay descuento para los pobres");
-            continue;
+            System.out.println("No hay descuento para tu categoría de aportante. Vas a tener que abonar: "+bruto);
         }else{
             System.out.println("El tipo de socio no existe");
-            continue;
         }
         
     }while("A".equalsIgnoreCase(socioTipo)||"B".equalsIgnoreCase(socioTipo)||"C".equalsIgnoreCase(socioTipo));

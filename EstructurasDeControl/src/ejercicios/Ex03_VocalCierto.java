@@ -3,11 +3,11 @@ Elaborar un algoritmo en el cual se ingrese una letra y se detecte si se
 trata de una vocal. Caso contrario mostrar un mensaje. Nota: investigar
 la función equals() de la clase String.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio3extra {
+public class Ex03_VocalCierto {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

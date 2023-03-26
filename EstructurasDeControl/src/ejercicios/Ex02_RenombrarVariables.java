@@ -5,9 +5,9 @@ necesarias para que: B tome el valor de C, C tome el valor de A, A tome
 el valor de D y D tome el valor de B. Mostrar los valores iniciales y los
 valores finales de cada variable. Utilizar sólo una variable auxiliar.
  */
-package Estructurasdecontrol;
+package ejercicios;
 
-public class Ejercicio2extra {
+public class Ex02_RenombrarVariables {
 
     public static void main(String[] args) {
         int A = 5;int B=3;int C=8;int D=2;

@@ -19,7 +19,7 @@ Para resolver el ejercicio
 deberá investigar cómo se utilizan las siguientes funciones de Java
 Substring(), Length(), equals()
  */
-package Estructurasdecontrol;
+package ejercicios;
 
 import java.util.Scanner;
 
