@@ -65,7 +65,7 @@ public Libro(){
 
     @Override
     public String toString() {
-        return "Libro cargado:" +'\n'+ "ISBN =" + isbn +'\n'+ "Titulo =" + titulo + '\n'+"Autor =" + autor + '\n'+"Cantidad de páginas =" + pp ;
+        return "Libro cargado: " +'\n'+ "ISBN = " + isbn +'\n'+ "Titulo = " + titulo + '\n'+"Autor = " + autor + '\n'+"Cantidad de páginas = " + pp ;
     }
 
     

@@ -20,7 +20,7 @@ public class Ejercicio1 {
                
         String rta = ""; 
         do{
-            System.out.println("MENU:"+'\n'+ "1.Cargar libro nuevamente"+'\n'+ "2.Consultar libro cargado"+'\n'+ "3.Salir");
+            System.out.println("MENU:"+'\n'+ "1.Cargar libro"+'\n'+ "2.Consultar libro cargado"+'\n'+ "3.Salir");
             rta = sc.next();
             switch(rta){
                 case "1":
