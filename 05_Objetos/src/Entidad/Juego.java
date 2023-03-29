@@ -29,11 +29,11 @@ public class Juego {
     public void iniciar_juego(){
     //  El primer jugador elige un número y el segundo jugador intenta adivinarlo.
         String confirmacionDeSalida = "no";
-        int bulean = 2;
+        int contadorRonda = 2;
         int numA = 5;
         Scanner sc = new Scanner(System.in);
         do{
-            if(bulean%2==0){
+            if(contadorRonda%2==0){
                 System.out.println("Eh, vos, "+primerJugador+", ingresá un número de dos dígitos:");
                 num = sc.nextInt();
                 System.out.println("Eh, vos, "+segundoJugador+", intentá adivinarlo:");
@@ -80,22 +80,27 @@ public class Juego {
                 
                 
                     // y el número de veces que cada jugador ha ganado.
-                    if(bulean%2==0 && num==numA){
-                        puntajeJ2++;
-                    }else{
+                    if(contadorRonda%2==0 && num==numA){
                         puntajeJ1++;
+                    }else if(contadorRonda%2!=0 && num==numA){
+                        puntajeJ2++;
+                    }else if(contadorRonda%2==0 && num!=numA){
+                        puntajeJ1++;
+                    }else if(contadorRonda%2!=0 && num!=numA){
+                        puntajeJ2++;
                     }
                     
                     System.out.println("Así las cosas:"
-                        +'\n'+primerJugador+" = "+puntajeJ1
-                        +'\n'+segundoJugador+" = "+puntajeJ2);
+                    +'\n'+primerJugador+" = "+puntajeJ1
+                    +'\n'+segundoJugador+" = "+puntajeJ2);
                 
-                System.out.println("");
+                    System.out.println("");
                 
-                bulean++;
+                contadorRonda++;
                 
             System.out.println("¿Seguir jugando? (si/no)");
             String rta = sc.next();
+            
             switch(rta){
                 case "si":
                     continue;
