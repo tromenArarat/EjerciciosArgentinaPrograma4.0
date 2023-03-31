@@ -10,20 +10,26 @@ public class Libro {
     
     Scanner sc = new Scanner(System.in);
     
-    public long isbn;
-    public String titulo;
-    public String autor;
-    public int pp;
+    private long isbn;
+    private String titulo;
+    private String autor;
+    private int pp;
+//    private String item;
 
 //y un constructor con todos los
 //atributos pasados por parámetro y un constructor vacío.
+
+    public Libro(long isbn, String titulo, String autor, int pp) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.pp = pp;
+    }
     
-public Libro(int isbn, String titulo, String autor, int pp){
-    
-}
-public Libro(){
-    
-}
+
+//public Libro(){
+//    
+//}
 
 //Crear un método para cargar un libro pidiendo los datos al usuario y luego
 //informar mediante otro método el número de ISBN, el título, el autor del
@@ -62,11 +68,17 @@ public Libro(){
     public void setPp(int pp) {
         this.pp = pp;
     }
+    
+//    public void setItem(String item){
+        
+//    }
 
     @Override
     public String toString() {
-        return "Libro cargado: " +'\n'+ "ISBN = " + isbn +'\n'+ "Titulo = " + titulo + '\n'+"Autor = " + autor + '\n'+"Cantidad de páginas = " + pp ;
+        return "Libro isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", pp=" + pp + '}';
     }
+
+
 
     
 

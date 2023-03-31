@@ -81,9 +81,9 @@ public class Juego {
                 
                     // y el número de veces que cada jugador ha ganado.
                     if(contadorRonda%2==0 && num==numA){
-                        puntajeJ1++;
-                    }else if(contadorRonda%2!=0 && num==numA){
                         puntajeJ2++;
+                    }else if(contadorRonda%2!=0 && num==numA){
+                        puntajeJ1++;
                     }else if(contadorRonda%2==0 && num!=numA){
                         puntajeJ1++;
                     }else if(contadorRonda%2!=0 && num!=numA){
