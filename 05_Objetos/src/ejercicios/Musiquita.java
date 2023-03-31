@@ -26,8 +26,11 @@ public class Musiquita {
         //  E F G
         //  C E D C E D C
         //  D E C
+        for (int i = 0; i < 5; i++) {
+            player.play("C E D C");
+            
+        }
         
-        player.play("C E D C E D C E F G C E D C E D C D E C");
                 
         System.out.println("Sonó balada del trasnochado");
         

@@ -13,7 +13,10 @@ import Entidad.Puntos;
 public class Ejercicio2extra {
 
     public static void main(String[] args) {
-        Puntos puntelis = new Puntos();
+        Puntos puntelis = new Puntos(12,15,12,16);
+        
+        System.out.println(puntelis.getX1());
+        
         puntelis.crearPuntos();
         
         System.out.println("La distancia entre los dos puntos es: "+puntelis.calcDistancia());
