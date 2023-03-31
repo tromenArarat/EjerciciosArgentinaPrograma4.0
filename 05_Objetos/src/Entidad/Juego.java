@@ -32,19 +32,21 @@ public class Juego {
         int contadorRonda = 2;
         int numA = 5;
         Scanner sc = new Scanner(System.in);
+        int min = 20;
+        int max = 50;
         do{
             if(contadorRonda%2==0){
-                System.out.println("Eh, vos, "+primerJugador+", ingresá un número de dos dígitos:");
+                System.out.println("Eh, vos, "+primerJugador+", ingresá un número de dos dígitos entre 20 y 50:");
                 num = sc.nextInt();
                 System.out.println("Eh, vos, "+segundoJugador+", intentá adivinarlo:");
-                numA = sc.nextInt();
+                numA = min + (int)(Math.random() * ((max - min) + 1));
             }else{
-                System.out.println("Eh, vos, "+segundoJugador+", ingresá un número de dos dígitos:");
-                num = sc.nextInt();
+                System.out.println("Hola, primer jugador , a ver si adivinás este:");
+                
+                num = min + (int)(Math.random() * ((max - min) + 1));
                 System.out.println("Eh, vos, "+primerJugador+", intentá adivinarlo:");
                 numA = sc.nextInt();
             }
-            
             int intentos = 1;
             String ayuda = "";
             // El segundo jugador tiene un número limitado de intentos y recibe una pista
@@ -52,6 +54,7 @@ public class Juego {
                                     // El juego termina cuando el segundo jugador adivina el número 
                                     // o se queda sin intentos.
                 while(numA!=num && intentos<5){
+                    int numAnterior = numA;
                     if(numA<num){
                         ayuda = "Más alto.";
                     }else{
@@ -59,7 +62,23 @@ public class Juego {
                     }
                     
                     System.out.println(ayuda+" Te quedan "+(5-intentos)+" oportunidades");
-                    numA = sc.nextInt();
+                    
+                    //Sumar a la máquina como jugador
+                    //
+                    if(ayuda.equals("Más bajo.") && contadorRonda%2==0){
+                        max=numAnterior;
+                        numA = min + (int)(Math.random() * ((max - min) + 1));
+                    }else{
+                        min=numAnterior;
+                        numA = min + (int)(Math.random() * ((max - min) + 1));
+                    }
+                    
+                    // Si juega el humano
+                    
+                    if(contadorRonda%2!=0){
+                        numA = sc.nextInt();
+                            }
+                    
                     intentos++;
                 }
                
