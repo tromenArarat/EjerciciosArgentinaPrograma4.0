@@ -12,7 +12,7 @@ import Entidad.Libro;
 import Servicios.LibroServicios;
 import java.util.Scanner;
 
-public class Ejercicio1 {
+public class Ej1_Libro {
 
     public static void main(String[] args) {
         

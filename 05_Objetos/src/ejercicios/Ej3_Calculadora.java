@@ -7,7 +7,7 @@ package ejercicios;
 import Entidad.Operacion;
 import java.util.Scanner;
 
-public class Ejercicio3 {
+public class Ej3_Calculadora {
 
     public static void main(String[] args) {
         

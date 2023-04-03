@@ -2,14 +2,14 @@
 Realizar un algoritmo que llene un vector de tamaño N 
 con valores aleatorios 
 y le pida al usuario un número a buscar en el vector. 
-El programa mostrará dónde se encuentra el numero y 
+El programa mostrará dónde se encuentra el número y 
 si se encuentra repetido
  */
 package ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio2 {
+public class Ej2_Quini6 {
 
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);

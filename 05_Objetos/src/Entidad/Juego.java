@@ -7,8 +7,8 @@ public class Juego {
 
     //  Atributos de la clase Juego
     private int num;
-    private String primerJugador = "primer jugador";
-    private String segundoJugador = "segundo jugador";
+    private String primerJugador = "jugador humano aleatorio";
+    private String segundoJugador = "ordenador desordenado";
     private int puntajeJ1 = 0;
     private int puntajeJ2 = 0;
     
@@ -32,19 +32,19 @@ public class Juego {
         int contadorRonda = 2;
         int numA = 5;
         Scanner sc = new Scanner(System.in);
-        int min = 20;
-        int max = 50;
+        int min = 10;
+        int max = 99;
         do{
             if(contadorRonda%2==0){
-                System.out.println("Eh, vos, "+primerJugador+", ingresá un número de dos dígitos entre 20 y 50:");
+                System.out.println("Turno: "+primerJugador+", ingresá un número de dos dígitos:");
                 num = sc.nextInt();
-                System.out.println("Eh, vos, "+segundoJugador+", intentá adivinarlo:");
+                System.out.println("Turno: "+segundoJugador+", intentá adivinarlo:");
                 numA = min + (int)(Math.random() * ((max - min) + 1));
+                System.out.println("La máquina dijo "+numA);
             }else{
-                System.out.println("Hola, primer jugador , a ver si adivinás este:");
-                
+                System.out.println("Hola, "+primerJugador+" , a ver si adivinás este:");
                 num = min + (int)(Math.random() * ((max - min) + 1));
-                System.out.println("Eh, vos, "+primerJugador+", intentá adivinarlo:");
+                System.out.println("Turno: "+primerJugador+", intentá adivinarlo:");
                 numA = sc.nextInt();
             }
             int intentos = 1;
@@ -54,11 +54,12 @@ public class Juego {
                                     // El juego termina cuando el segundo jugador adivina el número 
                                     // o se queda sin intentos.
                 while(numA!=num && intentos<5){
-                    int numAnterior = numA;
                     if(numA<num){
                         ayuda = "Más alto.";
+                        System.out.println(numA);
                     }else{
                         ayuda = "Más bajo.";
+                        System.out.println(numA);
                     }
                     
                     System.out.println(ayuda+" Te quedan "+(5-intentos)+" oportunidades");
@@ -66,10 +67,10 @@ public class Juego {
                     //Sumar a la máquina como jugador
                     //
                     if(ayuda.equals("Más bajo.") && contadorRonda%2==0){
-                        max=numAnterior;
+                        max=numA;
                         numA = min + (int)(Math.random() * ((max - min) + 1));
                     }else{
-                        min=numAnterior;
+                        min=numA;
                         numA = min + (int)(Math.random() * ((max - min) + 1));
                     }
                     
@@ -86,14 +87,14 @@ public class Juego {
             // número de veces que cada jugador ha ganado.
            if(intentos==5){
                System.out.println("No hubo caso."
-               +'\n'+"Tuviste un total de "+intentos+" oportunidades."
+               +'\n'+"Ningún acierto en "+intentos+" oportunidades."
                );
            }else if(numA==num && intentos==1){
-               System.out.println("Acertaste en un solo intento. Hoy es tu día :D"
+               System.out.println("¡Acierto en uno!"
                );
            }else if(numA==num){
-               System.out.println("Acertaste."
-               +'\n'+"Tuviste un total de "+intentos+" oportunidades ;)"
+               System.out.println("Intuición a pleno."
+               +'\n'+"Dio en el blanco después de "+intentos+" oportunidades ;)"
                );
            }
                 

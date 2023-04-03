@@ -4,7 +4,7 @@ enteros y los muestre por pantalla en orden descendente
  */
 package ejercicios;
 
-public class Ejercicio1 {
+public class Ej1_CuentaRegresiva {
 
 //    public static void main(String[] args) {
 //        int regresiva[] = new int[101];

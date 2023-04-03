@@ -9,7 +9,7 @@ package ejercicios;
 import Entidad.Rectang;
 import Servicios.RectangServicios;
 
-public class Ejercicio7extra {
+public class Ex7_Rectangulo {
 
     public static void main(String[] args) {
        RectangServicios service = new RectangServicios();

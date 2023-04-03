@@ -10,7 +10,7 @@ package ejercicios;
 
 import Entidad.Puntos;
 
-public class Ejercicio2extra {
+public class Ex2_Puntelis {
 
     public static void main(String[] args) {
         Puntos puntelis = new Puntos(12,15,12,16);

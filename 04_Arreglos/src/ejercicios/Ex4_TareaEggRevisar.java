@@ -20,7 +20,7 @@ package ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio4extra {
+public class Ex4_TareaEggRevisar {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in).useDelimiter("\n");                

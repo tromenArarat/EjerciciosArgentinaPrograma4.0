@@ -16,7 +16,7 @@ notas del curso
  */
 package ejercicios;
 
-public class ejercicio4nuevo {
+public class Ej4_PromediosRevisar {
 
     public static void main(String[] args) {
         // Creo una matriz para las notas y un vector para el promedio.

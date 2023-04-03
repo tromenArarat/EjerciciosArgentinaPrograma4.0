@@ -7,7 +7,7 @@ getters y setters correspondientes.
  */
 package ejercicios;
 
-public class Ejercicio1extra {
+public class Ex1_CancionIncompleto {
 
     public static void main(String[] args) {
         // TODO code application logic here

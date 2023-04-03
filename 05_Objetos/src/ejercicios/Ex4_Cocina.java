@@ -8,7 +8,7 @@ package ejercicios;
 
 import Entidad.Cocina;
 
-public class Ejercicio4extra {
+public class Ex4_Cocina {
 
     public static void main(String[] args) {
         Cocina horno = new Cocina();

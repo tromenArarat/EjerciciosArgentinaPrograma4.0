@@ -23,8 +23,15 @@ Por ejemplo, puedes hacer lo siguiente:
 */
 
 int min = 1;
-int max = 28;
+int max = 10;
 int randomNum2 = min + (int)(Math.random() * ((max - min) + 1));
+        System.out.println(randomNum2);
+
+// Otra
+// 10+1 significa que devuelva 10 números a partir del 1
+int num = (int) (Math.random()*89+10);
+
+        System.out.println(num);
 
 //NO CHEQUEADO
 // Random randomizate= new Random();

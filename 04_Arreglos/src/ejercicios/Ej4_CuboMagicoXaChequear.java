@@ -8,7 +8,7 @@ están entre el 1 y el 9.
  */
 package ejercicios;
 
-public class cuboMagico {
+public class Ej4_CuboMagicoXaChequear {
 
     public static void main(String[] args) {
         int min = 1;

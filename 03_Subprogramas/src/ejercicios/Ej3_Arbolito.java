@@ -1,14 +1,12 @@
 /*
-Crea una aplicación que nos pida un número por teclado y con una
-función se lo pasamos por parámetro para que nos indique si es o no un
-número primo, debe devolver true si es primo, sino false.
+
 
 */
 package ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio3 {
+public class Ej3_Arbolito {
 
     public static void main(String[] args) {
         String rta = "si";

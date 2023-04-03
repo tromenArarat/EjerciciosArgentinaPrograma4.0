@@ -5,7 +5,7 @@ procedimiento que imprima el vector.
  */
 package ejercicios;
 
-public class ejercicio3extra {
+public class Ex3_RellenoVector {
 
     public static void main(String[] args) {
         int arreglo[]=new int[5];

@@ -4,7 +4,7 @@ package ejercicios;
 import Entidad.Menu;
 
 
-public class Ejercicio6extra {
+public class Ex6_Menu {
 
     public static void main(String[] args) {
         Menu menu = new Menu();

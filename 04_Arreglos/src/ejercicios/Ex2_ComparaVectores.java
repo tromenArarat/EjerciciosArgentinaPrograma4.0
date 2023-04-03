@@ -6,7 +6,7 @@ diferencia entre los elementos).
 package ejercicios;
 
 
-public class ejercicio2extra {
+public class Ex2_ComparaVectores {
 
 
     public static void main(String[] args) {

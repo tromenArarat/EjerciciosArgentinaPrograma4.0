@@ -16,7 +16,7 @@ package ejercicios;
 import Entidad.Circunferencia;
 import java.util.Scanner;
 
-public class Ejercicio2 {
+public class Ej2_Circunferencia {
 
       public static void main(String[] args) {
 

@@ -20,7 +20,7 @@ package ejercicios;
 
 import Entidad.Rectangulo;
 
-public class Ejercicio4 {
+public class Ej4_Rectangulo {
 
     public static void main(String[] args) {
         Rectangulo caja = new Rectangulo();

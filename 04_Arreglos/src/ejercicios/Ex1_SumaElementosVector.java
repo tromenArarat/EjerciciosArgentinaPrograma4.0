@@ -6,7 +6,7 @@ package ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio1extra {
+public class Ex1_SumaElementosVector {
 
     public static void main(String[] args) {
 

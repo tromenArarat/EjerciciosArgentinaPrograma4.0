@@ -6,7 +6,7 @@ package ejercicios;
 
 import java.util.Scanner;
 
-public class Ejercicio3 {
+public class Ej3_ContadorDeDigitos_RandomDesbalanceado {
 
     public static void main(String[] args) {
         System.out.println("Ingrese valor de N");

@@ -7,7 +7,7 @@ cuando el usuario ingrese la palabra “No”.
  */
 package ejercicios;
 
-public class ejercicio2 {
+public class Ej2_PatovaSinHacer {
 
     public static void main(String[] args) {
         // TODO code application logic here

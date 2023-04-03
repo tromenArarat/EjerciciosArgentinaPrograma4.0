@@ -7,7 +7,7 @@ package ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio4 {
+public class Ej4_EsPrimo {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
