@@ -46,7 +46,7 @@ public class CuentaBancariaServicio {
         double monto = sc.nextDouble();
         if(libreta.getSaldoActual()<monto){
             System.out.println("Su cuenta tenía un saldo de "+libreta.getSaldoActual()+ 
-                    "\n"+"El retiro habilitado es de "+(libreta.getSaldoActual()-(monto-libreta.getSaldoActual())));
+                    "\n"+"El retiro habilitado es de "+ libreta.getSaldoActual());
             libreta.setSaldoActual(0);
         }else{
             libreta.setSaldoActual(libreta.getSaldoActual() - monto);
@@ -62,7 +62,7 @@ public class CuentaBancariaServicio {
     public void extraccionRapida(CuentaBancaria libreta){
         System.out.println("Monto a retirar:");
         double monto = sc.nextDouble();
-        if(libreta.getSaldoActual()*0.2>monto){
+        if(libreta.getSaldoActual()*0.2<monto){
             System.out.println("El monto ingresado supera el límite de la extracción rápida"+
                     "\n"+"El retiro habilitado es de "+libreta.getSaldoActual()*0.2);
             libreta.setSaldoActual(libreta.getSaldoActual()*0.8);

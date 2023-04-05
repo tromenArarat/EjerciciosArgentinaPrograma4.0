@@ -4,7 +4,7 @@ CUESTIONES A REVISAR
 - Los métodos de retiro y retiro rápido no frenan en 0.
 
  */
-package pkg06_servicio;
+package Ejercicios;
 
 import Entidades.CuentaBancaria;
 import Servicios.CuentaBancariaServicio;
@@ -55,7 +55,8 @@ public class Ej1_Cuenta {
                 fontanero.consultarSaldo(libretaDeVerdulero);
                 break;
             case 5:
-                fontanero.consultarDatos(libretaDeVerdulero);
+                System.out.println(fontanero.consultarDatos(libretaDeVerdulero));
+                break;
             case 6:
                 System.out.println("¿Seguro de que desea salir? (si/no)");
                 confirmacionSalida = sc.next();
