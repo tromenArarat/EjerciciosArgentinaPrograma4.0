@@ -62,7 +62,7 @@ public class Ej3_Personajines {
         int promedioSaludable = (100/4)*contador2;
         int promedioFlaquitos = (100/4)*contador3;
         
-        System.out.println("El promedio de dogors es "+promedioSobrepeso);
+        System.out.println("El promedio de pesados es "+promedioSobrepeso);
         System.out.println("El promedio de normis es "+promedioSaludable);
         System.out.println("El promedio de flaquitos es "+promedioFlaquitos);
         
