@@ -16,7 +16,9 @@ public class Ex5_NxM {
             for (int j = 0; j < m; j++) {
                 matriz[i][j]=(int)(Math.random()*9+1);
                 suma+=matriz[i][j];
+                System.out.print("["+matriz[i][j]+"]");
             }
+            System.out.println("");
         }
         System.out.println(suma);
     }

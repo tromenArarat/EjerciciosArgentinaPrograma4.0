@@ -13,7 +13,7 @@ package ejercicios;
 
 import java.util.Scanner;
 
-public class Ex6_SopaDeLetrasBLOKEADA {
+public class Ex6_SopaDeLetras {
 
     public static void main(String[] args) {
         
@@ -38,33 +38,28 @@ public class Ex6_SopaDeLetrasBLOKEADA {
         for (int i = 0; i < sopa.length; i++) {
             for (int j = 0; j < sopa[0].length; j++) {
                 sopa[i][j] = String.valueOf((int)(Math.random ()*9+1));
-                System.out.print(sopa[i][j]);
+//                System.out.print(sopa[i][j]);
             }
-            System.out.println("");
+//            System.out.println("");
         }
         
         // Bucle para intercalar palabras ingresadas dentro de una fila random
+             
         for (int i = 0; i < 5; i++) {
-            String palabraX;
-            int numRandom;
-            numRandom = (int)(Math.random()* 4+1);
-            palabraX = palabra[numRandom];
-            
-            sopa[(int)(Math.random()*19+1)][i] = palabraX.substring(i);
-            
-        }
-        for (int i = 0; i < sopa.length; i++) {
-            int numAleatorio = (int)(Math.random()*20+1);
-            // Código para buscar el tamaño de una palabra random
-            // palabra[(int)(Math.random()*5+1)].length()
-            for (int j = 0; j < palabra[(int)(Math.random()*5+1)].length(); j++) {
-                sopa[numAleatorio][palabra[(int)(Math.random()*5+1)].length()]=palabra[numAleatorio].substring(j, j+1);
-                System.out.println(sopa[i][j]=palabra[numAleatorio].substring(j, j+1));
+            int numRandom = (int)(Math.random ()*19+1);
+         
+            for (int j = 0; j < palabra[i].length() ; j++) {
+            if(j<palabra[i].length() && (sopa[numRandom][j].equals("1")||sopa[numRandom][j].equals("2")||sopa[numRandom][j].equals("3")||sopa[numRandom][j].equals("4")||sopa[numRandom][j].equals("5")||sopa[numRandom][j].equals("6")||sopa[numRandom][j].equals("7")||sopa[numRandom][j].equals("8")||sopa[numRandom][j].equals("9"))){
+                sopa[numRandom][j] = palabra[i].substring(j, j+1);
+            }else if(j<palabra[i].length()){
+                numRandom = (int)(Math.random ()*19+1);
+                sopa[numRandom][j] = palabra[i].substring(j, j+1);
             }
         }
+            
+        }
         
-        System.out.println("");
-        
+      
         // Bucle para imprimir resultado
         for (int i = 0; i < sopa.length; i++) {
             for (int j = 0; j < sopa[0].length; j++) {
