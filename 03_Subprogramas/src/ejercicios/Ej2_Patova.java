@@ -5,7 +5,7 @@ package ejercicios;
 
 import java.util.Scanner;
 
-public class Patova {
+public class Ej2_Patova {
     
     public static void main(String[] args) {
              confirmacion();

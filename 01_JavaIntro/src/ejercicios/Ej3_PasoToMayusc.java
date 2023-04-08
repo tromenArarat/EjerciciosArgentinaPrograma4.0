@@ -6,7 +6,7 @@ Scanner leer = new Scanner(System.in).useDelimiter("\n");
 package ejercicios;
 import java.util.Scanner;
 
-public class PasoToMayusc {
+public class Ej3_PasoToMayusc {
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         System.out.println("Ingresá una frase:");
