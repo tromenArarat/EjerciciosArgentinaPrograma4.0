@@ -1,7 +1,5 @@
 /*
-Integer(String s) Constructor que inicializa un objeto con una
-cadena de caracteres. Esta cadena debe
-contener un número entero.
+
 
 compareTo(entero,
 otroEntero)
@@ -31,6 +29,15 @@ package ejemplos.integer;
 public class ejemplosInteger {
 
     public static void main(String[] args) {
+        
+        /*
+            Integer(String s) Constructor que inicializa un objeto con una
+            cadena de caracteres. Esta cadena debe
+            contener un número entero.
+        */
+      
+ 
+        
         
       // Ejemplo 1: convirtiendo una cadena en un objeto Integer
         String numeroComoString = "123";

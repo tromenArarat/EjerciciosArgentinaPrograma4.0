@@ -14,7 +14,7 @@ public class FechaService {
     new Date(anio, mes, dia);
     */   
     
-    public Scanner sc = new Scanner(System.in);
+    public Scanner sc = new Scanner(System.in).useDelimiter("\n");
     
     public Date fechaNacimiento(){
         
@@ -42,13 +42,21 @@ public class FechaService {
     /*
     Método diferencia que reciba las dos fechas por parámetro y retorna
     la diferencia de años entre una y otra (edad del usuario).
+    
+    se usa .getDate (que va del 1 al 31) en lugar de .getDay (que va del 1 al 7)
+    
     */
-    public int edadUsuario(){
+    public int edadUsuario(Date fechaNacimiento, Date fechaActual){
         
-        
-        int edad = fechaNacimiento().getYear() - fechaActual().getYear();
+        int edad; 
+        if(fechaNacimiento.getMonth() > fechaActual.getMonth()||(fechaNacimiento.getMonth() == fechaActual.getMonth()&&fechaNacimiento.getDate() > fechaActual.getDate())){
+        edad = (fechaActual.getYear()-fechaNacimiento.getYear())-1;
+        }else{
+           edad = fechaActual.getYear() - fechaNacimiento.getYear();
+        }
         
         return edad;
     }
+    
     
 }
