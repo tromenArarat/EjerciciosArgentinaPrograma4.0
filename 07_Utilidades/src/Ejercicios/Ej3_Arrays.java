@@ -19,17 +19,20 @@ public class Ej3_Arrays {
 
         ArregloService plomero = new ArregloService();
        
-       plomero.inicializarA(vectorA);
+        plomero.inicializarA(vectorA);
         System.out.println("");
-       plomero.mostrar(vectorA);
+        System.out.println("Impresion vector A");
+        plomero.mostrar(vectorA);
         System.out.println("");
-       plomero.sort(vectorA);
+        System.out.println("Vector A ordenado:");
+        plomero.sort(vectorA);
+       
+       
         System.out.println("");
-       plomero.inicializarB(vectorA, vectorB);
-        System.out.println("");
-       plomero.mostrar(vectorA);
-        System.out.println("");
-       plomero.mostrar(vectorB);
+        plomero.inicializarB(vectorA, vectorB);
+      
+        System.out.println("Vector B:");
+        plomero.mostrar(vectorB);
        
     }
     
