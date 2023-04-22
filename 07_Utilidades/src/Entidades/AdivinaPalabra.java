@@ -22,7 +22,8 @@ public class AdivinaPalabra {
         this.letrasEncontradas = letrasEncontradas;
         this.limiteIntentos = limiteIntentos;
     }
-
+    
+    // Esto no se está usando, es solo un ejemplo de usar el this
     // Constructor que pasa por defecto el valor de cero a letras encontradas
         public AdivinaPalabra(String[] palabraOculta, int limiteIntentos) {
         this(palabraOculta,0,limiteIntentos);
@@ -32,8 +33,8 @@ public class AdivinaPalabra {
         return palabraOculta;
     }
 
-    public void setPalabraOculta(String[] palabraOculta) {
-        this.palabraOculta = palabraOculta;
+    public void setPalabraOculta(String[] marmota) {
+        this.palabraOculta = marmota;
     }
 
     public int getLetrasEncontradas() {

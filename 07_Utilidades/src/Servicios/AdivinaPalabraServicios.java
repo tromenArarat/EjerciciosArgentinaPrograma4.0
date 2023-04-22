@@ -1,11 +1,11 @@
 package Servicios;
 
 import Entidades.AdivinaPalabra;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class AdivinaPalabraServicios {
     
+     private Scanner sc = new Scanner(System.in);
     /*
     Metodo crearJuego(): le pide la palabra al usuario y cantidad de
     jugadas máxima. Con la palabra del usuario, pone la longitud de la
@@ -15,28 +15,23 @@ public class AdivinaPalabraServicios {
     valor que ingresó el usuario.
     */
     
-    private Scanner sc = new Scanner(System.in);
-    
     public void crearJuego(AdivinaPalabra juego){
         System.out.println("Palabra a adivinar:");
-        String palabraOculta = sc.next();
+        String palabraAadivinar = sc.next();
+        
+        String[] palabra = new String[palabraAadivinar.length()];
+        // Arrays.fill(arreglo, int desde, int hasta, variable)
+        
+        for (int i = 0; i < palabra.length; i++) {
+//            Arrays.fill(palabra, 0, palabra.length-1, palabraOculta.substring(i, i+1));
+            palabra[i]=palabraAadivinar.substring(i,(i+1));
+        }
+        juego.setPalabraOculta(palabra);
         
         System.out.println("Límite de intentos:");
         int limite = sc.nextInt();
         
         juego.setLimiteIntentos(limite);
-        
-        String[] palabra = new String[palabraOculta.length()];
-        // Arrays.fill(arreglo, int desde, int hasta, variable)
-        
-        for (int i = 0; i < palabra.length; i++) {
-            Arrays.fill(palabra, 0, palabra.length-1, palabraOculta.substring(i, i+1));
-//            while(i<palabra.length){
-//                palabra[i]=palabraOculta.substring(i,(i+1));
-//            }
-        }
-        
-        juego.setPalabraOculta(palabra);
         
     }
     
@@ -52,46 +47,57 @@ public class AdivinaPalabraServicios {
     /*
     Método buscar(letra): este método recibe una letra dada por el
     usuario y busca si la letra ingresada es parte de la palabra o no.
-    También informará si la letra estaba o no
+    
+    OJO QUE FALTA ESTE
+    También informará si la letra estaba YA ADIVINADA o no
     */
     
-    public String buscarLetra(AdivinaPalabra juego){
-        String resultado = "";
-        System.out.println("Ingrese una letra:");
-        String letra = sc.next();
+    public void buscar(String letra, AdivinaPalabra juego){
+        int contador = 0;
+        int perdidas = 0;
         
-        System.out.print("Longitud de la palabra: ");
-        longitud(juego);
+        for (int i = 0; i < juego.getPalabraOculta().length; i++) {
+            if(letra.equals(juego.getPalabraOculta()[i])){
+              contador++;
+              juego.setLetrasEncontradas(juego.getLetrasEncontradas()+1);
+                }
+            if(!letra.equals(juego.getPalabraOculta()[i])){
+              perdidas++;    
+            }
+        }
         
-        for (int i = 0; i < juego.palabraOculta.length; i++) {
-            if(letra.equals(juego.palabraOculta[i])){
-            resultado = "Mensaje: La letra pertenece a la palabra";
-            }else{
-         resultado = "Mensaje: La letra no se encuentra en la palabra";
-        }
-        }
-        return resultado;
+        if(perdidas==juego.getPalabraOculta().length){
+            System.out.println("Mensaje: La letra no se encuentra en la palabra");
+        }else if(contador==1){
+            System.out.println("Mensaje: La letra se encuentra en la palabra una vez");
+        }else if(contador>1){
+            System.out.println("Mensaje: La letra se encuentra en la palabra más de una vez");
+        }    
     }
-    
     /*
     Método encontradas(letra): que reciba una letra ingresada por el
-    usuario y muestre cuantas letras han sido encontradas y cuántas le
+    usuario y muestre cuántas letras han sido encontradas y cuántas le
     faltan. Este método además deberá devolver true si la letra estaba y
     false si la letra no estaba, ya que, cada vez que se busque una letra
     que no esté, se le restará uno a sus oportunidades.
     */
     
-    public void encontradas(AdivinaPalabra juego){
-        int faltantes = juego.palabraOculta.length;
-        if(buscarLetra(juego).equals("Mensaje: La letra pertenece a la palabra")){
-            faltantes--;
-            juego.setLetrasEncontradas(+1);
-        }else{
-            juego.setLimiteIntentos(-1);
+    public boolean encontradas(String letra,AdivinaPalabra juego){
+        boolean resultado = false;
+        int faltantes = juego.getPalabraOculta().length - juego.getLetrasEncontradas();
+        
+        for (int i = 0; i < juego.getPalabraOculta().length; i++) {
+           if(letra.equals(juego.getPalabraOculta()[i])){
+            faltantes = juego.palabraOculta.length-1;
+            resultado = true;
+               }else{
+                juego.setLimiteIntentos(juego.getLimiteIntentos()-1);
+                resultado = false;
         }
+        }
+        System.out.println("Número de letras (encontradas, faltantes):"+"("+juego.getLetrasEncontradas()+", "+faltantes+")");
         
-        System.out.println("Número de letras (encontradas, faltantes):"+"("+juego.getLetrasEncontradas()+", "+faltantes);
-        
+        return resultado;
     }
     
     /*
@@ -109,26 +115,29 @@ public class AdivinaPalabraServicios {
     descubra toda la palabra o se quede sin intentos. Este método se
     llamará en el main.
     */
-    
+    // JUEGO pide letra La pasa a encontradas(letra) que la pasa BUSCAR(letra,palabra[])
     public void juego(){
-        
         AdivinaPalabra juego = new AdivinaPalabra();
+        
+        crearJuego(juego); 
         do{
-        crearJuego(juego);    
-        buscarLetra(juego);
-        encontradas(juego);
-        intentos(juego);
+            System.out.println("Ingrese una letra:");
+            String letra = sc.next();
+        
+            System.out.print("Longitud de la palabra: ");
+            longitud(juego);
+            buscar(letra,juego);
+            encontradas(letra,juego);
+        }while(juego.getLimiteIntentos()>0 || juego.getLetrasEncontradas()==juego.getPalabraOculta().length);
+            
         if(juego.letrasEncontradas==juego.palabraOculta.length){
             System.out.print("Muy bien! Adivinaste todas las letras de la palabra: ");
             for (int i = 0; i < juego.palabraOculta.length; i++) {
                     System.out.print(juego.palabraOculta[i]);
             }
-        }
-        }while(juego.getLimiteIntentos()!=0);
-        System.out.println("Mensaje: Lo sentimos, no hay más oportunidades.");
-        
-        
-        
+        }else{
+              System.out.println("Mensaje: Lo sentimos, no hay más oportunidades.");
+            }
     }
     
 }
