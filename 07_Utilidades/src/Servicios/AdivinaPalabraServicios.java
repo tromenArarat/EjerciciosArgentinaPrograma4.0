@@ -68,6 +68,7 @@ public class AdivinaPalabraServicios {
         
         if(perdidas==juego.getPalabraOculta().length){
             System.out.println("Mensaje: La letra no se encuentra en la palabra");
+             juego.setLimiteIntentos(juego.getLimiteIntentos()-1);
         }else if(contador==1){
             System.out.println("Mensaje: La letra se encuentra en la palabra una vez");
         }else if(contador>1){
@@ -91,7 +92,6 @@ public class AdivinaPalabraServicios {
             faltantes = juego.palabraOculta.length-1;
             resultado = true;
                }else{
-                juego.setLimiteIntentos(juego.getLimiteIntentos()-1);
                 resultado = false;
         }
         }
