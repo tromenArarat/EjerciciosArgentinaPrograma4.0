@@ -38,6 +38,10 @@ public class CursoServicios {
     
     
     NO ESTARÍA INVOCANDO EL MÉTODO SINO HACIENDO LO MISMO QUE HACE EL MÉTODO
+    
+    Para invocar al método hubiese tenido que crear un constructor que no 
+    incluya al vector alumnos. Retornar el objeto curso con valor nulo para el
+    vector y luego invocar el método para cargarlo.
     */  
     
     public Curso crearCurso(){
@@ -45,10 +49,11 @@ public class CursoServicios {
         String nombreCurso = sc.next();
         System.out.println("Cantidad de horas por día:");
         int cantidadHorasPorDia = sc.nextInt();
-        System.out.println("Cantidad de horas por día:");
+        System.out.println("Cantidad de días por semana:");
         int cantidadDiasPorSemana = sc.nextInt();
-        System.out.println("Turno:");
+        System.out.println("¿Turno Mañana? (true/false)");
         boolean turno = sc.nextBoolean();
+        System.out.println("Precio por hora:");
         float precioPorHora = sc.nextFloat();
         
         String[] alumnos = new String[5];
@@ -70,10 +75,15 @@ public class CursoServicios {
     multiplicar la cantidad de horas por día, el precio por hora, la
     cantidad de alumnos y la cantidad de días a la semana que se repite
     el encuentro.
-    
     ESTA QUEDA PENDIENTE POR MERCANTILISTA. QUE TE VAYA A LIQUIDAR EL SUELDO TU ABUELA ;)
     */
+
+public void calcularGananciaSemanal(Curso taller){
+    System.out.println("Recaudación Bruta semanal:");
+    System.out.println(taller.getCantidadHorasPorDia()*taller.getPrecioPorHora()*taller.getCantidadDiasPorSemana()*5);
     
+    }
+
     
     
     
