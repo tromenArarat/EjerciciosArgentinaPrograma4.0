@@ -3,6 +3,7 @@ package guiacolecciones;
 
 import Entidades.Persona;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,11 +20,12 @@ public class ManosAlaObra {
     */
         
     //instanciar colección
-        
+       
+    // Lista
      ArrayList<Persona> vagos = new ArrayList();
-     
+     // Conjunto
      HashSet<Persona> laburantes = new HashSet();
-     
+     // Mapa
      HashMap<String,Persona> espias = new HashMap();
        
     //instanciar objeto 5 veces
@@ -105,17 +107,21 @@ public class ManosAlaObra {
         System.out.println(espias.get("marrón").getNombre());
         
         /*
-        Uso de iterator 
+        USO DE ITERATOR
         */
         
         // para mostrar elementos de la lista escenarios que es un ArrayList de String
+        
         ArrayList<String> escenarios = new ArrayList();
         escenarios.add("Hong Kong");
         escenarios.add("Purgatorio");
         escenarios.add("Egipto");
         escenarios.add("Bahamas");
+        
         Iterator loop = escenarios.iterator();
+        
         System.out.println("Elementos de la lista escenarios:");
+        
         while(loop.hasNext()){
             System.out.println(loop.next()+"");
         }
@@ -127,7 +133,9 @@ public class ManosAlaObra {
             if(bucle.next().equals("Egipto")){
                 bucle.remove();    
             }
-         System.out.println(bucle.next()+"");
+        }
+        while(bucle.hasNext()){
+            System.out.println(bucle.next()+"");
         }
         
         // Manos a la obra página 11
@@ -137,12 +145,35 @@ public class ManosAlaObra {
         Iterator<String> it = bebidas.iterator();
         while(it.hasNext()){
             if (it.next().equals("café")){
-            it.remove();
+                System.out.println(it.next());
+                it.remove();
             }
         }
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
+       
+        /*
+        ORDENAR UNA COLECCIÓN
+        */
     
+        // Ordenar una lista:
+//        Collections.sort(escenarios);
+        
+        // para ordenar los conjuntos, deberemos convertirlos a listas
+//        ArrayList<String> laburantesID = new ArrayList(laburantes);
+//        Collections.sort(laburantesID);
+        
+        // a la hora de ordenar un mapa como tenemos dos datos para ordenar,
+        // vamos a convertir el HashMap a un TreeMap. Nota: recordemos que los TreeSet y TreeMap se ordenan por sí mismos.
+        // PENDIENTE ESTO
+        
+        /*
+        RECORRER UNA COLECCIÓN CON OBJETOS
+        */
+        
+        // con un forEach
+        
+        for (Persona obrebrio : laburantes) {
+            System.out.println(obrebrio.getNombre());
+        }
+        
 }
 }
