@@ -73,18 +73,24 @@ public void ordenarPelis(){
         for (Pelicula pelicula : stock) {
             pelis.add(pelicula.getTitulo());
         }
-        
         Collections.sort(pelis);
         System.out.println("Las películas ordenadas alfabéticamente según su título:");
         for (String peli : pelis) {
             System.out.println(peli);
-        }
-        
+        }   
     }
     
     //  Ordenar las películas por director, alfabéticamente y mostrarlo en pantalla.
-    public void ordenarDirector(){
-      
+      public void ordenarAlfabPorDire(){
+        ArrayList<String> pelisPorDirector = new ArrayList();
+        for (Pelicula pelicula : stock) {
+            pelisPorDirector.add(pelicula.getDirector());
+        }
+        Collections.sort(pelisPorDirector);
+        System.out.println("Las películas ordenadas alfabéticamente según su director:");
+        for (String peli : pelisPorDirector) {
+            System.out.println(peli);
+        }   
     }
     
     
