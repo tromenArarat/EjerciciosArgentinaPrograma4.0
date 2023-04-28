@@ -1,5 +1,5 @@
 
-package guiacolecciones;
+package Ejercicios;
 
 import Servicios.MascotaServicio;
 

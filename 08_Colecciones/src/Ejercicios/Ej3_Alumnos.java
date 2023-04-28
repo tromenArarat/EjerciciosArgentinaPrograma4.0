@@ -15,7 +15,7 @@ del método se usará la lista notas para calcular el promedio final de alumno. 
 promedio final, devuelto por el método y mostrado en el main
 
 */
-package guiacolecciones;
+package Ejercicios;
 
 import Servicios.AlumnosServicio;
 

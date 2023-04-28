@@ -11,7 +11,7 @@ ordenada. Si el perro no se encuentra en la lista, se le informará al usuario y
 la lista ordenada.
 
 */
-package guiacolecciones;
+package Ejercicios;
 
 import java.util.ArrayList;
 import java.util.Iterator;
