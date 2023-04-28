@@ -17,14 +17,16 @@ promedio final, devuelto por el método y mostrado en el main
 */
 package guiacolecciones;
 
+import Servicios.AlumnosServicio;
+
 
 public class Ej3_Alumnos {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        AlumnosServicio skinner = new AlumnosServicio();
+        skinner.crearAlumno();
+        skinner.buscarAlumno();
+        
     }
     
 }
