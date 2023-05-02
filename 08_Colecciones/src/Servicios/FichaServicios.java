@@ -11,18 +11,43 @@ package Servicios;
 
 import Entidades.Ficha;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class FichaServicios {
-    ArrayList<ArrayList<String>> fichin;
-//    public Ficha crearFichas(){
-//        for (int i = 0; i < 7; i++) {
-//            for (int j = 0; j < 7; j++) {
-//                fichin(i)(j) = ;
-//                
-//            }
-//            
-//        }
-//        return fichin;
-//    }
+    
+    private ArrayList<Ficha> fichines = new ArrayList();
+    
+    public void crearFichas(){
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                ArrayList<String> ficha = new ArrayList();
+                ficha.add(i+":"+j);
+                fichines.add(new Ficha(ficha));
+            }
+        }
+    }
+    
+    public void mostrarFichas(){
+        fichines.forEach((fichine) -> System.out.println(fichine.getFicha().toString()));
+    }
+    
+    public void desordenarFichas(){
+        Collections.shuffle(fichines);
+    }
+    
+    public void tomarSiete(){
+    if(fichines.size()>=7){
+        System.out.println("Sus fichas son:");
+        for (int i = 0; i < 7; i++) {
+            System.out.println(fichines.get(i).toString());
+            fichines.remove(i);
+        }
+    }else{
+        System.out.println("No hay más que "+fichines.size()+" piezas disponibles.");
+    }
+        
+      
+    }
     
 }

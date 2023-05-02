@@ -9,9 +9,20 @@
  */
 package Ejercicios;
 
+import Servicios.FichaServicios;
+
 public class Ex_00_Domino {
     public static void main(String[] args) {
-        // TODO code application logic here
+        FichaServicios cubano = new FichaServicios();
+        cubano.crearFichas();
+        System.out.println("---------------------");
+        cubano.mostrarFichas();
+        System.out.println("---------------------");
+        cubano.desordenarFichas();
+        System.out.println("---------------------");
+        cubano.mostrarFichas();
+        System.out.println("---------------------");
+        cubano.tomarSiete();
     }
     
 }
