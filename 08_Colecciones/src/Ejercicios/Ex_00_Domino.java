@@ -9,20 +9,21 @@
  */
 package Ejercicios;
 
-import Servicios.FichaServicios;
+import Servicios.ServiciosDomino;
 
 public class Ex_00_Domino {
     public static void main(String[] args) {
-        FichaServicios cubano = new FichaServicios();
-        cubano.crearFichas();
-        System.out.println("---------------------");
-        cubano.mostrarFichas();
-        System.out.println("---------------------");
-        cubano.desordenarFichas();
-        System.out.println("---------------------");
-        cubano.mostrarFichas();
-        System.out.println("---------------------");
-        cubano.tomarSiete();
+        ServiciosDomino cubano = new ServiciosDomino();
+        cubano.iniciarJuego();
+        
+//        System.out.println("---------------------");
+//        cubano.mostrarFichas();
+//        System.out.println("---------------------");
+//        cubano.desordenarFichas();
+//        System.out.println("---------------------");
+//        cubano.mostrarFichas();
+//        System.out.println("---------------------");
+//        cubano.tomarSiete();
     }
     
 }

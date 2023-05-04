@@ -8,10 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-
-
 public class ManosAlaObra {
-
 
     public static void main(String[] args) {
     
@@ -22,9 +19,34 @@ public class ManosAlaObra {
     //instanciar colección
        
     // Lista
-     ArrayList<Persona> vagos = new ArrayList();
-     // Conjunto
-     HashSet<Persona> laburantes = new HashSet();
+     ArrayList<Persona> listados = new ArrayList();
+     
+     /*
+     Comentario sobre las listas:
+     -  son indiciables y esa es la manera de acceder a los valores alojados ahí, 
+        indicando su posición en la lista.
+     -  LinkedList funciona distinto que ArrayList. Es más eficiente si necesito
+        reposicionar los elementos de la lista o colocar uno nuevo entre medio
+        de dos existentes. PROBAR ESTO CON ATRIL DOMINÓ
+     -  Se implementa como una lista de doble enlace. Su rendimiento al agregar y quitar es mejor que
+        Arraylist, pero peor en los métodos set y get.
+        
+        ARRAY LIST 
+        0 1 2 3 4 5 6 7
+        5:2 6:3 3:4 1:2 3:4 3:3 1:1
+     
+        LINKED LIST
+     
+     */
+     
+     
+    // Conjunto
+     HashSet<Persona> fichasDomino = new HashSet();
+     
+     /*
+     
+     */
+     
      // Mapa
      HashMap<String,Persona> espias = new HashMap();
        
@@ -45,7 +67,7 @@ public class ManosAlaObra {
         // TRES
         Persona bot3 = new Persona(nombre,edad);
         
-        nombre = "Disculpas";
+        nombre = "Amigo";
         edad = (int) (Math.random()*99+25);
         // CUATRO
         Persona bot4 = new Persona(nombre,edad);
@@ -56,49 +78,57 @@ public class ManosAlaObra {
         Persona bot5 = new Persona(nombre,edad);
    
   
-     //agregar objeto a la colección
-        vagos.add(bot1);
-        vagos.add(bot2);
-        vagos.add(bot3);
-        vagos.add(bot4);
-        vagos.add(bot5);
+     // Agregar objeto a la colección
+        listados.add(bot1);
+        listados.add(bot2);
+        listados.add(bot3);
+        listados.add(bot4);
+        listados.add(bot5);
         
-        laburantes.add(bot1);
-        laburantes.add(bot2);
-        laburantes.add(bot3);
-        laburantes.add(bot4);
-        laburantes.add(bot5);
+        fichasDomino.add(bot1);
+        fichasDomino.add(bot2);
+        fichasDomino.add(bot3);
+        fichasDomino.add(bot4);
+        fichasDomino.add(bot5);
         
         espias.put("marrón", bot1);
         espias.put("blanco", bot2);
         espias.put("rosado", bot3);
         espias.put("magenta", bot4);
         espias.put("amarillo", bot5);
+        
+        /*
+        Uso de la clase predefinida COLlECTIONS
+        */
+        Collections.reverse(listados);
 
         /*
         Toma la Lista, el Conjunto y el Mapa que hiciste previamente y elimina en cada uno un objeto de
         cada forma que aprendiste arriba.
         */
         
-        System.out.println("Elimino vago de la posición 0");
-        vagos.remove(0);
+        System.out.println("Elimino al listado desde la posición que ocupa");
+        listados.remove(0);
+        System.out.println("Elimino al listado cuyo nombre coincida con el buscado");
+        String buscado = "Fenicio";
         
-        System.out.println("Elimino al laburante bot4");
-        laburantes.remove(bot4);
+        
+        System.out.println("Elimino del conjunto al bot4");
+        fichasDomino.remove(bot4);
         
         System.out.println("Elimino al espía rosado");
         espias.remove("rosado");
         
         // Impresiones de prueba
         
-        // imprimo la lista de vagos en sus índices 0 y 1
+        // imprimo la lista de listados en sus índices 0 y 1
         System.out.println("Muestro vago en la posición cero: nombre y edad");
-        System.out.println(vagos.get(0).getNombre()+
-                " "+vagos.get(0).getEdad());
+        System.out.println(listados.get(0).getNombre()+
+                " "+listados.get(0).getEdad());
         
-        // imprimo el conjunto de laburantes con un for each
-        System.out.println("Muestro laburantes en la colección: nombres y edad");
-        for (Persona laburante : laburantes) {
+        // imprimo el conjunto de fichasDomino con un for each
+        System.out.println("Muestro fichasDomino en la colección: nombres y edad");
+        for (Persona laburante : fichasDomino) {
             System.out.println(laburante.getNombre()+" "+laburante.getEdad());
         }
         
@@ -154,16 +184,16 @@ public class ManosAlaObra {
         ORDENAR UNA COLECCIÓN
         */
     
-        // Ordenar una lista:
-//        Collections.sort(escenarios);
+        //  Ordenar una lista:
+        //  Collections.sort(escenarios);
         
-        // para ordenar los conjuntos, deberemos convertirlos a listas
-//        ArrayList<String> laburantesID = new ArrayList(laburantes);
-//        Collections.sort(laburantesID);
+        //  para ordenar los conjuntos, deberemos convertirlos a listas
+        //  ArrayList<String> fichasDominoID = new ArrayList(fichasDomino);
+        //  Collections.sort(fichasDominoID);
         
-        // a la hora de ordenar un mapa como tenemos dos datos para ordenar,
-        // vamos a convertir el HashMap a un TreeMap. Nota: recordemos que los TreeSet y TreeMap se ordenan por sí mismos.
-        // PENDIENTE ESTO
+        //  a la hora de ordenar un mapa como tenemos dos datos para ordenar,
+        //  vamos a convertir el HashMap a un TreeMap. Nota: recordemos que los TreeSet y TreeMap se ordenan por sí mismos.
+        //  PENDIENTE ESTO
         
         /*
         RECORRER UNA COLECCIÓN CON OBJETOS
@@ -171,7 +201,7 @@ public class ManosAlaObra {
         
         // con un forEach
         
-        for (Persona obrebrio : laburantes) {
+        for (Persona obrebrio : fichasDomino) {
             System.out.println(obrebrio.getNombre());
         }
         
