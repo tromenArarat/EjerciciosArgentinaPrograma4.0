@@ -17,10 +17,12 @@ import java.util.Iterator;
 public class FichaServicios {
     
     private ArrayList<Ficha> fichines = new ArrayList();
+    private ArrayList<Ficha> atril = new ArrayList();
+    
     
     public void crearFichas(){
         for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
+            for (int j = i; j < 7; j++) {
                 ArrayList<String> ficha = new ArrayList();
                 ficha.add(i+":"+j);
                 fichines.add(new Ficha(ficha));
@@ -36,17 +38,38 @@ public class FichaServicios {
         Collections.shuffle(fichines);
     }
     
-    public void tomarSiete(){
+    public void iniciarJuego(){
+        String confirmacionDeSalida = "no";
+        int contadorRonda = 2;
+        crearFichas();
+        
+        do{
+            if(contadorRonda%2==0){
+                desordenarFichas();
+                tomarSiete();
+                // Mostrar atril. Si está el doble seis jugarlo, si no pasar.
+            }else{
+                desordenarFichas();
+                tomarSiete();
+            }
+            
+        }while(confirmacionDeSalida.equalsIgnoreCase("si")||confirmacionDeSalida.equalsIgnoreCase("sí"));
+    }
+    
+    public ArrayList tomarSiete(){
     if(fichines.size()>=7){
         System.out.println("Sus fichas son:");
         for (int i = 0; i < 7; i++) {
-            System.out.println(fichines.get(i).toString());
+//            System.out.print(fichines.get(i).toString()+ "|");
             fichines.remove(i);
+            atril.add(fichines.get(i));
+            return atril;
         }
     }else{
         System.out.println("No hay más que "+fichines.size()+" piezas disponibles.");
-    }
         
+    }
+        return atril;
       
     }
     
