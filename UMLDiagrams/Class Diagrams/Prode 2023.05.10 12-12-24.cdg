@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Prode">
+  <ClassDiagramComponents>
+    <Class name="Equipo" package="Entidades" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="nombreSimplificado" type="String" visibility="private"/>
+        <Field name="dt" type="String" visibility="private"/>
+        <Field name="puntajeGeneral" type="int" visibility="private"/>
+        <Field name="pg" type="int" visibility="private"/>
+        <Field name="pe" type="int" visibility="private"/>
+        <Field name="pp" type="int" visibility="private"/>
+        <Field name="gf" type="int" visibility="private"/>
+        <Field name="gc" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setPuntajeGeneral" returnType="void" visibility="public">
+          <Argument type="int" name="puntajeGeneral"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Partido" package="Entidades" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="local" type="String" visibility="private"/>
+        <Field name="visitante" type="String" visibility="private"/>
+        <Field name="fecha" type="int" visibility="private"/>
+        <Field name="orden" type="int" visibility="private"/>
+        <Field name="fixture" type="String[][]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="local"/>
+          <Argument type="String" name="visitante"/>
+          <Argument type="int" name="fecha"/>
+          <Argument type="int" name="orden"/>
+          <Argument type="String[][]" name="fixture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getLocal" returnType="String" visibility="public"/>
+        <Method name="setLocal" returnType="void" visibility="public">
+          <Argument type="String" name="local"/>
+        </Method>
+        <Method name="getVisitante" returnType="String" visibility="public"/>
+        <Method name="setVisitante" returnType="void" visibility="public">
+          <Argument type="String" name="visitante"/>
+        </Method>
+        <Method name="getFecha" returnType="int" visibility="public"/>
+        <Method name="setFecha" returnType="void" visibility="public">
+          <Argument type="int" name="fecha"/>
+        </Method>
+        <Method name="getOrden" returnType="int" visibility="public"/>
+        <Method name="setOrden" returnType="void" visibility="public">
+          <Argument type="int" name="orden"/>
+        </Method>
+        <Method name="getFixture" returnType="String[][]" visibility="public"/>
+        <Method name="setFixture" returnType="void" visibility="public">
+          <Argument type="String[][]" name="fixture"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Resultado" package="Entidades" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="resultado" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int[][]" name="resultado"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getResultado" returnType="int[][]" visibility="public"/>
+        <Method name="setResultado" returnType="void" visibility="public">
+          <Argument type="int[][]" name="resultado"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Usuario" package="Entidades" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="puntaje" type="int" visibility="private"/>
+        <Field name="pronostico" type="ArrayList&lt;ArrayList&lt;Integer&gt;&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="puntaje"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getPuntaje" returnType="int" visibility="public"/>
+        <Method name="setPuntaje" returnType="void" visibility="public">
+          <Argument type="int" name="puntaje"/>
+        </Method>
+        <Method name="getPronostico" returnType="ArrayList&lt;ArrayList&lt;Integer&gt;&gt;" visibility="public"/>
+        <Method name="setPronostico" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;ArrayList&lt;Integer&gt;&gt;" name="pronostico"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="prode" package="prode" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="EquipoServicios" package="Servicios" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="sc" type="Scanner" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="cargarEquipos" returnType="Equipo" visibility="public">
+          <Argument type="Partido" name="doparti"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PartidoServicio" package="Servicios" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="llenarFixture" returnType="void" visibility="public">
+          <Argument type="Partido" name="doparti"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ResultadoServicio" package="Servicios" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="crearResultado" returnType="Resultado" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="UsuarioServicio" package="Servicios" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="sc" type="Scanner" visibility="private"/>
+        <Field name="usuarios" type="ArrayList&lt;Usuario&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crearUsuario" returnType="void" visibility="public"/>
+        <Method name="pedirPronostico" returnType="void" visibility="public">
+          <Argument type="Partido" name="doparti"/>
+          <Argument type="Usuario" name="jugador"/>
+        </Method>
+        <Method name="actualizarPuntaje" returnType="void" visibility="public">
+          <Argument type="Usuario" name="usuario"/>
+          <Argument type="Resultado" name="resultado"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="usuarios" source="Servicios.UsuarioServicio" target="Entidades.Usuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Usuario&gt;"/>
+    <UseRelation source="Servicios.PartidoServicio" target="Entidades.Partido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Servicios.ResultadoServicio" target="Entidades.Resultado" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Servicios.EquipoServicios" target="Entidades.Partido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Servicios.UsuarioServicio" target="Entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
