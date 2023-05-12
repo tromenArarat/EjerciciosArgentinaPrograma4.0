@@ -6,6 +6,7 @@ public class Jugador {
     private String apellido;
     private String posicion;
     private int numero;
+    private Equipo eq;
 
     public Jugador() {
     }
@@ -49,6 +50,13 @@ public class Jugador {
         this.numero = numero;
     }
     
+    public Equipo getEq(){
+        return eq;
+    }
+    
+    public void setEq(Equipo eq){
+        this.eq = eq;
+    }
     
     
 }

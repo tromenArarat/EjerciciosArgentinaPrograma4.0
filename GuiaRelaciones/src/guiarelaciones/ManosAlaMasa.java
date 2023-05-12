@@ -46,8 +46,12 @@ public class ManosAlaMasa {
             String posicion = sc.next();
             System.out.println("Casaca:");
             int casaca = sc.nextInt();
+            
             aveer.add(new Jugador(nombre,apellido,posicion,casaca));
         }
+            System.out.println("Equipo:");
+            String eq = sc.next();
+            galacticos.setNombre(eq);
             galacticos.setJugadores(aveer);
             System.out.println("El primer jugador de la lista:");
             System.out.println(galacticos.getJugadores().get(0).getApellido());
