@@ -1,5 +1,5 @@
 /*
-Realizar un programa para que una Persona pueda adoptar un Perro. Vamos a contar de dos
+Realizar un programa para que una Persona pueda adoptar un Perro. Vamos a contar CON dos
 clases. Perro, que tendrá como atributos: nombre, raza, edad y tamaño; y la clase Persona con
 atributos: nombre, apellido, edad, documento y Perro.
 
@@ -20,7 +20,7 @@ public class AdopcionResponsable {
         
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         
-        Cuidadorx x = new Cuidadorx();
+        Cuidadorx x;
         
         Perro perro1 = new Perro("PotitoCagado","delCerro",5,15);
         Perro perro2 = new Perro("Purrán","delBarrio",7,19);
@@ -28,8 +28,6 @@ public class AdopcionResponsable {
         ropes.add(perro1);
         ropes.add(perro2);
        
-            
-            
             String confirmacionSalida = "no";
             do{
                 System.out.println("-----------------------------------------------");
@@ -68,7 +66,7 @@ public class AdopcionResponsable {
                         break;
                     case 3:
                         System.out.println("¿Seguro de que desea salir? si/no");
-                        String confirmacion = sc.next();
+                        confirmacionSalida = sc.next();
                         break;
                 }
             }while(confirmacionSalida.equalsIgnoreCase("no"));
