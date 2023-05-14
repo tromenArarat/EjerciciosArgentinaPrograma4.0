@@ -9,6 +9,19 @@ la clase Persona, la información del Perro y de la Persona.
  */
 package guiarelaciones;
 
+/*
+Ahora se debe realizar unas mejoras al ejercicio de Perro y Persona. Nuestro programa va a
+tener que contar con muchas personas y muchos perros. El programa deberá preguntarle a
+cada persona, que perro según su nombre, quiere adoptar. 
+
+- Dos personas no pueden adoptar al mismo perro
+- Si la persona eligió un perro que ya estaba adoptado, se le debe informar a la persona.
+
+Una vez que la Persona elige, el Perro se le asigna. 
+
+Al final deberemos mostrar todas las personas con sus respectivos perros.
+*/
+
 import Entidades.Cuidadorx;
 import Entidades.Perro;
 import java.util.ArrayList;
@@ -20,7 +33,7 @@ public class AdopcionResponsable {
         
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         
-        Cuidadorx x;
+        ArrayList<Cuidadorx> c = new ArrayList();
         
         Perro perro1 = new Perro("PotitoCagado","delCerro",5,15);
         Perro perro2 = new Perro("Purrán","delBarrio",7,19);
@@ -34,8 +47,9 @@ public class AdopcionResponsable {
                 System.out.println("Bienvenido al mercado virtual de mascotas (MVM)");
                 System.out.println("-----------------------------------------------");
                 System.out.println("VER PERROS DISPONIBLES   ------->  Presione |1|");
-                System.out.println("ADOPTAR ALGUNO           ------->  Presione |2|");
-                System.out.println("SALIR                    ------->  Presione |3|");
+                System.out.println("INGRESAR DATOS           ------->  Presione |2|");
+                System.out.println("ADOPTAR                  ------->  Presione |3|");
+                System.out.println("SALIR                    ------->  Presione |4|");
             
             int rta = sc.nextInt();
                 switch(rta){
@@ -45,26 +59,37 @@ public class AdopcionResponsable {
                         }
                         break;
                     case 2:
-                        System.out.println("Disculpame, pero ¿cómo te llamás?");
+                        System.out.println("¿Cómo te llamás?");
                         String nombre = sc.next();
-                        System.out.println("Sí, claro, ¿y tu apellido?");
+                        System.out.println("¿Y tu apellido?");
                         String apellido = sc.next();
                         System.out.println("¿Cuántos años tenés?");
                         int edad = sc.nextInt();
                         System.out.println("Permitime tu DNI");
                         int dni = sc.nextInt();
-                        System.out.println("¿Qué perro querés?");
-                        System.out.println(ropes.get(0).getNombre()+" presione |1|");
-                        System.out.println(ropes.get(1).getNombre()+" presione |2|");
-                        int opcion = sc.nextInt();
-                        if(opcion == 1){
-                            x = new Cuidadorx(nombre,apellido,edad,dni,ropes.get(0));
-                        }else{
-                            x = new Cuidadorx(nombre,apellido,edad,dni,ropes.get(1));
-                        }
-                        System.out.println(x.getApellido()+" más vale que te hagas cargo de "+x.getRope().getNombre());
+                        c.add(new Cuidadorx(nombre,apellido,edad,dni)); 
                         break;
+                    
                     case 3:
+                        System.out.println("A ver, escribime las iniciales de tu nombre y de tu apellido todo junto, sin espacios");
+                        String ini = sc.next();
+                        for (int i = 0; i < c.size(); i++) {
+                            if(ini.equals(c.get(i).getNombre().substring(0, 1)+""+c.get(i).getApellido().substring(0, 1))){
+                                System.out.println("¿Qué perro querés?");
+                                for (int j = 0; j < ropes.size(); j++) {
+                                   System.out.println(ropes.get(j).getNombre()+" presione |"+(j+1)+"|");
+                                    
+                                }
+                                
+                                int opcion = sc.nextInt();
+                                c.get(i).setRope(ropes.get(opcion-1));
+                                ropes.remove(opcion-1);
+                                System.out.println(c.get(i).getApellido()+" más vale que te hagas cargo de "+c.get(i).getRope().getNombre());
+                                }
+                            };
+                        break;
+                        
+                    case 4:
                         System.out.println("¿Seguro de que desea salir? si/no");
                         confirmacionSalida = sc.next();
                         break;

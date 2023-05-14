@@ -12,6 +12,15 @@ package Entidades;
     public Cuidadorx() {
     }
 
+    public Cuidadorx(String nombre, String apellido, int edad, int dni) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.dni = dni;
+    }
+
+    
+    
     public Cuidadorx(String nombre, String apellido, int edad, int dni, Perro rope) {
         this.nombre = nombre;
         this.apellido = apellido;
