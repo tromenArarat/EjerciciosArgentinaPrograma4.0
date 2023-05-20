@@ -24,6 +24,7 @@ Al final deberemos mostrar todas las personas con sus respectivos perros.
 
 import Entidades.Cuidadorx;
 import Entidades.Perro;
+import Entidades.Raza;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,8 +36,8 @@ public class AdopcionResponsable {
         
         ArrayList<Cuidadorx> c = new ArrayList();
         
-        Perro perro1 = new Perro("PotitoCagado","delCerro",5,15);
-        Perro perro2 = new Perro("Purrán","delBarrio",7,19);
+        Perro perro1 = new Perro("PotitoCagado",Raza.valueOf("del Cerro"),5,15);
+        Perro perro2 = new Perro("Purrán",Raza.valueOf("de la cuadra"),7,19);
         ArrayList<Perro> ropes = new ArrayList();
         ropes.add(perro1);
         ropes.add(perro2);
@@ -69,7 +70,6 @@ public class AdopcionResponsable {
                         int dni = sc.nextInt();
                         c.add(new Cuidadorx(nombre,apellido,edad,dni)); 
                         break;
-                    
                     case 3:
                         System.out.println("A ver, escribime las iniciales de tu nombre y de tu apellido todo junto, sin espacios");
                         String ini = sc.next();
@@ -78,9 +78,7 @@ public class AdopcionResponsable {
                                 System.out.println("¿Qué perro querés?");
                                 for (int j = 0; j < ropes.size(); j++) {
                                    System.out.println(ropes.get(j).getNombre()+" presione |"+(j+1)+"|");
-                                    
-                                }
-                                
+                                } 
                                 int opcion = sc.nextInt();
                                 c.get(i).setRope(ropes.get(opcion-1));
                                 ropes.remove(opcion-1);
@@ -88,14 +86,11 @@ public class AdopcionResponsable {
                                 }
                             };
                         break;
-                        
                     case 4:
                         System.out.println("¿Seguro de que desea salir? si/no");
                         confirmacionSalida = sc.next();
                         break;
                 }
-            }while(confirmacionSalida.equalsIgnoreCase("no"));
-                        
+            }while(confirmacionSalida.equalsIgnoreCase("no"));        
     }
-    
 }

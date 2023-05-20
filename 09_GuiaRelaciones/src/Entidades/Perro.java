@@ -3,14 +3,14 @@ package Entidades;
 public class Perro {
 
     private String nombre;
-    private String raza;
+    private Raza raza;
     private int edad;
     private int kg;
 
     public Perro() {
     }
 
-    public Perro(String nombre, String raza, int edad, int kg) {
+    public Perro(String nombre, Raza raza, int edad, int kg) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -25,11 +25,11 @@ public class Perro {
         this.nombre = nombre;
     }
 
-    public String getRaza() {
+    public Raza getRaza() {
         return raza;
     }
 
-    public void setRaza(String raza) {
+    public void setRaza(Raza raza) {
         this.raza = raza;
     }
 

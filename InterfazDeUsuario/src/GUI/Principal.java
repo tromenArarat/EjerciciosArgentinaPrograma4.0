@@ -343,7 +343,6 @@ public class Principal extends javax.swing.JFrame {
                                     tablaDeVerdad[i][8] = "   F   ";
                                 }
                                 
-                                
                             }else if(i==2){
                                 setP(true);
                                 setQ(false);
@@ -352,7 +351,6 @@ public class Principal extends javax.swing.JFrame {
                                 }else{
                                     tablaDeVerdad[i][0] = "   F   ";
                                 }    
-                                
                                 if(isQ()){
                                     tablaDeVerdad[i][1] = "   V   ";
                                 }else{
@@ -418,91 +416,88 @@ public class Principal extends javax.swing.JFrame {
                                 }else{
                                     tablaDeVerdad[i][3] = "   F   ";
                                 }
-                                if(eso3.conjuncion){
+                                if(operar.conjuncion(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][4] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][4] = "   F   ";
                                 }
-                                if(eso3.disyuncion){
+                                if(operar.disyuncion(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][5] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][5] = "   F   ";
                                 }
-                                if(eso3.condicional){
+                                if(operar.condicional(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][6] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][6] = "   F   ";
                                 }
-                                if(eso3.bicondicional){
+                                if(operar.bicondicional(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][7] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][7] = "   F   ";
                                 }
-                                if(eso3.disyExcl){
+                                if(operar.disyExcl(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][8] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][8] = "   F   ";
                                 }
                             }else if(i==4){
-                                qyp.setP(false);
-                                qyp.setQ(false);
-                                Conectores eso4 = plomo.rellenarConectores(qyp);
+                                setP(false);
+                                setQ(false);
                                 if(isP()){
                                     tablaDeVerdad[i][0] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][0] = "   F   ";
-                                }    
-                                
+                                }
                                 if(isQ()){
                                     tablaDeVerdad[i][1] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][1] = "   F   ";
                                 } 
-                                if(eso4.noP){
+                                if(operar.noP(p).equals("Verdadero")){
                                     tablaDeVerdad[i][2] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][2] = "   F   ";
                                 }
-                                if(eso4.noQ){
+                                if(operar.noQ(q).equals("Verdadero")){
                                     tablaDeVerdad[i][3] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][3] = "   F   ";
                                 }
-                                if(eso4.conjuncion){
+                                if(operar.conjuncion(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][4] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][4] = "   F   ";
                                 }
-                                if(eso4.disyuncion){
+                                if(operar.disyuncion(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][5] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][5] = "   F   ";
                                 }
-                                if(eso4.condicional){
+                                if(operar.condicional(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][6] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][6] = "   F   ";
                                 }
-                                if(eso4.bicondicional){
+                                if(operar.bicondicional(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][7] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][7] = "   F   ";
                                 }
-                                if(eso4.disyExcl){
+                                if(operar.disyExcl(p,q).equals("Verdadero")){
                                     tablaDeVerdad[i][8] = "   V   ";
                                 }else{
                                     tablaDeVerdad[i][8] = "   F   ";
                                 }
-                                
-                            
                         }
-                            System.out.print(tablaDeVerdad[i][j]);
-                        
-                        
+                            textArea.setText(tablaDeVerdad[i][j]);
+//                            System.out.print(tablaDeVerdad[i][j]);   
                     }
-                        System.out.println("");
+//                        System.out.println("");
+                            textArea.setText("");
                     }
-                    System.out.println("");
+//                    System.out.println("");
+                            textArea.setText("");
         
     }//GEN-LAST:event_tablaVerdadActionPerformed
 
