@@ -9,25 +9,24 @@ public class SalaServicios {
     
     private Scanner sc = new Scanner(System.in).useDelimiter("\n");
     
-    
-    public void llenarSala(){
+        
+    public void llenarSala(Sala peri){
         Asiento butacas[][] = new Asiento[8][6];
-        for (int i = 8; i < 1; i--) {
+        for (int i = 0; i < 8; i++) {
             char letra = 'A';
             for (int j = 0; j < 6; j++) {
-                butacas[i][j] = new Asiento(false,letra,i);
+                butacas[i][j] = new Asiento(false,letra,(8-i));
                 letra++;
             }
         }
-        for (Asiento[] butaca : butacas) {
-            System.out.println(butaca.toString());
-        }
+        peri.setAsientos(butacas);
     }
+    
     
     public void mostrarSala(Sala peri){
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 6; j++) {
-                System.out.println(peri.getAsientos()[i][j]);
+                System.out.print(peri.getAsientos()[i][j]+" "+ "|");
             }
             System.out.println("");
         }

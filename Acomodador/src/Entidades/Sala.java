@@ -6,25 +6,27 @@ ocupado se muestra una X, sino un espacio vacío.
  */
 package Entidades;
 
+import java.util.ArrayList;
+
 
 public class Sala {
     
-    private Espectador[] espectadores;
-    private Asiento[][] asientos;
+    private ArrayList<Espectador> espectadores;
+    private Asiento[][] asientos = new Asiento[8][6];
 
     public Sala() {
     }
 
-    public Sala(Espectador[] espectadores, Asiento[][] asientos) {
+    public Sala(ArrayList<Espectador> espectadores, Asiento[][] asientos) {
         this.espectadores = espectadores;
         this.asientos = asientos;
     }
 
-    public Espectador[] getEspectadores() {
+    public ArrayList<Espectador> getEspectadores() {
         return espectadores;
     }
 
-    public void setEspectadores(Espectador[] espectadores) {
+    public void setEspectadores(ArrayList<Espectador> espectadores) {
         this.espectadores = espectadores;
     }
 

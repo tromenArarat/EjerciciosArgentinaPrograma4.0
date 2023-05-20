@@ -490,14 +490,14 @@ public class Principal extends javax.swing.JFrame {
                                     tablaDeVerdad[i][8] = "   F   ";
                                 }
                         }
-                            textArea.setText(tablaDeVerdad[i][j]);
-//                            System.out.print(tablaDeVerdad[i][j]);   
+//                            textArea.setText(tablaDeVerdad[i][j]);
+                            System.out.print(tablaDeVerdad[i][j]);   
                     }
-//                        System.out.println("");
-                            textArea.setText("");
+                        System.out.println("");
+//                            textArea.setText("");
                     }
-//                    System.out.println("");
-                            textArea.setText("");
+                    System.out.println("");
+//                            textArea.setText("");
         
     }//GEN-LAST:event_tablaVerdadActionPerformed
 

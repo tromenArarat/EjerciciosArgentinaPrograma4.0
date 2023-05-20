@@ -45,9 +45,11 @@ public class Asiento {
         String ocu = "";
         if(ocupada){
             ocu = "X";
+        }else{
+            ocu="";
         }
         
-        return letra + numero + ocu;
+        return numero +" "+ letra +" "+ ocu;
     }
     
     
