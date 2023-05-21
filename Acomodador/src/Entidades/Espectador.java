@@ -9,6 +9,7 @@ public class Espectador {
     private String nombre;
     private int edad;
     private int dinero;
+    private Asiento butaca;
 
     public Espectador() {
     }
@@ -41,6 +42,14 @@ public class Espectador {
 
     public void setDinero(int dinero) {
         this.dinero = dinero;
+    }
+
+    public Asiento getButaca() {
+        return butaca;
+    }
+
+    public void setButaca(Asiento butaca) {
+        this.butaca = butaca;
     }
 
     

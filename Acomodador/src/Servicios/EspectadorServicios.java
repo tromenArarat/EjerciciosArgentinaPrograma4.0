@@ -13,35 +13,57 @@ En caso de que el asiento este ocupado se le debe buscar uno libre.
  */
 package Servicios;
 
+import Entidades.Asiento;
+import Entidades.Cine;
 import Entidades.Espectador;
 import Entidades.Sala;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class EspectadorServicios {
     
     public void crearEspectadores(Sala peri){
-        ArrayList<Espectador> publico = new ArrayList();
-        for (int i = 0; i < 64; i++) {
-            char letra = 'z';
-            String nombre = letra+" "+"fan";
-            int edad = (int)(Math.random()*99+6);
-            int dinero = (int)(Math.random()*2000+100);
-            publico.add(new Espectador(nombre,edad,dinero));
-            letra++;
+        Espectador[][] publico = new Espectador[8][6];
+        for (int i = 0; i < 8; i++) {
+            char letra = 'a';
+            for (int j = 0; j < 6; j++) {
+                String nombre = letra+" "+"fan";
+                int edad = (int)(Math.random()*95+6);
+                int dinero = (int)(Math.random()*2000+100);
+                publico[i][j] = new Espectador(nombre,edad,dinero);
+                letra ++;    
+            }
         }
         peri.setEspectadores(publico);
     }
     
     public void mostrarEspectadores(Sala peri){
-        for (int i = 0; i < 64; i++) {
-            System.out.println("Nombre: "+peri.getEspectadores().get(i).getNombre() +'\n'+ "Edad: "+peri.getEspectadores().get(i).getEdad() +
-                    '\n'+ "Bille disponible: " + peri.getEspectadores().get(i).getDinero());
-            
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 6; j++) {
+                System.out.println("Nombre: "+peri.getEspectadores()[i][j].getNombre() +'\n'+ "Edad: "+peri.getEspectadores()[i][j].getEdad() +
+                    '\n'+ "Bille disponible: " + peri.getEspectadores()[i][j].getDinero());
+            }
         }
     }
-    public void ubicarEspectador(){
-        
-    }
-
     
+    public void ubicarEspectador(Sala peri, Espectador smith, Cine tugurio){
+        // Cargo los asientos ya creados en un arrayList de asientos
+        ArrayList<Asiento> lugares = new ArrayList();
+           for (int i = 0; i < 8; i++) {
+               for (int j = 0; j < 6; j++) {
+                   lugares.add(peri.getButacax()[i][j]);
+               }
+           }
+
+        // Desordeno ese ArrayList e itero sobre la lista: 
+        // Si se cumplen todas las condiciones, asigno el asiento a Smith
+        Collections.shuffle(lugares);
+        for (Asiento lugar : lugares) {
+            if(smith.getDinero()>tugurio.getPrecioEntrada()
+                    & lugar.isOcupada() == false & smith.getEdad()>=tugurio.getEdadMinima()){
+                smith.setButaca(lugar);
+        }
+        } 
+    }
 }

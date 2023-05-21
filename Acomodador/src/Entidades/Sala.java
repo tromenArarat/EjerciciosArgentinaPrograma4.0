@@ -11,32 +11,36 @@ import java.util.ArrayList;
 
 public class Sala {
     
-    private ArrayList<Espectador> espectadores;
-    private Asiento[][] asientos = new Asiento[8][6];
+   private Espectador[][] espectadores;
+   private Asiento[][] butacax;
 
     public Sala() {
     }
 
-    public Sala(ArrayList<Espectador> espectadores, Asiento[][] asientos) {
-        this.espectadores = espectadores;
-        this.asientos = asientos;
-    }
-
-    public ArrayList<Espectador> getEspectadores() {
+    public Espectador[][] getEspectadores() {
         return espectadores;
     }
 
-    public void setEspectadores(ArrayList<Espectador> espectadores) {
+    public void setEspectadores(Espectador[][] espectadores) {
         this.espectadores = espectadores;
     }
 
-    public Asiento[][] getAsientos() {
-        return asientos;
+    public Asiento[][] getButacax() {
+        return butacax;
     }
 
-    public void setAsientos(Asiento[][] asientos) {
-        this.asientos = asientos;
+    public void setButacax(Asiento[][] butacax) {
+        this.butacax = butacax;
     }
+
+    public Sala(Espectador[][] espectadores, Asiento[][] butacax) {
+        this.espectadores = espectadores;
+        this.butacax = butacax;
+    }
+
+
     
+  
+   
     
 }

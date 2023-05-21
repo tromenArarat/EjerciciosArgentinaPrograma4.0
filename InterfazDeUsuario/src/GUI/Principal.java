@@ -493,11 +493,11 @@ public class Principal extends javax.swing.JFrame {
 //                            textArea.setText(tablaDeVerdad[i][j]);
                             System.out.print(tablaDeVerdad[i][j]);   
                     }
-                        System.out.println("");
-//                            textArea.setText("");
+//                        System.out.println("");
+                            textArea.setText("");
                     }
-                    System.out.println("");
-//                            textArea.setText("");
+//                    System.out.println("");
+                            textArea.setText("");
         
     }//GEN-LAST:event_tablaVerdadActionPerformed
 

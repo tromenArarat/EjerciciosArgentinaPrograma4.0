@@ -49,7 +49,7 @@ public class Asiento {
             ocu="";
         }
         
-        return numero +" "+ letra +" "+ ocu;
+        return numero +" "+ letra +" "+ ocu + " |";
     }
     
     
