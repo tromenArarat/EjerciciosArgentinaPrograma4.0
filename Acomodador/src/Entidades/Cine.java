@@ -9,9 +9,7 @@ package Entidades;
 
 public class Cine {
 
-    private String pelicula;
-    private Sala auditorio;
-    private int precioEntrada;
+   private int precioEntrada;
     private String titulo;
     private int duracion;
     private int edadMinima;
@@ -20,30 +18,12 @@ public class Cine {
     public Cine() {
     }
 
-    public Cine(String pelicula, Sala auditorio, int precioEntrada, String titulo, int duracion, int edadMinima, String director) {
-        this.pelicula = pelicula;
-        this.auditorio = auditorio;
+    public Cine(int precioEntrada, String titulo, int duracion, int edadMinima, String director) {
         this.precioEntrada = precioEntrada;
         this.titulo = titulo;
         this.duracion = duracion;
         this.edadMinima = edadMinima;
         this.director = director;
-    }
-
-    public String getPelicula() {
-        return pelicula;
-    }
-
-    public void setPelicula(String pelicula) {
-        this.pelicula = pelicula;
-    }
-
-    public Sala getAuditorio() {
-        return auditorio;
-    }
-
-    public void setAuditorio(Sala auditorio) {
-        this.auditorio = auditorio;
     }
 
     public int getPrecioEntrada() {
@@ -85,7 +65,5 @@ public class Cine {
     public void setDirector(String director) {
         this.director = director;
     }
-    
-    
     
 }

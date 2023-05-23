@@ -6,6 +6,7 @@ public class Asiento {
     private boolean ocupada;
     private char letra;
     private int numero;
+    
 
     public Asiento() {
     }

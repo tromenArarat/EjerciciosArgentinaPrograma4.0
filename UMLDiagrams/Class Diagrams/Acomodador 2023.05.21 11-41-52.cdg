@@ -11,7 +11,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Asiento" package="Entidades" visibility="public" xPosition="20.0" yPosition="141.0">
+    <Class name="Asiento" package="Entidades" visibility="public" xPosition="20.0" yPosition="160.0">
       <Fields>
         <Field name="ocupada" type="boolean" visibility="private"/>
         <Field name="letra" type="char" visibility="private"/>
@@ -41,7 +41,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Cine" package="Entidades" visibility="public" xPosition="65.0" yPosition="379.0">
+    <Class name="Cine" package="Entidades" visibility="public" xPosition="864.0" yPosition="326.0">
       <Fields>
         <Field name="pelicula" type="String" visibility="private"/>
         <Field name="auditorio" type="Sala" visibility="private"/>
@@ -94,7 +94,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Espectador" package="Entidades" visibility="public" xPosition="427.0" yPosition="20.0">
+    <Class name="Espectador" package="Entidades" visibility="public" xPosition="427.0" yPosition="8.0">
       <Fields>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="edad" type="int" visibility="private"/>
@@ -128,7 +128,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Sala" package="Entidades" visibility="public" xPosition="717.0" yPosition="377.0">
+    <Class name="Sala" package="Entidades" visibility="public" xPosition="427.0" yPosition="398.0">
       <Fields>
         <Field name="espectadores" type="Espectador[][]" visibility="private"/>
         <Field name="butacax" type="Asiento[][]" visibility="private"/>
@@ -151,7 +151,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="CineServicios" package="Servicios" visibility="public" xPosition="792.0" yPosition="122.0">
+    <Class name="CineServicios" package="Servicios" visibility="public" xPosition="1071.0" yPosition="160.0">
       <Fields>
         <Field name="sc" type="Scanner" visibility="private"/>
       </Fields>
@@ -162,7 +162,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="EspectadorServicios" package="Servicios" visibility="public" xPosition="1042.0" yPosition="67.0">
+    <Class name="EspectadorServicios" package="Servicios" visibility="public" xPosition="761.0" yPosition="1.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -179,7 +179,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="SalaServicios" package="Servicios" visibility="public" xPosition="1144.0" yPosition="387.0">
+    <Class name="SalaServicios" package="Servicios" visibility="public" xPosition="121.0" yPosition="526.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -193,14 +193,14 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <UseRelation source="Entidades.Espectador" target="Entidades.Asiento" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Entidades.Sala" target="Entidades.Espectador" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="butaca" source="Entidades.Espectador" target="Entidades.Asiento" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Entidades.Cine" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Servicios.CineServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Entidades.Sala" target="Entidades.Asiento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Espectador" target="Entidades.Asiento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Servicios.CineServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="butaca" source="Entidades.Espectador" target="Entidades.Asiento" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Servicios.EspectadorServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Servicios.SalaServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="auditorio" source="Entidades.Cine" target="Entidades.Sala" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Cine" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Sala" target="Entidades.Espectador" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
