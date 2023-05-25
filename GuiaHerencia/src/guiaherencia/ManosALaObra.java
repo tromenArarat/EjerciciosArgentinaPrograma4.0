@@ -26,7 +26,7 @@ package guiaherencia;
 import java.util.ArrayList;
 
 
-public abstract class ManosALaObra implements Operaciones {
+public class ManosALaObra implements Operaciones {
     
      @Override
         public int sumar(int num1,int num2){
@@ -54,12 +54,14 @@ public abstract class ManosALaObra implements Operaciones {
         int num1 = animales.get(0).caminar();
         int num2 = animales.get(1).caminar();
         
-        int sumax = sumar(num1,num2);
+        ManosALaObra o = new ManosALaObra();
+        int sumaO = o.sumar(num1, num2);
+        
        
-        System.out.println("La cantidad de pasos que dieron los animales son "+ sumax);
+        System.out.println("La cantidad de pasos que dieron los animales es: "+ sumaO);
         }
         
     }
     
     
-}
+

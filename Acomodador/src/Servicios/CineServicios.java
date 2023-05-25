@@ -76,7 +76,9 @@ public class CineServicios {
                         if(butaca.isOcupada()==false){
                             espectador.setButaca(butaca);
                             butaca.setOcupada(true);
+                           
                         }
+                         break;
                     }
                 }
                 continue;
