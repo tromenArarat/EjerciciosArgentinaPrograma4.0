@@ -133,6 +133,19 @@ debemos indicárselo al usuario.
         
     }
     
+    /*
+    • darCartas(): dado un número de cartas que nos pidan, le devolveremos ese número de
+cartas. En caso de que haya menos cartas que las pedidas, no devolveremos nada, pero
+debemos indicárselo al usuario.
+    */
+    
+    public void repartir(){
+        for (int i = 0; i < 3; i++) {
+            System.out.println(baraja.element());
+            baraja.remove(baraja.element());                
+            }
+        }
+  
     
     /*
     • cartasMonton(): mostramos aquellas cartas que ya han salido, si no ha salido ninguna

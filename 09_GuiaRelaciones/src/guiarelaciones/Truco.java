@@ -14,33 +14,33 @@ public class Truco {
       
         Baraja b = new Baraja();
         b.llenarBaraja();
-        b.mostrarBaraja();
+//        b.mostrarBaraja();
         
         b.barajar();
         
         System.out.println("----------------");
         
-        b.mostrarBaraja();
+//        b.mostrarBaraja();
         
         System.out.println("----------------");
         
-        b.siguienteCarta();
+//        b.siguienteCarta();
         
         System.out.println("----------------");
         
-        b.mostrarBaraja();
+//        b.mostrarBaraja();
         
         System.out.println("----------------");
         
-        b.cartasDisponibles();
+//        b.cartasDisponibles();
         
         System.out.println("----------------");
         
-        b.siguienteCarta();
+//        b.siguienteCarta();
         
         System.out.println("----------------");
         
-        b.cartasMonton();
+//        b.cartasMonton();
         
         System.out.println("----------------");
         
@@ -48,7 +48,7 @@ public class Truco {
         
         System.out.println("----------------");
         
-        b.cartasMonton();
+        b.mostrarBaraja();
 
 
         
