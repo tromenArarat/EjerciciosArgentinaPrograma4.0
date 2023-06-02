@@ -23,6 +23,7 @@ un objeto a partir de la interfaz
 
 package guiaherencia;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -59,6 +60,11 @@ public class ManosALaObra implements Operaciones {
         
        
         System.out.println("La cantidad de pasos que dieron los animales es: "+ sumaO);
+        
+        LocalDate ahora = LocalDate.now();
+        System.out.println(ahora);
+        LocalDate otroDia = ahora.plusDays(10);
+        System.out.println(otroDia);
         }
         
     }

@@ -6,11 +6,17 @@ import java.util.LinkedList;
 public class Malandra {
      private LinkedList<Carta> mano = new LinkedList();
      private boolean canto = false;
-     private boolean quiere = false;
+     private boolean seQuiere = false;
+     private boolean jugo = false;
      private String queCanto = "";
+     
      private Carta primera;
      private Carta segunda;
      private Carta tercera;
+     
+     private int puntaje;
+     private boolean ipa = false;
+     private int tantos;
 
     public Malandra() {
     }
@@ -64,6 +70,49 @@ public class Malandra {
 
     public void setTercera(Carta tercera) {
         this.tercera = tercera;
+    }
+
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
+  
+
+    public boolean isSeQuiere() {
+        return seQuiere;
+    }
+
+    public void setSeQuiere(boolean seQuiere) {
+        this.seQuiere = seQuiere;
+    }
+
+    public boolean isJugo() {
+        return jugo;
+    }
+
+    public void setJugo(boolean jugo) {
+        this.jugo = jugo;
+    }
+
+    public boolean isIpa() {
+        return ipa;
+    }
+
+    public void setIpa(boolean ipa) {
+        this.ipa = ipa;
+    }
+
+    public int getTantos() {
+        return tantos;
+    }
+
+    public void setTantos(int tantos) {
+        this.tantos = tantos;
     }
     
     

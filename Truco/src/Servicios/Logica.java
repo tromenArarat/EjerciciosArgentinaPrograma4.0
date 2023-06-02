@@ -55,6 +55,15 @@ public class Logica {
         Collections.shuffle(baraja);
     }
     
+    public void mostrarMano(Malandra jugador){
+        System.out.println("Tus cartas: ");
+        int i = 1;
+        for (Carta carta : jugador.getMano()) {
+            System.out.println(carta+" "+"|"+i+"|");
+            i++;
+        }
+    }
+    
     public void jugarRonda(){
         
         boolean girar = true;
@@ -84,20 +93,20 @@ public class Logica {
             if(contadorRonda%2==0){
                 switch(contadorRonda){
                     case 2:
-                        System.out.println("Tus cartas: ");
-                        System.out.println(jugador.getMano().get(0) + "" + jugador.getMano().get(1) + "" + jugador.getMano().get(2));
+                        mostrarMano(jugador);
                         System.out.println("JUGAR |1| IRSE |2|");
                         int rtaX = sc.nextInt();
                         if (rtaX == 1) {
                             System.out.println("JUGAR |1| CANTAR |2|");
                             int rtaY = sc.nextInt();
                             if (rtaY == 1) {
-                                System.out.println("Jugar " + jugador.getMano().get(0) + " |1|");
-                                System.out.println("Jugar " + jugador.getMano().get(1) + " |2|");
-                                System.out.println("Jugar " + jugador.getMano().get(2) + " |3|");
+                                mostrarMano(jugador);
                                 int rtaW = sc.nextInt();
-                                jugador.setPrimera(jugador.getMano().get(rtaW));
-                                jugador.getMano().remove(rtaW);
+                                LinkedList mano = new LinkedList();
+                                mano.add(jugador.getMano().get(rtaW-1));
+                                jugador.setJugadas(mano);
+                                jugador.getMano().remove(rtaW-1);
+                                jugador.setJugo(true);
                             } else {
                                 System.out.println("Cantar Envido |1|");
                                 System.out.println("Cantar Real Envido |2|");
@@ -134,17 +143,23 @@ public class Logica {
                                 }
                                 }
                         }else {
+                            maquina.setPuntaje(+1);
                         //Darle 1 pto a la máquina e iniciar segunda ronda;
                         girar=false;
                     }
+                        
                    
                     break;
+                    
+                    
                     //Fin del Case 1
                     
                     //No hay Case 3 porque estamos adentro del if PAR
                     
                     case 4:
-                        // if (maquina.getCanto==false & maquina.getPrimera().equals(null))
+                        if (maquina.isJugo()==true||maquina.isSeQuiere()==true){
+                            
+                        }
                         // jugar o cantar
                         // si jugar, función
                         
@@ -156,15 +171,43 @@ public class Logica {
                 // Entramos al IF IMPAR
                 /*
                 Juega la máquina
-                Si jugador cantó, activa función quéCantó y evalua condiciones para cada una, es un
-                método que se ejecuta distinto para cada posibilidad. Por ejemplo, si queCanto() da
-                como resultado el String "Envido", el método seQuiere() devolverá un booleano si
+                Si jugador cantó, activa función quéCantó y evalua condiciones para cada una. 
+                Por ejemplo, si queCanto() da como resultado el String "Envido", 
+                el método seQuiere() devolverá un booleano si.
+                
+                
                 maquina.getMano().get(0).getPalo().equals(maquina.getMano().get(1).getPalo())||
                 maquina.getMano().get(0).getPalo().equals(maquina.getMano().get(2).getPalo())||
                 maquina.getMano().get(2).getPalo().equals(maquina.getMano().get(1).getPalo())
+                
                 if sumar getNumero > 25
+                
                 sout "Se quiere"
+                
+                
                 */   
+                if(jugador.isCanto()){
+                    switch(jugador.getQueCanto()){
+                        case "Envido":
+                            if(maquina.isIpa()){
+                                if(maquina.getTantos()<33&&maquina.getTantos()>27){
+                                    System.out.println("MÁQUINA: Se quiere");
+                                }else if(maquina.getTantos()>31){
+                                    System.out.println("Envido");
+                                    maquina.setCanto(true);
+                                }
+                            }
+                    }
+                }
+                if(jugador.isJugo()){
+                   switch(jugador.getPrimera().toString()){
+                       case "1 de espada":
+                       
+                   }
+                   
+                    
+                }
+                
            
                 
             
@@ -173,6 +216,11 @@ public class Logica {
         
         
         }while(girar);
+        
+        //Mostrar puntaje
+        System.out.println("Máquina: "+maquina.getPuntaje());
+        System.out.println("Máquina: "+maquina.getPuntaje());
+        
     }
     
     
