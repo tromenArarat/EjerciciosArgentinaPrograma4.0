@@ -55,6 +55,7 @@ public class Logica {
         Collections.shuffle(baraja);
     }
     
+    
     public void mostrarMano(Malandra jugador){
         System.out.println("Tus cartas: ");
         int i = 1;
@@ -64,49 +65,67 @@ public class Logica {
         }
     }
     
-    public void jugarRonda(){
+        public boolean buscarReyes(){
+        barajar();
+        boolean result = false;
+        System.out.println("Buscando reyes...");
+        System.out.println(baraja.element().getNumero()+" de "+baraja.element().getPalo());
+            if(baraja.element().getNumero()==12){
+                result=true;
+                System.out.println("Juega primero el humano. La máquina es mano");
+            }else{
+            if(buscarReyes()){
+                System.out.println("Juega primero la máquina. El humano es mano");
+            }else{
+                buscarReyes();
+            }
+            }
+        return result;
+    }
+    
+       
+    public Malandra crearJugador(){
+        Malandra jugador = new Malandra();
+        return jugador;
+    }
+    
+    public LinkedList<Carta> reparto(){
+        LinkedList<Carta> resultado = new LinkedList();
+        barajar();
+        for (int i = 0; i < 3; i++) {
+            resultado.add(baraja.get(i));
+        }
+        return resultado;
+    }
+    
+    public void jugarRonda(Malandra jugador, Malandra maquina){
         
         boolean girar = true;
         
         llenarBaraja();
         
         int contadorRonda = 2;
-    
-        if(buscarReyes()){
-            System.out.println("Juega primero el humano. La máquina es mano");
-        }else{
-            if(buscarReyes()){
-                System.out.println("Juega primero la máquina. El humano es mano");
-                contadorRonda ++;
-            }else{
-                buscarReyes();
-            }
-        }
         
-        Malandra jugador = new Malandra();
+        
         jugador.setMano(reparto());
-            
-        Malandra maquina = new Malandra();
+        
         maquina.setMano(reparto());
     
         do{
             if(contadorRonda%2==0){
-                switch(contadorRonda){
-                    case 2:
-                        mostrarMano(jugador);
-                        System.out.println("JUGAR |1| IRSE |2|");
-                        int rtaX = sc.nextInt();
-                        if (rtaX == 1) {
-                            System.out.println("JUGAR |1| CANTAR |2|");
-                            int rtaY = sc.nextInt();
+                mostrarMano(jugador);
+//                responder(); Es un método que se pregunta maquina.isCanto==true, maquina.getQueSeQuiere
+//                  Actualiza ptos ipa y ptosronda
+                System.out.println("JUGAR |1| IRSE |2|");
+                int rtaX = sc.nextInt();
+                    if (rtaX == 1) {
+                        System.out.println("JUGAR |1| CANTAR |2|");
+                        int rtaY = sc.nextInt();
                             if (rtaY == 1) {
                                 mostrarMano(jugador);
                                 int rtaW = sc.nextInt();
-                                LinkedList mano = new LinkedList();
-                                mano.add(jugador.getMano().get(rtaW-1));
-                                jugador.setJugadas(mano);
-                                jugador.getMano().remove(rtaW-1);
-                                jugador.setJugo(true);
+                                jugador.setPrimera(jugador.getMano().get(rtaW));
+                                jugador.getMano().remove(rtaW);
                             } else {
                                 System.out.println("Cantar Envido |1|");
                                 System.out.println("Cantar Real Envido |2|");
@@ -114,38 +133,31 @@ public class Logica {
                                 System.out.println("Cantar Flor |4|");
                                 System.out.println("Cantar Truco |5|");
                                 int rtaZ = sc.nextInt();
-                                switch (rtaZ) {
+                                String rtaZstring = "";
+                                switch(rtaZ){
                                     case 1:
-                                        jugador.setQueCanto("Envido");
-                                        jugador.setCanto(true);
-                                        contadorRonda++;
-                                        break;
+                                        rtaZstring = "Envido";
+                                    
                                     case 2:
-                                        jugador.setQueCanto("Real Envido");
-                                        jugador.setCanto(true);
-                                        contadorRonda++;
-                                        break;
+                                        rtaZstring = "Real Envido";
+                                    
                                     case 3:
-                                        jugador.setQueCanto("Falta Envido");
-                                        jugador.setCanto(true);
-                                        contadorRonda++;
-                                        break;
+                                        rtaZstring = "Falta Envido";
+                                    
                                     case 4:
-                                        jugador.setQueCanto("Flor");
-                                        jugador.setCanto(true);
-                                        contadorRonda++;
-                                        break;
+                                        rtaZstring = "Flor";
+                                    
                                     case 5:
-                                        jugador.setQueCanto("Truco");
-                                        jugador.setCanto(true);
-                                        contadorRonda++;
-                                        break;
+                                        rtaZstring = "Truco";
                                 }
-                                }
+                                
+                                jugador.setCanto(true);
+                                jugador.setQueSeQuiere(rtaZstring);
+                                contadorRonda++;
+                                
                         }else {
                             maquina.setPuntaje(+1);
-                        //Darle 1 pto a la máquina e iniciar segunda ronda;
-                        girar=false;
+                            girar=false;
                     }
                         
                    
@@ -224,27 +236,9 @@ public class Logica {
     }
     
     
-    public boolean buscarReyes(){
-        barajar();
-        boolean result = false;
-        System.out.println("Buscando reyes...");
-        for (int i = 0; i < 1; i++) {
-            System.out.println(baraja.element().getNumero()+" de "+baraja.element().getPalo());
-            if(baraja.element().getNumero()==12){
-                result=true;
-            }
-        }
-        return result;
-    }
 
-    public LinkedList<Carta> reparto(){
-        LinkedList<Carta> resultado = new LinkedList();
-        barajar();
-        for (int i = 0; i < 3; i++) {
-            resultado.add(baraja.get(i));
-        }
-        return resultado;
-    }
+
+    
     
     
 }

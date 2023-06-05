@@ -23,6 +23,8 @@ public class GuarderiaBarcos {
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         
         boolean out = true;
+        LocalDate ya = LocalDate.now();
+        LocalDate devolucion;
         
         do{
         System.out.println("Bienvenido, elegí la opción");
@@ -58,21 +60,20 @@ public class GuarderiaBarcos {
                     rtaY = sc.next();
                     System.out.println("Eslora");
                     int rtaW = sc.nextInt();
-                    System.out.println("Eslora");
+                    System.out.println("Año de fabricación");
                     rtaZ = sc.nextInt();
                     Barco bote = new Barco(rtaY,rtaW,rtaZ);
                     
                     System.out.println("¿Por cuántos días lo vas a dejar?");
                     rtaZ = sc.nextInt();
                     
-                    LocalDate ahora = LocalDate.now();
-                    LocalDate devolucion = ahora.plusDays(rtaZ);
+                    devolucion = ya.plusDays(rtaZ);
                    
                     //Random para posAmarre
                     
-                    Alquiler rentada = new Alquiler(senior,ahora,devolucion,4,bote);
+                    Alquiler rentada = new Alquiler(senior,ya,devolucion,4,bote,"G",rtaW,rtaZ);
                     
-                    System.out.println("El alquiler te va a costar: "+ bote.calcularAlquiler());
+                    System.out.println("El alquiler te va a costar: "+ rentada.calcularAlquiler());
                     
                     
                     break;
@@ -81,13 +82,26 @@ public class GuarderiaBarcos {
                     rtaY = sc.next();
                     System.out.println("Eslora");
                     rtaZ = sc.nextInt();
-                    System.out.println("Eslora");
+                    System.out.println("Año de fabricación");
                     rtaQ = sc.nextInt();
+                    Barco bote2 = new Barco(rtaY, rtaZ, rtaQ);
                     System.out.println("CV:");
                     rtaR = sc.nextInt();
                     System.out.println("Número de camarotes:");
                     rtaJ = sc.nextInt();
-                    Yate botecin = new Yate(rtaQ,rtaZ,rtaY,rtaR,rtaJ);
+                    
+                    System.out.println("¿Por cuántos días lo vas a dejar?");
+                    rtaZ = sc.nextInt();
+                    
+                    devolucion = ya.plusDays(rtaZ);
+                    
+                    Yate botecin = new Yate(rtaR, rtaJ, senior, ya, devolucion, 3, bote2, rtaY, rtaZ, rtaQ);
+                    
+                    Alquiler rentada2 = new Alquiler(senior,ya,devolucion,3,bote2,rtaY,rtaZ,rtaQ);
+                    
+                    System.out.println("El alquiler te va a costar: "+ botecin.calcularAlquiler());
+                                      
+                                                          
                     break;
                 case 3:
                     System.out.println("Matricula");
@@ -98,7 +112,6 @@ public class GuarderiaBarcos {
                     rtaZ = sc.nextInt();
                     System.out.println("CV:");
                     rtaJ = sc.nextInt();
-                    Amotor botardo = new Amotor(rtaQ,rtaY,rtaZ,rtaJ);
                     break;
                 case 4:
                     System.out.println("Matricula");
@@ -109,19 +122,13 @@ public class GuarderiaBarcos {
                     rtaQ = sc.nextInt();
                     System.out.println("Número de mástiles:");
                     rtaJ = sc.nextInt();
-                    Velero velerito = new Velero(rtaZ,rtaY,rtaQ,rtaJ);
                     
                     System.out.println("¿Por cuántos días lo vas a dejar?");
                     rtaZ = sc.nextInt();
                     
-                    LocalDate ya = LocalDate.now();
                     LocalDate devo = ya.plusDays(rtaZ);
                    
                     //Random para posAmarre
-                    
-                    Alquiler rentadas = new Alquiler(senior,ya,devo,5,velerito);
-                    
-                    System.out.println("El alquiler te va a costar: "+ velerito.calcularAlquiler());
                     
                     break;
             }

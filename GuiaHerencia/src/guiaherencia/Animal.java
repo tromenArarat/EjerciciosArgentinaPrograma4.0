@@ -1,11 +1,9 @@
 
 package guiaherencia;
 
-public abstract class Animal {
+public class Animal {
     
-    public abstract int caminar();
-    
-    protected void hacerRuido(){
-        System.out.println("Qué tulkit");
+     protected void hacerRuido(){
+        System.out.println("Hola");
     }
 }

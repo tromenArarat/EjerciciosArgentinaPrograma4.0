@@ -31,7 +31,7 @@ public class ManosALaObra implements Operaciones {
     
      @Override
         public int sumar(int num1,int num2){
-            int suma = num1+num2;
+            int suma = num1+num2+NUM;
             return suma;
         }
     
@@ -40,11 +40,11 @@ public class ManosALaObra implements Operaciones {
        /*
        Animal es un método abstracto, por eso no podemos instanciarlo
        */
-//       Animal a = new Animal();
+       Animal a = new Animal();
        Animal b = new Perro();
        Animal c = new Gato();
        
-//       animales.add(a);
+       animales.add(a);
        animales.add(b);
        animales.add(c);
        
@@ -52,20 +52,24 @@ public class ManosALaObra implements Operaciones {
             animale.hacerRuido();
         }
         
-        int num1 = animales.get(0).caminar();
-        int num2 = animales.get(1).caminar();
-        
+//        int num1 = animales.get(0).caminar();
+//        int num2 = animales.get(1).caminar();
+//        
         ManosALaObra o = new ManosALaObra();
-        int sumaO = o.sumar(num1, num2);
-        
+        int sumaO = o.sumar(1, 2);
+        System.out.println(sumaO);
        
-        System.out.println("La cantidad de pasos que dieron los animales es: "+ sumaO);
+//        System.out.println("La cantidad de pasos que dieron los animales es: "+ sumaO);
         
         LocalDate ahora = LocalDate.now();
         System.out.println(ahora);
         LocalDate otroDia = ahora.plusDays(10);
         System.out.println(otroDia);
+        
+        
+        
         }
+    
         
     }
     
