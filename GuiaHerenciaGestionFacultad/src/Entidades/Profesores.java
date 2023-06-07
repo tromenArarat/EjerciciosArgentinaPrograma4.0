@@ -14,14 +14,20 @@ public class Profesores extends Empleado {
     public Profesores() {
     }
     
-   
-
     public Profesores(Date incorporacion, int despacho, String nombre, String apellido, int id, EstadoCivil estadoCivil) {
         super(incorporacion, despacho, nombre, apellido, id, estadoCivil);
     }
 
     public int getDespacho() {
         return despacho;
+    }
+
+    public String getDepto() {
+        return depto;
+    }
+
+    public void setDepto(String depto) {
+        this.depto = depto;
     }
 
     

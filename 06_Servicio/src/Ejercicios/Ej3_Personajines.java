@@ -16,21 +16,31 @@ package Ejercicios;
 import Entidades.Persona;
 import Servicios.PersonaServicio;
 
+/*
+Inicializar un objeto de la clase Persona ejercicio 7 de la guía POO, a null y tratar de invocar el
+método esMayorDeEdad() a través de ese objeto. Luego, englobe el código con una cláusula
+try-catch para probar la nueva excepción que debe ser controlada.
+*/
 
 public class Ej3_Personajines {
 
     public static void main(String[] args) {
         PersonaServicio mecanico = new PersonaServicio();
-        Persona p1 = mecanico.crearPersona();
-        Persona p2 = mecanico.crearPersona();
-        Persona p3 = mecanico.crearPersona();
-        Persona p4 = mecanico.crearPersona();
+        
+        try{
+        Persona p1 = null;
+//        Persona p2 = mecanico.crearPersona();
+//        Persona p3 = mecanico.crearPersona();
+//        Persona p4 = mecanico.crearPersona();
+        
         
         boolean[] esMayor = new boolean[4];
         esMayor[0] = mecanico.esMayorDeEdad(p1);
-        esMayor[1] = mecanico.esMayorDeEdad(p2);
-        esMayor[2] = mecanico.esMayorDeEdad(p3);
-        esMayor[3] = mecanico.esMayorDeEdad(p4);
+        
+        
+//        esMayor[1] = mecanico.esMayorDeEdad(p2);
+//        esMayor[2] = mecanico.esMayorDeEdad(p3);
+//        esMayor[3] = mecanico.esMayorDeEdad(p4);
         
         int contador = 0;
         for (int i = 0; i < 4; i++) {
@@ -45,9 +55,9 @@ public class Ej3_Personajines {
                 
         double[] imc = new double[4];
         imc[0] = mecanico.indiceMasaCorporal(p1);
-        imc[1] = mecanico.indiceMasaCorporal(p2);
-        imc[2] = mecanico.indiceMasaCorporal(p3);
-        imc[3] = mecanico.indiceMasaCorporal(p4);
+//        imc[1] = mecanico.indiceMasaCorporal(p2);
+//        imc[2] = mecanico.indiceMasaCorporal(p3);
+//        imc[3] = mecanico.indiceMasaCorporal(p4);
         
         int contador2 = 0;
         int contador3 = 0;
@@ -65,6 +75,11 @@ public class Ej3_Personajines {
         System.out.println("El promedio de pesados es "+promedioSobrepeso);
         System.out.println("El promedio de normis es "+promedioSaludable);
         System.out.println("El promedio de flaquitos es "+promedioFlaquitos);
+        
+        }catch(Exception e){
+            System.out.println("Estás creando una persona como nula");
+        }
+        
         
             
         }

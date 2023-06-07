@@ -20,6 +20,12 @@ import Servicios.PersonaServicio;
 
 public class Ej5_Persona {
 
+    /*
+    Inicializar un objeto de la clase Persona ejercicio 7 de la guía POO, a null y tratar de invocar el
+    método esMayorDeEdad() a través de ese objeto. Luego, englobe el código con una cláusula
+    try-catch para probar la nueva excepción que debe ser controlada.
+    */
+    
     public static void main(String[] args) {
         PersonaServicio osteopata = new PersonaServicio();
         

@@ -10,6 +10,8 @@ public class Persona {
     protected String apellido;
     protected int id;
     protected EstadoCivil estadoCivil;
+    
+    
     public Persona() {
     }
 
