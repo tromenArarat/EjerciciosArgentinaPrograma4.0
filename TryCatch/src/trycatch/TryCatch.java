@@ -7,6 +7,7 @@ una división con los dos numeros y mostrar el resultado.
 package trycatch;
 
 import Entidades.DivisionNumero;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -16,33 +17,31 @@ public class TryCatch {
         
 //    ServiciosVector pepe = new ServiciosVector();
     
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
     
-        System.out.println("Número 1");
-        String num1 = sc.next();
-        System.out.println("Número 2");
-        String num2 = sc.next();
-        
-        DivisionNumero x = new DivisionNumero(num1,num2);
-        
-        try{
-            System.out.println(x.pasarAint());
-        }catch(Exception e){
-            System.out.println("Hubo un problema");
-        }
-        
-        
-        
-//    try{
-//        String[] supl = new String[3];
-//        for (int i = 0; i < 4; i++) {
-//           supl[i] = sc.next();
-//            }
+//        System.out.println("Número 1");
+//        String num1 = sc.next();
+//        System.out.println("Número 2");
+//        String num2 = sc.next();
 //        
-//    }catch(ArrayIndexOutOfBoundsException e){
-//        System.out.println("Olvidate");
-//        
-//    }
+//        DivisionNumero x = new DivisionNumero(num1,num2);
+        
+//        try{
+//            System.out.println(x.pasarAint());
+//        }catch(InputMismatchException e){
+//            System.out.println("Se espera otro formato");
+//        }catch(NumberFormatException a){
+//            System.out.println("La cadena no puede convertirse a entero");
+//        }catch(ArithmeticException b){
+//            System.out.println("División por cero MAAl");
+//        }
+    try{
+        int saludo = sc.nextInt();
+        
+    }catch(InputMismatchException e){
+        System.out.println(e);
+        
+    }
         
     
             

@@ -19,12 +19,17 @@ el mensaje de inicio se repite.
 package ejercicios;
 
 import Entidad.Juego;
+import java.util.InputMismatchException;
 
 public class Ex3_Juego {
 
     public static void main(String[] args) {
         Juego adivinaNumero = new Juego();
-        adivinaNumero.iniciar_juego();
+        try{
+            adivinaNumero.iniciar_juego();
+        }catch(InputMismatchException e){
+            System.out.println("El juego se interrumpió");
+        }
         
     }
     

@@ -1,6 +1,6 @@
-
 package Entidad;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Juego {
@@ -26,7 +26,7 @@ public class Juego {
 // Crear un método "iniciar_juego" que permita a dos jugadores 
 // jugar un juego de adivinanza de números
    
-    public void iniciar_juego(){
+    public void iniciar_juego()throws InputMismatchException{
     //  El primer jugador elige un número y el segundo jugador intenta adivinarlo.
         String confirmacionDeSalida = "no";
         int contadorRonda = 2;
@@ -45,7 +45,13 @@ public class Juego {
                 System.out.println("Hola, "+primerJugador+" , a ver si adivinás este:");
                 num = min + (int)(Math.random() * ((max - min) + 1));
                 System.out.println("Turno: "+primerJugador+", intentá adivinarlo:");
-                numA = sc.nextInt();
+                
+                // Acá empieza el ejercio 3 de la Guía Excepciones
+                try{
+                    numA = sc.nextInt();
+                }catch(InputMismatchException e){
+                    System.out.println("No es un número");
+                }
             }
             int intentos = 1;
             String ayuda = "";
@@ -75,11 +81,17 @@ public class Juego {
                     }
                     
                     // Si juega el humano
-                    
-                    if(contadorRonda%2!=0){
-                        numA = sc.nextInt();
-                            }
-                    
+                    if (contadorRonda % 2 != 0) {
+                        
+                        // Acá sigue el ejercio 3 de la Guía Excepciones
+                        try {
+                            numA = sc.nextInt();
+                        } catch (Exception e) {
+                            System.out.println("No es un número");
+                            numA = sc.nextInt();
+                        }
+                    }
+
                     intentos++;
                 }
                
