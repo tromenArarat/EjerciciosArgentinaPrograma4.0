@@ -1,4 +1,14 @@
+/*
+PENDIENTES
+    - La carga del mes empieza en el día 15 HECHO
+    - Condición de límite semanal
+    - Condición de límite findes y feriados
+    - Trueque de guardias
 
+    - Hacer todo usando DATE o CALENDAR
+    - Comparar mes anterior y empezar reparto con quienes recibieron menos guardias de finde
+
+*/
 package Servicios;
 
 import Entidades.Fecha;
@@ -49,19 +59,22 @@ public class GuardiasServicios {
         doctores.add(doctor);
     }
     
-    public void setearTotalGuardiasPorDr(int cantidad){
+    // Asigna la cantidad de guardias por doc dividiendo el total de guardias por el total de docs
+    public void setearCreditosGuardiasPorDoc(int cantidad){
+        
         for (Doctor doctore : doctores) {
-            doctore.setCreditoParaGuardias(cantidad);
+            doctore.setCreditoParaGuardias(Math.round(guardias.size()/doctores.size()));
         }
     }
-
+    
+    // Carga la lista de fechas de nombre "calendario". Viene a ser el mes en curso
     public void cargarMes(){
         
-        System.out.println("AÑO:");
+        System.out.println("Año:");
         int anio = sc.nextInt();
         System.out.println("");
         
-        System.out.println("MES DEL AÑO:");
+        System.out.println("Mes del año:");
         for (Mes mes : Mes.values()) {
             System.out.println(mes);
         }
@@ -69,22 +82,27 @@ public class GuardiasServicios {
         Mes mesEnCurso = Mes.valueOf(mes);
         System.out.println("");
         
-        System.out.println("PRIMER DIA DEL MES:");
+        System.out.println("¿Qué día cae el 15? (LUNES, MARTES,...)");
         for (Dia dia : Dia.values()) {
             System.out.println(dia);
         }
         String dia = sc.next();
-        Dia primerDiaDelMes = Dia.valueOf(dia);
+        Dia dia15DelMes = Dia.valueOf(dia);
         System.out.println("");
         
-        System.out.println("CUÁNTOS DIAS TIENE EL MES");
+        System.out.println("¿Cuántos días tiene el mes?");
         int diasMes = sc.nextInt();
         
-        Dia siguiente = primerDiaDelMes;
-        for (int i = 1; i < diasMes+1; i++) {
+        Dia siguiente = dia15DelMes;
+        for (int i = 15; i < (diasMes-15)+16; i++) {
              calendario.add(new Fecha(siguiente,mesEnCurso,anio,i));
              siguiente = siguiente.next();
             }
+        for (int i = 1; i < 16; i++) {
+             calendario.add(new Fecha(siguiente,mesEnCurso.next(),anio,i));
+             siguiente = siguiente.next();
+            
+        }
         System.out.println("");
         
     }
@@ -95,6 +113,7 @@ public class GuardiasServicios {
         }
     }
     
+    // Por cada día del mes en curso crea dos guardias, una de DIA y otra de NOCHE
     public void cargarGuardias(){
         for (Fecha fecha : calendario) {
             guardias.add(new Guardia(fecha,Turno.DIA));
@@ -107,6 +126,7 @@ public class GuardiasServicios {
             System.out.println(guardia.getFecha().getDia()+" "+guardia.getFecha().getNum());
         }
     }
+    
     
     public void cargarDocs(){
         

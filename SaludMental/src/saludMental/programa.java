@@ -1,16 +1,9 @@
 package saludMental;
 
 
-import Entidades.Dia;
-import Entidades.Doctor;
-import Entidades.Guardia;
-import Entidades.Turno;
+
 import Servicios.GuardiasServicios;
-import java.time.DayOfWeek;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
+
 import java.util.Scanner;
 
 
