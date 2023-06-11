@@ -11,9 +11,9 @@ public class Doctor {
     private boolean trabaja24;
     private ArrayList<Dia> diasDisponibles;
     private int guardiasSemanales = 0;
-    private int mediasGuardiasSemanales = 0;
     private int creditoParaGuardias = 28;
-    private int mediasGuardiasMensuales = 0;
+    private int guardias12Asignadas = 0;
+    private int guardias24Asignadas = 0;
     private ArrayList<Guardia> guardias;
 
     public Doctor(String nombre, boolean trabajaNoche, boolean trabaja24, ArrayList<Dia> diasDisponibles) {
@@ -56,12 +56,12 @@ public class Doctor {
         this.guardiasSemanales = guardiasSemanales;
     }
 
-    public int getMediasGuardiasSemanales() {
-        return mediasGuardiasSemanales;
+    public int getGuardias12Asignadas() {
+        return guardias12Asignadas;
     }
 
-    public void setMediasGuardiasSemanales(int mediasGuardiasSemanales) {
-        this.mediasGuardiasSemanales = mediasGuardiasSemanales;
+    public void setGuardias12Asignadas(int guardias12Asignadas) {
+        this.guardias12Asignadas = guardias12Asignadas;
     }
 
     public int getCreditoParaGuardias() {
@@ -72,12 +72,12 @@ public class Doctor {
         this.creditoParaGuardias = creditoParaGuardias;
     }
 
-    public int getMediasGuardiasMensuales() {
-        return mediasGuardiasMensuales;
+    public int getGuardias24Asignadas() {
+        return guardias24Asignadas;
     }
 
-    public void setMediasGuardiasMensuales(int mediasGuardiasMensuales) {
-        this.mediasGuardiasMensuales = mediasGuardiasMensuales;
+    public void setGuardias24Asignadas(int guardias24Asignadas) {
+        this.guardias24Asignadas = guardias24Asignadas;
     }
 
     public boolean isTrabaja24() {
@@ -99,23 +99,24 @@ public class Doctor {
     
     
   
-    public void resetearGuadiasSemanales() {
+    public void resetearGuardias() {
         guardiasSemanales = 0;
-        mediasGuardiasSemanales = 0;
+        guardias24Asignadas = 0;
+        guardias12Asignadas = 0;
     }
     
     
 
     @Override
     public String toString() {
+        
         return "Doctor: "+ nombre + 
                 '\n' +"Trabaja de noche: " + trabajaNoche + 
                 '\n' +"Trabaja 24 hs: " + trabaja24 + 
                 '\n' +"Días disponibles: " + diasDisponibles + 
-                '\n' +"Cant. guardias semanales de 24 hs: " + guardiasSemanales +
-                '\n' +"Cant. guardias semanales de 12 hs: " + mediasGuardiasSemanales + 
+                '\n' +"Guardias de 24 hs asignadas: " + guardias24Asignadas +
+                '\n' +"Guardias de 12 hs asignadas: " + guardias12Asignadas + 
                 '\n' +"Crédito para guardias: " + creditoParaGuardias + 
-                '\n' +"Guardias asignadas: " + guardias.toArray().toString()+
                 '\n';
     }
     

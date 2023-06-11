@@ -30,14 +30,14 @@ public class programa {
         String rta = "no";
         
         do{
-            System.out.println("Hola Usuarie, ¿qué desea?");
-            System.out.println("");
             System.out.println("CARGAR PROFESIONAL      --> 1");
             System.out.println("VER PROFESIONALES       --> 2");
-            System.out.println("ASIGNAR GUARDIAS        --> 3");
-            System.out.println("MOSTRAR GUARDIAS LIBRES --> 4");
-            System.out.println("CAMBIAR GUARDIAS        --> 5");
+            System.out.println("ASIGNAR GUARDIA 24 HS   --> 3");
+            System.out.println("ASIGNAR GUARDIAS 12 HS  --> 4");
+            System.out.println("MOSTRAR GUARDIAS ASIGNA --> 5");
+//            System.out.println("CAMBIAR GUARDIAS        --> 5");
             System.out.println("SALIR                   --> 6");
+            System.out.println("");
             int opcion = sc.nextInt();
             switch(opcion){
                 case 1:
@@ -47,10 +47,13 @@ public class programa {
                     servidor.mostrarDocs();
                     break;
                 case 3:
-                    servidor.asignarGuardias();
+                    servidor.asignarGuardia24();
                     break;
                 case 4:
-                    servidor.mostrarGuardias();
+                    servidor.asignarGuardiasDerechos();
+                    break;
+                case 5:
+                    servidor.mostrarGuardiasAsignadasDocs();
                     break;
                 
                 case 6:
