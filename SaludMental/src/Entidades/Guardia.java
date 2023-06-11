@@ -1,27 +1,34 @@
 
 package Entidades;
 
+import java.util.Comparator;
 
 public class Guardia {
-    private Dias diaDeLaSemana;
+    private Fecha fecha;
     private Turno turno;
-    private boolean mediaGuardia;
 
-    public Guardia(Dias diaDeLaSemana, Turno turno, boolean mediaGuardia) {
-        this.diaDeLaSemana = diaDeLaSemana;
+    public Guardia(Fecha fecha, Turno turno) {
+        this.fecha = fecha;
         this.turno = turno;
-        this.mediaGuardia = mediaGuardia;
     }
 
-    public Dias getDiaDeLaSemana() {
-        return diaDeLaSemana;
+    public Fecha getFecha() {
+        return fecha;
     }
 
     public Turno getTurno() {
         return turno;
     }
 
-    public boolean isMediaGuardia() {
-        return mediaGuardia;
-    }
+    
+    //Comparator
+    public static Comparator<Guardia> ordenarPorNumDia = new Comparator<Guardia>(){
+        @Override
+        public int compare(Guardia g1,Guardia g2){
+            Integer guardia1 = g1.getFecha().getNum();
+            Integer guardia2 = g2.getFecha().getNum();
+            return guardia2.compareTo(guardia1);
+        }
+    };
+    
 }
