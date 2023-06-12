@@ -14,10 +14,12 @@ public class programa {
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         GuardiasServicios servidor = new GuardiasServicios();
         
-        servidor.cargarMes();
+//        servidor.cargarMes();
+        servidor.cargarMesModelo();
         servidor.mostrarMes();
         servidor.cargarGuardias();
         servidor.mostrarGuardias();
+        servidor.mostrarFeriados();
         
         
         String rta = "no";
@@ -43,7 +45,7 @@ public class programa {
                     servidor.asignarGuardia24();
                     break;
                 case 4:
-                    servidor.asignarGuardiasDerechos();
+                    servidor.asignarGuardias12();
                     break;
                 case 5:
                     servidor.mostrarGuardiasAsignadasDocs();

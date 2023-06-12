@@ -49,6 +49,7 @@ public class ManosAlaObra {
      
      // Mapa
      HashMap<String,Persona> espias = new HashMap();
+     
        
     //instanciar objeto 5 veces
         

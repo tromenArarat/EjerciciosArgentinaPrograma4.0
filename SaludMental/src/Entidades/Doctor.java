@@ -2,6 +2,7 @@
 package Entidades;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,18 +10,21 @@ public class Doctor {
     private String nombre;
     private boolean trabajaNoche;
     private boolean trabaja24;
-    private ArrayList<Dia> diasDisponibles;
+    // Convertir en HashMap<Dia,Turno>
+    HashMap<Dia,Turno> diasYturnosDisp = new HashMap();
+//    private ArrayList<Dia> diasDisponibles;
     private int guardiasSemanales = 0;
     private int creditoParaGuardias = 28;
     private int guardias12Asignadas = 0;
     private int guardias24Asignadas = 0;
+    private int guardiasFindOferiado = 0;
     private ArrayList<Guardia> guardias;
 
-    public Doctor(String nombre, boolean trabajaNoche, boolean trabaja24, ArrayList<Dia> diasDisponibles) {
+    public Doctor(String nombre, boolean trabajaNoche, boolean trabaja24, HashMap<Dia,Turno> diasYturnosDisp) {
         this.nombre = nombre;
         this.trabajaNoche = trabajaNoche;
         this.trabaja24 = trabaja24;
-        this.diasDisponibles = diasDisponibles;
+        this.diasYturnosDisp = diasYturnosDisp;
         this.guardias = new ArrayList();
     }
 
@@ -40,12 +44,12 @@ public class Doctor {
         this.trabajaNoche = trabajaNoche;
     }
 
-    public ArrayList<Dia> getDiasDisponibles() {
-        return diasDisponibles;
+    public HashMap<Dia,Turno> getDiasYturnosDisp() {
+        return diasYturnosDisp;
     }
 
-    public void setDiasDisponibles(ArrayList<Dia> diasDisponibles) {
-        this.diasDisponibles = diasDisponibles;
+    public void setDiasYturnosDisp(HashMap<Dia,Turno> diasYturnosDisp) {
+        this.diasYturnosDisp = diasYturnosDisp;
     }
 
     public int getGuardiasSemanales() {
@@ -95,6 +99,14 @@ public class Doctor {
     public void setGuardias(ArrayList<Guardia> guardias) {
         this.guardias = guardias;
     }
+
+    public int getGuardiasFindOferiado() {
+        return guardiasFindOferiado;
+    }
+
+    public void setGuardiasFindOferiado(int guardiasFindOferiado) {
+        this.guardiasFindOferiado = guardiasFindOferiado;
+    }
     
     
     
@@ -110,15 +122,19 @@ public class Doctor {
     @Override
     public String toString() {
         
+        
+               
         return "Doctor: "+ nombre + 
                 '\n' +"Trabaja de noche: " + trabajaNoche + 
                 '\n' +"Trabaja 24 hs: " + trabaja24 + 
-                '\n' +"Días disponibles: " + diasDisponibles + 
+                // Dudas acá
+                '\n' +"Días disponibles: " + diasYturnosDisp.keySet() + 
                 '\n' +"Guardias de 24 hs asignadas: " + guardias24Asignadas +
                 '\n' +"Guardias de 12 hs asignadas: " + guardias12Asignadas + 
                 '\n' +"Crédito para guardias: " + creditoParaGuardias + 
                 '\n';
     }
+    
     
     
     

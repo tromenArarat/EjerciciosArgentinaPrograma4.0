@@ -6,13 +6,18 @@ public class Fecha {
     Mes mes;
     int año;
     int num;
-    Guardia guardia;
+    boolean feriado;
+    Guardia guardiaDia;
+    Guardia guardiaNoche;
+    int semana;
 
-    public Fecha(Dia dia, Mes mes, int año,int num) {
+    public Fecha(Dia dia, Mes mes, int año,int num,boolean feriado, int semana) {
         this.dia = dia;
         this.mes = mes;
         this.año = año;
         this.num = num;
+        this.feriado = feriado;
+        this.semana = semana;
     }
     
     public void setNum(int num){
@@ -22,12 +27,20 @@ public class Fecha {
         return num;
     }
 
-    public Guardia getGuardia() {
-        return guardia;
+    public Guardia getGuardiaDia() {
+        return guardiaDia;
+    }
+    
+    public Guardia getGuardiaNoche(){
+        return guardiaNoche;
     }
 
-    public void setGuardia(Guardia guardia) {
-        this.guardia = guardia;
+    public void setGuardiaDia(Guardia guardiaDia) {
+        this.guardiaDia = guardiaDia;
+    }
+    
+    public void setGuardiaNoche(Guardia guardiaNoche) {
+        this.guardiaNoche = guardiaNoche;
     }
 
     public Dia getDia() {
@@ -52,6 +65,22 @@ public class Fecha {
 
     public void setAño(int año) {
         this.año = año;
+    }
+
+    public boolean isFeriado() {
+        return feriado;
+    }
+
+    public void setFeriado(boolean feriado) {
+        this.feriado = feriado;
+    }
+
+    public int getSemana() {
+        return semana;
+    }
+
+    public void setSemana(int semana) {
+        this.semana = semana;
     }
     
 }
