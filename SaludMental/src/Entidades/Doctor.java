@@ -3,28 +3,26 @@ package Entidades;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Doctor {
     private String nombre;
     private boolean trabajaNoche;
     private boolean trabaja24;
-    // Convertir en HashMap<Dia,Turno>
-    HashMap<Dia,Turno> diasYturnosDisp = new HashMap();
-//    private ArrayList<Dia> diasDisponibles;
+    private ArrayList<Disponibilidad> disponibilidad = new ArrayList();
     private int guardiasSemanales = 0;
-    private int creditoParaGuardias = 28;
+    private int creditoParaGuardias = 28; // cantidad de guardias / cantidad de docs 
     private int guardias12Asignadas = 0;
     private int guardias24Asignadas = 0;
     private int guardiasFindOferiado = 0;
     private ArrayList<Guardia> guardias;
+    // listado
 
-    public Doctor(String nombre, boolean trabajaNoche, boolean trabaja24, HashMap<Dia,Turno> diasYturnosDisp) {
+    public Doctor(String nombre, boolean trabajaNoche, boolean trabaja24, ArrayList<Disponibilidad> disponibilidad) {
         this.nombre = nombre;
         this.trabajaNoche = trabajaNoche;
         this.trabaja24 = trabaja24;
-        this.diasYturnosDisp = diasYturnosDisp;
+        this.disponibilidad = disponibilidad;
+       
         this.guardias = new ArrayList();
     }
 
@@ -44,12 +42,12 @@ public class Doctor {
         this.trabajaNoche = trabajaNoche;
     }
 
-    public HashMap<Dia,Turno> getDiasYturnosDisp() {
-        return diasYturnosDisp;
+    public ArrayList<Disponibilidad> getDisponibilidad() {
+        return disponibilidad;
     }
 
-    public void setDiasYturnosDisp(HashMap<Dia,Turno> diasYturnosDisp) {
-        this.diasYturnosDisp = diasYturnosDisp;
+    public void setDisponibilidad(ArrayList<Disponibilidad> disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     public int getGuardiasSemanales() {
@@ -108,7 +106,11 @@ public class Doctor {
         this.guardiasFindOferiado = guardiasFindOferiado;
     }
     
-    
+     public void mostrarDiasDisponiblessDr(){
+         for (Disponibilidad disponibilidad1 : disponibilidad) {
+             System.out.println(disponibilidad.toString());
+         }
+    }
     
   
     public void resetearGuardias() {
@@ -117,6 +119,17 @@ public class Doctor {
         guardias12Asignadas = 0;
     }
     
+    public String toStringo(){
+        StringBuilder sb = new StringBuilder();
+        for (Disponibilidad disponibilidad1 : disponibilidad) {
+            sb.append(disponibilidad1.toString()).append(" ");
+        }
+        String result = sb.toString();
+        if(!result.isEmpty()){
+            result = result.substring(0,result.length()-2);
+        }
+        return "["+result+"]";
+    }
     
 
     @Override
@@ -127,10 +140,11 @@ public class Doctor {
         return "Doctor: "+ nombre + 
                 '\n' +"Trabaja de noche: " + trabajaNoche + 
                 '\n' +"Trabaja 24 hs: " + trabaja24 + 
-                // Dudas acá
-                '\n' +"Días disponibles: " + diasYturnosDisp.keySet() + 
+                '\n' +"Días disponibles: " + toStringo() + 
                 '\n' +"Guardias de 24 hs asignadas: " + guardias24Asignadas +
                 '\n' +"Guardias de 12 hs asignadas: " + guardias12Asignadas + 
+                '\n' +"Guardias de finde o feriado: " + guardiasFindOferiado +
+                '\n' +"Promedio de guardias semanales: " + guardiasSemanales +
                 '\n' +"Crédito para guardias: " + creditoParaGuardias + 
                 '\n';
     }

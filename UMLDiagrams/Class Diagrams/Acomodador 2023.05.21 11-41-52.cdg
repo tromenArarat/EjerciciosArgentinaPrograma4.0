@@ -11,7 +11,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Asiento" package="Entidades" visibility="public" xPosition="20.0" yPosition="160.0">
+    <Class name="Asiento" package="Entidades" visibility="public" xPosition="63.0" yPosition="160.0">
       <Fields>
         <Field name="ocupada" type="boolean" visibility="private"/>
         <Field name="letra" type="char" visibility="private"/>
@@ -194,13 +194,13 @@
   </ClassDiagramComponents>
   <ClassDiagramRelations>
     <UseRelation source="Entidades.Sala" target="Entidades.Asiento" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Entidades.Espectador" target="Entidades.Asiento" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Servicios.CineServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="auditorio" source="Entidades.Cine" target="Entidades.Sala" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="butaca" source="Entidades.Espectador" target="Entidades.Asiento" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Servicios.EspectadorServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Servicios.SalaServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="auditorio" source="Entidades.Cine" target="Entidades.Sala" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Entidades.Cine" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Entidades.Sala" target="Entidades.Espectador" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Cine" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Espectador" target="Entidades.Asiento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Servicios.SalaServicios" target="Entidades.Sala" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

@@ -14,13 +14,18 @@ public class programa {
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         GuardiasServicios servidor = new GuardiasServicios();
         
-//        servidor.cargarMes();
-        servidor.cargarMesModelo();
+        servidor.cargarMes();
+        //servidor.cargarMesModelo();
         servidor.mostrarMes();
         servidor.cargarGuardias();
         servidor.mostrarGuardias();
         servidor.mostrarFeriados();
         
+//        servidor.removerGuardiasDuplicadas();
+        servidor.mostrarGuardias();
+//        servidor.cargarDocs();
+        servidor.cargarDocsModelo();
+//        System.out.println(servidor.coincideDisponibilidad());
         
         String rta = "no";
         
@@ -30,7 +35,7 @@ public class programa {
             System.out.println("ASIGNAR GUARDIA 24 HS   --> 3");
             System.out.println("ASIGNAR GUARDIAS 12 HS  --> 4");
             System.out.println("MOSTRAR GUARDIAS ASIGNA --> 5");
-//            System.out.println("CAMBIAR GUARDIAS        --> 5");
+        //  System.out.println("CAMBIAR GUARDIAS        --> 5");
             System.out.println("SALIR                   --> 6");
             System.out.println("");
             int opcion = sc.nextInt();
@@ -57,15 +62,7 @@ public class programa {
                     break;
             }
         }while(rta.equals("no"));
-        
-        
   
-        
-        
-        
-        
-        
-       
     }
     
 }
