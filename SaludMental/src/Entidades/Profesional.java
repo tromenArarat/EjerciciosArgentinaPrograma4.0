@@ -2,9 +2,9 @@
 package Entidades;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 
-public class Doctor {
+public class Profesional {
     private String nombre;
     private boolean trabajaNoche;
     private boolean trabaja24;
@@ -14,16 +14,36 @@ public class Doctor {
     private int guardias12Asignadas = 0;
     private int guardias24Asignadas = 0;
     private int guardiasFindOferiado = 0;
+    private Date licencia = new Date();
+    private Date finLicencia = new Date();
+    
+    
     private ArrayList<Guardia> guardias;
     // listado
 
-    public Doctor(String nombre, boolean trabajaNoche, boolean trabaja24, ArrayList<Disponibilidad> disponibilidad) {
+    public Profesional(String nombre, boolean trabajaNoche, boolean trabaja24, ArrayList<Disponibilidad> disponibilidad) {
         this.nombre = nombre;
         this.trabajaNoche = trabajaNoche;
         this.trabaja24 = trabaja24;
         this.disponibilidad = disponibilidad;
        
         this.guardias = new ArrayList();
+    }
+
+    public Date getLicencia() {
+        return licencia;
+    }
+
+    public void setLicencia(Date licencia) {
+        this.licencia = licencia;
+    }
+
+    public Date getFinLicencia() {
+        return finLicencia;
+    }
+
+    public void setFinLicencia(Date finLicencia) {
+        this.finLicencia = finLicencia;
     }
 
     public String getNombre() {

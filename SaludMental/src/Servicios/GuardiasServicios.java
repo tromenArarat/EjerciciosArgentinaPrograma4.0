@@ -13,20 +13,19 @@ package Servicios;
 import Entidades.Fecha;
 import Entidades.Dia;
 import Entidades.Disponibilidad;
-import Entidades.Doctor;
+import Entidades.Profesional;
 import Entidades.Guardia;
 import Entidades.Mes;
 import Entidades.Turno;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class GuardiasServicios {
 
     private ArrayList<Guardia> guardias = new ArrayList();
-    private ArrayList<Doctor> doctores = new ArrayList();
+    private ArrayList<Profesional> profesionales = new ArrayList();
     private ArrayList<Fecha> calendario = new ArrayList();
     private Scanner sc = new Scanner(System.in).useDelimiter("\n");
     private int guardiasAsignadas = 0;
@@ -34,7 +33,7 @@ public class GuardiasServicios {
     // Constructor
     public GuardiasServicios() {
         guardias = new ArrayList<>();
-        doctores = new ArrayList<>();
+        profesionales = new ArrayList<>();
         calendario = new ArrayList<>();
         this.guardiasAsignadas = 0;
     }
@@ -300,13 +299,13 @@ public class GuardiasServicios {
             System.out.println("¿Cargar otro día? (sí/no)");
             rta2 = sc.next();
         }while(rta2.equalsIgnoreCase("si")||rta2.equalsIgnoreCase("sí"));
-        doctores.add(new Doctor(nombre,noche,centinela,disponibilidad));
+        profesionales.add(new Profesional(nombre,noche,centinela,disponibilidad));
     }
         
         public void setearCreditosGuardiasPorDoc(int cantidad){
         
-        for (Doctor doctore : doctores) {
-            doctore.setCreditoParaGuardias(Math.round(guardias.size()/doctores.size()));
+        for (Profesional profesionale : profesionales) {
+            profesionale.setCreditoParaGuardias(Math.round(guardias.size()/profesionales.size()));
         }
     }
         
@@ -371,26 +370,26 @@ public class GuardiasServicios {
         dispo5.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
         dispo5.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
         
-        doctores.add(new Doctor(nombre,true,true,dispo1));
-        doctores.add(new Doctor(nombre2,true,false,dispo2));
-        doctores.add(new Doctor(nombre3,true,true,dispo3));
-        doctores.add(new Doctor(nombre4,true,false,dispo4));
-        doctores.add(new Doctor(nombre5,false,false,dispo5));
-        doctores.add(new Doctor(nombre6,false,false,dispo5));
-        doctores.add(new Doctor(nombre7,true,false,dispo4));
-        doctores.add(new Doctor(nombre8,true,true,dispo3));
-        doctores.add(new Doctor(nombre9,true,false,dispo2));
-        doctores.add(new Doctor(nombre10,true,true,dispo1));
+        profesionales.add(new Profesional(nombre,true,true,dispo1));
+        profesionales.add(new Profesional(nombre2,true,false,dispo2));
+        profesionales.add(new Profesional(nombre3,true,true,dispo3));
+        profesionales.add(new Profesional(nombre4,true,false,dispo4));
+        profesionales.add(new Profesional(nombre5,false,false,dispo5));
+        profesionales.add(new Profesional(nombre6,false,false,dispo5));
+        profesionales.add(new Profesional(nombre7,true,false,dispo4));
+        profesionales.add(new Profesional(nombre8,true,true,dispo3));
+        profesionales.add(new Profesional(nombre9,true,false,dispo2));
+        profesionales.add(new Profesional(nombre10,true,true,dispo1));
     }
     
         public void mostrarDocs(){
-        for (Doctor doctor : doctores) {
-            System.out.println(doctor.toString());
+        for (Profesional profesional : profesionales) {
+            System.out.println(profesional.toString());
         }
     }
         
-        public void agregarDoctor(Doctor doctor) {
-        doctores.add(doctor);
+        public void agregarProfesional(Profesional profesional) {
+        profesionales.add(profesional);
     }
         
        
@@ -401,8 +400,8 @@ public class GuardiasServicios {
         public Dia coincideDisponibilidadDia(){
             Dia este = Dia.DOMINGO;
             Iterator it = guardias.iterator();
-            for (Doctor doctore : doctores) {
-                for (Disponibilidad disponibilidad : doctore.getDisponibilidad()) {
+            for (Profesional profesionale : profesionales) {
+                for (Disponibilidad disponibilidad : profesionale.getDisponibilidad()) {
                     if(disponibilidad.getDia()==guardia.getFecha().getDia()){
                         quiOnda = disponibilidad.getTurno()==guardia.getTurno();
                     };
@@ -417,26 +416,23 @@ public class GuardiasServicios {
         public void asignarGuardia24(){
                
         /*
-        Asignar guardia completa a doctor 
+        Asignar guardia completa a profesional 
         */
        
-        // Mezclar los doctores for fairness
-        Collections.shuffle(doctores); 
+        // Mezclar los profesionales
+        Collections.shuffle(profesionales); 
         
-        // Ordenar guardias for lógica
+        // Ordenar guardias
         Collections.sort(guardias,Guardia.ordenarPorNumDia);
         
         Iterator it = guardias.iterator();
         
         while(it.hasNext()){
             Guardia guardia = (Guardia) it.next();
-             for (Doctor dotor : doctores) {
+             for (Profesional dotor : profesionales) {
                 if(dotor.getCreditoParaGuardias()>1&dotor.getGuardias24Asignadas()<3
-                    & dotor.getDisponibilidad().contains(guardia.getFecha().getDia())
-                    & dotor.getDisponibilidad().contains(guardia.getTurno())
-                    & dotor.getGuardiasSemanales()<15
-                    & dotor.getGuardiasFindOferiado()<4){
-                        asignarGuardiaDoctor(dotor, guardia);
+                        ){
+                        asignarGuardiaProfesional(dotor, guardia);
                         dotor.setCreditoParaGuardias(dotor.getCreditoParaGuardias()-2);
                         dotor.setGuardias24Asignadas(dotor.getGuardias24Asignadas()+1);
                         it.remove();
@@ -450,13 +446,13 @@ public class GuardiasServicios {
         public void asignarGuardias12(){
         
         /*
-        Asignar guardias a doctor. Aplica los filtros de: 
+        Asignar guardias a profesional. Aplica los filtros de: 
         - Condición de límite semanal en 7 incluido findes y feriados
         - Condición de límite findes y feriados en 1.5 a 2 como mucho
         */
         
-        // Mezclar los doctores for fairness
-        Collections.shuffle(doctores);
+        // Mezclar los profesionales for fairness
+        Collections.shuffle(profesionales);
                 
         // Mezclar las guardias for fairness
         Collections.shuffle(guardias);
@@ -464,28 +460,28 @@ public class GuardiasServicios {
                
         Iterator bucle = guardias.iterator();
         
-        // Recorro los doctores
-        for (Doctor doctor : doctores) {
+        // Recorro los profesionales
+        for (Profesional profesional : profesionales) {
             // Mientras haya una guardia y el doc tenga crédito disponible 
             // Y Mientras las guardias de finde por mes asignadas para el doc no superen las 3 
             // Y Mientras la cantidad semanal no supere las 7
-           while(bucle.hasNext()&doctor.getCreditoParaGuardias()>0&doctor.getGuardiasFindOferiado()<4&
-                   doctor.getGuardiasSemanales()<8){
+           while(bucle.hasNext()&profesional.getCreditoParaGuardias()>0&profesional.getGuardiasFindOferiado()<4&
+                   profesional.getGuardiasSemanales()<8){
                 Guardia guardia = (Guardia) bucle.next();
-                if(doctor.getDisponibilidad().contains(guardia.getFecha().getDia())
-                        &doctor.getDisponibilidad().contains(guardia.getTurno())
-                        //&(guardia.getTurno()==Turno.DIA || doctor.isTrabajaNoche())
+                if(profesional.getDisponibilidad().contains(guardia.getFecha().getDia())
+                        &profesional.getDisponibilidad().contains(guardia.getTurno())
+                        //&(guardia.getTurno()==Turno.DIA || profesional.isTrabajaNoche())
                         ){
-                                asignarGuardiaDoctor(doctor, guardia);
-                                doctor.setCreditoParaGuardias(doctor.getCreditoParaGuardias()-1);
-                                doctor.setGuardias12Asignadas(doctor.getGuardias12Asignadas()+1);
+                                asignarGuardiaProfesional(profesional, guardia);
+                                profesional.setCreditoParaGuardias(profesional.getCreditoParaGuardias()-1);
+                                profesional.setGuardias12Asignadas(profesional.getGuardias12Asignadas()+1);
                                 guardiasAsignadas++;
                                 
                                 
                                 if(guardia.getFecha().isFeriado()
                                 ||guardia.getFecha().getDia().equals(Dia.DOMINGO)
                                 ||guardia.getFecha().getDia().equals(Dia.SABADO)){
-                                    doctor.setGuardiasFindOferiado(doctor.getGuardiasFindOferiado()+1);
+                                    profesional.setGuardiasFindOferiado(profesional.getGuardiasFindOferiado()+1);
                         }
                                 int primera = 0;
                                 int segunda = 0;
@@ -507,7 +503,7 @@ public class GuardiasServicios {
                                 }
                                 int uno = (Math.max(primera, segunda));
                                 int dos = (Math.max(tercera, cuarta));
-                                doctor.setGuardiasSemanales(Math.max(uno, dos));
+                                profesional.setGuardiasSemanales(Math.max(uno, dos));
                                 bucle.remove(); 
                 }
                     
@@ -520,14 +516,14 @@ public class GuardiasServicios {
         
     }
 
-        public void asignarGuardiaDoctor(Doctor doctor, Guardia guardia){
-        doctor.getGuardias().add(guardia);
+        public void asignarGuardiaProfesional(Profesional profesional, Guardia guardia){
+        profesional.getGuardias().add(guardia);
 }
         
         public void mostrarGuardiasAsignadasDocs(){
-        for (Doctor doctore : doctores) {
-            System.out.println(doctore.getNombre());
-            for (Guardia guardia : doctore.getGuardias()) {
+        for (Profesional profesionale : profesionales) {
+            System.out.println(profesionale.getNombre());
+            for (Guardia guardia : profesionale.getGuardias()) {
                 System.out.println(guardia.getFecha().getDia()+
                         " "+guardia.getFecha().getNum()+
                         " "+guardia.getTurno());

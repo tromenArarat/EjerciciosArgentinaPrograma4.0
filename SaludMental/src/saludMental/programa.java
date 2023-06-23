@@ -14,8 +14,8 @@ public class programa {
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         GuardiasServicios servidor = new GuardiasServicios();
         
-        servidor.cargarMes();
-        //servidor.cargarMesModelo();
+//        servidor.cargarMes();
+        servidor.cargarMesModelo();
         servidor.mostrarMes();
         servidor.cargarGuardias();
         servidor.mostrarGuardias();
