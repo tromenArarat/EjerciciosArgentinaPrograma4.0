@@ -1,22 +1,9 @@
-/*
-PENDIENTES
-   - Trueque de guardias
-   - Hacer todo usando DATE o CALENDAR
-   - Comparar mes anterior y empezar reparto con quienes recibieron menos guardias de finde
-   - Ordenar listado de docs de acuerdo a la cant. de guardias recibidas en finde del mes anterior.
-Ciertas reglas: todos hacen una guardia de finde mínimo. Si hay más porque hay feriados, el siguiente 
-mes empieza el reparto por quienes menos guardias de finde recibieron.
-  
-*/
+
 package Servicios;
 
-import Entidades.Fecha;
-import Entidades.Dia;
-import Entidades.Disponibilidad;
-import Entidades.Profesional;
 import Entidades.Guardia;
-import Entidades.Mes;
-import Entidades.Turno;
+import Entidades.Profesional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -26,17 +13,14 @@ public class GuardiasServicios {
 
     private ArrayList<Guardia> guardias = new ArrayList();
     private ArrayList<Profesional> profesionales = new ArrayList();
-    private ArrayList<Fecha> calendario = new ArrayList();
     private Scanner sc = new Scanner(System.in).useDelimiter("\n");
     private int guardiasAsignadas = 0;
 
     // Constructor
+
     public GuardiasServicios() {
-        guardias = new ArrayList<>();
-        profesionales = new ArrayList<>();
-        calendario = new ArrayList<>();
-        this.guardiasAsignadas = 0;
     }
+    
     
     // Getter y Setter de guardiasAsignadas
 
@@ -47,489 +31,180 @@ public class GuardiasServicios {
     public void setGuardiasAsignadas(int guardiasAsignadas) {
         this.guardiasAsignadas = guardiasAsignadas;
     }
+
+    public ArrayList<Guardia> getGuardias() {
+        return guardias;
+    }
+
+    public void setGuardias(ArrayList<Guardia> guardias) {
+        this.guardias = guardias;
+    }
+
+    public ArrayList<Profesional> getProfesionales() {
+        return profesionales;
+    }
+
+    public void setProfesionales(ArrayList<Profesional> profesionales) {
+        this.profesionales = profesionales;
+    }
+
+
+   // Métodos en el orden en que se ejecutan en el mein
     
-    
-    // Métodos en el orden en que se ejecutan en el mein
-    
-        // De Calendario
-        public void cargarMes(){
-
-                System.out.println("Año:");
-                int anio = sc.nextInt();
-                System.out.println("");
-
-                System.out.println("Mes en curso:");
-                for (Mes mes : Mes.values()) {
-                    System.out.println(mes);
-                }
-                String mes = sc.next();
-                Mes mesEnCurso = Mes.valueOf(mes);
-                System.out.println("");
-
-                System.out.println("¿Qué día cae el 16 de este mes? (LUNES, MARTES,...)");
-                for (Dia dia : Dia.values()) {
-                    System.out.println(dia);
-                }
-                String dia = sc.next();
-                Dia dia16DelMes = Dia.valueOf(dia);
-                System.out.println("");
-
-                System.out.println("¿Cuántos días tiene el mes?");
-                int diasMes = sc.nextInt();
-
-                Dia siguiente = dia16DelMes;
-                for (int i = 16; i < 23; i++) {
-                     calendario.add(new Fecha(siguiente,mesEnCurso,anio,i,false,1));
-                     siguiente = siguiente.next();
-                    }
-                // Falta código por acá para que el programa no se caiga si el mes es FEBRERO
-                for (int i = 23; i < 30; i++) {
-                     calendario.add(new Fecha(siguiente,mesEnCurso,anio,i,false,2));
-                     siguiente = siguiente.next();
-                    }
-                int diaM;
-                switch(diasMes){
-                    case 30:
-                        for (int i = 30; i < 31; i++) {
-                            calendario.add(new Fecha(siguiente,mesEnCurso,anio,i,false,3));
-                            siguiente = siguiente.next();
-                        }
-                        for (int i = 1; i < 7; i++) {
-                            calendario.add(new Fecha(siguiente,mesEnCurso.next(),anio,i,false,3));
-                            siguiente = siguiente.next();
-                        }
-                        for (int i = 7; i < 16; i++) {
-                            calendario.add(new Fecha(siguiente,mesEnCurso.next(),anio,i,false,4));
-                            siguiente = siguiente.next();
-                        }
-                        break;
-                    case 31:    
-                        for (int i = 30; i < 32; i++) {
-                            calendario.add(new Fecha(siguiente,mesEnCurso,anio,i,false,3));
-                            siguiente = siguiente.next();
-                        }
-                        for (int i = 1; i < 6; i++) {
-                            calendario.add(new Fecha(siguiente,mesEnCurso.next(),anio,i,false,3));
-                            siguiente = siguiente.next();
-                        }
-                        for (int i = 6; i < 16; i++) {
-                            calendario.add(new Fecha(siguiente,mesEnCurso.next(),anio,i,false,4));
-                            siguiente = siguiente.next();
-                        }
-                        break;
-                }
-
-
-                System.out.println("");
-
-                System.out.println("¿Qué número de día es feriado?");
-                System.out.println("(Entre el 16 del mes anterior y el 15 de este mes incluídos)");
-                int feriado = sc.nextInt();
-                for (Fecha fecha : calendario) {
-                    if(fecha.getNum()==feriado){
-                        fecha.setFeriado(true);
-                    }
-                }
-                String confirmacionSalida = "si";
-                do {
-                    System.out.println("¿Algún otro? (si/no)");
-                    confirmacionSalida = sc.next();
-                    if(confirmacionSalida.equalsIgnoreCase("si")){
-                        System.out.println("¿Qué número?");
-                        feriado = sc.nextInt();
-                        for (Fecha fecha : calendario) {
-                            if(fecha.getNum()==feriado){
-                                fecha.setFeriado(true);
-                            }
-                        }
-                    }     
-                } while (confirmacionSalida.equalsIgnoreCase("si"));
-            }
-
-        public void cargarMesModelo(){
-                Dia siguiente = Dia.VIERNES;
-                for (int i = 16; i < 23; i++) {
-                     calendario.add(new Fecha(siguiente,Mes.JUNIO,2023,i,false,1));
-                     siguiente = siguiente.next();
-                    }
-                for (int i = 23; i < 30; i++) {
-                    calendario.add(new Fecha(siguiente,Mes.JUNIO,2023,i,false,2));
-                     siguiente = siguiente.next();
-                    }
-                for (int i = 30; i < 31; i++) {
-                    calendario.add(new Fecha(siguiente,Mes.JUNIO,2023,i,false,3));
-                    siguiente = siguiente.next();
-                        }
-                for (int i = 1; i < 7; i++) {
-                    calendario.add(new Fecha(siguiente,Mes.JUNIO.next(),2023,i,false,3));
-                    siguiente = siguiente.next();
-                        }
-                for (int i = 7; i < 16; i++) {
-                    calendario.add(new Fecha(siguiente,Mes.JUNIO.next(),2023,i,false,4));
-                    siguiente = siguiente.next();
-                        }
-
-                int feriado = 19;
-                for (Fecha fecha : calendario) {
-                    if(fecha.getNum()==feriado){
-                        fecha.setFeriado(true);
-                    }
-                }
-                feriado = 20;
-                for (Fecha fecha : calendario) {
-                    if(fecha.getNum()==feriado){
-                        fecha.setFeriado(true);
-                    }
-                }
-
-            }
-
-        public void mostrarFeriados(){
-                for (Fecha fecha : calendario) {
-                    if(fecha.isFeriado())
-                    System.out.println(fecha.getDia()+" "+fecha.getNum()+" de "+fecha.getMes());
-                }
-            }
-
-        public void mostrarMes(){
-        for (Fecha dia : calendario) {
-            System.out.println(dia.getDia()+" "+dia.getNum());
-        }
-    }
-        
-        // De Guardia
-        public void cargarGuardias(){
-        for (Fecha fecha : calendario) {
-            guardias.add(new Guardia(fecha,Turno.DIA));
-            guardias.add(new Guardia(fecha,Turno.NOCHE));
-            guardias.add(new Guardia(fecha,Turno.CENTINELA));
-        }
-    };
-        
-        public void removerGuardiasDuplicadas(){
-       Iterator it = guardias.iterator();
-       while(it.hasNext()){
-                Guardia guardia = (Guardia) it.next();
-                if(guardia.getTurno()==Turno.CENTINELA){
-                    Iterator itElPayaso = guardias.iterator();
-                    while(it.hasNext()){
-                        Guardia guardiola = (Guardia) it.next();
-                        if(guardia.getFecha().getNum()==guardiola.getFecha().getNum()){
-                            itElPayaso.remove();
-                        }
-                    }
-                }
-                    
-       }
-   }
-    
-        public void mostrarGuardias(){
-        for (Guardia guardia : guardias) {
-            System.out.println(guardia.getFecha().getDia()+" "+guardia.getFecha().getNum());
-        }
-    }
-    
-        public void agregarGuardia(Guardia guardia) {
-                    guardias.add(guardia);
-            }
-            
-        // De Docs
-        
-        public void cargarDocs(){
-        
-        boolean noche = false;
-        boolean centinela = false;
-        
-        System.out.println("Nombre:");
-        String nombre = sc.next();
-        System.out.println("¿Hace guardias de 24 hs? (true/false)");
-        // Se llama centinela la variable porque se queda despierto todo el día
-        
-        centinela = sc.nextBoolean();
-        if(centinela){
-            noche=true;
-        }
-      
-        ArrayList<Disponibilidad> disponibilidad = new ArrayList();
-        String rta2 = "si";
-        do{
-            System.out.println("¿Qué días trabaja? (LUNES/MARTES...)");
-            String dia = sc.next();
-                        
-            System.out.println("¿En qué turno? 1-DIA 2-NOCHE 3-INDISTINTO 4-24HS");
-            int turno = sc.nextInt();
-            switch(turno){
-                case 1:
-                    for (Fecha fecha : calendario) {
-                        if(fecha.getDia()==Dia.valueOf(dia)){
-                            Disponibilidad dispo = new Disponibilidad(Dia.valueOf(dia),Turno.DIA);
-                            disponibilidad.add(dispo);
-                        }
-                    }
-                    break;
-                case 2:
-                    for (Fecha fecha : calendario) {
-                        if(fecha.getDia()==Dia.valueOf(dia)){
-                            Disponibilidad dispo2 = new Disponibilidad(Dia.valueOf(dia),Turno.NOCHE);
-                            disponibilidad.add(dispo2);
-                        }
-                    }
-                    noche=true;
-                    break;
-                case 3:
-                    for (Fecha fecha : calendario) {
-                        if(fecha.getDia()==Dia.valueOf(dia)){
-                            Disponibilidad dispo3 = new Disponibilidad(Dia.valueOf(dia),Turno.DIA);
-                            Disponibilidad dispo4 = new Disponibilidad(Dia.valueOf(dia),Turno.NOCHE);
-                            disponibilidad.add(dispo3);
-                            disponibilidad.add(dispo4);
-                        }
-                    }
-                    noche=true;
-                    break;
-                case 4:
-                    for (Fecha fecha : calendario) {
-                        if(fecha.getDia()==Dia.valueOf(dia)){
-                            Disponibilidad dispo5 = new Disponibilidad(Dia.valueOf(dia),Turno.CENTINELA);
-                            disponibilidad.add(dispo5);
-                        }
-                    }
-                  
-            }
-            System.out.println("¿Cargar otro día? (sí/no)");
-            rta2 = sc.next();
-        }while(rta2.equalsIgnoreCase("si")||rta2.equalsIgnoreCase("sí"));
-        profesionales.add(new Profesional(nombre,noche,centinela,disponibilidad));
-    }
-        
-        public void setearCreditosGuardiasPorDoc(int cantidad){
-        
-        for (Profesional profesionale : profesionales) {
-            profesionale.setCreditoParaGuardias(Math.round(guardias.size()/profesionales.size()));
-        }
-    }
-        
-        public void cargarDocsModelo(){
-        String nombre = "Ramón";
-        String nombre2 = "Dora";
-        String nombre3 = "Josefa";
-        String nombre4 = "Eugenio";
-        String nombre5 = "Daniel";
-        String nombre6 = "Florencia";
-        String nombre7 = "Clara";
-        String nombre8 = "Javier";
-        String nombre9 = "Pepa";
-        String nombre10 = "Kun";
-        boolean centinela = true;
-        boolean medialuna = false;
-        ArrayList<Disponibilidad> dispo1 = new ArrayList();
-        dispo1.add(new Disponibilidad(Dia.DOMINGO,Turno.CENTINELA));
-        dispo1.add(new Disponibilidad(Dia.LUNES,Turno.NOCHE));
-        dispo1.add(new Disponibilidad(Dia.MARTES,Turno.CENTINELA));
-        dispo1.add(new Disponibilidad(Dia.MIERCOLES,Turno.CENTINELA));
-        dispo1.add(new Disponibilidad(Dia.JUEVES,Turno.CENTINELA));
-        dispo1.add(new Disponibilidad(Dia.VIERNES,Turno.CENTINELA));
-        dispo1.add(new Disponibilidad(Dia.SABADO,Turno.CENTINELA));
-        
-        ArrayList<Disponibilidad> dispo2 = new ArrayList();
-        dispo2.add(new Disponibilidad(Dia.DOMINGO,Turno.DIA));
-        dispo2.add(new Disponibilidad(Dia.DOMINGO,Turno.NOCHE));
-        dispo2.add(new Disponibilidad(Dia.LUNES,Turno.DIA));
-        dispo2.add(new Disponibilidad(Dia.LUNES,Turno.NOCHE));
-        dispo2.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
-        dispo2.add(new Disponibilidad(Dia.SABADO,Turno.NOCHE));
-        
-        ArrayList<Disponibilidad> dispo3 = new ArrayList();
-        dispo3.add(new Disponibilidad(Dia.DOMINGO,Turno.DIA));
-        dispo3.add(new Disponibilidad(Dia.DOMINGO,Turno.NOCHE));
-        dispo3.add(new Disponibilidad(Dia.MARTES,Turno.DIA));
-        dispo3.add(new Disponibilidad(Dia.MARTES,Turno.NOCHE));
-        dispo3.add(new Disponibilidad(Dia.MIERCOLES,Turno.DIA));
-        dispo3.add(new Disponibilidad(Dia.MIERCOLES,Turno.NOCHE));
-        dispo3.add(new Disponibilidad(Dia.MIERCOLES,Turno.CENTINELA));
-        dispo3.add(new Disponibilidad(Dia.JUEVES,Turno.DIA));
-        dispo3.add(new Disponibilidad(Dia.JUEVES,Turno.NOCHE));
-        dispo3.add(new Disponibilidad(Dia.VIERNES,Turno.DIA));
-        dispo3.add(new Disponibilidad(Dia.VIERNES,Turno.NOCHE));
-        dispo3.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
-        dispo3.add(new Disponibilidad(Dia.SABADO,Turno.NOCHE));
-        
-        ArrayList<Disponibilidad> dispo4 = new ArrayList();
-        dispo4.add(new Disponibilidad(Dia.DOMINGO,Turno.DIA));
-        dispo4.add(new Disponibilidad(Dia.DOMINGO,Turno.NOCHE));
-        dispo4.add(new Disponibilidad(Dia.JUEVES,Turno.DIA));
-        dispo4.add(new Disponibilidad(Dia.LUNES,Turno.NOCHE));
-        dispo4.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
-        dispo4.add(new Disponibilidad(Dia.SABADO,Turno.NOCHE));
-        
-        ArrayList<Disponibilidad> dispo5 = new ArrayList();
-        dispo5.add(new Disponibilidad(Dia.DOMINGO,Turno.DIA));
-        dispo5.add(new Disponibilidad(Dia.LUNES,Turno.DIA));
-        dispo5.add(new Disponibilidad(Dia.JUEVES,Turno.DIA));
-        dispo5.add(new Disponibilidad(Dia.LUNES,Turno.DIA));
-        dispo5.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
-        dispo5.add(new Disponibilidad(Dia.SABADO,Turno.DIA));
-        
-        profesionales.add(new Profesional(nombre,true,true,dispo1));
-        profesionales.add(new Profesional(nombre2,true,false,dispo2));
-        profesionales.add(new Profesional(nombre3,true,true,dispo3));
-        profesionales.add(new Profesional(nombre4,true,false,dispo4));
-        profesionales.add(new Profesional(nombre5,false,false,dispo5));
-        profesionales.add(new Profesional(nombre6,false,false,dispo5));
-        profesionales.add(new Profesional(nombre7,true,false,dispo4));
-        profesionales.add(new Profesional(nombre8,true,true,dispo3));
-        profesionales.add(new Profesional(nombre9,true,false,dispo2));
-        profesionales.add(new Profesional(nombre10,true,true,dispo1));
-    }
-    
-        public void mostrarDocs(){
-        for (Profesional profesional : profesionales) {
-            System.out.println(profesional.toString());
-        }
-    }
-        
-        public void agregarProfesional(Profesional profesional) {
-        profesionales.add(profesional);
-    }
-        
+   // De Guardia
+    public void cargarGuardias(){
+        String fecha = "2023-06-16";
+        LocalDate fechaInicio = LocalDate.parse(fecha);
+        guardias.add(new Guardia(1, fechaInicio,'D', null, false, 'V'));
+        guardias.add(new Guardia(2, fechaInicio,'N', null, false, 'V'));
+        guardias.add(new Guardia(3, fechaInicio,'C', null, false, 'V'));
+        guardias.add(new Guardia(4, fechaInicio.plusDays(1),'D', null, true, 'S'));
+        guardias.add(new Guardia(5, fechaInicio.plusDays(1),'N', null, true, 'S'));
+        guardias.add(new Guardia(6, fechaInicio.plusDays(1),'C', null, true, 'S'));
+        guardias.add(new Guardia(7, fechaInicio.plusDays(2),'D', null, true, 'D'));
+        guardias.add(new Guardia(8, fechaInicio.plusDays(2),'N', null, true, 'D'));
+        guardias.add(new Guardia(9, fechaInicio.plusDays(2),'C', null, true, 'D'));
+        guardias.add(new Guardia(10, fechaInicio.plusDays(3), 'D', null, true, 'L'));
+        guardias.add(new Guardia(11, fechaInicio.plusDays(3), 'N', null, true, 'L'));
+        guardias.add(new Guardia(12, fechaInicio.plusDays(3), 'C', null, true, 'L'));
+        guardias.add(new Guardia(13, fechaInicio.plusDays(4), 'D', null, true, 'M'));
+        guardias.add(new Guardia(14, fechaInicio.plusDays(4), 'N', null, true, 'M'));
+        guardias.add(new Guardia(15, fechaInicio.plusDays(4), 'C', null, true, 'M'));
+        guardias.add(new Guardia(16, fechaInicio.plusDays(5), 'D', null, false, 'X'));
+        guardias.add(new Guardia(17, fechaInicio.plusDays(5), 'N', null, false, 'X'));
+        guardias.add(new Guardia(18, fechaInicio.plusDays(5), 'C', null, false, 'X'));
+        guardias.add(new Guardia(19, fechaInicio.plusDays(6), 'D', null, false, 'J'));
+        guardias.add(new Guardia(20, fechaInicio.plusDays(6), 'N', null, false, 'J'));
+        guardias.add(new Guardia(21, fechaInicio.plusDays(6), 'C', null, false, 'J'));
+        guardias.add(new Guardia(22, fechaInicio.plusDays(7), 'D', null, false, 'V'));
+        guardias.add(new Guardia(23, fechaInicio.plusDays(7), 'N', null, false, 'V'));
+        guardias.add(new Guardia(24, fechaInicio.plusDays(7), 'C', null, false, 'V'));
+        guardias.add(new Guardia(25, fechaInicio.plusDays(8), 'D', null, true, 'S'));
+        guardias.add(new Guardia(26, fechaInicio.plusDays(8), 'N', null, true, 'S'));
+        guardias.add(new Guardia(27, fechaInicio.plusDays(8), 'C', null, true, 'S'));
+        guardias.add(new Guardia(28, fechaInicio.plusDays(9), 'D', null, true, 'D'));
+        guardias.add(new Guardia(29, fechaInicio.plusDays(9), 'N', null, true, 'D'));
+        guardias.add(new Guardia(30, fechaInicio.plusDays(9), 'C', null, true, 'D'));
+        guardias.add(new Guardia(31, fechaInicio.plusDays(10), 'D', null, false, 'L'));
+        guardias.add(new Guardia(32, fechaInicio.plusDays(10), 'N', null, false, 'L'));
+        guardias.add(new Guardia(33, fechaInicio.plusDays(10), 'C', null, false, 'L'));
+        guardias.add(new Guardia(34, fechaInicio.plusDays(11), 'D', null, true, 'M'));
+        guardias.add(new Guardia(35, fechaInicio.plusDays(11), 'N', null, true, 'M'));
+        guardias.add(new Guardia(36, fechaInicio.plusDays(11), 'C', null, true, 'M'));
+        guardias.add(new Guardia(37, fechaInicio.plusDays(12), 'D', null, false, 'X'));
+        guardias.add(new Guardia(38, fechaInicio.plusDays(12), 'N', null, false, 'X'));
+        guardias.add(new Guardia(39, fechaInicio.plusDays(12), 'C', null, false, 'X'));
+        guardias.add(new Guardia(40, fechaInicio.plusDays(13), 'D', null, false, 'J'));
+        guardias.add(new Guardia(41, fechaInicio.plusDays(13), 'N', null, false, 'J'));
+        guardias.add(new Guardia(42, fechaInicio.plusDays(13), 'C', null, false, 'J'));
+        guardias.add(new Guardia(43, fechaInicio.plusDays(14), 'D', null, false, 'V'));
+        guardias.add(new Guardia(44, fechaInicio.plusDays(14), 'N', null, false, 'V'));
+        guardias.add(new Guardia(45, fechaInicio.plusDays(14), 'C', null, false, 'V'));
+        guardias.add(new Guardia(46, fechaInicio.plusDays(15), 'D', null, true, 'S'));
+        guardias.add(new Guardia(47, fechaInicio.plusDays(15), 'N', null, true, 'S'));
+        guardias.add(new Guardia(48, fechaInicio.plusDays(15), 'C', null, true, 'S'));
+        guardias.add(new Guardia(49, fechaInicio.plusDays(16), 'D', null, true, 'D'));
+        guardias.add(new Guardia(50, fechaInicio.plusDays(16), 'N', null, true, 'D'));
+        guardias.add(new Guardia(51, fechaInicio.plusDays(16), 'C', null, true, 'D'));
+        guardias.add(new Guardia(52, fechaInicio.plusDays(17), 'D', null, false, 'L'));
+        guardias.add(new Guardia(53, fechaInicio.plusDays(17), 'N', null, false, 'L'));
+        guardias.add(new Guardia(54, fechaInicio.plusDays(17), 'C', null, false, 'L'));
+        guardias.add(new Guardia(55, fechaInicio.plusDays(18), 'D', null, false, 'M'));
+        guardias.add(new Guardia(56, fechaInicio.plusDays(18), 'N', null, false, 'M'));
+        guardias.add(new Guardia(57, fechaInicio.plusDays(18), 'C', null, false, 'M'));
+        guardias.add(new Guardia(58, fechaInicio.plusDays(19), 'D', null, false, 'X'));
+        guardias.add(new Guardia(59, fechaInicio.plusDays(19), 'N', null, false, 'X'));
+        guardias.add(new Guardia(60, fechaInicio.plusDays(19), 'C', null, false, 'X'));
+        guardias.add(new Guardia(61, fechaInicio.plusDays(20), 'D', null, false, 'J'));
+        guardias.add(new Guardia(62, fechaInicio.plusDays(20), 'N', null, false, 'J'));
+        guardias.add(new Guardia(63, fechaInicio.plusDays(20), 'C', null, false, 'J'));
+        guardias.add(new Guardia(64, fechaInicio.plusDays(21), 'D', null, false, 'V'));
+        guardias.add(new Guardia(65, fechaInicio.plusDays(21), 'N', null, false, 'V'));
+        guardias.add(new Guardia(66, fechaInicio.plusDays(21), 'C', null, false, 'V'));
+        guardias.add(new Guardia(67, fechaInicio.plusDays(22), 'D', null, true, 'S'));
+        guardias.add(new Guardia(68, fechaInicio.plusDays(22), 'N', null, true, 'S'));
+        guardias.add(new Guardia(69, fechaInicio.plusDays(22), 'C', null, true, 'S'));
+        guardias.add(new Guardia(70, fechaInicio.plusDays(23), 'D', null, true, 'D'));
+        guardias.add(new Guardia(71, fechaInicio.plusDays(23), 'N', null, true, 'D'));
+        guardias.add(new Guardia(72, fechaInicio.plusDays(23), 'C', null, true, 'D'));
+        guardias.add(new Guardia(73, fechaInicio.plusDays(24), 'D', null, false, 'L'));
+        guardias.add(new Guardia(74, fechaInicio.plusDays(24), 'N', null, false, 'L'));
+        guardias.add(new Guardia(75, fechaInicio.plusDays(24), 'C', null, false, 'L'));
+        guardias.add(new Guardia(76, fechaInicio.plusDays(25), 'D', null, false, 'M'));
+        guardias.add(new Guardia(77, fechaInicio.plusDays(25), 'N', null, false, 'M'));
+        guardias.add(new Guardia(78, fechaInicio.plusDays(25), 'C', null, false, 'M'));
+        guardias.add(new Guardia(79, fechaInicio.plusDays(26), 'D', null, false, 'X'));
+        guardias.add(new Guardia(80, fechaInicio.plusDays(26), 'N', null, false, 'X'));
+        guardias.add(new Guardia(81, fechaInicio.plusDays(26), 'C', null, false, 'X'));
+        guardias.add(new Guardia(82, fechaInicio.plusDays(27), 'D', null, false, 'J'));
+        guardias.add(new Guardia(83, fechaInicio.plusDays(27), 'N', null, false, 'J'));
+        guardias.add(new Guardia(84, fechaInicio.plusDays(27), 'C', null, false, 'J'));
+        guardias.add(new Guardia(85, fechaInicio.plusDays(28), 'D', null, false, 'V'));
+        guardias.add(new Guardia(86, fechaInicio.plusDays(28), 'N', null, false, 'V'));
+        guardias.add(new Guardia(87, fechaInicio.plusDays(28), 'C', null, false, 'V'));
+        guardias.add(new Guardia(88, fechaInicio.plusDays(29), 'D', null, true, 'S'));
+        guardias.add(new Guardia(89, fechaInicio.plusDays(29), 'N', null, true, 'S'));
+        guardias.add(new Guardia(90, fechaInicio.plusDays(29), 'C', null, true, 'S'));
        
-        
-        
-        // De Programa
-        /*
-        public Dia coincideDisponibilidadDia(){
-            Dia este = Dia.DOMINGO;
-            Iterator it = guardias.iterator();
-            for (Profesional profesionale : profesionales) {
-                for (Disponibilidad disponibilidad : profesionale.getDisponibilidad()) {
-                    if(disponibilidad.getDia()==guardia.getFecha().getDia()){
-                        quiOnda = disponibilidad.getTurno()==guardia.getTurno();
-                    };
-                    }
-            }
-                
-            }
-            return quiOnda;
-            
-        }
-        */
-        public void asignarGuardia24(){
-               
-        /*
-        Asignar guardia completa a profesional 
-        */
        
-        // Mezclar los profesionales
-        Collections.shuffle(profesionales); 
+    }
+    
+    // De Profesionales 
+    public void cargarProfesionales(){
+        String fecha = "2023-07-01";
+        String fecha2 = "2023-06-26";
+        String fecha3 = "2023-06-16";
+        LocalDate fechaLic1 = LocalDate.parse(fecha);
+        LocalDate fechaLic2 = LocalDate.parse(fecha2);
+        LocalDate fechaLic3 = LocalDate.parse(fecha3);
         
-        // Ordenar guardias
-        Collections.sort(guardias,Guardia.ordenarPorNumDia);
+        profesionales.add(new Profesional(1, "Rubén", 15, "LMXJVSD","LMXJVSD", "LMXJVSD", fechaLic1, fechaLic1.plusDays(15), 0, 0, 0, 0));
         
+        profesionales.add(new Profesional(2, "María", 5, "LV","SD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(3, "Loana", 12, "LMXJVSD","MS", "X", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(4, "Odor", 12, "LMXJVSD","LMXJVSD", "LMXJVSD", fechaLic2, fechaLic2.plusDays(19), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(5, "Reijav", 12, "LMXJSD","LMSD", "LMSD", fechaLic3, fechaLic3.plusDays(5), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(6, "Flor", 12, "LX","LXJVD", "", fechaLic3, fechaLic3.plusDays(6), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(7, "Luisin", 3, "LXJSD","D", "", fechaLic3, fechaLic3.plusDays(14), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(8, "Lucas", 12, "LVSD","LMJSD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(9, "Anerol", 7, "MVS","", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(10, "Julia", 7, "VSD","MXSD", "VSD", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        
+    }
+ 
+    // De Asignación
+    public void asignarGuardias24(){
         Iterator it = guardias.iterator();
-        
         while(it.hasNext()){
-            Guardia guardia = (Guardia) it.next();
+             Guardia guardia = (Guardia) it.next();
              for (Profesional dotor : profesionales) {
-                if(dotor.getCreditoParaGuardias()>1&dotor.getGuardias24Asignadas()<3
-                        ){
-                        asignarGuardiaProfesional(dotor, guardia);
-                        dotor.setCreditoParaGuardias(dotor.getCreditoParaGuardias()-2);
-                        dotor.setGuardias24Asignadas(dotor.getGuardias24Asignadas()+1);
-                        it.remove();
+                if(guardia.getTurno()=='C'& dotor.getCredito()>2&dotor.getCentinelaDisp().contains(guardia.getDia()+"")&dotor.getGuardiasFinde()<4){
+                        guardia.setProfesional(dotor);
+                        dotor.setCredito(dotor.getCredito()-2);
+                        dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
+                        Collections.shuffle(profesionales);
                 }
             } 
         }
-        }
-       
+    }
     
-        
-        public void asignarGuardias12(){
-        
-        /*
-        Asignar guardias a profesional. Aplica los filtros de: 
-        - Condición de límite semanal en 7 incluido findes y feriados
-        - Condición de límite findes y feriados en 1.5 a 2 como mucho
-        */
-        
-        // Mezclar los profesionales for fairness
-        Collections.shuffle(profesionales);
-                
-        // Mezclar las guardias for fairness
-        Collections.shuffle(guardias);
-        
-               
-        Iterator bucle = guardias.iterator();
-        
-        // Recorro los profesionales
-        for (Profesional profesional : profesionales) {
-            // Mientras haya una guardia y el doc tenga crédito disponible 
-            // Y Mientras las guardias de finde por mes asignadas para el doc no superen las 3 
-            // Y Mientras la cantidad semanal no supere las 7
-           while(bucle.hasNext()&profesional.getCreditoParaGuardias()>0&profesional.getGuardiasFindOferiado()<4&
-                   profesional.getGuardiasSemanales()<8){
-                Guardia guardia = (Guardia) bucle.next();
-                if(profesional.getDisponibilidad().contains(guardia.getFecha().getDia())
-                        &profesional.getDisponibilidad().contains(guardia.getTurno())
-                        //&(guardia.getTurno()==Turno.DIA || profesional.isTrabajaNoche())
-                        ){
-                                asignarGuardiaProfesional(profesional, guardia);
-                                profesional.setCreditoParaGuardias(profesional.getCreditoParaGuardias()-1);
-                                profesional.setGuardias12Asignadas(profesional.getGuardias12Asignadas()+1);
-                                guardiasAsignadas++;
-                                
-                                
-                                if(guardia.getFecha().isFeriado()
-                                ||guardia.getFecha().getDia().equals(Dia.DOMINGO)
-                                ||guardia.getFecha().getDia().equals(Dia.SABADO)){
-                                    profesional.setGuardiasFindOferiado(profesional.getGuardiasFindOferiado()+1);
-                        }
-                                int primera = 0;
-                                int segunda = 0;
-                                int tercera = 0;
-                                int cuarta = 0;
-                                switch(guardia.getFecha().getSemana()){
-                                    case 1:
-                                        primera++;
-                                        break;
-                                    case 2:
-                                        segunda++;
-                                        break;
-                                    case 3:
-                                        tercera++;
-                                        break;
-                                    case 4:
-                                        cuarta++;
-                                        break;
-                                }
-                                int uno = (Math.max(primera, segunda));
-                                int dos = (Math.max(tercera, cuarta));
-                                profesional.setGuardiasSemanales(Math.max(uno, dos));
-                                bucle.remove(); 
-                }
-                    
-            }
-            
-        }
-       
-
-        
-        
-    }
-
-        public void asignarGuardiaProfesional(Profesional profesional, Guardia guardia){
-        profesional.getGuardias().add(guardia);
-}
-        
-        public void mostrarGuardiasAsignadasDocs(){
-        for (Profesional profesionale : profesionales) {
-            System.out.println(profesionale.getNombre());
-            for (Guardia guardia : profesionale.getGuardias()) {
-                System.out.println(guardia.getFecha().getDia()+
-                        " "+guardia.getFecha().getNum()+
-                        " "+guardia.getTurno());
+    public void mostrarGuardiasAsignadas(){
+        for (Guardia guardia : guardias) {
+            if(guardia.getProfesional()!=null){
+                System.out.println(guardia.getFecha() + " " + guardia.getProfesional().getNombre() + " "+ "Crédito: " 
+                        + guardia.getProfesional().getCredito() + "GuardiasFinde: " + guardia.getProfesional().getGuardiasFinde()) ;
             }
         }
     }
 
+    
 }
 
