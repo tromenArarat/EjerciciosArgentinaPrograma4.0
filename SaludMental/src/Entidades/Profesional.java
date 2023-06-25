@@ -16,10 +16,13 @@ public class Profesional {
     private LocalDate fechaLicencia;
     private LocalDate finLicencia;
     
+    private int guardias24;
+    
     private int guardiasFinde;
     private int guardiasFindeAmterior;
     private int guardiasMes;
     private int guardiasMesAnterior;
+    
      // cantidad de guardias / cantidad de docs 
 
     public Profesional() {
@@ -135,6 +138,15 @@ public class Profesional {
     public void setGuardiasMesAnterior(int guardiasMesAnterior) {
         this.guardiasMesAnterior = guardiasMesAnterior;
     }
+
+    public int getGuardias24() {
+        return guardias24;
+    }
+
+    public void setGuardias24(int guardias24) {
+        this.guardias24 = guardias24;
+    }
+    
 
     @Override
     public String toString() {

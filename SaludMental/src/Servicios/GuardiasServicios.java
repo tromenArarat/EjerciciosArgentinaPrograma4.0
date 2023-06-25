@@ -158,25 +158,27 @@ public class GuardiasServicios {
         LocalDate fechaLic2 = LocalDate.parse(fecha2);
         LocalDate fechaLic3 = LocalDate.parse(fecha3);
         
-        profesionales.add(new Profesional(1, "Rubén", 15, "LMXJVSD","LMXJVSD", "LMXJVSD", fechaLic1, fechaLic1.plusDays(15), 0, 0, 0, 0));
+        profesionales.add(new Profesional(1, "Hector", 15, "LMXJVSD","LMXJVSD", "LMXJVSD", fechaLic1, fechaLic1.plusDays(15), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(2, "María", 5, "LV","SD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        profesionales.add(new Profesional(2, "Maru", 5, "LV","SD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(3, "Loana", 12, "LMXJVSD","MS", "X", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        profesionales.add(new Profesional(3, "Lau S.", 12, "LMXJVSD","MS", "X", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(4, "Odor", 12, "LMXJVSD","LMXJVSD", "LMXJVSD", fechaLic2, fechaLic2.plusDays(19), 0, 0, 0, 0));
+        profesionales.add(new Profesional(4, "Rodo", 12, "LMXJVSD","LMXJVSD", "LMXJVSD", fechaLic2, fechaLic2.plusDays(19), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(5, "Reijav", 12, "LMXJSD","LMSD", "LMSD", fechaLic3, fechaLic3.plusDays(5), 0, 0, 0, 0));
+        profesionales.add(new Profesional(5, "Javier", 12, "LMXJSD","LMSD", "LMSD", fechaLic3, fechaLic3.plusDays(5), 0, 0, 0, 0));
         
         profesionales.add(new Profesional(6, "Flor", 12, "LX","LXJVD", "", fechaLic3, fechaLic3.plusDays(6), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(7, "Luisin", 3, "LXJSD","D", "", fechaLic3, fechaLic3.plusDays(14), 0, 0, 0, 0));
+        profesionales.add(new Profesional(7, "Luisi", 3, "LXJSD","D", "", fechaLic3, fechaLic3.plusDays(14), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(8, "Lucas", 12, "LVSD","LMJSD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        profesionales.add(new Profesional(8, "Lucia", 12, "LVSD","LMJSD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
         
-        profesionales.add(new Profesional(9, "Anerol", 7, "MVS","", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        profesionales.add(new Profesional(9, "Lorena", 7, "MVS","", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
         
         profesionales.add(new Profesional(10, "Julia", 7, "VSD","MXSD", "VSD", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
+        
+        profesionales.add(new Profesional(11, "Anto", 2, "LMXJVSD","LMXJVSD", "", fechaLic1.plusDays(30), fechaLic1.plusDays(31), 0, 0, 0, 0));
         
     }
  
@@ -186,25 +188,81 @@ public class GuardiasServicios {
         while(it.hasNext()){
              Guardia guardia = (Guardia) it.next();
              for (Profesional dotor : profesionales) {
-                if(guardia.getTurno()=='C'& dotor.getCredito()>2&dotor.getCentinelaDisp().contains(guardia.getDia()+"")&dotor.getGuardiasFinde()<4){
-                        guardia.setProfesional(dotor);
-                        dotor.setCredito(dotor.getCredito()-2);
-                        dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
-                        Collections.shuffle(profesionales);
-                }
-            } 
+                 /*Las condiciones son:
+                 - que la guardia sea centinela, 
+                 - que el profesional pueda, 
+                 - que tenga menos de 3 asignadas en finde o feriado, 
+                 - que tenga menos o igual a 2 de 24 hs, 
+                 - que tenga crédito, 
+                 - que no sea en su periodo de licencia
+                */
+                 if(dotor.getCredito()>2&dotor.getGuardiasFinde()<3
+                        &dotor.getGuardias24()<=2
+                        &(guardia.getFecha().isBefore(dotor.getFechaLicencia())
+                        |guardia.getFecha().isAfter(dotor.getFinLicencia()))){                
+                
+                     if(guardia.getTurno()=='C'){
+                    
+                            if(dotor.getCentinelaDisp().contains(String.valueOf(guardia.getDia()))){
+                                if  (guardia.isFeriado()){
+                                    guardia.setProfesional(dotor);
+                                    dotor.setGuardiasFinde(dotor.getGuardiasFinde()+1);
+                                    dotor.setCredito(dotor.getCredito()-2);
+                                    dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
+                                    dotor.setGuardias24(dotor.getGuardias24()+1);
+                                }else{
+                                    guardia.setProfesional(dotor);
+                                    dotor.setCredito(dotor.getCredito()-2);
+                                    dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
+                                    dotor.setGuardias24(dotor.getGuardias24()+1);
+                                 }
+                            }
+                        } 
+                 }
+            }
         }
+        
     }
     
-    public void mostrarGuardiasAsignadas(){
+    public void borrarRepes(){
+        
+        ArrayList<LocalDate> fechas = new ArrayList();
+        
+        Iterator it = guardias.iterator();
+        while(it.hasNext()){
+             Guardia guardia = (Guardia) it.next();
+             if(guardia.getProfesional()!=null){
+                  fechas.add(guardia.getFecha());
+             }
+        }
+        
+        Iterator ec = guardias.iterator();
+        while(ec.hasNext()){
+             Guardia guardiax = (Guardia) ec.next();
+             if(fechas.contains(guardiax.getFecha())&(guardiax.getTurno()=='D'|guardiax.getTurno()=='N')){
+                  ec.remove();
+             }
+        }
+        
+    }
+    
+    public void mostrarGuardias(){
         for (Guardia guardia : guardias) {
             if(guardia.getProfesional()!=null){
-                System.out.println(guardia.getFecha() + " " + guardia.getProfesional().getNombre() + " "+ "Crédito: " 
-                        + guardia.getProfesional().getCredito() + "GuardiasFinde: " + guardia.getProfesional().getGuardiasFinde()) ;
+                System.out.println(guardia.getFecha() + " " + guardia.getFecha().getDayOfWeek() + " " 
+                  + guardia.getProfesional().getNombre() + " "+ "Crédito: " 
+                  + guardia.getProfesional().getCredito() + " Guardias Finde: " 
+                  + guardia.getProfesional().getGuardiasFinde() + " Guardias del mes: "
+                  + guardia.getProfesional().getGuardiasMes())   ;
+            }else{
+                System.out.println(guardia.getFecha() + " " + guardia.getFecha().getDayOfWeek() + " ");
+            }
+            
+                    
             }
         }
     }
 
     
-}
+
 
