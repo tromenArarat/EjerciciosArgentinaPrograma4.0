@@ -11,7 +11,17 @@ public class programa {
         bedel.cargarGuardias();
         bedel.cargarProfesionales();
         bedel.asignarGuardias24();
-        bedel.borrarRepes();
+        bedel.borrarRepes24();
+        bedel.asignarGuardias12Dia();
+        bedel.asignarGuardias12Noche();
+        bedel.asignarGuardias12Dia();
+        bedel.asignarGuardias12Noche();
+        bedel.asignarGuardias12Dia();
+        bedel.asignarGuardias12Noche();
+        bedel.asignarGuardias12Dia();
+        bedel.asignarGuardias12Noche();
+        bedel.asignarGuardias12Dia();
+        bedel.asignarGuardias12Noche();
         bedel.mostrarGuardias();
         
      

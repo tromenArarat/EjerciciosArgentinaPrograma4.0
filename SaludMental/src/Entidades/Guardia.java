@@ -2,6 +2,7 @@
 package Entidades;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 public class Guardia {
     private int id_guardia;
@@ -68,6 +69,16 @@ public class Guardia {
     public void setDia(char dia) {
         this.dia = dia;
     }
+    
+    //Comparator
+    public static Comparator<Guardia> ordenarPorDia = new Comparator<Guardia>(){
+        @Override
+        public int compare(Guardia g1,Guardia g2){
+            LocalDate guardia1 = g1.getFecha();
+            LocalDate guardia2 = g2.getFecha();
+            return guardia1.compareTo(guardia2);
+        }
+    };
 
     @Override
     public String toString() {
