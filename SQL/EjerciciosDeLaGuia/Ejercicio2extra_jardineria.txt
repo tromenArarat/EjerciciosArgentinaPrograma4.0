@@ -129,6 +129,7 @@ WHERE gama = "Ornamentales" AND cantidad_en_stock > 100
 ORDER BY precio_venta
 DESC
 ;
+
 16. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo
 representante de ventas tenga el código de empleado 11 o 30.
 SELECT cliente.nombre_cliente,cliente.codigo_empleado_rep_ventas
@@ -137,3 +138,180 @@ INNER JOIN empleado
 ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
 WHERE cliente.ciudad = "Madrid" AND cliente.codigo_empleado_rep_ventas IN (11,30)
 ;
+
+Consultas multitabla (Composición interna)
+Las consultas se deben resolver con INNER JOIN.
+
+1. Obtén un listado con el nombre de cada cliente y el nombre y 
+apellido de su representante de ventas.
+SELECT cliente.nombre_cliente,empleado.nombre,empleado.apellido1
+FROM cliente
+INNER JOIN empleado
+ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
+;
+
+2. Muestra el nombre de los clientes que hayan realizado pagos junto 
+con el nombre de sus representantes de ventas.
+
+SELECT cliente.nombre_cliente,empleado.nombre,empleado.apellido1
+FROM cliente
+INNER JOIN pago
+ON cliente.codigo_cliente = pago.codigo_cliente
+INNER JOIN empleado
+ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
+WHERE pago.id_transaccion is not null
+AND empleado.puesto = "Representante Ventas"
+;
+
+3. Muestra el nombre de los clientes que no hayan realizado pagos 
+junto con el nombre de sus representantes de ventas.
+SELECT cliente.nombre_cliente,empleado.nombre,empleado.apellido1
+FROM cliente
+LEFT JOIN pago
+ON cliente.codigo_cliente = pago.codigo_cliente
+INNER JOIN empleado
+ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
+WHERE pago.id_transaccion is null
+AND empleado.puesto = "Representante Ventas"
+;
+
+
+4. Devuelve el nombre de los clientes que han hecho pagos y el nombre 
+de sus representantes junto con la ciudad de la oficina a la que 
+pertenece el representante.
+SELECT DISTINCT cliente.nombre_cliente, empleado.nombre,empleado.apellido1,empleado.puesto,oficina.ciudad
+FROM cliente
+LEFT JOIN pago
+ON cliente.codigo_cliente = pago.codigo_cliente
+INNER JOIN empleado
+ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
+INNER JOIN oficina
+ON empleado.codigo_oficina = oficina.codigo_oficina
+WHERE pago.id_transaccion is not null
+AND empleado.puesto = "Representante Ventas"
+;
+
+6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+SELECT DISTINCT oficina.linea_direccion1
+FROM cliente
+INNER JOIN empleado
+ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
+INNER JOIN oficina
+ON empleado.codigo_oficina = oficina.codigo_oficina
+WHERE cliente.ciudad = "Fuenlabrada"
+;
+
+7. Devuelve el nombre de los clientes y el nombre de sus representantes
+junto con la ciudad de la oficina a la que pertenece el representante.
+SELECT DISTINCT cliente.nombre_cliente,empleado.nombre,oficina.ciudad
+FROM cliente
+INNER JOIN empleado
+ON cliente.codigo_empleado_rep_ventas = empleado.codigo_empleado
+INNER JOIN oficina
+ON empleado.codigo_oficina = oficina.codigo_oficina
+;
+
+8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+
+SELECT e2.nombre empleado, e1.nombre jefe, e1.apellido1
+FROM empleado AS e1
+INNER JOIN empleado AS e2
+ON e1.codigo_empleado =  e2.codigo_jefe
+;
+
+9. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+
+SELECT cliente.nombre_cliente, count(cliente.nombre_cliente)
+FROM cliente
+INNER JOIN pedido
+ON cliente.codigo_cliente =  pedido.codigo_cliente
+WHERE pedido.fecha_entrega > pedido.fecha_esperada
+group by cliente.nombre_cliente
+order by count(cliente.nombre_cliente)
+DESC
+;
+
+10. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+SELECT DISTINCT cliente.nombre_cliente,producto.gama
+FROM cliente
+INNER JOIN pedido
+ON cliente.codigo_cliente =  pedido.codigo_cliente
+INNER JOIN detalle_pedido
+ON pedido.codigo_pedido = detalle_pedido.codigo_pedido
+INNER JOIN producto
+ON detalle_pedido.codigo_producto = producto.codigo_producto
+;
+
+Consultas multitabla (Composición externa)
+Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN, JOIN.
+
+1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+
+SELECT DISTINCT cliente.nombre_cliente
+FROM cliente
+LEFT JOIN pago
+ON cliente.codigo_cliente =  pago.codigo_cliente
+WHERE pago.codigo_cliente is null
+;
+
+2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún
+pedido.
+SELECT DISTINCT cliente.nombre_cliente
+FROM cliente
+LEFT JOIN pedido
+ON cliente.codigo_cliente =  pedido.codigo_cliente
+WHERE pedido.codigo_cliente is null
+;
+
+
+
+
+3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que
+no han realizado ningún pedido.
+
+SELECT DISTINCT nombre_cliente clienteNoPago , (SELECT DISTINCT cliente.nombre_cliente
+FROM cliente
+LEFT JOIN pago
+ON cliente.codigo_cliente =  pago.codigo_cliente
+WHERE pago.codigo_cliente is null)
+FROM cliente
+LEFT JOIN pedido
+ON cliente.codigo_cliente =  pedido.codigo_cliente
+WHERE pedido.codigo_cliente is null
+;
+Error Code: 1242. Subquery returns more than 1 row
+
+
+4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina
+asociada.
+
+SELECT empleado.nombre, empleado.codigo_oficina
+FROM empleado
+LEFT JOIN oficina
+ON oficina.codigo_oficina = empleado.codigo_oficina
+WHERE empleado.codigo_oficina is null
+;
+
+
+5. Devuelve un listado que muestre solamente los empleados que no tienen un cliente
+asociado.
+
+6. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los
+que no tienen un cliente asociado.
+
+7. Devuelve un listado de los productos que nunca han aparecido en un pedido.
+SELECT DISTINCT producto.nombre
+FROM producto
+LEFT JOIN detalle_pedido
+ON producto.codigo_producto = detalle_pedido.codigo_producto
+WHERE detalle_pedido.codigo_producto is null
+;
+
+8. Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los
+representantes de ventas de algún cliente que haya realizado la compra de algún producto
+de la gama Frutales.
+
+9. Devuelve un listado con los clientes que han realizado algún pedido, pero no han realizado
+ningún pago.
+10. Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el
+nombre de su jefe asociado.
