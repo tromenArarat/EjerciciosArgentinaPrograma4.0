@@ -10,18 +10,11 @@ public class programa {
         GuardiasServicios bedel = new GuardiasServicios();
         bedel.cargarGuardias();
         bedel.cargarProfesionales();
+        
+        bedel.asignarCandidatos();
         bedel.asignarGuardias24();
         
-        bedel.asignarGuardias12Dia();
-        bedel.asignarGuardias12Noche();
-        bedel.asignarGuardias12Dia();
-        bedel.asignarGuardias12Noche();
-        bedel.asignarGuardias12Dia();
-        bedel.asignarGuardias12Noche();
-        bedel.asignarGuardias12Dia();
-        bedel.asignarGuardias12Noche();
-        bedel.asignarGuardias12Dia();
-        bedel.asignarGuardias12Noche();
+        
         bedel.mostrarGuardias();
         
      

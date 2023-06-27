@@ -2,13 +2,17 @@
 package Entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Guardia {
     private int id_guardia;
     private LocalDate fecha;
     private char turno;
+    
     private Profesional profesional;
+    private ArrayList<Profesional> candidates = new ArrayList();
+    
     private boolean feriado;
     private char dia;
 
@@ -69,6 +73,16 @@ public class Guardia {
     public void setDia(char dia) {
         this.dia = dia;
     }
+
+    public ArrayList<Profesional> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(ArrayList<Profesional> candidates) {
+        this.candidates = candidates;
+    }
+    
+    
     
     //Comparator
     public static Comparator<Guardia> ordenarPorDia = new Comparator<Guardia>(){

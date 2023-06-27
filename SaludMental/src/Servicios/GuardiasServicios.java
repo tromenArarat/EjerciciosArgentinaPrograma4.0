@@ -183,40 +183,20 @@ public class GuardiasServicios {
     }
  
     // De Asignación
-    public void asignarGuardias24(){
+    
+    public void asignarCandidatos(){
         Collections.shuffle(guardias);
         Iterator it = guardias.iterator();
         while(it.hasNext()){
              Guardia guardia = (Guardia) it.next();
              for (Profesional dotor : profesionales) {
-                 /*Las condiciones son:
-                 - que la guardia sea centinela, 
-                 - que el profesional pueda, 
-                 - que tenga menos de 3 asignadas en finde o feriado, 
-                 - que tenga menos o igual a 2 de 24 hs, 
-                 - que tenga crédito, 
-                 - que no sea en su periodo de licencia
-                */
-                 if(dotor.getCredito()>2&dotor.getGuardiasFinde()<3
-                        &dotor.getGuardias24()<=2
-                        &(guardia.getFecha().isBefore(dotor.getFechaLicencia())
-                        |guardia.getFecha().isAfter(dotor.getFinLicencia()))){                
+                if(guardia.getFecha().isBefore(dotor.getFechaLicencia())
+                        |guardia.getFecha().isAfter(dotor.getFinLicencia())){                
                 
                      if(guardia.getTurno()=='C'){
                     
                             if(dotor.getCentinelaDisp().contains(String.valueOf(guardia.getDia()))){
-                                if  (guardia.isFeriado()){
-                                    guardia.setProfesional(dotor);
-                                    dotor.setGuardiasFinde(dotor.getGuardiasFinde()+2);
-                                    dotor.setCredito(dotor.getCredito()-2);
-                                    dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
-                                    dotor.setGuardias24(dotor.getGuardias24()+1);
-                                }else{
-                                    guardia.setProfesional(dotor);
-                                    dotor.setCredito(dotor.getCredito()-2);
-                                    dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
-                                    dotor.setGuardias24(dotor.getGuardias24()+1);
-                                 }
+                               guardia.getCandidates().add(dotor);
                             }
                         } 
                  }
@@ -224,6 +204,41 @@ public class GuardiasServicios {
         }
         
     }
+    
+    public void asignarGuardias24(){
+        Collections.shuffle(guardias);
+        Iterator it = guardias.iterator();
+        while(it.hasNext()){
+             Guardia guardia = (Guardia) it.next();
+             for (Profesional candidate : guardia.getCandidates()) {
+                 for (Profesional dotor : profesionales) {
+                     if(candidate==dotor){
+                         if(dotor.getCredito()>2
+                        &dotor.getGuardias24()<=2){
+                    if(guardia.isFeriado()&dotor.getGuardiasFinde()<3){
+                        guardia.setProfesional(dotor);
+                        dotor.setGuardiasFinde(dotor.getGuardiasFinde()+2);
+                        dotor.setCredito(dotor.getCredito()-2);
+                        dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
+                        dotor.setGuardias24(dotor.getGuardias24()+1);
+                        }else{
+                        guardia.setProfesional(dotor);
+                        dotor.setCredito(dotor.getCredito()-2);
+                        dotor.setGuardiasMes(dotor.getGuardiasMes()+2);
+                        dotor.setGuardias24(dotor.getGuardias24()+1);
+                                 }
+                            }
+                     }
+                 }
+                
+                        } 
+            }
+             
+            }
+        
+        
+
+
     
     public void asignarGuardias12Dia(){
         Collections.shuffle(guardias);
