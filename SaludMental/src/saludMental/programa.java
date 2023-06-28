@@ -11,7 +11,7 @@ public class programa {
         bedel.cargarGuardias();
         bedel.cargarProfesionales();
         
-        bedel.asignarCandidatos();
+        bedel.asignarCandidatos24();
         bedel.asignarGuardias24();
         
         

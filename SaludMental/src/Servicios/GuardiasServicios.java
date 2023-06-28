@@ -184,7 +184,7 @@ public class GuardiasServicios {
  
     // De Asignación
     
-    public void asignarCandidatos(){
+    public void asignarCandidatos24(){
         Collections.shuffle(guardias);
         Iterator it = guardias.iterator();
         while(it.hasNext()){
