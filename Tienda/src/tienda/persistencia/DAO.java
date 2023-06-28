@@ -1,4 +1,3 @@
-
 package tienda.persistencia;
 
 import java.sql.Connection;
@@ -7,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 public abstract class DAO {
-    
+
     protected Connection conexion;
     protected ResultSet resultado;
     protected Statement sentencia;
+    
     private final String USER = "root";
     private final String PASSWORD = "root";
     private final String DATABASE = "tienda";
@@ -26,7 +28,6 @@ public abstract class DAO {
             throw ex;
         }
     }
-
     protected void desconectarBase() throws Exception {
         try {
             if (resultado != null) {
@@ -73,5 +74,4 @@ public abstract class DAO {
             throw ex;
         }
     }
-    
 }
