@@ -74,6 +74,15 @@ public class productoServicio {
             throw e;
         }
     }
+        // Llama a productoDAO para que liste todos los productos con todas sus columnas
+        public Collection<Producto> listarProductos() throws Exception{
+       try{
+           Collection<Producto> productos = dao.listarProductos();
+           return productos;
+       }catch(Exception e){
+           throw e;
+       }
+   }
         // Llama a productosDAO para que liste el nombre de todos los productos que hay en la tabla producto
         public ArrayList<String> listarProductosPorNombre() throws Exception {
         try {
@@ -84,18 +93,18 @@ public class productoServicio {
         }
     }
         // Llama a productosDAO para que liste los nombres y los precios de todos los productos de la tabla producto.
-        public Collection<Producto> listarProductosPorNombreYprecio() throws Exception {
+        public ArrayList<String> listarProductosPorNombreYprecio() throws Exception {
         try {
-            Collection<Producto> productosNombreyPrecio = dao.listarProductosPorNombreYprecio();
+            ArrayList<String> productosNombreyPrecio = dao.listarProductosPorNombreYprecio();
             return productosNombreyPrecio;
         } catch (Exception e) {
             throw e;
         }
         }
         // pide a productosDao las ofertas
-        public Collection<Producto> productosOfertas()throws Exception{
+        public ArrayList<String> productosOfertas()throws Exception{
         try{
-            Collection<Producto> productosOferta = dao.productosOferta();
+            ArrayList<String> productosOferta = dao.productosOferta();
             return productosOferta;
         }catch(Exception e){
             throw e;
@@ -104,18 +113,18 @@ public class productoServicio {
         
         // pide a productosDAO todos los portátiles
         
-        public Collection<Producto> productosPortatiles()throws Exception{
+        public ArrayList<String> productosPortatiles()throws Exception{
         try{
-            Collection<Producto> productosPortatiles = dao.productosPortatiles();
+            ArrayList<String> productosPortatiles = dao.productosPortatiles();
             return productosPortatiles;
         }catch(Exception e){
             throw e;
         }
     }
         // pide a productosDAO el más barato
-        public Collection<Producto> productoMasBarato()throws Exception{
+        public ArrayList<String> productoMasBarato()throws Exception{
             try{
-                Collection<Producto> productoMasBarato = dao.productoMasBarato();
+                ArrayList<String> productoMasBarato = dao.productoMasBarato();
                 return productoMasBarato;
             }catch(Exception e){
                 throw e;

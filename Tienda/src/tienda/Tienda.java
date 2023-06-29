@@ -19,6 +19,10 @@ public class Tienda {
         g) INGRESAR FABRICANTE
         h) CAMBIAR PRECIO PRODUCTO
         */
+        menu();
+        }
+        
+    public static void menu() throws Exception{
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         String confirmacionSalida = "no";
         productoServicio cajero = new productoServicio();
@@ -39,6 +43,7 @@ public class Tienda {
                     System.out.println("(3) --- OFERTAS (entre 120 y 202) ---");
                     System.out.println("(4) -----------------  PORTATILES ---");
                     System.out.println("(5) -----------------    + BARATO ---");
+                    System.out.println("(6) -------------------    VOLVER ---");
                     int num2 = sc.nextInt();
                     switch(num2){
                         case 1:
@@ -56,11 +61,15 @@ public class Tienda {
                         case 5:
                             System.out.println(cajero.productoMasBarato());
                             break;
+                        case 6:
+                            menu();
+                            break;
                     }
                     case 2:
                     System.out.println("(1) ----------- INGRESAR PRODUCTO ---");
                     System.out.println("(2) --------- INGRESAR FABRICANTE ---");
                     System.out.println("(3) ----- CAMBIAR PRECIO PRODUCTO ---");
+                    System.out.println("(4) ---------------------- VOLVER ---");
                     int num3 = sc.nextInt();
                     switch(num3){
                         case 1:
@@ -85,6 +94,9 @@ public class Tienda {
                             double nuevoPrecio = sc.nextDouble();
                             cajero.modificarProductoPrecio(codigoProducto, nuevoPrecio);
                             break;
+                        case 4:
+                            menu();
+                            break;
                     }
                     case 3: 
                         System.out.println("¿Está seguro de que desea salir?");
@@ -96,5 +108,5 @@ public class Tienda {
             }
         }while(confirmacionSalida.equals("no"));
     }
-    
+        
 }

@@ -20,11 +20,10 @@ public final class productoDAO extends DAO{
             if (producto == null) {
                 throw new Exception("Debe indicar un producto");
             }
-            String sql = "INSERT INTO producto (nombre, precio, idFabricante) "
+            //INSERT INTO producto (nombre, precio, codigo_fabricante) VALUES ('mouse' , 10, 1);
+            String sql = "INSERT INTO producto (nombre, precio, codigo_fabricante) "
                     + "VALUES ( '" +producto.getNombre() + "' ," + 
-                    producto.getPrecio()+ "' ," + producto.getCodigoFabricante() + " );";
-
-            System.out.println(sql);
+                    producto.getPrecio()+ " ," + producto.getCodigoFabricante() + " );";
             insertarModificarEliminar(sql);
         } catch (Exception e) {
             throw e;
@@ -39,9 +38,7 @@ public final class productoDAO extends DAO{
             if(producto == null){
                 throw new Exception("Debe indicar el producto cuyo precio desea modificar");
             }
-            String sql = "UPDATE producto SET "
-                    + " nombre = '" + producto.getNombre() + "' , precio = '" + producto.getPrecio() + "' , codigoFabricante = " + producto.getCodigoFabricante()
-                    + " WHERE codigo = '" + producto.getCodigo() + "'";
+            String sql = "UPDATE producto SET precio = " + producto.getPrecio()+ " WHERE codigo = " + producto.getCodigo()+"";
             insertarModificarEliminar(sql);
         } catch (Exception e) {
             throw e;
@@ -70,6 +67,28 @@ public final class productoDAO extends DAO{
         }
     }
     
+      public Collection<Producto> listarProductos()throws Exception{
+          try{
+              String sql = "SELECT * FROM producto ";
+              consultarBase(sql);
+              Producto producto = null;
+              Collection<Producto> productos = new ArrayList();
+              while(resultado.next()){
+                  producto = new Producto();
+                  producto.setCodigo(resultado.getInt(1));
+                  producto.setNombre(resultado.getString(2));
+                  producto.setPrecio(resultado.getDouble(3));
+                  producto.setCodigoFabricante(resultado.getInt(4));
+                  productos.add(producto);
+              }
+              desconectarBase();
+              return productos;
+          }catch(Exception e){
+              e.printStackTrace();
+              desconectarBase();
+              throw e;
+          }
+      }
     // a) Listar el nombre de todos los productos que hay en la tabla producto
     public ArrayList<String> listarProductosPorNombre() throws Exception {
         try {
@@ -79,8 +98,8 @@ public final class productoDAO extends DAO{
             ArrayList<String> productosNombre = new ArrayList();
             while (resultado.next()) {
                 producto = new Producto();
-                producto.setNombre(resultado.getString(2));
-                productosNombre.add(producto.getNombre());
+                producto.setNombre(resultado.getString("nombre"));
+                productosNombre.add(producto.getNombre()+"\n");
             }
             desconectarBase();
             return productosNombre;
@@ -91,17 +110,18 @@ public final class productoDAO extends DAO{
         }
     }
     // b) Lista los nombres y los precios de todos los productos de la tabla producto
-    public Collection<Producto> listarProductosPorNombreYprecio() throws Exception {
+    public ArrayList<String> listarProductosPorNombreYprecio() throws Exception {
         try {
-            String sql = "SELECT nombre,precio FROM producto ";
+            String sql = "SELECT nombre, precio FROM producto ";
             consultarBase(sql);
             Producto producto = null;
-            Collection<Producto> productosNombreyPrecio = new ArrayList();
+            ArrayList<String> productosNombreyPrecio = new ArrayList();
             while (resultado.next()) {
                 producto = new Producto();
-                producto.setNombre(resultado.getString(2));
-                producto.setPrecio(resultado.getDouble(3));
-                productosNombreyPrecio.add(producto);
+                producto.setNombre(resultado.getString("nombre"));
+                producto.setPrecio(resultado.getDouble("precio"));
+                String nombreYprecio = producto.getNombre()+"\n"+producto.getPrecio();
+                productosNombreyPrecio.add(nombreYprecio);
             }
             desconectarBase();
             return productosNombreyPrecio;
@@ -112,19 +132,19 @@ public final class productoDAO extends DAO{
         }
     }
     // c) Listar aquellos productos que su precio esté entre 120 y 202.
-    public Collection<Producto> productosOferta()throws Exception{
+    public ArrayList<String> productosOferta()throws Exception{
         try{
             
-        String sql = "SELECT nombre,precio FROM producto "
-                +"WHERE precio > 119 AND precio < 203 ";
+        String sql = "SELECT nombre,precio FROM producto WHERE precio > 119 AND precio < 203 ";
             consultarBase(sql);
             Producto producto = null;
-            Collection<Producto> productosOferta = new ArrayList();
+            ArrayList<String> productosOferta = new ArrayList();
             while (resultado.next()) {
                 producto = new Producto();
-                producto.setNombre(resultado.getString(2));
-                producto.setPrecio(resultado.getDouble(3));
-                productosOferta.add(producto);
+                producto.setNombre(resultado.getString(1));
+                producto.setPrecio(resultado.getDouble(2));
+                String nombreYprecio = producto.getNombre() + " " + producto.getPrecio() +"\n";
+                productosOferta.add(nombreYprecio);
             }
             desconectarBase();
             return productosOferta;
@@ -135,19 +155,20 @@ public final class productoDAO extends DAO{
         }
     }
     // d) Buscar y listar todos los Portátiles de la tabla producto.
-    public Collection<Producto> productosPortatiles()throws Exception{
+    public ArrayList<String> productosPortatiles()throws Exception{
         try{
             
-        String sql = "SELECT nombre,precio FROM producto "
-                +"WHERE nombre LIKE '%port%'";
+        String sql = "SELECT nombre,precio FROM producto WHERE nombre LIKE '%ort%'";
             consultarBase(sql);
             Producto producto = null;
-            Collection<Producto> productosPortatiles = new ArrayList();
+            ArrayList<String> productosPortatiles = new ArrayList();
             while (resultado.next()) {
                 producto = new Producto();
-                producto.setNombre(resultado.getString(2));
-                producto.setPrecio(resultado.getDouble(3));
-                productosPortatiles.add(producto);
+                producto.setNombre(resultado.getString(1));
+                producto.setPrecio(resultado.getDouble(2));
+                String portatiles = producto.getNombre() + " " + producto.getPrecio();
+                 
+                productosPortatiles.add(portatiles);
             }
             desconectarBase();
             return productosPortatiles;
@@ -159,18 +180,19 @@ public final class productoDAO extends DAO{
     }
     
     // e) Listar el nombre y el precio del producto más barato
-    public Collection<Producto> productoMasBarato()throws Exception{
+    public ArrayList<String> productoMasBarato()throws Exception{
         try{
         String sql = "SELECT nombre,precio FROM producto "
                 +"WHERE precio = (SELECT min(precio) FROM producto)";
             consultarBase(sql);
             Producto producto = null;
-            Collection<Producto> productoMasBarato = new ArrayList();
+            ArrayList<String> productoMasBarato = new ArrayList();
             while (resultado.next()) {
                 producto = new Producto();
-                producto.setNombre(resultado.getString(2));
-                producto.setPrecio(resultado.getDouble(3));
-                productoMasBarato.add(producto);
+                producto.setNombre(resultado.getString(1));
+                producto.setPrecio(resultado.getDouble(2));
+                String toraba = producto.getNombre() + " " + producto.getPrecio();
+                productoMasBarato.add(toraba);
             }
             desconectarBase();
             return productoMasBarato;
