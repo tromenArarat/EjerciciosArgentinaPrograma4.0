@@ -16,13 +16,14 @@ public final class fabricanteDAO extends DAO {
         this.fabricanteServicio = fabricanteServicio;
     }
     
+    // g) Ingresar un fabricante a la base de datos
     public void insertarFabricante(Fabricante fabricante) throws Exception {
         try {
             if (fabricante == null) {
                 throw new Exception("Debe indicar un producto");
             }
-            String sql = "INSERT INTO fabricante (codigo, nombre) "
-                    + "VALUES ( '" + fabricante.getCodigo() + "' , '" + fabricante.getNombre() + " );";
+            String sql = "INSERT INTO fabricante (nombre) "
+                    + "VALUES ( '" + fabricante.getNombre() + " );";
 
             System.out.println(sql);
             insertarModificarEliminar(sql);
