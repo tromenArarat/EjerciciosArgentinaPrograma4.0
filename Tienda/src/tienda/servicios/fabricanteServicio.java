@@ -22,7 +22,7 @@ public class fabricanteServicio {
             if (nombre == null || nombre.trim().isEmpty()) {
                 throw new Exception("Debe indicar la gracia");
             }
-            //Creamos el mascota
+            //Creamos el fabricante
             Fabricante fabricante = new Fabricante();
             fabricante.setCodigo(codigo);
             fabricante.setNombre(nombre);

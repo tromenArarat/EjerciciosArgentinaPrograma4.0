@@ -2,6 +2,7 @@ package tienda.servicios;
 
 import java.util.Collection;
 import tienda.entidades.Fabricante;
+import tienda.entidades.Producto;
 import tienda.persistencia.productoDAO;
 
 /*
@@ -32,79 +33,65 @@ public class productoServicio {
              if (codigoFabricante == 0 ) {
                 throw new Exception("Debe indicar el código del fabricante");
             }
-            //Creamos el mascota
+            //Creamos el producto
             Producto producto = new Producto();
             producto.setCodigo(codigo);
             producto.setNombre(nombre);
-            dao.insertarFabricante(fabricante);
+            producto.setPrecio(precio);
+            producto.setCodigoFabricante(codigoFabricante);
+            dao.insertarProducto(producto);
         } catch (Exception e) {
             throw e;
         }
     }
-
-    /*
-    public void crearProducto(String correoElectronico, String clave) throws Exception {
-
-        try {
-            //Validamos
-            if (correoElectronico == null || correoElectronico.trim().isEmpty()) {
-                throw new Exception("Debe indicar el correo electrónico");
-            }
-            if (correoElectronico.contains("@") == false) {
-                throw new Exception("El correo electrónico es incorrecto");
-            }
-            if (clave == null || clave.trim().isEmpty()) {
-                throw new Exception("Debe indicar la clave");
-            }
-            if (clave.length() < 8) {
-                throw new Exception("La clave no puede tener menos de 8 caracteres");
-            }
-            if (buscarUsuarioPorCorreoElectronico(correoElectronico) != null) {
-                throw new Exception("Ya existe un usuario con el correo electrónico indicado " + correoElectronico);
-            }
-
-            //Creamos el usuario
-            Usuario usuario = new Usuario();
-            usuario.setCorreoElectronico(correoElectronico);
-            usuario.setClave(clave);
-            dao.guardarUsuario(usuario);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    public void modificarClaveUsuario(String correoElectronico, String claveActual, String nuevaClave) throws Exception {
+        
+        public void modificarProductoPrecio(String nombre, double nuevoPrecio) throws Exception {
 
         try {
 
             //Validamos
-            if (correoElectronico == null || correoElectronico.trim().isEmpty()) {
-                throw new Exception("Debe indicar el usuario");
+            if (nombre == null || nombre.trim().isEmpty()) {
+                throw new Exception("Debe indicar el nombre del producto");
             }
 
-            if (claveActual == null || claveActual.trim().isEmpty()) {
-                throw new Exception("Debe indicar la clave actual");
-            }
-
-            if (nuevaClave == null || nuevaClave.trim().isEmpty()) {
-                throw new Exception("Debe indicar la clave nueva");
+            if (nuevoPrecio == 0) {
+                throw new Exception("Debe indicar el precio");
             }
 
             //Buscamos
-            Usuario usuario = buscarUsuarioPorCorreoElectronico(correoElectronico);
-
-            //Validamos
-            if (!usuario.getClave().equals(claveActual)) {
-                throw new Exception("La clave actual no es la regsitrada en el sistema para el correo electrónico indicado");
-            }
+            Producto producto = buscarProductoPorNombre(nombre);
 
             //Modificamos
-            usuario.setClave(nuevaClave);
+            producto.setPrecio(nuevoPrecio);
 
-            dao.modificarUsuario(usuario);
+            dao.modificarProductoPrecio(producto);
+            
         } catch (Exception e) {
             throw e;
         }
+        }
+        
+        public Producto buscarProductoPorNombre(String nombre) throws Exception {
+
+        try {
+
+            //Validamos
+            if (nombre == null || nombre.trim().isEmpty()) {
+                throw new Exception("Debe indicar el nombre del producto");
+            }
+
+            Producto producto = dao.buscarProductoPorNombre(nombre);
+
+            return producto;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+        
+    }
+
+    /*
+        
     public void eliminarUsuario(String correoElectronico) throws Exception {
 
         try {
@@ -120,7 +107,7 @@ public class productoServicio {
         }
     }
 
-    public Usuario buscarUsuarioPorCorreoElectronico(String correoElectronico) throws Exception {
+    public Usuario buscarProductoPorNombre(String nombre) throws Exception {
 
         try {
 
