@@ -202,6 +202,23 @@ public final class productoDAO extends DAO{
             throw e;
         }
     }
+    /*
+    public void modificarProducto(producto Producto) throws Exception {
+        try {
+            if (Producto == null) {
+                throw new Exception("Debe indicar el producto que desea modificar");
+            }
+            String sql = "UPDATE producto SET "
+                    + " nombre = '" + Producto.getNombre() + "' , precio = " + Producto.getPrecio() + " , codigo_fabricante = " + Producto.getCodigoFabricante()
+                    + " WHERE codigo = " + Producto.getCodigo();
+            insertarModificarEliminar(sql);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            desconectarBase();
+        }
+    }
+    */
     
     }
     

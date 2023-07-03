@@ -1,0 +1,23 @@
+a) Listar aquellas familias que tienen al menos 3 hijos, y con edad máxima inferior a 10 años.
+SELECT * FROM familias WHERE num_hijos >= 3 AND edad_maxima < 10;
+
+b) Buscar y listar las casas disponibles para el periodo comprendido entre el 1 de agosto de
+2020 y el 31 de agosto de 2020 en Reino Unido.
+SELECT * FROM casas WHERE fecha_desde > 20200731 AND fecha_hasta < 20200901;
+
+c) Encuentra todas aquellas familias cuya dirección de mail sea de Hotmail.
+SELECT * FROM familias WHERE email LIKE "%otmail%";
+
+d) Consulta la BD para que te devuelva aquellas casas disponibles a partir de una fecha dada
+y un número de días específico
+SELECT * 
+FROM casas 
+WHERE tiempo_maximo > */tiempo_pedido*/ 
+AND (fecha_desde > 20200731 AND fecha_hasta < 20200901);
+
+e) Listar los datos de todos los clientes que en algún momento realizaron una estancia y la
+descripción de la casa donde la realizaron.
+
+Error Code: 1241. Operand should contain 1 column(s)
+Error Code: 1054. Unknown column 'clientes.id_cliente' in 'on clause'
+

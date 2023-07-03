@@ -145,8 +145,6 @@ public class GuardiasServicios {
         guardias.add(new Guardia(88, fechaInicio.plusDays(29), 'D', null, true, 'S'));
         guardias.add(new Guardia(89, fechaInicio.plusDays(29), 'N', null, true, 'S'));
         guardias.add(new Guardia(90, fechaInicio.plusDays(29), 'C', null, true, 'S'));
-       
-       
     }
     
     // De Profesionales 
@@ -191,10 +189,8 @@ public class GuardiasServicios {
              Guardia guardia = (Guardia) it.next();
              for (Profesional dotor : profesionales) {
                 if(guardia.getFecha().isBefore(dotor.getFechaLicencia())
-                        |guardia.getFecha().isAfter(dotor.getFinLicencia())){                
-                
+                        |guardia.getFecha().isAfter(dotor.getFinLicencia())){
                      if(guardia.getTurno()=='C'){
-                    
                             if(dotor.getCentinelaDisp().contains(String.valueOf(guardia.getDia()))){
                                guardia.getCandidates().add(dotor);
                             }

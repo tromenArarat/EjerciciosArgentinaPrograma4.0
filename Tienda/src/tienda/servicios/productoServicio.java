@@ -130,6 +130,32 @@ public class productoServicio {
                 throw e;
             }
         }
+        /*
+        public void modificarProducto(String nombre, double precio, int codigoFabricante, int codigo) throws Exception {
+        try {
+           if (nombre == null || nombre.trim().isEmpty()) {
+                throw new Exception("Debe indicar el nombre");
+            }
+           if (precio == 0) {
+                throw new Exception("Debe indicar el precio");
+            }
+           if (codigoFabricante == 0) {
+                throw new Exception("Debe indicar el codigo de fabricante porfavor!!");
+            }
+           
+           producto Producto = new producto();
+           Producto.setNombre(nombre);
+           Producto.setPrecio(precio);
+           Producto.setCodigoFabricante(codigoFabricante);
+           
+           Producto.setCodigo(codigo);
+           
+           pdao.modificarProducto(Producto);
+             
+        } catch (Exception e) {
+            throw e;
+        }
+        */
     }
 
     
