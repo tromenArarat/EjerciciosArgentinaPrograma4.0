@@ -2,6 +2,8 @@
 package libreria.servicios;
 
 import java.util.Scanner;
+import libreria.entidades.Autor;
+import libreria.entidades.Editorial;
 import libreria.entidades.Libro;
 import libreria.persistencia.DAOLibro;
 
@@ -15,19 +17,46 @@ public class LibroServicio {
         this.DAO = new DAOLibro();
     }
     
-    public Libro crearLibro(){
+    public Libro crearLibro() throws Exception{
+        Libro codice = new Libro();
         System.out.println("ISBN:");
-        String isbn = sc.next();
+        long isbn = sc.nextLong();
+        
+        // Acá empieza la joda
+        long anterior = 0;
+        try{
+            anterior = DAO.buscarPorISBN(isbn).getIsbn();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+        if(isbn==anterior){
+            System.out.println("Un libro con este ISBN ya fue cargado. El libro es " + DAO.buscarPorISBN(isbn).getIsbn());
+            crearLibro();
+        }
+        
         System.out.println("Título:");
         String titulo = sc.next();
         System.out.println("Año:");
         Integer anio = sc.nextInt();
         System.out.println("Ejemplares:");
         Integer ejemplares = sc.nextInt();
+        System.out.println("Nombre del autor");
+        String nombreAutor = sc.next();
+        Autor autor = new Autor();
+        autor.setNombre(nombreAutor);
+        System.out.println("Nombre de la editorial");
+        String nombreEditorial = sc.next();
+        Editorial editorial = new Editorial();
+        editorial.setNombre(nombreEditorial);
+       
         Boolean activo = true;
-        Libro codice = new Libro(isbn,titulo,anio,ejemplares,activo);
+        
+        codice = new Libro(isbn,titulo,anio,ejemplares,activo,autor,editorial);
+        
         
         return codice;
+        
     }
     /*
         En este proyecto vamos a eliminar entidades, pero no es considerado una buena

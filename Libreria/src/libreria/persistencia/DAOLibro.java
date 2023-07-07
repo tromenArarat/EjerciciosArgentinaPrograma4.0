@@ -9,8 +9,8 @@ public class DAOLibro extends DAO<Libro> {
         super.guardar(libro);
     }
 
-    public void eliminar(String dni) throws Exception {
-        Libro libro = buscarPorDNI(dni);
+    public void eliminar(long isbn) throws Exception {
+        Libro libro = buscarPorISBN(isbn);
         super.eliminar(libro);
     }
 
@@ -21,9 +21,9 @@ public class DAOLibro extends DAO<Libro> {
         return libros;
     }
 
-    public Libro buscarPorDNI(String nombre) throws Exception {
+    public Libro buscarPorISBN(long isbn) throws Exception {
         conectar();
-        Libro libro = (Libro) em.createQuery("SELECT m FROM Libro m WHERE m.nombre LIKE :nombre").setParameter("nombre", nombre).getSingleResult();
+        Libro libro = (Libro) em.createQuery("SELECT m FROM Libro m WHERE m.isbn = :isbn").setParameter("isbn", isbn).getSingleResult();
         desconectar();
         return libro;
     }

@@ -22,6 +22,7 @@ Al alumno le toca desarrollar, las siguientes funcionalidades:
  */
 package libreria;
 
+import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -35,11 +36,60 @@ import libreria.servicios.LibroServicio;
 public class Libreria {
 
     public static void main(String[] args) throws Exception{
-        AutorServicio servidor = new AutorServicio();
-        EditorialServicio editor = new EditorialServicio();
-        LibroServicio broli = new LibroServicio();
+        try{
+        menu();    
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
         
-        servidor.eliminarAutorPorNombre("Mario Puzzo");
     }
     
+    public static void menu()throws Exception{
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        String confirmacion = "no";
+        do{
+            System.out.println("------ Bienvenido a LIBROS SOCHA ------");
+            System.out.println("--(1)--- VER LIBROS -------------------");
+            System.out.println("--(2)--- VER AUTORES ------------------");
+            System.out.println("--(3)--- VER EDITORIALES --------------");
+            System.out.println("--(4)--- OPCIONES DE ADMINISTRADOR-----");
+            System.out.println("--(5)--- SALIR ------------------------");
+            
+            switch(sc.nextInt()){
+                case 1: 
+                    break;
+                case 2:
+                    break;
+                case 3: 
+                    break;
+                case 4:
+                    System.out.println("--(1)--- CARGAR LIBRO ----------");
+                    
+                    
+                    System.out.println("--(2)--- ELIMINAR LIBRO --------");
+                    System.out.println("--(3)--- PRESTAR LIBRO ---------");
+                    System.out.println("--(4)--- VOLVER AL MENÚ --------");
+                    switch(sc.nextInt()){
+                        case 1:
+                            LibroServicio librebrio = new LibroServicio();
+                            librebrio.crearLibro();
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            menu();
+                            break;
+                    }
+                    break;
+                case 5:
+                    System.out.println("¿Está seguro de que desea salir?");
+                    confirmacion = sc.next();
+                    break;
+            }
+            
+            
+        }while(confirmacion.equals("no"));
+    }
 }

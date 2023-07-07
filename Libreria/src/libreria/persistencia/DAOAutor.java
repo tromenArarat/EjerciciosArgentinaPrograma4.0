@@ -15,11 +15,12 @@ public class DAOAutor extends DAO<Autor>{
     }
 
     public void evitarDuplicado(Autor autor, String nombre) throws Exception {
-        Autor escritor;
-        try{
-            escritor = (Autor) em.createQuery("SELECT a.nombre FROM Autor a WHERE a.nombre = :nombre").setParameter("nombre", nombre).getSingleResult();
-        }catch (Exception e){
+        String escritor;
+            escritor = (String) em.createQuery("SELECT a.nombre FROM Autor a WHERE a.nombre = :nombre").setParameter("nombre", nombre).getSingleResult();
+        if(!escritor.equals(autor.getNombre())){
             super.guardar(autor);
+        }else{
+            System.out.println("El autor ya fue cargado");
         }
     }
     
