@@ -56,13 +56,16 @@ public class DAO<T> {
     // Como parámetro se pasa el objeto a eliminar de la base de datos.
     // Se busca en la base de datos el registro que contenga la misma información
     // que el parámetro recibido, y se elimina.
-    protected void eliminar(T objeto){
+   protected void eliminar(T objeto) throws Exception {
+    if (objeto != null) {
         conectar();
         em.getTransaction().begin();
         em.remove(objeto);
         em.getTransaction().commit();
         desconectar();
+    } else {
+        throw new IllegalArgumentException("No se puede remover un objeto nulo");
     }
-    
-    
+}
+
 }

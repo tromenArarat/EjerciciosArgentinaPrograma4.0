@@ -1,6 +1,7 @@
 
 package libreria.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 import libreria.entidades.Autor;
 
@@ -22,10 +23,16 @@ public class DAOAutor extends DAO<Autor>{
         }
     }
     
-    public void eliminar(String nombre) throws Exception {
-        Autor autor = buscarPorNombre(nombre);
-        super.eliminar(autor);
+    public void eliminarAutor(Autor escritor) throws Exception {
+    if (escritor != null) {
+        em.getTransaction().begin();
+        Autor mergedAutor = em.merge(escritor);
+        em.getTransaction().commit();
+        super.eliminar(mergedAutor);
+    } else {
+        throw new IllegalArgumentException("No se encontró ningún Autor con el nombre proporcionado: " + escritor.getNombre());
     }
+}
 
     public List<Autor> listarTodos() throws Exception {
         conectar();
@@ -36,8 +43,14 @@ public class DAOAutor extends DAO<Autor>{
 
     public Autor buscarPorNombre(String nombre) throws Exception {
         conectar();
-        Autor autor = (Autor) em.createQuery("SELECT m FROM Autor m WHERE m.nombre LIKE :nombre").setParameter("nombre", nombre).getSingleResult();
-        desconectar();
-        return autor;
+        List<Autor> escritores;
+        escritores = em.createQuery("SELECT a FROM Autor a WHERE a.nombre LIKE :nombre").setParameter("nombre", nombre).setMaxResults(1).getResultList();
+//        desconectar();
+         if (!escritores.isEmpty()) {
+        Autor escritor = escritores.get(0);
+        return escritor;
+    } else {
+        throw new Exception("No se encontró ningún Autor con el nombre proporcionado: " + nombre);
+    }
     }
 }

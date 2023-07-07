@@ -43,9 +43,18 @@ public class AutorServicio {
         escritor.setAlta(Boolean.TRUE);
     }
     
-     public void eliminarAutorPorNombre(Autor a) throws Exception{
-         DAO.eliminar(a.getNombre());
-     }
+   public void eliminarAutorPorNombre(String nombre) {
+    try {
+        Autor autor = DAO.buscarPorNombre(nombre);
+        if (autor != null) {
+            DAO.eliminarAutor(autor);
+        } else {
+            throw new IllegalArgumentException("No se encontró ningún Autor con el nombre proporcionado: " + nombre);
+        }
+    } catch (Exception e) {
+        System.out.println("Error al eliminar el Autor: " + e.getMessage());
+    }
+}
      
      public Autor buscarPorNombre() throws Exception{
          System.out.println("Nombre:");

@@ -25,6 +25,7 @@ package libreria;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import libreria.entidades.Autor;
 import libreria.entidades.Libro;
 import libreria.servicios.AutorServicio;
 import libreria.servicios.EditorialServicio;
@@ -38,9 +39,7 @@ public class Libreria {
         EditorialServicio editor = new EditorialServicio();
         LibroServicio broli = new LibroServicio();
         
-        servidor.crearAutor();
-        
-        servidor.eliminarAutorPorNombre(servidor.buscarPorNombre());
+        servidor.eliminarAutorPorNombre("Mario Puzzo");
     }
     
 }
