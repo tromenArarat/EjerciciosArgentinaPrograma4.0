@@ -24,7 +24,6 @@ public class DAOLibro extends DAO<Libro> {
     public Libro buscarPorISBN(long isbn) throws Exception {
         conectar();
         Libro libro = (Libro) em.createQuery("SELECT m FROM Libro m WHERE m.isbn = :isbn").setParameter("isbn", isbn).getSingleResult();
-        desconectar();
         return libro;
     }
 }

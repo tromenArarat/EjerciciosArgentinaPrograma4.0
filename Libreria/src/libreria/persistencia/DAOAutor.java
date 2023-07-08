@@ -35,11 +35,10 @@ public class DAOAutor extends DAO<Autor>{
     }
 }
 
-    public List<Autor> listarTodos() throws Exception {
+    public List<Autor> listarTodosLosAutores() throws Exception {
         conectar();
-        List<Autor> autors = em.createQuery("SELECT m FROM Autor m ").getResultList();
-        desconectar();
-        return autors;
+        List<Autor> autores = em.createQuery("SELECT m FROM Autor m ").getResultList();
+        return autores;
     }
 
     public Autor buscarPorNombre(String nombre) throws Exception {
@@ -52,6 +51,19 @@ public class DAOAutor extends DAO<Autor>{
         return escritor;
     } else {
         throw new Exception("No se encontró ningún Autor con el nombre proporcionado: " + nombre);
+    }
+    }
+    
+    public Autor buscarPorId(String id) throws Exception {
+        conectar();
+        List<Autor> escritores;
+        escritores = em.createQuery("SELECT a FROM Autor a WHERE a.id = :id").setParameter("id", id).setMaxResults(1).getResultList();
+//        desconectar();
+         if (!escritores.isEmpty()) {
+        Autor escritor = escritores.get(0);
+        return escritor;
+    } else {
+        throw new Exception("No se encontró ningún Autor con el id proporcionado: " + id);
     }
     }
 }

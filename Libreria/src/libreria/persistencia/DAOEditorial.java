@@ -9,22 +9,32 @@ public class DAOEditorial extends DAO<Editorial> {
         super.guardar(editorial);
     }
 
-    public void eliminar(String dni) throws Exception {
-        Editorial editorial = buscarPorDNI(dni);
+    public void eliminar(String nombre) throws Exception {
+        Editorial editorial = buscarPorNombre(nombre);
         super.eliminar(editorial);
+    }
+    
+    public void eliminarEditorial(Editorial e) throws Exception{
+        super.eliminar(e);
     }
 
     public List<Editorial> listarTodos() throws Exception {
         conectar();
         List<Editorial> editorials = em.createQuery("SELECT m FROM Editorial m ").getResultList();
-        desconectar();
         return editorials;
     }
 
-    public Editorial buscarPorDNI(String nombre) throws Exception {
+    public Editorial buscarPorNombre(String nombre) throws Exception {
         conectar();
         Editorial editorial = (Editorial) em.createQuery("SELECT m FROM Editorial m WHERE m.nombre LIKE :nombre").setParameter("nombre", nombre).getSingleResult();
-        desconectar();
+//        desconectar();
+        return editorial;
+    }
+    
+    public Editorial buscarPorId(String id)throws Exception{
+        conectar();
+        Editorial editorial = (Editorial) em.createQuery("SELECT m FROM Editorial m WHERE m.id LIKE :id").setParameter("id", id).getSingleResult();
+//        desconectar();
         return editorial;
     }
 }

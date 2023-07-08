@@ -1,6 +1,8 @@
 
 package libreria.servicios;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import libreria.entidades.Autor;
 import libreria.persistencia.DAOAutor;
@@ -16,6 +18,10 @@ public class AutorServicio {
     
     public AutorServicio(){
         this.DAO = new DAOAutor();
+    }
+    
+    public void cargarAutor(Autor autor) throws Exception{
+        DAO.guardar(autor);
     }
     
     public Autor crearAutor() throws Exception{
@@ -56,10 +62,14 @@ public class AutorServicio {
     }
 }
      
-     public Autor buscarPorNombre() throws Exception{
-         System.out.println("Nombre:");
-         String nom = sc.next();
+     public Autor buscarPorNombre(String nom) throws Exception{
          return DAO.buscarPorNombre(nom);
+     }
+     
+     public List<Autor> listarAutores() throws Exception{
+         List<Autor> cagatintas = new ArrayList<Autor>();
+         cagatintas = DAO.listarTodosLosAutores();
+         return cagatintas;
      }
             
             

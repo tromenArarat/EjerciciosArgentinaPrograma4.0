@@ -1,7 +1,10 @@
 
 package libreria.servicios;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import libreria.entidades.Autor;
 import libreria.entidades.Editorial;
 import libreria.persistencia.DAOEditorial;
 
@@ -12,6 +15,10 @@ public class EditorialServicio {
     
     public EditorialServicio(){
         this.DAO = new DAOEditorial();
+    }
+    
+    public void crearEditoriale(Editorial editorial) throws Exception{
+        DAO.guardar(editorial);
     }
     
     public Editorial crearEditorial(){
@@ -36,4 +43,17 @@ public class EditorialServicio {
      public void darDeAltaEditorial(Editorial publisher){
         publisher.setAlta(Boolean.TRUE);
     }
+     
+     public Editorial buscarPorNombre(String nom) throws Exception{
+        
+         return DAO.buscarPorNombre(nom);
+     }
+     
+     public List<Editorial> listarEditoriales() throws Exception{
+         List<Editorial> editoriales = new ArrayList<Editorial>();
+         editoriales = DAO.listarTodos();
+         return editoriales;
+     }
+     
+     
 }

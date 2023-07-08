@@ -23,29 +23,36 @@ Al alumno le toca desarrollar, las siguientes funcionalidades:
 package libreria;
 
 import java.util.Scanner;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import libreria.entidades.Autor;
-import libreria.entidades.Libro;
-import libreria.servicios.AutorServicio;
-import libreria.servicios.EditorialServicio;
+import libreria.persistencia.DAOAutor;
+import libreria.persistencia.DAOEditorial;
 import libreria.servicios.LibroServicio;
 
 
 public class Libreria {
 
     public static void main(String[] args) throws Exception{
+       
+        /*
+        DAOAutor sabueso = new DAOAutor();
+        sabueso.eliminarAutor(sabueso.buscarPorId("951"));
+        
+        DAOEditorial corpo = new DAOEditorial();
+        corpo.eliminarEditorial(corpo.buscarPorId("952"));
+        */
+        
+        
         try{
         menu();    
         }catch(Exception e){
             System.out.println(e.toString());
         }
         
+        
     }
     
     public static void menu()throws Exception{
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        LibroServicio librebrio = new LibroServicio();
         String confirmacion = "no";
         do{
             System.out.println("------ Bienvenido a LIBROS SOCHA ------");
@@ -64,14 +71,11 @@ public class Libreria {
                     break;
                 case 4:
                     System.out.println("--(1)--- CARGAR LIBRO ----------");
-                    
-                    
                     System.out.println("--(2)--- ELIMINAR LIBRO --------");
                     System.out.println("--(3)--- PRESTAR LIBRO ---------");
                     System.out.println("--(4)--- VOLVER AL MENÚ --------");
                     switch(sc.nextInt()){
                         case 1:
-                            LibroServicio librebrio = new LibroServicio();
                             librebrio.crearLibro();
                             break;
                         case 2:
@@ -88,8 +92,6 @@ public class Libreria {
                     confirmacion = sc.next();
                     break;
             }
-            
-            
         }while(confirmacion.equals("no"));
     }
 }
