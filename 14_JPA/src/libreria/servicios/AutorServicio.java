@@ -69,7 +69,17 @@ public class AutorServicio {
      public List<Autor> listarAutores() throws Exception{
          List<Autor> cagatintas = new ArrayList();
          cagatintas = DAO.listarTodosLosAutores();
+         
          return cagatintas;
+     }
+     
+     public void imprimirAutores() throws Exception{
+         List<Autor> cagatintas = new ArrayList();
+         cagatintas = DAO.listarTodosLosAutores();
+         
+         for (Autor cagatinta : cagatintas) {
+             System.out.println(cagatinta.getNombre());
+         }
      }
      
      public void editarProcedencia(Autor autor, String origen) throws Exception{

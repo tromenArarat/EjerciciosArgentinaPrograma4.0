@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import libreria.entidades.Autor;
 import libreria.entidades.Editorial;
+import libreria.entidades.Libro;
 import libreria.persistencia.DAOEditorial;
 
 public class EditorialServicio {
@@ -60,6 +61,7 @@ public class EditorialServicio {
          editoriales = DAO.listarTodos();
          return editoriales;
      }
+     
      
      
 }

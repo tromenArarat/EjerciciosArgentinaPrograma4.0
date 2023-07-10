@@ -1,6 +1,7 @@
 
 package libreria.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import libreria.entidades.Autor;
@@ -105,13 +106,6 @@ public class LibroServicio {
         
         
     }
-    /*
-        En este proyecto vamos a eliminar entidades, pero no es considerado una buena
-        práctica. Por esto, además de eliminar nuestras entidades, vamos a practicar que nuestras
-        entidades estén dadas de alta o de baja. Por lo que las entidades tendrán un atributo “activo”
-        de tipo booleano, que estará en true al momento de crearlas y en false cuando las demos de
-        baja, para evitar eliminarlas de la base de datos.
-    */
     
     // 7) Crear los métodos para dar de alta/bajo o editar dichas entidades.
     public void darDeBajaLibro(Libro broli){
@@ -141,6 +135,11 @@ public class LibroServicio {
         broli = DAO.buscarPorAnio(anio);
         return broli;
     }
+    public Libro buscarLibroPorISBN(Long isbn)throws Exception{
+        Libro broli = new Libro();
+        broli = DAO.buscarPorISBN(isbn);
+        return broli;
+    }
     public void cambiarISBN()throws Exception{
         System.out.println("Ingrese el id del libro:");
         String idProvisto = sc.next();
@@ -149,5 +148,35 @@ public class LibroServicio {
         Libro libro = buscarLibroPorId(idProvisto);
         libro.setIsbn(isbnProvisto);
         DAO.cambiarIsbn(libro);
+    }
+    public void buscarLibrosPorAutor()throws Exception{
+        System.out.println("Nombre del autor/a:");
+        String autorBuscado = sc.next();
+        AutorServicio sabueso = new AutorServicio();
+        Autor autorWanted = sabueso.buscarPorNombre(autorBuscado);
+        List<Libro> libros = DAO.buscarLibroPorAutor(autorWanted);
+        for (Libro libro : libros) {
+            System.out.println(libro.getTitulo());
+        }
+    }
+    
+    public void buscarLibrosPorEditorial()throws Exception{
+        System.out.println("Nombre editorial:");
+        String nombreBuscado = sc.next();
+        EditorialServicio editor = new EditorialServicio();
+        Editorial editorialBuscada = editor.buscarPorNombre(nombreBuscado);
+        List<Libro> libros = DAO.buscarEditorial(editorialBuscada);
+        for (Libro libro : libros) {
+            System.out.println(libro.getTitulo());
+        }
+    }
+    public void buscarLibrosPorTitulo()throws Exception{
+        System.out.println("Título libro:");
+        String tituloBuscado = sc.next();
+        
+        List<Libro> libros = DAO.buscarLibroPorTitulo(tituloBuscado);
+        for (Libro libro : libros) {
+            System.out.println(libro.getTitulo());
+        }
     }
 }

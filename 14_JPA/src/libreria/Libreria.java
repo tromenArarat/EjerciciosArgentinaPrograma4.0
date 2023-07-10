@@ -62,20 +62,44 @@ public class Libreria {
         String confirmacion = "no";
         do{
             System.out.println("------ Bienvenido a LIBROS SOCHA ------");
-            System.out.println("--(1)--- VER LIBROS -------------------");
-            System.out.println("--(2)--- VER AUTORES ------------------");
-            System.out.println("--(3)--- VER EDITORIALES --------------");
+            System.out.println("--(1)--- BUSCAR LIBRO -----------------");
+            System.out.println("--(2)--- BUSCAR AUTOR/A ---------------");
+            System.out.println("--(3)--- BUSCAR EDITORIAL -------------");
             System.out.println("--(4)--- OPCIONES DE ADMINISTRADOR-----");
             System.out.println("--(5)--- SALIR ------------------------");
             
             switch(sc.nextInt()){
                 case 1:
-                    librebrio.mostrarLibros();
+                    System.out.println("--(1)--- BUSCAR POR ISBN -------");
+                    System.out.println("--(2)--- BUSCAR POR AUTOR/A ----");
+                    System.out.println("--(1)--- BUSCAR POR EDITORIAL --");
+                    System.out.println("--(2)--- BUSCAR POR TÍTULO -----");
+                    System.out.println("--(3)--- VOLVER AL MENÚ --------");
+                    int rta = sc.nextInt();
+                    switch(rta){
+                        case 1:
+                            System.out.println("ISBN:");
+                            Long isbn = sc.nextLong();
+                            System.out.println(librebrio.buscarLibroPorISBN(isbn).getTitulo());
+                            break;
+                        case 2:
+                            librebrio.buscarLibrosPorAutor();
+                            break;
+                        case 3:
+                            librebrio.buscarLibrosPorEditorial();
+                            break;
+                        case 4:
+                            librebrio.buscarLibrosPorTitulo();
+                            break;
+                        case 5:
+                            menu();
+                    }
                     break;
                 case 2:
-                    sabueso.listarAutores();
+                    librebrio.buscarLibrosPorAutor();
                     break;
-                case 3: 
+                case 3:
+                    librebrio.buscarLibrosPorEditorial();
                     break;
                 case 4:
                     System.out.println("--(1)--- CARGAR LIBRO ----------");

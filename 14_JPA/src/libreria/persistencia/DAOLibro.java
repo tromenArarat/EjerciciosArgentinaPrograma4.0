@@ -1,6 +1,9 @@
 package libreria.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
+import libreria.entidades.Autor;
+import libreria.entidades.Editorial;
 import libreria.entidades.Libro;
 
 public class DAOLibro extends DAO<Libro> {
@@ -38,5 +41,26 @@ public class DAOLibro extends DAO<Libro> {
     }
     public void cambiarIsbn(Libro libro)throws Exception{
         super.editar(libro);
+    }
+    public List<Libro> buscarLibroPorAutor(Autor autor)throws Exception{
+        List<Libro> libros;
+        conectar();
+        libros = (List<Libro>) em.createQuery("SELECT m FROM Libro m WHERE m.autor = :autor").setParameter("autor", autor).getResultList();
+        desconectar();
+        return libros;
+    }
+    public List<Libro> buscarEditorial(Editorial editorial)throws Exception{
+        List<Libro> libros;
+        conectar();
+        libros = (List<Libro>) em.createQuery("SELECT m FROM Libro m WHERE m.editorial = :editorial").setParameter("editorial", editorial).getResultList();
+        desconectar();
+        return libros;
+    }
+    public List<Libro> buscarLibroPorTitulo(String titulo)throws Exception{
+        List<Libro> libros;
+        conectar();
+        libros = (List<Libro>) em.createQuery("SELECT m FROM Libro m WHERE m.titulo = :titulo").setParameter("titulo", titulo).getResultList();
+        desconectar();
+        return libros;
     }
 }
