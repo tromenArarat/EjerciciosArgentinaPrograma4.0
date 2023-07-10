@@ -66,4 +66,10 @@ public class DAOAutor extends DAO<Autor>{
         throw new Exception("No se encontró ningún Autor con el id proporcionado: " + id);
     }
     }
+    
+    public void cambiarProcedencia(Autor autor)throws Exception{
+        
+        super.editar(autor);
+    }
+    
 }

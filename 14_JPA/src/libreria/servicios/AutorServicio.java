@@ -71,6 +71,11 @@ public class AutorServicio {
          cagatintas = DAO.listarTodosLosAutores();
          return cagatintas;
      }
+     
+     public void editarProcedencia(Autor autor, String origen) throws Exception{
+         autor.setOrigen(origen);
+         DAO.cambiarProcedencia(autor);
+     }
             
             
 }

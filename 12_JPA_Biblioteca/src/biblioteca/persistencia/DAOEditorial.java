@@ -39,4 +39,8 @@ public class DAOEditorial extends DAO<Editorial>{
         return editorial;
     }
     
+    public void cambiarEstado(Editorial editorial)throws Exception{
+        super.editar(editorial);
+    }
+    
 }

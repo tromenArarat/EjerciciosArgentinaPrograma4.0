@@ -29,4 +29,14 @@ public class EditorialServicio {
          editoriales = DAO.listarTodos();
          return editoriales;
      }
+     
+     public void darDeAltaEditorial(Editorial publisher)throws Exception{
+        publisher.setActiva(Boolean.TRUE);
+        DAO.cambiarEstado(publisher);
+    }
+     public void darDeBajaEditorial(Editorial publisher)throws Exception{
+        publisher.setActiva(Boolean.FALSE);
+        DAO.cambiarEstado(publisher);
+    }
+     
 }

@@ -5,7 +5,9 @@ import biblioteca.entidades.Autor;
 import biblioteca.entidades.Editorial;
 import biblioteca.entidades.Libro;
 import biblioteca.persistencia.DAOLibro;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class LibroServicio {
@@ -92,6 +94,13 @@ public class LibroServicio {
         DAO.guardar(codice);
         
         
+    }
+    
+    public void mostrarLibros() throws Exception{
+        List<Libro> libros = DAO.listarTodos();
+        for (Libro libro : libros) {
+            System.out.println(libro.getTitulo()+"\n");
+        }
     }
     
 }

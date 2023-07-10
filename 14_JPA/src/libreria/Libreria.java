@@ -25,6 +25,8 @@ package libreria;
 import java.util.Scanner;
 import libreria.persistencia.DAOAutor;
 import libreria.persistencia.DAOEditorial;
+import libreria.servicios.AutorServicio;
+import libreria.servicios.EditorialServicio;
 import libreria.servicios.LibroServicio;
 
 
@@ -32,13 +34,13 @@ public class Libreria {
 
     public static void main(String[] args) throws Exception{
        
-        /*
-        DAOAutor sabueso = new DAOAutor();
-        sabueso.eliminarAutor(sabueso.buscarPorId("951"));
         
-        DAOEditorial corpo = new DAOEditorial();
-        corpo.eliminarEditorial(corpo.buscarPorId("952"));
-        */
+//        AutorServicio sabueso = new AutorServicio();
+//        sabueso.editarProcedencia(sabueso.buscarPorNombre("Jorge Luis Borges"),"Argentina");
+        
+//        EditorialServicio corpo = new EditorialServicio();
+//            corpo.darDeBajaEditorial(corpo.buscarPorId("1101"));
+        
         
         
         try{

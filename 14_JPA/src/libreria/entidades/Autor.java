@@ -15,6 +15,7 @@ public class Autor implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String nombre;
+    private String origen;
     private Boolean alta;
 
     public Autor() {
@@ -41,9 +42,15 @@ public class Autor implements Serializable {
     public void setAlta(Boolean alta) {
         this.alta = alta;
     }
-    
-    
 
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+    
     public String getId() {
         return id;
     }

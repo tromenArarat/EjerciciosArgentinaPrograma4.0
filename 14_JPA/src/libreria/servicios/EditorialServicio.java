@@ -37,16 +37,22 @@ public class EditorialServicio {
     */
     
     // 7) Crear los métodos para dar de alta/bajo o editar dichas entidades.
-    public void darDeBajaEditorial(Editorial publisher){
+    public void darDeBajaEditorial(Editorial publisher)throws Exception{
         publisher.setAlta(Boolean.FALSE);
+        DAO.cambiarEstado(publisher);
     }
-     public void darDeAltaEditorial(Editorial publisher){
+     public void darDeAltaEditorial(Editorial publisher)throws Exception{
         publisher.setAlta(Boolean.TRUE);
+        DAO.cambiarEstado(publisher);
     }
      
      public Editorial buscarPorNombre(String nom) throws Exception{
         
          return DAO.buscarPorNombre(nom);
+     }
+     
+     public Editorial buscarPorId(String id)throws Exception{
+         return DAO.buscarPorId(id);
      }
      
      public List<Editorial> listarEditoriales() throws Exception{

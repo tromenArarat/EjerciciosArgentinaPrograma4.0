@@ -1,6 +1,9 @@
 
 package biblioteca;
 
+import biblioteca.persistencia.DAOAutor;
+import biblioteca.persistencia.DAOEditorial;
+import biblioteca.servicios.EditorialServicio;
 import biblioteca.servicios.LibroServicio;
 import java.util.Scanner;
 
@@ -10,20 +13,22 @@ public class Main {
  
         public static void main(String[] args) throws Exception{
        
-        /*
+        
         DAOAutor sabueso = new DAOAutor();
-        sabueso.eliminarAutor(sabueso.buscarPorId("951"));
+//        sabueso.eliminarAutor(sabueso.buscarPorId("951"));
         
-        DAOEditorial corpo = new DAOEditorial();
-        corpo.eliminarEditorial(corpo.buscarPorId("952"));
-        */
+        EditorialServicio corpo = new EditorialServicio();
+        corpo.darDeBajaEditorial(corpo.buscarPorNombre("Alianza"));
+//            System.out.println(corpo.buscarPorNombre("Alianza").getActiva());
+//        corpo.eliminarEditorial(corpo.buscarPorId("952"));
         
         
-        try{
-        menu();    
-        }catch(Exception e){
-            System.out.println(e.toString());
-        }
+        
+//        try{
+//        menu();    
+//        }catch(Exception e){
+//            System.out.println(e.toString());
+//        }
         
         
     }
@@ -42,6 +47,7 @@ public class Main {
             
             switch(sc.nextInt()){
                 case 1: 
+                    librebrio.mostrarLibros();
                     break;
                 case 2:
                     break;
