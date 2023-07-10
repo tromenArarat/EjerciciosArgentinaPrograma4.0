@@ -76,6 +76,11 @@ public class AutorServicio {
          autor.setOrigen(origen);
          DAO.cambiarProcedencia(autor);
      }
+     
+     public void darDeAlta(Autor autor)throws Exception{
+         autor.setAlta(Boolean.TRUE);
+         DAO.cambiarEstado(autor);
+     }
             
             
 }

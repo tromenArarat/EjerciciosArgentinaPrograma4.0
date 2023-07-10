@@ -36,7 +36,10 @@ public class Libreria {
        
         
 //        AutorServicio sabueso = new AutorServicio();
-//        sabueso.editarProcedencia(sabueso.buscarPorNombre("Jorge Luis Borges"),"Argentina");
+//        sabueso.darDeAlta(sabueso.buscarPorNombre("Jerome David Salinger"));
+
+//        LibroServicio cebador = new LibroServicio();
+//        cebador.mostrarLibros();
         
 //        EditorialServicio corpo = new EditorialServicio();
 //            corpo.darDeBajaEditorial(corpo.buscarPorId("1101"));
@@ -55,6 +58,7 @@ public class Libreria {
     public static void menu()throws Exception{
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         LibroServicio librebrio = new LibroServicio();
+        AutorServicio sabueso = new AutorServicio();
         String confirmacion = "no";
         do{
             System.out.println("------ Bienvenido a LIBROS SOCHA ------");
@@ -65,9 +69,11 @@ public class Libreria {
             System.out.println("--(5)--- SALIR ------------------------");
             
             switch(sc.nextInt()){
-                case 1: 
+                case 1:
+                    librebrio.mostrarLibros();
                     break;
                 case 2:
+                    sabueso.listarAutores();
                     break;
                 case 3: 
                     break;
@@ -81,6 +87,9 @@ public class Libreria {
                             librebrio.crearLibro();
                             break;
                         case 2:
+                            System.out.println("Ingrese el id del libro que quiere eliminar");
+                            int anioProvisto = sc.nextInt();
+                            librebrio.eliminarLibro(librebrio.buscarLibroPorAnio(anioProvisto));
                             break;
                         case 3:
                             break;

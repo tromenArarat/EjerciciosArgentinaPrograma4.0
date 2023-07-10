@@ -31,11 +31,11 @@ public class EditorialServicio {
      }
      
      public void darDeAltaEditorial(Editorial publisher)throws Exception{
-        publisher.setActiva(Boolean.TRUE);
+        publisher.setAlta(Boolean.TRUE);
         DAO.cambiarEstado(publisher);
     }
      public void darDeBajaEditorial(Editorial publisher)throws Exception{
-        publisher.setActiva(Boolean.FALSE);
+        publisher.setAlta(Boolean.FALSE);
         DAO.cambiarEstado(publisher);
     }
      

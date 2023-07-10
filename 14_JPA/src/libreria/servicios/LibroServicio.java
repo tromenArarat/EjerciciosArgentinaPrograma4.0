@@ -120,5 +120,34 @@ public class LibroServicio {
      public void darDeAltaEditorial(Libro broli){
         broli.setAlta(Boolean.TRUE);
     }
-    
+     
+     public void mostrarLibros()throws Exception{
+         List<Libro> libros = DAO.listarTodos();
+         for (Libro libro : libros) {
+             System.out.println(libro.getTitulo()+" "+libro.getAutor().getNombre());
+         }
+     }
+     
+     public void eliminarLibro(Libro libro)throws Exception{
+         DAO.eliminar(libro);
+     }
+    public Libro buscarLibroPorId(String id)throws Exception{
+        Libro broli = new Libro();
+        broli = DAO.buscarPorId(id);
+        return broli;
+    }
+    public Libro buscarLibroPorAnio(int anio)throws Exception{
+        Libro broli = new Libro();
+        broli = DAO.buscarPorAnio(anio);
+        return broli;
+    }
+    public void cambiarISBN()throws Exception{
+        System.out.println("Ingrese el id del libro:");
+        String idProvisto = sc.next();
+        System.out.println("Ingrese el nuevo ISBN");
+        long isbnProvisto = sc.nextLong();
+        Libro libro = buscarLibroPorId(idProvisto);
+        libro.setIsbn(isbnProvisto);
+        DAO.cambiarIsbn(libro);
+    }
 }

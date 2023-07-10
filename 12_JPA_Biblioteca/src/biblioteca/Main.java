@@ -18,7 +18,7 @@ public class Main {
 //        sabueso.eliminarAutor(sabueso.buscarPorId("951"));
         
         EditorialServicio corpo = new EditorialServicio();
-        corpo.darDeBajaEditorial(corpo.buscarPorNombre("Alianza"));
+        corpo.darDeAltaEditorial(corpo.buscarPorNombre("Alianza"));
 //            System.out.println(corpo.buscarPorNombre("Alianza").getActiva());
 //        corpo.eliminarEditorial(corpo.buscarPorId("952"));
         

@@ -12,7 +12,7 @@ public class Editorial {
     @GeneratedValue(generator = "uuid")
     private String id;
     private String nombre;
-    private Boolean activa;
+    private Boolean alta;
 
     public Editorial() {
     }
@@ -33,12 +33,12 @@ public class Editorial {
         this.nombre = nombre;
     }
 
-    public Boolean getActiva() {
-        return activa;
+    public Boolean getAlta() {
+        return alta;
     }
 
-    public void setActiva(Boolean activa) {
-        this.activa = activa;
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
     }
     
 }
