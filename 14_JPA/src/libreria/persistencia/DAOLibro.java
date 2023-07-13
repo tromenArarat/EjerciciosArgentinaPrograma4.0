@@ -7,6 +7,7 @@ import libreria.entidades.Editorial;
 import libreria.entidades.Libro;
 
 public class DAOLibro extends DAO<Libro> {
+    
     @Override
     public void guardar(Libro libro) {
         super.guardar(libro);
@@ -62,5 +63,11 @@ public class DAOLibro extends DAO<Libro> {
         libros = (List<Libro>) em.createQuery("SELECT m FROM Libro m WHERE m.titulo = :titulo").setParameter("titulo", titulo).getResultList();
         desconectar();
         return libros;
+    }
+    public void cambiarEjemplaresPrestados(Libro libro)throws Exception{
+        super.editar(libro);
+    }
+    public void cambiarEjemplaresRestantes(Libro libro)throws Exception{
+        super.editar(libro);
     }
 }

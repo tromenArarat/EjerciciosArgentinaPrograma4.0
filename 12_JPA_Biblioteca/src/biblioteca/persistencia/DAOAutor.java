@@ -42,7 +42,7 @@ public class DAOAutor extends DAO<Autor> {
         conectar();
         List<Autor> escritores;
         escritores = em.createQuery("SELECT a FROM Autor a WHERE a.nombre LIKE :nombre").setParameter("nombre", nombre).setMaxResults(1).getResultList();
-//        desconectar();
+        desconectar();
          if (!escritores.isEmpty()) {
         Autor escritor = escritores.get(0);
         return escritor;
@@ -55,7 +55,7 @@ public class DAOAutor extends DAO<Autor> {
         conectar();
         List<Autor> escritores;
         escritores = em.createQuery("SELECT a FROM Autor a WHERE a.id = :id").setParameter("id", id).setMaxResults(1).getResultList();
-//        desconectar();
+        desconectar();
          if (!escritores.isEmpty()) {
         Autor escritor = escritores.get(0);
         return escritor;

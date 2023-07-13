@@ -7,6 +7,7 @@ import java.util.Scanner;
 import libreria.entidades.Autor;
 import libreria.entidades.Editorial;
 import libreria.entidades.Libro;
+import libreria.persistencia.DAO;
 import libreria.persistencia.DAOLibro;
 import libreria.persistencia.DAOAutor;
 import libreria.persistencia.DAOEditorial;
@@ -103,7 +104,6 @@ public class LibroServicio {
         Boolean activo = true;
         codice.setAlta(activo);
         DAO.guardar(codice);
-        
         
     }
     

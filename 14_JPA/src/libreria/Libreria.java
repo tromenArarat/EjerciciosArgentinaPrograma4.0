@@ -26,8 +26,10 @@ import java.util.Scanner;
 import libreria.persistencia.DAOAutor;
 import libreria.persistencia.DAOEditorial;
 import libreria.servicios.AutorServicio;
+import libreria.servicios.ClienteServicio;
 import libreria.servicios.EditorialServicio;
 import libreria.servicios.LibroServicio;
+import libreria.servicios.PrestamoServicio;
 
 
 public class Libreria {
@@ -50,6 +52,7 @@ public class Libreria {
         menu();    
         }catch(Exception e){
             System.out.println(e.toString());
+            e.printStackTrace();
         }
         
         
@@ -65,16 +68,17 @@ public class Libreria {
             System.out.println("--(1)--- BUSCAR LIBRO -----------------");
             System.out.println("--(2)--- BUSCAR AUTOR/A ---------------");
             System.out.println("--(3)--- BUSCAR EDITORIAL -------------");
-            System.out.println("--(4)--- OPCIONES DE ADMINISTRADOR-----");
-            System.out.println("--(5)--- SALIR ------------------------");
+            System.out.println("--(4)--- CREAR CLIENTE    -------------");
+            System.out.println("--(5)--- OPCIONES DE ADMINISTRADOR-----");
+            System.out.println("--(6)--- SALIR ------------------------");
             
             switch(sc.nextInt()){
                 case 1:
                     System.out.println("--(1)--- BUSCAR POR ISBN -------");
                     System.out.println("--(2)--- BUSCAR POR AUTOR/A ----");
-                    System.out.println("--(1)--- BUSCAR POR EDITORIAL --");
-                    System.out.println("--(2)--- BUSCAR POR TÍTULO -----");
-                    System.out.println("--(3)--- VOLVER AL MENÚ --------");
+                    System.out.println("--(3)--- BUSCAR POR EDITORIAL --");
+                    System.out.println("--(4)--- BUSCAR POR TÍTULO -----");
+                    System.out.println("--(5)--- VOLVER AL MENÚ --------");
                     int rta = sc.nextInt();
                     switch(rta){
                         case 1:
@@ -102,10 +106,15 @@ public class Libreria {
                     librebrio.buscarLibrosPorEditorial();
                     break;
                 case 4:
+                    ClienteServicio cliente = new ClienteServicio();
+                    cliente.crearCliente();
+                    break;
+                case 5:
                     System.out.println("--(1)--- CARGAR LIBRO ----------");
                     System.out.println("--(2)--- ELIMINAR LIBRO --------");
                     System.out.println("--(3)--- PRESTAR LIBRO ---------");
-                    System.out.println("--(4)--- VOLVER AL MENÚ --------");
+                    System.out.println("--(4)--- DEVOLVER LIBRO ---------");
+                    System.out.println("--(5)--- VOLVER AL MENÚ --------");
                     switch(sc.nextInt()){
                         case 1:
                             librebrio.crearLibro();
@@ -116,13 +125,19 @@ public class Libreria {
                             librebrio.eliminarLibro(librebrio.buscarLibroPorAnio(anioProvisto));
                             break;
                         case 3:
+                            PrestamoServicio prestamista = new PrestamoServicio();
+                            prestamista.crearPrestamo();
                             break;
                         case 4:
+                            PrestamoServicio prestamista3 = new PrestamoServicio();
+                            prestamista3.devolverLibro();
+                            break;
+                        case 5:
                             menu();
                             break;
                     }
                     break;
-                case 5:
+                case 6:
                     System.out.println("¿Está seguro de que desea salir?");
                     confirmacion = sc.next();
                     break;

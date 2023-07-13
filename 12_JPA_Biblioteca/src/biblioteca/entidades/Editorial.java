@@ -13,6 +13,7 @@ public class Editorial {
     private String id;
     private String nombre;
     private Boolean alta;
+    private String ciudad;
 
     public Editorial() {
     }
@@ -39,6 +40,14 @@ public class Editorial {
 
     public void setAlta(Boolean alta) {
         this.alta = alta;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
     
 }

@@ -13,22 +13,14 @@ public class Main {
  
         public static void main(String[] args) throws Exception{
        
+     
         
-        DAOAutor sabueso = new DAOAutor();
-//        sabueso.eliminarAutor(sabueso.buscarPorId("951"));
-        
-        EditorialServicio corpo = new EditorialServicio();
-        corpo.darDeAltaEditorial(corpo.buscarPorNombre("Alianza"));
-//            System.out.println(corpo.buscarPorNombre("Alianza").getActiva());
-//        corpo.eliminarEditorial(corpo.buscarPorId("952"));
-        
-        
-        
-//        try{
-//        menu();    
-//        }catch(Exception e){
-//            System.out.println(e.toString());
-//        }
+        try{
+        menu();    
+        }catch(Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
         
         
     }
