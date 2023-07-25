@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-public class DAO<T> {
+public abstract class DAO<T> {
     protected final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("LibreriaPU");
     protected EntityManager em = EMF.createEntityManager();
     

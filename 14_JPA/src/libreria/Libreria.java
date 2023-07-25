@@ -23,8 +23,10 @@ Al alumno le toca desarrollar, las siguientes funcionalidades:
 package libreria;
 
 import java.util.Scanner;
+import libreria.persistencia.DAO;
 import libreria.persistencia.DAOAutor;
 import libreria.persistencia.DAOEditorial;
+import libreria.persistencia.DAOLibro;
 import libreria.servicios.AutorServicio;
 import libreria.servicios.ClienteServicio;
 import libreria.servicios.EditorialServicio;
@@ -45,17 +47,19 @@ public class Libreria {
         
 //        EditorialServicio corpo = new EditorialServicio();
 //            corpo.darDeBajaEditorial(corpo.buscarPorId("1101"));
-        
-        
-        
+        DAOLibro dao = new DAOLibro();
+        dao.conectar();
+
+        /*
         try{
         menu();    
         }catch(Exception e){
             System.out.println(e.toString());
             e.printStackTrace();
-        }
-        
-        
+        }finally{
+            System.out.println("Que tengas un lindo día!");
+        } 
+*/
     }
     
     public static void menu()throws Exception{

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form action="../GuiaEjercicios/ej4_RecetaPapaFritas.html" method="POST" enctype="multipart/form-data">
+    <h1>Registrar un usuario</h1>
+    <label>Nombre del usuario</label>
+    <input type="text">
+    <br>
+    <label>Contraseña del usuario</label>
+    <input type="password">
+    <br>
+    <label>Edad del usuario</label>
+    <input type="number">
+    <br>
+    <label>Fecha de nacimiento del usuario</label>
+    <input type="date">
+    <br>
+    <label>Sexo del usuario</label>
+    <br>
+    <input type="radio" name="sexo" value="varon" id="varon">
+    <label for="varon">Varón</label>
+    <br>
+    <input type="radio" name="sexo" value="mujer" id="mujer">
+    <label for="mujer">Mujer</label>
+    <br>
+    <input type="radio" name="sexo" value="pnd" id="pnd">
+    <label for="pnd">Prefiero no decir</label>
+    <br>
+    <label>País nacimiento del usuario</label>
+    <select>
+        <option>Argentina</option>
+        <option>Chile</option>
+        <option>Brasil</option>
+    </select>
+    <button type="submit">Enviar</button>
+    <button type="reset">Borrar todo</button>
+</form>
+</body>
+</html>

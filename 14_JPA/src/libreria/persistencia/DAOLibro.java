@@ -23,6 +23,11 @@ public class DAOLibro extends DAO<Libro> {
         desconectar();
         return libros;
     }
+    
+    @Override
+    public void conectar(){
+        super.conectar();
+    }
 
     public Libro buscarPorISBN(long isbn) throws Exception {
         conectar();

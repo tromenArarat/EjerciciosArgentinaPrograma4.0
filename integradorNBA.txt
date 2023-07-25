@@ -1,0 +1,101 @@
+Candado A
+
+Posición
+SELECT count(jugadores.codigo) from jugadores
+INNER JOIN estadisticas
+ON jugadores.codigo = estadisticas.jugador
+WHERE estadisticas.Asistencias_por_partido = 
+(SELECT max(estadisticas.Asistencias_por_partido) 
+FROM estadisticas);
+
+Posición
+2
+
+Clave
+SELECT sum(jugadores.Peso) from jugadores
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE equipos.Conferencia = "East"
+AND jugadores.Posicion LIKE "C";
+
+Clave
+7230
+
+CANDADO B
+Posicion
+SELECT count(jugadores.codigo) from jugadores
+INNER JOIN estadisticas
+ON jugadores.codigo = estadisticas.jugador
+WHERE estadisticas.Asistencias_por_partido > 
+(SELECT count(jugadores.codigo) FROM jugadores
+WHERE jugadores.Nombre_equipo = "Heat");
+
+Posicion
+3
+
+Clave
+SELECT count(codigo) + (SELECT count(codigo) FROM partidos WHERE temporada = "98/99")
+FROM partidos
+WHERE temporada = "99/00";
+
+Clave
+3480
+
+
+CANDADO C
+Posición
+SELECT round(count(jugadores.codigo) /
+(SELECT count(codigo) from jugadores
+WHERE jugadores.Peso >= 195 ) + 0.9945) from jugadores
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE jugadores.Procedencia = "Michigan"
+AND equipos.Conferencia = "WEST";
+
+Posición
+1
+
+Clave
+SELECT floor(avg(estadisticas.Puntos_por_partido) + 
+(SELECT count(estadisticas.Asistencias_por_partido)from estadisticas 
+INNER JOIN jugadores
+ON jugadores.codigo = estadisticas.jugador
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE equipos.Division = "Central")+
+(SELECT sum(estadisticas.Tapones_por_partido)from estadisticas
+INNER JOIN jugadores
+ON jugadores.codigo = estadisticas.jugador
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE equipos.Division = "Central"))as montoto
+FROM estadisticas 
+INNER JOIN jugadores
+ON jugadores.codigo = estadisticas.jugador
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE equipos.Division = "Central";
+
+Clave
+631
+
+CANDADO D
+SELECT round(sum(estadisticas.Tapones_por_partido)) from estadisticas
+INNER JOIN jugadores
+ON jugadores.codigo = estadisticas.jugador
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE estadisticas.temporada = "00/01"
+AND jugadores.Nombre = "Corey Maggette"
+;
+4
+
+CLAVE
+SELECT floor(sum(estadisticas.Puntos_por_partido)) from estadisticas
+INNER JOIN jugadores
+ON jugadores.codigo = estadisticas.jugador
+INNER JOIN equipos
+ON jugadores.Nombre_equipo = equipos.Nombre
+WHERE jugadores.Procedencia = "Argentina"
+;
+191
