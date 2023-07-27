@@ -1,0 +1,20 @@
+table{
+    border: solid;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+}
+th, td {
+    border: solid;
+    border-collapse: collapse;
+    text-align: center;
+}
+#cambio{
+    background-image: url(../Ejercicios/img/fondo_gris.gif);
+}
+#moneda{
+    background-color: #E6F3FF;
+
+}
+.amarillito{
+    background-color: #FFFFCC;
+}

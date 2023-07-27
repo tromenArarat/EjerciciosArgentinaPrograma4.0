@@ -1,0 +1,20 @@
+.normal{
+    padding: 1px solid #000;
+}
+.img-fluid{
+    height:350px;
+}
+.card-body{
+    text-align: center;
+    
+    height: 280px;
+    background-color: lightgrey;
+}
+.col1{
+    border-color: white;
+    border-top-width: 35px;
+    border-right-width: 35px;
+    border-bottom-width: 35px;
+    border-left-width: 35px;
+}
+
