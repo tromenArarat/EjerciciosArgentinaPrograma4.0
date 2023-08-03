@@ -12,8 +12,10 @@
     background-color: #444;
       font-size:50px;
     text-align:center;
+    color:white;
     display: table-cell;
     vertical-align:middle;
+
 }
 
 .white {
@@ -28,13 +30,18 @@
 }
 
 .btn{
-    margin: 60px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: bisque;
+    color: black;
+    margin: 100px;
     font-size: larger;
     width: 160px;
     height: 40px;
     text-align: center;
 }
 
-.p{
-    font-size:xx-large;
+.resultados{
+    margin-left: 120px;
+    color: black;
+    font-size:large;
 }
