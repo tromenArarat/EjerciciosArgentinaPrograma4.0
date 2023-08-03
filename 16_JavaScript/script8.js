@@ -58,14 +58,20 @@ function hacerCuentas(){
     for (let i = 1; i < 65; i++) {
         let este = document.getElementById(i).innerHTML;
         if(este!==""){
-            if(este<numMin){
-                numMin = este;
+            if(este>numMax){
+                numMax = este;
             }
             suma = suma + parseInt(este);
-            anterior = este;
             cont++;
         }
-        
+    }
+    for (let i = 1; i < 65; i++) {
+        let otro = document.getElementById(i).innerHTML;
+        if(otro!==""){
+            if(otro<numMin){
+                numMin = otro;
+            }
+        }
     }
     promedio = suma/cont;
     const resultContainer = document.querySelector(".resultados");
@@ -81,5 +87,4 @@ function hacerCuentas(){
     resultContainer.appendChild(result);
     resultContainer.appendChild(result2);
     resultContainer.appendChild(result3);
-    
 }
