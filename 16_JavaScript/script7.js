@@ -12,9 +12,8 @@ const boton = document.getElementById("b1");
 const numField = document.getElementById("numField");
 const label = document.getElementById("lb");
 const numSum = document.getElementById("numSum");
-const sumaField = document.getElementById("suma");
 boton.onclick = llamada;
-var suma = sumaField.value = 0;
+var suma = 0;
 
 // Generación de un número random para simular el VLP
 function llamada() {
@@ -23,18 +22,19 @@ function llamada() {
     let VLP = Math.floor(Math.random() * (max - min + 1)) + min;
     numField.setAttribute("value", VLP);
     boton.innerHTML = `JUEGUE`;
-    // boton.disabled = true;
+    boton.disabled = true;
 };
 
 // Función para manejar la suma de los números ingresados
 function onEnterKeyPressed() {
-    console.log(suma);
     const inputValue = parseInt(numSum.value);
     suma = suma + inputValue;
     numSum.value = "";
     label.innerHTML = `Ingrese otro número`;
     if (suma > parseInt(numField.value)) {
         label.innerHTML = `La suma supera el límite`;
+        numSum.remove();
+
     }
 }
 
