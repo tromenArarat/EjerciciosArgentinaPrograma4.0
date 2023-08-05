@@ -23,9 +23,14 @@ Resultado esperado : “JavaScript"
 */
 var frase = "Mejor que de nuestro juicio, debemos fiarnos del cálculo algebraico.";
 
-let arr = [];
-for(let i=0;i<frase.length;i++){
-    arr.push(frase.charAt(i));
+let arr = frase.split(' ');
+for(let i=0;i>arr.length;i++) {
+    if (arr[i].lastIndexOf(1,0)==","){
+        var x = arr[i].lastIndexOf(1,0);
+        var nueva = arr[i].substring(0,x);
+        arr[i].splice(x, 1, nueva);
+        console.log(arr); // ["Yo", "JavaScript"]
+    }
 }
 
 
@@ -33,22 +38,22 @@ for(let i=0;i<frase.length;i++){
 // cuando llegue al espacio que agregue la palabra resultante en un 
 // vector de palabras
 
-let palabras = [];
+// let palabras = [];
 
-for(let i=0;i<arr.length;i++){
-    let letra = arr[i];
-    let letras = "";
-    while(letra != " "){
-        letras = letras.concat(letra);
-    }
-    if(letra == " "){
-        palabras.push(letras);
-    }
-}
+// for(let i=0;i<arr.length;i++){
+//     let letra = arr[i];
+//     let letras = "";
+//     while(letra != " "){
+//         letras = letras.concat(letra);
+//     }
+//     if(letra == " "){
+//         palabras.push(letras);
+//     }
+// }
 
-for(let p of palabras){
-    console.log(p);
-}
+// for(let p of palabras){
+//     console.log(p);
+// }
 
 
 
