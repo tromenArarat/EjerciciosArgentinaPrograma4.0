@@ -14,24 +14,6 @@ let revertir = n => {
      return arbalap;
 };
 console.log(revertir(palabra));
-/*
-11.
-Escribir una función que reciba una frase 
-y devuelva la palabra más larga.
-String Ejemplo: “Guia de JavaScript”
-Resultado esperado : “JavaScript"
-*/
-var frase = "Mejor que de nuestro juicio, debemos fiarnos del cálculo algebraico.";
-
-let arr = frase.split(' ');
-for(let i=0;i>arr.length;i++) {
-    if (arr[i].lastIndexOf(1,0)==","){
-        var x = arr[i].lastIndexOf(1,0);
-        var nueva = arr[i].substring(0,x);
-        arr[i].splice(x, 1, nueva);
-        console.log(arr); // ["Yo", "JavaScript"]
-    }
-}
 
 
 // Recorrer arr y concatenar letras hasta que haya espacio
