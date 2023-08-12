@@ -1,19 +1,16 @@
 /*
-Escriba una función de JavaScript para obtener los valores de Nombre y Apellido del
-siguiente formulario.
+Escriba una función de JavaScript para obtener los valores 
+de Nombre y Apellido del siguiente formulario.
 */
+  var nom = document.getElementById("nombre").value;
+  var ape = document.getElementById("apellido").value;
+  var boton = document.getElementById("boton");
+  boton.onclick = getFormValores;
+  
 
-var boton = document.getElementById("btn");
-var radio = document.getElementById("rdo");
-
-function mostrar(){
-    boton.innerHTML = `Listo`;
+function getFormValores(){
+    var titulo = document.createElement("h3");
+    titulo.innerHTML = `${nom} ${ape}`;
+    document.body.appendChild(titulo)  
     boton.disabled = true;
-    const img = document.getElementById("img");
-    img.src = "https://e7.pngegg.com/pngimages/878/945/png-clipart-thumb-signal-computer-icons-emoticon-thumbs-up-miscellaneous-hand.png";
-    img.alt = "Pulgar Arriba";
-    img.width = 150;
-    img.height = 100;
-    document.body.appendChild(img);
-};
-boton.onclick = mostrar;
+}
