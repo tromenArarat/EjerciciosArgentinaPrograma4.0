@@ -24,7 +24,7 @@ const persona = {
     domicilio: "ns"
 };
 
-
+// pasa nn por defecto
 function soloNombre( { nombre = "nn"} ){
     console.log(nombre);
 }
@@ -32,10 +32,14 @@ function soloNombre( { nombre = "nn"} ){
 soloNombre(perraCompa);
 soloNombre(persona);
 
-fetch(`https://rickandmortyapi.com/api/character`)
+var opcionPagina = window.prompt("¿Qué página?");
+
+fetch(`https://rickandmortyapi.com/api/character?page=${opcionPagina}`)
     .then(response => response.json())
     .then(data => {
-        const {results} = data;
-        console.log(results.name);
-    });
+        const characters = data.results;
+        characters.forEach(character => {
+            console.log(character.name);
+        });
+});
 
