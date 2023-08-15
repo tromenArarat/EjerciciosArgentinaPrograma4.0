@@ -14,11 +14,23 @@ async function getAllCharacters(pageNumber) {
     return results;
 }
 
-function agregar(nombre) {
+function agregar(nombre,imgSrc) {
+    let li = document.createElement("li");
+    li.innerHTML = nombre;
+    let img = document.createElement("img");
+    img.setAttribute("src", imgSrc);
+    img.setAttribute("alt", "Character Image");
+    li.appendChild(img);
+    ul.appendChild(li); 
+}
+
+function agregarNombre(nombre) {
     let li = document.createElement("li");
     li.innerHTML = nombre;
     ul.appendChild(li); 
 }
+
+
 reset.onclick = () => ul.innerHTML = '';
 
 perCap.onclick = async function () {
@@ -28,18 +40,52 @@ perCap.onclick = async function () {
 
         ul.innerHTML = '';
 
-        results.forEach(e => {
-            let caps = [];
-            caps = e.episode;
-            if(caps.length>2){
-                agregar(`${e.name}: aparece en ${caps.length} episodios`);
+        // Function to fetch episode details by URL
+        async function getEpisodeDetails(episodeURL) {
+            let response = await fetch(episodeURL);
+            let episodeData = await response.json();
+            return episodeData;
+        }
+
+        results.forEach(async e => {
+            let caps = e.episode;
+            if (caps.length > 2) {
+                let episodeDetails = [];
+                for (let i = 0; i < caps.length; i++) {
+                    let episodeData = await getEpisodeDetails(caps[i]);
+                    episodeDetails.push(episodeData);
+                }
+
+                let episodeNames = episodeDetails.map(episode => episode.name).join(", ");
+                
+                agregar(`${e.name} aparece en ${caps.length} episodios: ${episodeNames}`, e.image);
             }
-            
         });
     } catch (error) {
         console.error("Error fetching characters:", error);
     }
 }
+
+// perCap.onclick = async function () {
+//     try {
+//         let numPag = inputPag.value; 
+//         let results = await getAllCharacters(numPag);
+
+//         ul.innerHTML = '';
+
+//         results.forEach(e => {
+//             let caps = [];
+//             caps = e.episode;
+//             if(caps.length>2){
+//                 agregar(`${e.name} aparece en ${caps.length} episodios:
+//                 ${caps[0].name}, ${caps[1].name}, etc.`,e.image);
+//             }
+            
+//         });
+//     } catch (error) {
+//         console.error("Error fetching characters:", error);
+//     }
+// }
 
 boton.onclick = async function () {
     try {
@@ -49,7 +95,7 @@ boton.onclick = async function () {
         ul.innerHTML = ''; // Clear the existing list before adding new characters
 
         results.forEach(e => {
-            agregar(e.name);
+            agregarNombre(e.name);
         });
     } catch (error) {
         console.error("Error fetching characters:", error);
