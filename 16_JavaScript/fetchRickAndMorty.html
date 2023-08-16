@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rick&Morty</title>
+    <link rel="stylesheet" href="estilosRickAndMorty.css">
 </head>
 <body>
-    <h2 name="titulo">Personajes de Rick And Morty</h1>
+    <h1 class="titulo">RICK & MORTY</h1>
+    <h4 class="subtitulo">PERSONAJES DE LA SERIE</h4>
     
-    <label for="input">Mostrar página:</label>
-    <input type="number" id="123" value="0"/>
-    <button id="btn">Mostrar</button>
-    <button id="btnRst">Borrar Lista</button>
+    <label for="input">Página:</label>
+    <input class="numIng" type="number" id="pagNum" value="0"/>
+   
+    <button id="btnMstr">Mostrar</button>
+    
+    <button id="btnRst">Limpiar Pantalla</button>
     <br>
-    <button id="btnPerCap">Personajes Más Conocidos</button>
+    
+    <button id="btnPerCap">Personajes Recurrentes</button>
+    
+    <button id="btnPerUni">Personajes con una única aparición</button>
 
     <ul id="lista">
 

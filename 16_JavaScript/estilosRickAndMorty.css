@@ -1,0 +1,11 @@
+body{
+   font-family: 'Courier New', Courier, monospace; 
+}
+
+#pagNum{
+   width: 40px;
+}
+
+ul{
+   flex-flow: row;
+}

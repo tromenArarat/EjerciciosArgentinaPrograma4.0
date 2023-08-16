@@ -1,12 +1,15 @@
 /*
 https://www.youtube.com/watch?v=VLElmkz7eHA
 */
-const ul = document.getElementById("lista");
-const boton = document.getElementById("btn");
+
+// Llamada a los elementos del html
+const inputPag = document.getElementById("pagNum");
+const boton = document.getElementById("btnMstr");
 const reset = document.getElementById("btnRst");
 const perCap = document.getElementById("btnPerCap");
+const perUni = document.getElementById("btnPerUni");
 
-const inputPag = document.getElementById("123");
+const ul = document.getElementById("lista");
 
 async function getAllCharacters(pageNumber) {
     let response = await fetch(`https://rickandmortyapi.com/api/character?page=${pageNumber}`);
@@ -40,25 +43,47 @@ perCap.onclick = async function () {
 
         ul.innerHTML = '';
 
-        // Function to fetch episode details by URL
         async function getEpisodeDetails(episodeURL) {
             let response = await fetch(episodeURL);
             let episodeData = await response.json();
             return episodeData;
         }
 
+        async function getOriginDetails(origin){
+            let response = await fetch(origin);
+            let originData = await response.json();
+            return originData;
+        }
+        async function getLocationDetails(location){
+            let response = await fetch(location);
+            let locationData = await response.json();
+            return locationData;
+        }
+
         results.forEach(async e => {
             let caps = e.episode;
+           
             if (caps.length > 2) {
+
+              
+
+                let origin = await getOriginDetails(e.origin.url);
+                let originName = origin.name;
+                
+                let location = await getLocationDetails(e.location.url);
+                let locationName = location.name;
+
                 let episodeDetails = [];
-                for (let i = 0; i < caps.length; i++) {
+                for (let i = 0; i < 3; i++) {
                     let episodeData = await getEpisodeDetails(caps[i]);
                     episodeDetails.push(episodeData);
                 }
 
                 let episodeNames = episodeDetails.map(episode => episode.name).join(", ");
                 
-                agregar(`${e.name} aparece en ${caps.length} episodios: ${episodeNames}`, e.image);
+                agregar(`${e.name}, de ${originName} aparece en: ${caps.length} episodios.
+                Por ejemplo: ${episodeNames}. Fue visto por última vez en:
+                ${locationName}`, e.image);
             }
         });
     } catch (error) {
