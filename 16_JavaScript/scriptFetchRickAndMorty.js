@@ -1,6 +1,34 @@
+const url = 'https://api-football-beta.p.rapidapi.com/fixtures?date=2023-08-20';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '76460cea6emsha88cb53df3d75e8p13bc1ajsn5c6bdccdbd94',
+		'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
+	}
+};
+
+async function fetchear(){
+        let response = await fetch(url,options);
+        let data = await response.json();
+        return data;
+}
+const ul = document.getElementById("lista");
+async function imprimir(){
+    const resultados = await fetchear();
+    // console.log(resultados.response[0].teams.away);
+    let img = document.createElement("img");
+    img.setAttribute("src", resultados.response[0].league.logo);
+    img.setAttribute("alt", "Character Image");
+    let li = document.createElement("li");
+    li.appendChild(img);
+    ul.appendChild(li); 
+}
+
+imprimir();
 /*
+
 https://www.youtube.com/watch?v=VLElmkz7eHA
-*/
+
 
 // Llamada a los elementos del html
 const inputPag = document.getElementById("pagNum");
@@ -126,3 +154,5 @@ boton.onclick = async function () {
         console.error("Error fetching characters:", error);
     }
 };
+
+*/
