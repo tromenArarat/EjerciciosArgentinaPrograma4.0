@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registro de Libros</title>
+    </head>
+    <body>
+        <div>
+            <form action="/libro/registro" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label>Cargar Libro</label> 
+                    <input type="number" name="isbn" placeholder="ISBN">
+                </div>
+                <div>
+                    <input type="text" name="titulo" placeholder="Titulo del Libro">
+                </div>
+
+                <div>
+                    <input type="number" name="ejemplares" placeholder="Cantidad de Ejemplares">
+                </div>
+                
+                <div>
+                    <input type="file" name="archivo">
+                </div>
+                
+                <div>
+
+                    <select name="idAutor">
+
+                        <option>Seleccionar Autor</option>
+
+                        <option/>
+                    </select>
+                    
+                </div>
+                <div>
+                    <select name="idEditorial">  
+                        <option>Seleccionar Editorial</option>
+                        <option/>
+                    </select>
+                </div>
+
+                <button>Guardar</button>
+            </form>
+        </div>
+        
+        <div th:if="${error != null}">
+            <div>
+                <h5>Error ð</h5>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito != null}">
+            <div>
+                <h5>Exito!</h5>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+        
+    </body>
+    
+</html>

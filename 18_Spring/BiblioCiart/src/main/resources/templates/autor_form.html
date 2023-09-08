@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <h1>ingrese el nombre</h1>
+        <form action="/autor/registro" method="POST">
+        <input type="text" name="nombre"  >
+        <button type="submit">guardar</button>
+        </form>
+        
+        <div th:if="${error != null}">
+            <div>
+                <h5>Error ð</h5>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito != null}">
+            <div>
+                <h5>Exito!</h5>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+        
+    </body>
+</html>

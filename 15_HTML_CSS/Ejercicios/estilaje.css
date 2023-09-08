@@ -1,7 +1,28 @@
+
+
+
+body{
+    background-color: rgb(216, 31, 31);
+    border-width: ;
+}
 table{
     border: solid;
     border-collapse: collapse;
     font-family: Arial, Helvetica, sans-serif;
+}
+*{
+    background-color: rgb(255, 255, 255);
+}
+
+#prueba{
+    background-color: #a31c9f;
+    border: 50px;
+}
+.prueba2{
+    background-color: #986d6d;
+}
+#prueba3{
+    background-color: #39cd8f73;
 }
 th, td {
     border: solid;
