@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AutorServicio {
- @Autowired
+    @Autowired
     AutorRepositorio autorRepositorio;
 
     @Transactional
@@ -33,6 +33,8 @@ public class AutorServicio {
 
     public List<Autor> listarAutores() {
 
+         System.out.println("ESTOY EN LISTAR AUTORES---------------------------------------------------***************************************************");
+        
         List<Autor> autores = new ArrayList();
 
         autores = autorRepositorio.findAll();

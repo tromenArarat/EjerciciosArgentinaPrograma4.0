@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org/">
     <head>
         <meta charset="UTF-8">
         <title>Registro de Libros</title>
@@ -14,49 +14,45 @@
                 <div>
                     <input type="text" name="titulo" placeholder="Titulo del Libro">
                 </div>
-
                 <div>
                     <input type="number" name="ejemplares" placeholder="Cantidad de Ejemplares">
                 </div>
-                
                 <div>
                     <input type="file" name="archivo">
                 </div>
-                
                 <div>
-
                     <select name="idAutor">
+                        <option >Seleccionar Autor</option>
 
-                        <option>Seleccionar Autor</option>
-
-                        <option/>
+                        <option th:each="autor:${autores}"
+                                th:value="${autor.id}"
+                                th:text="${autor.nombre}"
+                                />
                     </select>
-                    
                 </div>
                 <div>
                     <select name="idEditorial">  
                         <option>Seleccionar Editorial</option>
-                        <option/>
+                        <option th:each="editorial :${editoriales}"
+                                th:value="${editorial.id}"
+                                th:text="${editorial.nombre}"
+                                />
                     </select>
                 </div>
-
-                <button>Guardar</button>
+                <button tyoe="submit">Guardar</button>
             </form>
         </div>
-        
-        <div th:if="${error != null}">
+        <div th:if="${error!=null}">
             <div>
                 <h5>Error ð</h5>
                 <p th:text="${error}"></p>
             </div>
         </div>
-        <div th:if="${exito != null}">
+        <div th:if="${exito!= null}">
             <div>
                 <h5>Exito!</h5>
                 <p th:text="${exito}"></p>
             </div>
         </div>
-        
     </body>
-    
 </html>

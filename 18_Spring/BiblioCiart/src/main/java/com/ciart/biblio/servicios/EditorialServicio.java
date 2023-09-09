@@ -31,7 +31,7 @@ public class EditorialServicio {
         editorialRespositorio.save(editorial);
     }
 
-    public List<Editorial> listarEditorial() {
+    public List<Editorial> listarEditoriales() {
 
         //probar el otro modo pro WHAAT
         List<Editorial> editoriales = new ArrayList();
