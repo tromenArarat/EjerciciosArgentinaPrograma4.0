@@ -1,8 +1,14 @@
 
 package com.ciart.biblio.controladores;
 
+import com.ciart.biblio.entidades.Autor;
+import com.ciart.biblio.entidades.Editorial;
+import com.ciart.biblio.entidades.Libro;
 import com.ciart.biblio.excepciones.MiException;
 import com.ciart.biblio.servicios.AutorServicio;
+import com.ciart.biblio.servicios.EditorialServicio;
+import com.ciart.biblio.servicios.LibroServicio;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AutorControlador {
     @Autowired
     private AutorServicio autorServicio;
+    @Autowired
+    private EditorialServicio editorialServicio;
+    @Autowired
+    private LibroServicio libroServicio;
 
     @GetMapping("/registrar")
     public String registrar() {
@@ -31,7 +41,16 @@ public class AutorControlador {
         try {
 
             autorServicio.crearAutor(nombre);
-            modelo.put("exito","El autor fue cargado ok");
+            modelo.put("exito","El autor fue cargado bien");
+            
+           List<Autor> autores = autorServicio.listarAutores();
+           List<Editorial> editoriales = editorialServicio.listarEditoriales();
+           List<Libro> libros = libroServicio.listarLibro();
+           modelo.addAttribute("autores",autores);
+           modelo.addAttribute("editoriales",editoriales);
+           modelo.addAttribute("libros",libros);
+            
+            
         } catch ( MiException e) {
            
             modelo.put("error",e.getMessage());

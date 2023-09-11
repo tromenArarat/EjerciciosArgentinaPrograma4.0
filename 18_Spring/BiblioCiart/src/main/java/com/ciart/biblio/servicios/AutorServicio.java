@@ -32,8 +32,6 @@ public class AutorServicio {
     }
 
     public List<Autor> listarAutores() {
-
-         System.out.println("ESTOY EN LISTAR AUTORES---------------------------------------------------***************************************************");
         
         List<Autor> autores = new ArrayList();
 

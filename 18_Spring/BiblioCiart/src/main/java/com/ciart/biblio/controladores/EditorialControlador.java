@@ -6,6 +6,7 @@ package com.ciart.biblio.controladores;
 
 import com.ciart.biblio.entidades.Autor;
 import com.ciart.biblio.entidades.Editorial;
+import com.ciart.biblio.entidades.Libro;
 import com.ciart.biblio.excepciones.MiException;
 import com.ciart.biblio.servicios.AutorServicio;
 import com.ciart.biblio.servicios.EditorialServicio;
@@ -26,6 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EditorialControlador {
     @Autowired
     private EditorialServicio editorialServicio;
+    @Autowired
+    private AutorServicio autorServicio;
+    @Autowired
+    private LibroServicio libroServicio;
     
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo){
@@ -37,8 +42,17 @@ public class EditorialControlador {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap modelo){
         try {
+            
             editorialServicio.crearEditorial(nombre);
-            modelo.put("exito","La editorial fue cargado ok");
+            modelo.put("exito","La editorial fue cargado con éxito");
+            
+            List<Autor> autores = autorServicio.listarAutores();
+           List<Editorial> editoriales = editorialServicio.listarEditoriales();
+           List<Libro> libros = libroServicio.listarLibro();
+           modelo.addAttribute("autores",autores);
+           modelo.addAttribute("editoriales",editoriales);
+           modelo.addAttribute("libros",libros);
+            
         } catch (MiException ex) {
             modelo.put("error",ex.getMessage());
             Logger.getLogger(LibroControlador.class.getName()).log(Level.SEVERE, null, ex);

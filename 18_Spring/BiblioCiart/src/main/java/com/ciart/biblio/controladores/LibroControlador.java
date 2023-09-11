@@ -6,6 +6,7 @@ package com.ciart.biblio.controladores;
 
 import com.ciart.biblio.entidades.Autor;
 import com.ciart.biblio.entidades.Editorial;
+import com.ciart.biblio.entidades.Libro;
 import com.ciart.biblio.excepciones.MiException;
 import com.ciart.biblio.servicios.AutorServicio;
 import com.ciart.biblio.servicios.EditorialServicio;
@@ -36,8 +37,10 @@ public class LibroControlador {
         
            List<Autor> autores = autorServicio.listarAutores();
            List<Editorial> editoriales = editorialServicio.listarEditoriales();
+           List<Libro> libros = libroServicio.listarLibro();
            modelo.addAttribute("autores",autores);
            modelo.addAttribute("editoriales",editoriales);
+           modelo.addAttribute("libros",libros);
            
            return "libro_form.html";
     }
@@ -51,8 +54,10 @@ public class LibroControlador {
         } catch (MiException ex) {
             List<Autor> autores = autorServicio.listarAutores();
             List<Editorial> editoriales = editorialServicio.listarEditoriales();
+            List<Libro> libros = libroServicio.listarLibro();
             modelo.addAttribute("editoriales",editoriales);
             modelo.addAttribute("autores",autores);
+            modelo.addAttribute("libros",libros);
             modelo.put("error",ex.getMessage());
             
             return "libro_form.html";
