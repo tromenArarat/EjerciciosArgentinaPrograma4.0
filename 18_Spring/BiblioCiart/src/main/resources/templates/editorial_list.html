@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Id del autor
+                </th>
+                <th>
+                    Nombre del autor
+                </th>
+            </tr>
+        </thead>
+        <tbody th:each="editorial : ${editoriales}">
+            <tr>
+                <td th:text="${editorial.id}"></td>
+                <td th:text="${editorial.nombre}"></td>
+            </tr>
+    </table>
+    
+</html>

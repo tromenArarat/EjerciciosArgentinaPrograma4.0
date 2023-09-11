@@ -58,10 +58,19 @@ public class LibroControlador {
             modelo.addAttribute("editoriales",editoriales);
             modelo.addAttribute("autores",autores);
             modelo.addAttribute("libros",libros);
+            Logger.getLogger(LibroControlador.class.getName()).log(Level.SEVERE, null, ex);
             modelo.put("error",ex.getMessage());
             
             return "libro_form.html";
         }
        return "index.html";
     }
+    
+    @GetMapping("/lista")
+    public String list(ModelMap modelo){
+        List<Libro> libros = libroServicio.listarLibro();
+        modelo.addAttribute("libros", libros);
+        return "libro_list.html";
+    }
+    
 }

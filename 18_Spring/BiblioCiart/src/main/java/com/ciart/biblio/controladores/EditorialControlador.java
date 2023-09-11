@@ -46,7 +46,7 @@ public class EditorialControlador {
             editorialServicio.crearEditorial(nombre);
             modelo.put("exito","La editorial fue cargado con éxito");
             
-            List<Autor> autores = autorServicio.listarAutores();
+           List<Autor> autores = autorServicio.listarAutores();
            List<Editorial> editoriales = editorialServicio.listarEditoriales();
            List<Libro> libros = libroServicio.listarLibro();
            modelo.addAttribute("autores",autores);
@@ -60,4 +60,12 @@ public class EditorialControlador {
         }
        return "index.html";
     }
+    
+    @GetMapping("/lista")
+    public String list(ModelMap modelo){
+        List<Editorial> editoriales = editorialServicio.listarEditoriales();
+        modelo.addAttribute("editoriales", editoriales);
+        return "editorial_list.html";
+    }
+    
 }

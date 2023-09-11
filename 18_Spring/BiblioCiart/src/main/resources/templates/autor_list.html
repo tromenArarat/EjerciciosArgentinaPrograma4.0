@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+    
+    
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Id del autor
+                </th>
+                <th>
+                    Nombre del autor
+                </th>
+                <th>
+                    Modificar
+                </th>
+            </tr>
+        </thead>
+        <tbody th:each="autor : ${autores}">
+            <tr>
+                <td th:text="${autor.id}"></td>
+                <td th:text="${autor.nombre}"></td>
+                <td>
+                    <a th:href="@{/autor/modificar/__${autor.id}__}">Modificar</a>
+                </td>
+            </tr>
+    </table>
+    
+    </div>
+        <div th:if="${error!=null}" class="alert alert-danger" role="alert">
+            <div>
+                <h5>Error</h5>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito!= null}" class="alert alert-success" role="alert">
+            <div>
+                <h5>Éxito</h5>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+    
+    
+</html>

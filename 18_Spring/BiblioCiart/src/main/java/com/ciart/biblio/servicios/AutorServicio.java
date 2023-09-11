@@ -57,6 +57,10 @@ public class AutorServicio {
         }
 
     }
+    
+    public Autor traeUno(String id){
+        return autorRepositorio.getOne(id);
+    }
 
      private void validar(String nombre) throws MiException {
 

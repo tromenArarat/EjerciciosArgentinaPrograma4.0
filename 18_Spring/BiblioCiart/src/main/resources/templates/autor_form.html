@@ -13,7 +13,17 @@ and open the template in the editor.
 
     </head>
     <body>
-        
+        <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Cargar Autor</li>
+                <li class="breadcrumb-item"><a href="/libro/registrar">Cargar Libro</a></li>
+                <li class="breadcrumb-item"><a href="/autor/registrar">Cargar Autor</a></li>
+                <li class="breadcrumb-item"><a href="/editorial/registrar">Cargar Editorial</a></li>
+            </ol>
+
+            <span class="badge rounded-pill bg-warning text-dark">Acá se cuecen piñones</span>
+        </nav>
         <div class="card" style="width: 18rem;">
             <img src="/img/tipito.png" class="card-img-top" alt="Tipito">
             <div class="card-body">
