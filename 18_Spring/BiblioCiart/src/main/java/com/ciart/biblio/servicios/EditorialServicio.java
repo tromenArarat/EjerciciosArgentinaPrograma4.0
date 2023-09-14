@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EditorialServicio {
 @Autowired
-    EditorialRepositorio editorialRespositorio;
+EditorialRepositorio editorialRepositorio;
 
     @Transactional
     public void crearEditorial(String nombre) throws MiException {
@@ -28,15 +28,24 @@ public class EditorialServicio {
 
         editorial.setNombre(nombre);
 
-        editorialRespositorio.save(editorial);
+        editorialRepositorio.save(editorial);
     }
 
+    public Editorial traeUno(String id){
+        return editorialRepositorio.findById(id).get();
+    }
+    
+    public Editorial getOne(String id){
+    
+        return editorialRepositorio.findById(id).get();
+    
+    }
+    
     public List<Editorial> listarEditoriales() {
 
-        //probar el otro modo pro WHAAT
         List<Editorial> editoriales = new ArrayList();
 
-        editoriales = editorialRespositorio.findAll();
+        editoriales = editorialRepositorio.findAll();
 
         return editoriales;
     }
@@ -45,7 +54,7 @@ public class EditorialServicio {
 
         validar(nombre);
 
-        Optional<Editorial> respuesta = editorialRespositorio.findById(id);
+        Optional<Editorial> respuesta = editorialRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
 
@@ -53,7 +62,7 @@ public class EditorialServicio {
 
             editorial.setNombre(nombre);
 
-            editorialRespositorio.save(editorial);
+            editorialRepositorio.save(editorial);
 
         }
 
@@ -61,7 +70,7 @@ public class EditorialServicio {
 
     private void validar(String nombre) throws MiException {
 
-        if (nombre.isEmpty() || nombre == null) {
+        if (nombre == null) {
 
             throw new MiException("El nombre no puede estar vacio");
 

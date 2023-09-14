@@ -14,27 +14,34 @@
         <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cargar Editorial</li>
                 <li class="breadcrumb-item"><a href="/libro/registrar">Cargar Libro</a></li>
                 <li class="breadcrumb-item"><a href="/autor/registrar">Cargar Autor</a></li>
-                <li class="breadcrumb-item"><a href="/editorial/registrar">Cargar Editorial</a></li>
             </ol>
 
-            <span class="badge rounded-pill bg-warning text-dark">Acá se cuecen piñones</span>
+            
         </nav>
         
         <div class="card" style="width: 18rem;">
-            <img src="/img/editorial.jpg" class="card-img-top" alt="Interior de una editorial de libros">
+            
             <div class="card-body">
                 <h5 class="card-title">Nombre de la editorial</h5>
-                <form action="/editorial/registro" method="POST">
+                <form th:action="@{/editorial/registro/}" method="POST">
                     <div class="mb-3">
                         <input type="text" name="nombre" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
+                    <section class=" text-center container">
+                        <div class="row mt-3">
+                            <div class="divVolver">
+                                <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                            </div>
+                        </div>
+                    </section>
                 </form>
             </div>
         </div>
+        
+        
         
         </div>
         <div th:if="${error!=null}" class="alert alert-danger" role="alert">

@@ -3,16 +3,10 @@
 
 -->
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+    <head th:replace= "/fragments/head :: head"> </head>
     
     <table>
+        <h4>Listado de libros</h4>
         <thead>
             <tr>
                 <th>
@@ -33,6 +27,9 @@
                 <th>
                    Editorial
                 </th>
+                <th>
+                   Modificar
+                </th>
             </tr>
         </thead>
         <tbody th:each="libro : ${libros}">
@@ -43,7 +40,32 @@
                 <td th:text="${libro.alta}"></td>
                 <td th:text="${libro.autor.nombre}"></td>
                 <td th:text="${libro.editorial.nombre}"></td>
+                <td>
+                    <a th:href="@{/libro/modificar/__${libro.isbn}__}">Modificar</a>
+                </td>
             </tr>
     </table>
+    
+    <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+    </section>
+    
+    </div>
+        <div th:if="${error!=null}" class="alert alert-danger" role="alert">
+            <div>
+                <h5>Error</h5>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito!= null}" class="alert alert-success" role="alert">
+            <div>
+                <h5>Éxito</h5>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
     
 </html>

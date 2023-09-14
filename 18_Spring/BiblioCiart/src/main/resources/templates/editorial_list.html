@@ -3,23 +3,19 @@
 
 -->
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <head th:replace= "/fragments/head :: head"> </head>
     <body>
-        <div>TODO write content</div>
-    </body>
-    
-    <table>
+        <table>
         <thead>
             <tr>
                 <th>
-                    Id del autor
+                    Id de la editorial
                 </th>
                 <th>
-                    Nombre del autor
+                    Nombre de la editorial
+                </th>
+                <th>
+                    Modificar
                 </th>
             </tr>
         </thead>
@@ -27,7 +23,20 @@
             <tr>
                 <td th:text="${editorial.id}"></td>
                 <td th:text="${editorial.nombre}"></td>
+                <td>
+                    <a th:href="@{/editorial/modificar/__${editorial.id}__}">Modificar</a>
+                </td>
             </tr>
     </table>
+        
+    </body>
+    
+    <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+    </section>
     
 </html>

@@ -55,7 +55,14 @@ public class AutorControlador {
         } catch ( MiException e) {
            
             modelo.put("error",e.getMessage());
-            Logger.getLogger(LibroControlador.class.getName()).log(Level.SEVERE, null, e);
+            
+           List<Autor> autores = autorServicio.listarAutores();
+           List<Editorial> editoriales = editorialServicio.listarEditoriales();
+           List<Libro> libros = libroServicio.listarLibro();
+           modelo.addAttribute("autores",autores);
+           modelo.addAttribute("editoriales",editoriales);
+           modelo.addAttribute("libros",libros);
+            
             return "autor_form.html";
         }
 

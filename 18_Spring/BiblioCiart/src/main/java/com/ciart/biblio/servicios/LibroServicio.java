@@ -35,13 +35,45 @@ public class LibroServicio {
 
         List<Libro> libro = new ArrayList<>();
         libro = libroRepositorio.findAll();
-        //List<Libro> libro = libroRepositorio.findAll(); PROBAR
-        //return libroRepositorio.findAll();
         return libro;
     }
 
     @Transactional
     public void crearLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException{
+        
+        validar(isbn, titulo, ejemplares, idAutor, idEditorial);
+        
+        Optional<Libro> respuesta = libroRepositorio.findById(isbn);
+        Optional<Autor> respuestaAutor = autorRepositorio.findById(idAutor);
+        Optional<Editorial> respuestaEditorial = editorialRepositorio.findById(idEditorial);
+        
+        Autor autor = new Autor();
+        Editorial editorial= new Editorial();
+        
+        if(respuestaAutor.isPresent()){
+            autor = respuestaAutor.get();
+        }
+        
+        if(respuestaEditorial.isPresent()){
+            editorial = respuestaEditorial.get();
+        }
+      
+             Libro libro = new Libro();
+
+             libro.setIsbn(isbn);
+             libro.setTitulo(titulo);
+             libro.setEjemplares(ejemplares);
+             libro.setAlta(new Date());
+             libro.setAutor(autor);
+             libro.setEditorial(editorial);
+
+             libroRepositorio.save(libro);
+         
+        
+    }
+    
+    @Transactional
+    public void modificarLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException{
         
         validar(isbn, titulo, ejemplares, idAutor, idEditorial);
         
@@ -61,26 +93,39 @@ public class LibroServicio {
             
             editorial = respuestaEditorial.get();
         }
-      
-         if(respuesta.isPresent()) {
-             Libro libro = new Libro();
-
-             libro.setIsbn(isbn);
-             libro.setTitulo(titulo);
-             libro.setEjemplares(ejemplares);
-             libro.setAlta(new Date());
-             libro.setAutor(autor);
-             libro.setEditorial(editorial);
-//
-//        Imagen imagen = imagenServicio.guardar(archivo);
-//        
-//        libro.setImagen(imagen);
-
-             libroRepositorio.save(libro);
-         }
         
+        if(respuesta.isPresent()){
+            
+            Libro libro = respuesta.get();
+            
+                     
+            libro.setTitulo(titulo);
+            
+            libro.setEjemplares(ejemplares);
+            
+            libro.setAutor(autor);
+            
+            libro.setEditorial(editorial);
+            
+            String idImagen = null;
+            
+//            if (libro.getImagen() != null) {
+//                idImagen = libro.getImagen().getId();
+//            }
+//            
+//            Imagen imagen = imagenServicio.actualizar(idImagen, archivo);
+//            libro.setImagen(imagen);
+//            
+            libroRepositorio.save(libro);
+            
+        }
     }
 
+    
+     public Libro traeUno(Long isbn){
+        return libroRepositorio.getOne(isbn);
+    }
+    
     private void validar(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException{
        
         if(isbn == null){

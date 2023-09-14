@@ -10,22 +10,18 @@
         <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cargar libro</li>
-                <li class="breadcrumb-item"><a href="/libro/registrar">Cargar Libro</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Libro</li>
                 <li class="breadcrumb-item"><a href="/autor/registrar">Cargar Autor</a></li>
                 <li class="breadcrumb-item"><a href="/editorial/registrar">Cargar Editorial</a></li>
             </ol>
 
-            <span class="badge rounded-pill bg-warning text-dark">Acá se cuecen piñones</span>
         </nav>
         
         <div>
-            
             <div class="card" style="width: 18rem;">
-            <img src="/img/libro.jpg" class="card-img-top" alt="Libro">
             <div class="card-body">
                 <h5 class="card-title">Datos del libro:</h5>
-                <form action="/editorial/registro" method="POST">
+                <form th:action="@{/libro/registro/}" method="POST">
                     <div class="mb-3">
                         <input type="number" name="isbn" placeholder="ISBN" class="form-control">
                     </div>
@@ -36,7 +32,7 @@
                         <input type="number" name="ejemplares" class="form-control">
                     </div>
                     <div>
-                    <select name="idAutor" class="form-select" aria-label="Default select example">
+                    <select name="idAutor" class="form-select">
                         <option >Seleccionar Autor</option>
                         <option th:each="autor:${autores}"
                                 th:value="${autor.id}"
@@ -45,15 +41,22 @@
                     </select>
                     </div>
                     <div>
-                    <select name="idEditorial" class="form-select" aria-label="Default select example">
+                    <select name="idEditorial" class="form-select">
                         <option >Seleccionar Editorial</option>
-                        <option th:each="editorial :${editoriales}"
+                        <option th:each="editorial:${editoriales}"
                                 th:value="${editorial.id}"
                                 th:text="${editorial.nombre}"
                                 />
                     </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
+                    <section class=" text-center container">
+                        <div class="row mt-3">
+                            <div class="divVolver">
+                                <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                            </div>
+                        </div>
+                    </section>
                 </form>
             </div>
         </div>
