@@ -51,7 +51,7 @@ public class PortalControlador {
     
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            String password2, ModelMap modelo) {
+            @RequestParam String password2, ModelMap modelo) {
 
         try {
            usuarioServicio.registrar(nombre, email, password, password2);
@@ -77,6 +77,7 @@ public class PortalControlador {
     }
     @GetMapping("/login")
     public String login(@RequestParam(required = false)String error, ModelMap modelo){
+        
         if(error!=null){
             modelo.put("error","Usuario o contraseña inválido");
         }
@@ -85,6 +86,7 @@ public class PortalControlador {
     
     @GetMapping("/inicio")
     public String inicio(){
+        
         return "inicio.html";
     }
     
