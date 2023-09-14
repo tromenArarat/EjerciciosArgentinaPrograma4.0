@@ -41,9 +41,7 @@ public class PortalControlador {
            modelo.addAttribute("editoriales",editoriales);
            modelo.addAttribute("libros",libros);
         
-    
         return "index.html";
-        
     }
     
     @GetMapping("/registrar")
@@ -56,11 +54,16 @@ public class PortalControlador {
             String password2, ModelMap modelo) {
 
         try {
-            usuarioServicio.registrar(nombre, email, password, password2);
+           usuarioServicio.registrar(nombre, email, password, password2);
+            
+           modelo.put("exito", "Usuario registrado correctamente!");
 
-            modelo.put("exito", "Usuario registrado correctamente!");
-
-            return "index.html";
+           List<Autor> autores = autorServicio.listarAutores();
+           List<Editorial> editoriales = editorialServicio.listarEditoriales();
+           List<Libro> libros = libroServicio.listarLibro();
+           modelo.addAttribute("autores",autores);
+           modelo.addAttribute("editoriales",editoriales);
+           modelo.addAttribute("libros",libros);
             
         } catch (MiException ex) {
 
@@ -70,12 +73,19 @@ public class PortalControlador {
 
             return "registro.html";
         }
-
+        return "index.html";
+    }
+    @GetMapping("/login")
+    public String login(@RequestParam(required = false)String error, ModelMap modelo){
+        if(error!=null){
+            modelo.put("error","Usuario o contraseña inválido");
+        }
+        return "login.html";
     }
     
-    @GetMapping("/login")
-    public String login(){
-        return "login.html";
+    @GetMapping("/inicio")
+    public String inicio(){
+        return "inicio.html";
     }
     
 }

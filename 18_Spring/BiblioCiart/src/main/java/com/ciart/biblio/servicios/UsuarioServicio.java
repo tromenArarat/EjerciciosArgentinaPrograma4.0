@@ -37,7 +37,8 @@ public class UsuarioServicio implements UserDetailsService{
         usuario.setNombre(nombre);
         usuario.setEmail(email);
 
-        usuario.setClave(new BCryptPasswordEncoder().encode(password));
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+        
 
         usuario.setRol(Rol.USER);
         
@@ -56,7 +57,7 @@ public class UsuarioServicio implements UserDetailsService{
             usuario.setNombre(nombre);
             usuario.setEmail(email);
 
-            usuario.setClave(new BCryptPasswordEncoder().encode(password));
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
             usuario.setRol(Rol.USER);
             
@@ -129,7 +130,7 @@ public class UsuarioServicio implements UserDetailsService{
 
             permisos.add(p);
 
-            return new User(usuario.getEmail(), usuario.getClave(), permisos);
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
             return null;
         }

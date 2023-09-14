@@ -20,7 +20,7 @@ public class Usuario {
     private String id;
     private String nombre;
     private String email;
-    private String clave;
+    private String password;
     
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -44,12 +44,12 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getClave() {
-        return clave;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Rol getRol() {

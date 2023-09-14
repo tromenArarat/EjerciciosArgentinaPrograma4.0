@@ -4,6 +4,7 @@
 
 package com.ciart.biblio;
 
+import com.ciart.biblio.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,15 +20,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll();
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll();
+//    
+//    }
+    @Autowired
+    public UsuarioServicio usuarioServicio;
     
-    }
-//    @Autowired
-//    public UsuarioServicio usuarioServicio;
     
-    /*
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(usuarioServicio)
@@ -50,12 +51,11 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                         .permitAll()
                 .and().logout()
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/")
                         .permitAll()
                 .and().csrf()
                         .disable();
                 
 
     }
-*/
 }
