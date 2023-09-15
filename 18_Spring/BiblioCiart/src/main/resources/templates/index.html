@@ -3,34 +3,18 @@
     <head th:replace= "/fragments/head :: head"> </head>
     <body>
         
-        <nav class="nav">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-            <a class="nav-link" href="/libro/registrar">Cargar Libro</a>
-            <a class="nav-link" href="/autor/registrar">Cargar Autor</a>
-            <a class="nav-link" href="/editorial/registrar">Cargar Editorial</a>
-            <a class="nav-link disabled">Perder un libro</a>
-        </nav>
+        
         
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                    
-                    <button type="button" class="btn btn-light"><a href="/libro/lista" id="boton" class="btn btn-light">Ver libros</a></button>
+                    <button type="button" class="btn btn-light"><a href="/registrar" id="boton" class="btn btn-light">Registrate como usuarix!</a></button>
                 </div>
-                <span class="badge bg-primary rounded-pill" th:text="${#lists.size(libros)}"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                    <button type="button" class="btn btn-light"><a href="/autor/lista" id="boton" class="btn btn-light">Ver autores</a></button>
+                    <button type="button" class="btn btn-light"><a href="/login" id="boton" class="btn btn-light">Accedé con tu nombre de usuarix</a></button>
                 </div>
-                <span class="badge bg-primary rounded-pill" th:text="${#lists.size(autores)}"></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <button type="button" class="btn btn-light"><a href="/editorial/lista" id="boton" class="btn btn-light">Ver editoriales</a></button>
-                </div>
-                <span class="badge bg-primary rounded-pill" th:text="${#lists.size(editoriales)}"></span>
-                
             </li>
         </ul>
 
