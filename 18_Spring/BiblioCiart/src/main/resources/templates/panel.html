@@ -5,14 +5,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace= "/fragments/head :: head"> </head>
     <body>
-        <nav class="nav">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-            <a class="nav-link" href="/libro/registrar">Cargar Libro</a>
-            <a class="nav-link" href="/autor/registrar">Cargar Autor</a>
-            <a class="nav-link" href="/editorial/registrar">Cargar Editorial</a>
-            <a class="nav-link disabled">Perder un libro</a>
-        </nav>
-      
+       <nav th:replace= "/fragments/navbarUser :: nav"> </nav>     
         <ul th:replace="/fragments/botonsuli :: ul"></ul>
         
     </body>

@@ -27,7 +27,7 @@
                 <th>
                    Editorial
                 </th>
-                <th>
+                <th sec:authorize="hasRole('ADMIN')">
                    Modificar
                 </th>
             </tr>
@@ -40,7 +40,7 @@
                 <td th:text="${libro.alta}"></td>
                 <td th:text="${libro.autor.nombre}"></td>
                 <td th:text="${libro.editorial.nombre}"></td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <a th:href="@{/libro/modificar/__${libro.isbn}__}">Modificar</a>
                 </td>
             </tr>

@@ -6,24 +6,21 @@
     <head th:replace= "/fragments/head :: head"> </head>
     <body>
         <table>
+            <h4>Listado de editoriales</h4>
         <thead>
             <tr>
                 <th>
-                    Id de la editorial
+                    Nombre
                 </th>
-                <th>
-                    Nombre de la editorial
-                </th>
-                <th>
+                <th sec:authorize="hasRole('ADMIN')">
                     Modificar
                 </th>
             </tr>
         </thead>
         <tbody th:each="editorial : ${editoriales}">
             <tr>
-                <td th:text="${editorial.id}"></td>
                 <td th:text="${editorial.nombre}"></td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <a th:href="@{/editorial/modificar/__${editorial.id}__}">Modificar</a>
                 </td>
             </tr>
@@ -34,7 +31,7 @@
     <section class=" text-center container">
                 <div class="row mt-3">
                     <div class="divVolver">
-                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                        <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                     </div>
                 </div>
     </section>

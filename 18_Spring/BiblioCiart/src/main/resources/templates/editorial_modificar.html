@@ -19,8 +19,15 @@
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
             </div>
+            <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/editorial/lista}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+    </section>
         </div>
-                
+      
         
         </div>
         <div th:if="${error!=null}" class="alert alert-danger" role="alert">

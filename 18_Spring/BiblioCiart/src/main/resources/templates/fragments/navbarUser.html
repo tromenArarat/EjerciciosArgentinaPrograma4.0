@@ -5,8 +5,17 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace= "/fragments/head :: head"> </head>
     <body>
-        <nav class="nav">
-            <a class="dropdown-item" href="/logout">Cerrar sesión</a>
-        </nav>
-    </body>
+    <nav class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Perfil
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" th:href="@{/perfil}" >Editar Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+
+            <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+</body>
 </html>

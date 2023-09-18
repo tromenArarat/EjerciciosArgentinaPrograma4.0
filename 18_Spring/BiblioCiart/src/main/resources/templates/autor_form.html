@@ -7,14 +7,6 @@ and open the template in the editor.
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace= "/fragments/head :: head"> </head>
     <body>
-        <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/libro/registrar">Cargar Libro</a></li>
-                <li class="breadcrumb-item"><a href="/editorial/registrar">Cargar Editorial</a></li>
-            </ol>
-
-        </nav>
         
         <div class="card" style="width: 18rem;">
             
@@ -30,12 +22,13 @@ and open the template in the editor.
                     <section class=" text-center container">
                         <div class="row mt-3">
                             <div class="divVolver">
-                                <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                                <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                             </div>
                         </div>
                     </section>
                 </form>
             
+                
             </div>
         </div>
                 

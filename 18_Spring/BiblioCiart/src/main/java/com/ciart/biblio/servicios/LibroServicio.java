@@ -106,16 +106,7 @@ public class LibroServicio {
             libro.setAutor(autor);
             
             libro.setEditorial(editorial);
-            
-            String idImagen = null;
-            
-//            if (libro.getImagen() != null) {
-//                idImagen = libro.getImagen().getId();
-//            }
-//            
-//            Imagen imagen = imagenServicio.actualizar(idImagen, archivo);
-//            libro.setImagen(imagen);
-//            
+             
             libroRepositorio.save(libro);
             
         }
