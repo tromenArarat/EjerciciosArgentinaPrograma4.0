@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace= "/fragments/head :: head" </head>
+
+    <body>
+        <header class="header">
+            <section class="contenedorMain">
+                
+                <div class="tituloBiblioteca">
+                    
+                    <a class="navbar-brand" th:text="'Error ' + ${codigo}"></a>
+                    <p class="tituloLibros" th:text="${mensaje}"></p>
+                    
+                    
+                    <ul class="navbar-nav ms-auto elementos">
+                    <li class="nav-item">
+                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/registrar" id="navbarDropdown" role="button" aria-expanded="false" type="button">
+                            Registrate!
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/login" id="navbarDropdown" role="button" aria-expanded="false" type="button">
+                            LOGIN!
+                        </a>
+
+                    </li>
+                </ul>
+                    
+                </div>
+                <section class="text-center container">
+                    <div class="row mt-3">
+                        <div class="divVolver">
+                            <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                        </div>
+                </section>
+                
+            </section>
+            
+            <div class="collapse navbar-collapse elementosNav" id="navbarNavDropdown">
+                
+            </div>
+            
+        </header>
+
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>
