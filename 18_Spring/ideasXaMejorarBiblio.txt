@@ -1,0 +1,20 @@
+CAMBIOS EN LA BASE DE DATOS
+- Un libro va a tener un donante (en lugar de autor) y una ubicación (en lugar de editorial). El donante mantiene la misma relación 
+que tenía la entidad autor pero la ubicación es OneToOne porque para cada ejemplar de libro corresponderá una referencia al espacio físico 
+donde está ubicado. Autor y Editorial dejan de ser entidades y pasan a ser atributos de Libro de tipo string.
+
+- El usuario admin debe poder registrar los préstamos de libros. Ver ejercicio de libreriaConJPA donde pusimos préstamos.
+Préstamos pasa a ser una entidad con los atributos Usuario, Libro, fechaRetiro, fechaDevolucion. Necesitamos un html préstamo, 
+un controlador para eso y un servicio con el método que crea el préstamo. Este método toma la fecha actual y calcula la fecha de devolución 
+con el dato de la cantidad de días que va a ser prestado el libro. Además tendremos un método listar préstamos y su html correspondiente.
+
+- En Usuario tendremos un atributo Estado que va a tener la información de cuántos libros pidió prestado, cuántos tiene actualmente,
+si tiene que devolver alguno y cuántos días se pasó.
+
+
+
+VINCULACIÓN A API EXTERNA
+- Con la carga del isbn y una la llamada a una api de isbn se deberían cargar todos los datos. Ni idea si se puede.
+
+
+
