@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ServicioSaludo">
+  <ClassDiagramComponents>
+    <Class name="Calendario" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="42.0" yPosition="8.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="profesional" type="Profesional" visibility="private"/>
+        <Field name="turnos" type="Turno[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="CalificacionConsulta" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="76.0" yPosition="222.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="turno" type="Turno" visibility="private"/>
+        <Field name="calificacion" type="Integer" visibility="private"/>
+        <Field name="comentario" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Disponibilidad" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="91.0" yPosition="567.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Historia" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="328.0" yPosition="148.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="idPaciente" type="String" visibility="private"/>
+        <Field name="registros" type="RegistroHistoria[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Imagen" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="1071.0" yPosition="222.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Paciente" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="1029.0" yPosition="65.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Profesional" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="306.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="RegistroHistoria" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="547.0" yPosition="298.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Turno" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="76.0" yPosition="430.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Usuario" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="290.0" yPosition="347.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ServicioSaludApplication" package="com.cg.servicioSalud" visibility="public" xPosition="766.0" yPosition="243.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="Especialidad" package="com.cg.servicioSalud.enumeradores" visibility="public" xPosition="376.0" yPosition="476.0">
+      <Literals>
+        <Literal name="GINECO"/>
+        <Literal name="PSICO"/>
+        <Literal name="KINESIO"/>
+        <Literal name="PROCTO"/>
+        <Literal name="TRAUMATO"/>
+        <Literal name="DENTISTA"/>
+      </Literals>
+    </Enum>
+    <Enum name="Modalidad" package="com.cg.servicioSalud.enumeradores" visibility="public" xPosition="729.0" yPosition="404.0">
+      <Literals/>
+    </Enum>
+    <Enum name="ObraSocial" package="com.cg.servicioSalud.enumeradores" visibility="public" xPosition="729.0" yPosition="578.0">
+      <Literals/>
+    </Enum>
+    <Enum name="Rol" package="com.cg.servicioSalud.enumeradores" visibility="public" xPosition="1029.0" yPosition="513.0">
+      <Literals>
+        <Literal name="ADMIN"/>
+        <Literal name="USER"/>
+        <Literal name="INVITADE"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="profesional" source="com.cg.servicioSalud.entidades.Calendario" target="com.cg.servicioSalud.entidades.Profesional" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="turno" source="com.cg.servicioSalud.entidades.CalificacionConsulta" target="com.cg.servicioSalud.entidades.Turno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
