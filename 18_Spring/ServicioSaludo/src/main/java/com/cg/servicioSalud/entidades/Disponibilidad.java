@@ -1,24 +1,27 @@
 
 package com.cg.servicioSalud.entidades;
 
-import java.util.Date;
+import com.cg.servicioSalud.enumeradores.Dia;
+import com.cg.servicioSalud.enumeradores.Horario;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
 public class Disponibilidad {
     @Id
     @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
-    @Temporal(TemporalType.DATE)
-    private Date dia;
+    @Enumerated(EnumType.STRING)
+    private Dia dia;
     
-    private String horaInicio;
-    private String horaFin;
+    @Enumerated(EnumType.STRING)
+    private Horario horario;
 }

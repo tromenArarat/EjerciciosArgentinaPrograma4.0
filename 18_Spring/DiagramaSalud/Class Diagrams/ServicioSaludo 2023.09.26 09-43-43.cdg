@@ -40,7 +40,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Imagen" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="438.0" yPosition="639.0">
+    <Class name="Imagen" package="com.cg.servicioSalud.entidades" visibility="public" xPosition="460.0" yPosition="655.0">
       <Fields>
         <Field name="id" type="String" visibility="private"/>
         <Field name="mime" type="String" visibility="private"/>
@@ -175,16 +175,16 @@
   </ClassDiagramComponents>
   <ClassDiagramRelations>
     <IsRelation name="is" source="com.cg.servicioSalud.entidades.Paciente" target="com.cg.servicioSalud.entidades.Usuario"/>
+    <IsRelation name="is" source="com.cg.servicioSalud.entidades.Profesional" target="com.cg.servicioSalud.entidades.Usuario"/>
     <HasRelation name="profesional" source="com.cg.servicioSalud.entidades.Calendario" target="com.cg.servicioSalud.entidades.Profesional" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="paciente" source="com.cg.servicioSalud.entidades.Turno" target="com.cg.servicioSalud.entidades.Paciente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="com.cg.servicioSalud.entidades.Profesional" target="com.cg.servicioSalud.entidades.Usuario"/>
+    <HasRelation name="imagen" source="com.cg.servicioSalud.entidades.Paciente" target="com.cg.servicioSalud.entidades.Imagen" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="rol" source="com.cg.servicioSalud.entidades.Usuario" target="com.cg.servicioSalud.enumeradores.Rol" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="disponibilidad" source="com.cg.servicioSalud.entidades.Profesional" target="com.cg.servicioSalud.entidades.Disponibilidad" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="profesional" source="com.cg.servicioSalud.entidades.Turno" target="com.cg.servicioSalud.entidades.Profesional" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="historiaClinica" source="com.cg.servicioSalud.entidades.Paciente" target="com.cg.servicioSalud.entidades.Historia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="modalidad" source="com.cg.servicioSalud.entidades.Profesional" target="com.cg.servicioSalud.enumeradores.Modalidad" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="imagen" source="com.cg.servicioSalud.entidades.Paciente" target="com.cg.servicioSalud.entidades.Imagen" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="turno" source="com.cg.servicioSalud.entidades.RegistroHistoria" target="com.cg.servicioSalud.entidades.Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="historiaClinica" source="com.cg.servicioSalud.entidades.Paciente" target="com.cg.servicioSalud.entidades.Historia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="profesional" source="com.cg.servicioSalud.entidades.Turno" target="com.cg.servicioSalud.entidades.Profesional" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="turno" source="com.cg.servicioSalud.entidades.CalificacionConsulta" target="com.cg.servicioSalud.entidades.Turno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

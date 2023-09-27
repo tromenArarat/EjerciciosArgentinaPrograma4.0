@@ -1,9 +1,10 @@
 package com.cg.servicioSalud.entidades;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,9 +19,13 @@ public class Paciente extends Usuario {
 
     private String obraSocial;
 
-    @OneToOne
-    private Imagen imagen;
-
-    @OneToOne
-    private Historia historiaClinica;
+    @OneToMany
+    private List<HistorialClinico> historial;
 }
+
+/*
+Métodos con permiso USER: registrarPaciente, actualizarPaciente
+
+Métodos con permiso ADMIN: eliminarPaciente 
+
+*/
