@@ -32,7 +32,7 @@ public class Turno {
     private Profesional profesional;
     
     @Enumerated(EnumType.STRING)
-    private Estado estado;// 
+    private Estado estado;// PENDIENTE CANCELADO CUMPLIDO
     
     private String motivo;
     

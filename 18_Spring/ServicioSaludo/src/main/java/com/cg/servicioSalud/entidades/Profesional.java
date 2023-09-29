@@ -1,13 +1,9 @@
 package com.cg.servicioSalud.entidades;
 
-import com.cg.servicioSalud.enumeradores.Modalidad;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,20 +20,18 @@ public class Profesional extends Usuario {
 
     private Integer tarifa;
 
-    @OneToMany
-    private List<Disponibilidad> disponibilidad;
-
-    @Enumerated(EnumType.STRING)
-    private Modalidad modalidad; //telemedicina o presencial
+    @OneToOne
+    private String disponibilidad;
+    
+    private String modalidad; //telemedicina o presencial
 
     private String ubicacion;
 
-    @OneToMany
-    private List<String> obrasSociales; //con cuáles trabaja
+    private String obrasSociales; //con cuáles trabaja
     
     private String especialidad;
 
-    private Boolean estado; //true = alta; false = baja
+    private Boolean activo; // true = alta; false = baja
 }
 
 
