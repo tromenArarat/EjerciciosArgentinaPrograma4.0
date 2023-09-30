@@ -1,186 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Servicio Salud</title>
 </head>
-
 <body>
-
     <main>
-
-        <div class="col-md-7 col-lg-8">
-            <h4 class="mb-3">Billing address</h4>
-            <form action="/profesional/registro" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="" name="nombreCompleto">
-                        <div class="invalid-feedback">
-                            Valid first name is required.
-                        </div>
+        <div>
+            <form action="/profesional/registro" method="POST" enctype="multipart/form-data">
+                <div>
+                    <h4>Registro de profesional</h4>
+                    <div>
+                        <label for="name">Nombre completo</label>
+                        <input name="nombreCompleto" type="text" id="name" placeholder="Zoilo Sagaz">
                     </div>
-
-                    
-
-                    <div class="col-12">
-                        <label for="email" class="form-label">Email <span
-                                class="text-body-secondary">(Optional)</span></label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                    <div>
+                        <label for="correo">Dirección postal electrónica</label>
+                        <input name="email" type="email" id="correo" placeholder="vos@ejemplo.edu">
                     </div>
-
-                    <div class="col-12">
-                        <label for="address" class="form-label">unbicacion</label>
-                        <input name="ubicacion" type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
+                    <div>
+                        <label for="pass">Clave</label>
+                        <input name="clave" type="password" id="pass" placeholder="*******">
                     </div>
-                    <div class="col-12">
-                        <label for="address" class="form-label">especialidad</label>
-                        <input name="especialidad" hidden type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
+                    <div>
+                        <label for="tel">Teléfono</label>
+                        <input name="telefono" type="number" id="tel" placeholder="444555">
                     </div>
-                    <div class="col-12">
-                        <label for="address" class="form-label">clave</label>
-                        <input name="clave" type="password" class="form-control" id="address" placeholder="1234 Main St" required="">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
+                    <div>
+                        <label for="address">Ubicación</label>
+                        <input name="ubicacion" type="text" id="address" placeholder="Morón">
                     </div>
-
-                    <div class="col-12">
-                        <label for="address2" class="form-label">telefono <span
-                                class="text-body-secondary">(Optional)</span></label>
-                        <input name="telefono" type="number" class="form-control" id="address2" placeholder="Apartment or suite">
+                    <div>
+                        <label for="img">Imagen<span> (Opcional)</span></label>
+                        <input name="imagen" type="file" id="img">
                     </div>
-                    <div class="col-12">
-                        <label for="address2" class="form-label">tarifa<span
-                                class="text-body-secondary">(Optional)</span></label>
-                        <input name="tarifa" type="number" class="form-control" id="address2" placeholder="Apartment or suite">
-                    </div>
-                    <div class="col-12">
-                        <label for="address2" class="form-label">imagen<span
-                                class="text-body-secondary">(Optional)</span></label>
-                        <input name="imagen" type="file" class="form-control" id="address2" placeholder="Apartment or suite">
-                    </div>
-                    
-
-                    <div class="col-md-5">
-                        <label for="country" class="form-label">Country</label>
-                        <select class="form-select" id="country" required="">
-                            <option value="">Choose...</option>
-                            <option>United States</option>
+                    <div>
+                        <label for="dispo">Disponibilidad</label>
+                        <br>
+                        <input type="checkbox" name="disponibilidad" id="dispo">
+                        <label for="dispo">
+                            Lunes a viernes por la mañana
+                        </label>
+                        <input type="checkbox" id="dispo">
+                        <label for="dispo">
+                            Lunes a viernes por la tarde
+                        </label>
                         </select>
-                        <div class="invalid-feedback">
-                            Please select a valid country.
-                        </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">State</label>
-                        <select class="form-select" id="state" required="">
-                            <option value="">Choose...</option>
-                            <option>California</option>
+                    <div>
+                        <label for="obras">Obras sociales</label>
+                        <br>
+                        <input name="obrasSociales" type="checkbox" value="" id="obras">
+                        <label for="obras">
+                            Osde para jipis
+                        </label>
+                        <input type="checkbox" name="obrasSociales" value="" id="obras">
+                        <label for="obras">
+                            Sin obra social
+                        </label>
+                    </div>
+                    <div>
+                        <label for="select">Especialidad</label>
+                        <select id="select">
+                            <option selected value="oscultista">Ocultista</option>
+                            <option name="especialidad" value="delirantologo">Delirantólogo</option>
+                            <option value="panelista">Panelista</option>
                         </select>
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
-                        </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <label for="zip" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Zip code required.
-                        </div>
+                    <div>
+                        <label for="moda">Modalidad</label>
+                        <select id="moda" name="modalidad">
+                            <option selected value="presencial">Presencial</option>
+                            <option value="telemedicina">Teledirigido</option>
+                        </select>
                     </div>
-                </div>
-
-                <hr class="my-4">
-
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="same-address">
-                    <label class="form-check-label" for="same-address">Shipping address is the same as my billing
-                        address</label>
-                </div>
-
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="save-info">
-                    <label class="form-check-label" for="save-info">Save this information for next time</label>
-                </div>
-
-                <hr class="my-4">
-
-                <h4 class="mb-3">Payment</h4>
-
-                <div class="my-3">
-                    <div class="form-check">
-                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked=""
-                            required="">
-                        <label class="form-check-label" for="credit">Credit card</label>
-                    </div>
-                    <div class="form-check">
-                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
-                        <label class="form-check-label" for="debit">Debit card</label>
-                    </div>
-                    <div class="form-check">
-                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
-                        <label class="form-check-label" for="paypal">PayPal</label>
+                    <div>
+                        <label for="cash">Tarifa</label>
+                        <input name="tarifa" type="number" id="cash" placeholder="1000">
                     </div>
                 </div>
-
-                <div class="row gy-3">
-                    <div class="col-md-6">
-                        <label for="cc-name" class="form-label">Name on card</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                        <small class="text-body-secondary">Full name as displayed on card</small>
-                        <div class="invalid-feedback">
-                            Name on card is required
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="cc-number" class="form-label">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Credit card number is required
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="cc-expiration" class="form-label">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Expiration date required
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="cc-cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Security code required
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="my-4">
-
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                <button type="submit">Registrar</button>
             </form>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
-
 </html>

@@ -1,126 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicio Salud</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-
 <body>
-
     <main>
-
-        <div class="col-md-7 col-lg-8">
-            <h4 class="mb-3">Registro de profesional</h4>
-            <form action="/profesional/registro" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="name" class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" id="name" placeholder="" value="" required="" name="nombreCompleto">
-                        <div class="invalid-feedback">
-                            Un nombre válido es requerido.
-                        </div>
+        <div>
+            <form action="/profesional/registro" method="POST" enctype="multipart/form-data">
+                <div>
+                    <h4>Registro de profesional</h4>
+                    <div>
+                        <label for="name">Nombre completo</label>
+                        <input value="" type="text" id="name" name="nombreCompleto" placeholder="Zoilo Sagaz">
                     </div>
-
-                    <div class="col-12">
-                        <label for="email" class="form-label">Email <span
-                                class="text-body-secondary"></span></label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="vos@ejemplo.edu">
-                        <div class="invalid-feedback">
-                            Ingrese un email válido.
-                        </div>
+                    <div>
+                        <label for="correo">Dirección postal electrónica</label>
+                        <input value="" type="email" id="correo" name="email" placeholder="vos@ejemplo.edu">
                     </div>
-
-                    <div class="col-12">
-                        <label for="pass" class="form-label">Clave</label>
-                        <input name="clave" type="password" class="form-control" id="pass" placeholder="*******" required="">
-                        <div class="invalid-feedback">
-                            Clave incorrecta.
-                        </div>
+                    <div>
+                        <label for="pass">Clave</label>
+                        <input name="clave" type="password" id="pass" placeholder="*******">
                     </div>
-
-                    <div class="col-12">
-                        <label for="tel" class="form-label">Teléfono <span
-                                class="text-body-secondary">(Opcional)</span></label>
-                        <input name="telefono" type="number" class="form-control" id="tel" placeholder="444555">
+                    <div>
+                        <label for="tel">Teléfono</label>
+                        <input name="telefono" type="number" id="tel" placeholder="444555">
                     </div>
-                    
-                    <div class="col-12">
-                        <label for="img" class="form-label">Imagen<span
-                                class="text-body-secondary">(Opcional)</span></label>
-                        <input name="imagen" type="file" class="form-control" id="img" placeholder="Apartment or suite">
+                    <div>
+                        <label for="address">Ubicación</label>
+                        <input name="ubicacion" type="text" id="address" placeholder="Morón">
                     </div>
-                    
-
-                    <div class="col-md-5">
-                        <label for="country" class="form-label">Disponibilidad</label>
-                        <select class="form-select" id="country" required="">
-                            <option value="">Elegí...</option>
-                            <option>Lunes a viernes por la mañana</option>
-                            <option>Findes a la noche</option>
+                    <div>
+                        <label for="img">Imagen<span> (Opcional)</span></label>
+                        <input name="imagen" type="file" id="img">
+                    </div>
+                    <div>
+                        <label for="dispo">Disponibilidad</label>
+                        <br>
+                        <input type="checkbox" value="" id="dispo">
+                        <label for="dispo">
+                            Lunes a viernes por la mañana
+                        </label>
+                        <input type="checkbox" value="" id="dispo">
+                        <label for="dispo">
+                            Lunes a viernes por la tarde
+                        </label>
                         </select>
-                        <div class="invalid-feedback">
-                            Seleccione una opción válida sivuplé.
-                        </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">Obras sociales</label>
-                        <select class="form-select" id="state" required="">
-                            <option value="">Te debo el checkbox</option>
-                            <option>Osde para jipis</option>
+                    <div>
+                        <label for="obras">Obras sociales</label>
+                        <br>
+                        <input type="checkbox" value="" id="obras">
+                        <label for="obras">
+                            Osde para jipis
+                        </label>
+                        <input type="checkbox" value="" id="obras">
+                        <label for="obras">
+                            Sin obra social
+                        </label>
+                    </div>
+                    <div>
+                        <label for="select">Especialidad</label>
+                        <select id="select">
+                            <option selected value="oscultista">Oscultista</option>
+                            <option value="delirantologo">Delirantólogo</option>
+                            <option value="panelista">Panelista</option>
                         </select>
-                        <div class="invalid-feedback">
-                            Ingrese una opción válida sivuplé.
-                        </div>
                     </div>
-                    
-                   <div class="col-12">
-                        <label for="rubro" class="form-label">Especialidad</label>
-                        <input name="especialidad" hidden type="text" class="form-control" id="rubro" placeholder="Delirantólogo" required="">
-                        
-                        <div class="invalid-feedback">
-                            Ingrese una opción válida sivuplé.
-                        </div>
+                    <div>
+                        <label for="moda">Modalidad</label>
+                        <select id="moda">
+                            <option selected value="presencial">Presencial</option>
+                            <option value="telemedicina">Teledirigido</option>
+                        </select>
                     </div>
-
-                    <div class="col-12">
-                        <label for="address" class="form-label">Ubicación</label>
-                        <input name="ubicacion" type="text" class="form-control" id="address" placeholder="Chinchinales" required="">
-                        <div class="invalid-feedback">
-                            Ingrese una ubicación fidedigna.
-                        </div>
+                    <div>
+                        <label for="cash">Tarifa</label>
+                        <input name="tarifa" type="number" id="cash" placeholder="1000">
                     </div>
-
-                    <div class="col-12">
-                        <label for="address" class="form-label">Modalidad</label>
-                        <input name="ubicacion" type="text" class="form-control" id="address" placeholder="Presencial" required="">
-                        <div class="invalid-feedback">
-                            Ingrese una modalidad fidedigna.
-                        </div>
-                    </div>
-
-
-                    
-                    <div class="col-12">
-                        <label for="cash" class="form-label">Tarifa<span
-                                class="text-body-secondary">(Opcional)</span></label>
-                        <input name="tarifa" type="number" class="form-control" id="cash" placeholder="1000">
-                    </div>
-
-                   
                 </div>
-
-                
-
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Registrar</button>
+                <button type="submit">Registrar</button>
             </form>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
-
 </html>

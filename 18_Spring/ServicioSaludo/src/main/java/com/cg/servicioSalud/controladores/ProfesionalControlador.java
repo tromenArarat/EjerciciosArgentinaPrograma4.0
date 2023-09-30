@@ -1,9 +1,7 @@
 package com.cg.servicioSalud.controladores;
 
 import com.cg.servicioSalud.entidades.Imagen;
-import com.cg.servicioSalud.enumeradores.Rol;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

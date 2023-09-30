@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio Salud</title>
+</head>
+<body>
+    <main>
+        <div>
+            <form action="/profesional/registro" method="POST" enctype="multipart/form-data">
+                <div>
+                    <h4>Registro de paciente</h4>
+                    <div>
+                        <label for="name">Nombre completo</label>
+                        <input name="nombreCompleto" type="text" id="name" placeholder="Zoilo Sagaz">
+                    </div>
+                    <div>
+                        <label for="correo">Dirección postal electrónica</label>
+                        <input name="email" type="email" id="correo" placeholder="vos@ejemplo.edu">
+                    </div>
+                    <div>
+                        <label for="pass">Clave</label>
+                        <input name="clave" type="password" id="pass" placeholder="*******">
+                    </div>
+                    <div>
+                        <label for="tel">Teléfono</label>
+                        <input name="telefono" type="number" id="tel" placeholder="444555">
+                    </div>
+                        <label for="img">Imagen<span> (Opcional)</span></label>
+                        <input name="imagen" type="file" id="img">
+                    </div>
+                    
+                    <div>
+                        <label for="obras">Obra social</label>
+                        <br>
+                        <input name="obraSocial" type="checkbox" value="" id="obras">
+                        <label for="obras">
+                            Osde para jipis
+                        </label>
+                        <input type="checkbox" name="obrasSociales" value="" id="obras">
+                        <label for="obras">
+                            Sin obra social
+                        </label>
+                    </div>
+                   
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
