@@ -30,36 +30,24 @@
                     </div>
                     <div>
                         <label for="address">Ubicación</label>
-                        <input name="ubicacion" type="text" id="address" placeholder="Morón">
+                        <input name="ubicacion" type="text" id="address" placeholder="Chos Malal">
                     </div>
                     <div>
                         <label for="img">Imagen<span> (Opcional)</span></label>
                         <input name="imagen" type="file" id="img">
                     </div>
+
                     <div>
                         <label for="dispo">Disponibilidad</label>
-                        <br>
-                        <input type="checkbox" value="" id="dispo">
-                        <label for="dispo">
-                            Lunes a viernes por la mañana
-                        </label>
-                        <input type="checkbox" value="" id="dispo">
-                        <label for="dispo">
-                            Lunes a viernes por la tarde
-                        </label>
+                        <select name="disponibilidad" class="form-select" id="dispo">
+                            <option value="">Elige...</option>
+                            <option>Lunes a viernes por la mañana</option>
+                            <option>Lunes a viernes por la tarde</option>
                         </select>
                     </div>
                     <div>
                         <label for="obras">Obras sociales</label>
-                        <br>
-                        <input type="checkbox" value="" id="obras">
-                        <label for="obras">
-                            Osde para jipis
-                        </label>
-                        <input type="checkbox" value="" id="obras">
-                        <label for="obras">
-                            Sin obra social
-                        </label>
+                        <input type="checkbox" role="switch" id="obras">
                     </div>
                     <div>
                         <label for="select">Especialidad</label>

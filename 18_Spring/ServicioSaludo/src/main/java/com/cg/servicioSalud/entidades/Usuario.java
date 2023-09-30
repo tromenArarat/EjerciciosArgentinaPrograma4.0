@@ -1,17 +1,18 @@
 package com.cg.servicioSalud.entidades;
 
 import com.cg.servicioSalud.enumeradores.Rol;
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
 
+@MappedSuperclass
 @Data
-public abstract class Usuario implements Serializable {
+public abstract class Usuario{
 
     protected String nombreCompleto;
 

@@ -5,10 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class Profesional extends Usuario {
 
     @Id
@@ -20,14 +22,14 @@ public class Profesional extends Usuario {
 
     private Integer tarifa;
 
-    @OneToOne
+    
     private String disponibilidad;
     
     private String modalidad; //telemedicina o presencial
 
     private String ubicacion;
 
-    private String obrasSociales; //con cuáles trabaja
+    private Boolean obrasSociales; //con cuáles trabaja
     
     private String especialidad;
 

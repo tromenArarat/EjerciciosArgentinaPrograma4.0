@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -24,12 +25,15 @@ public class ProfesionalControlador {
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombreCompleto, 
-            @RequestParam String email,@RequestParam String clave,
-            @RequestParam(required=false) Long telefono,
-            @RequestParam Imagen imagen, @RequestParam Double reputacion, 
+            @RequestParam String email,
+            @RequestParam String clave,
+            @RequestParam Long telefono,
+            MultipartFile imagen,
             @RequestParam String disponibilidad, 
-            @RequestParam String obrasSociales, @RequestParam String modalidad,
-            @RequestParam String especialidad, @RequestParam String ubicacion,
+            @RequestParam Boolean obrasSociales, 
+            @RequestParam String modalidad,
+            @RequestParam String especialidad, 
+            @RequestParam String ubicacion,
             @RequestParam Integer tarifa) {
 
         try{
@@ -41,7 +45,8 @@ public class ProfesionalControlador {
                     modalidad, tarifa);
         
         } catch (Exception ex) {
-            return "libro_form.html";
+            System.out.println(ex);
+            return "profesional_form.html";
         }
        return "index.html";
 

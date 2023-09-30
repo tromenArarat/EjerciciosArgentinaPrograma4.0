@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ProfesionalServicio {
@@ -16,23 +18,27 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
     
+    @Autowired
+    private ImagenServicio imagenServicio;
     
     @Transactional
     public void crearProfesional(String nombreCompleto, String email, 
-            String clave, Long telefono, Imagen imagen, 
+            String clave, Long telefono, MultipartFile archivo, 
             String disponibilidad, 
-            String obrasSociales, String modalidad, 
+            Boolean obrasSociales, String modalidad, 
             String especialidad, String ubicacion,
-            Integer tarifa){
+            Integer tarifa) throws Exception{
        
         //Falta funcion validar
         Profesional profesional = new Profesional();
+        profesional.setRol(Rol.ADMIN);
+        Imagen imagen = imagenServicio.guardar(archivo);
         profesional.setImagen(imagen);
         profesional.setNombreCompleto(nombreCompleto);
         profesional.setTarifa(tarifa);
         profesional.setDisponibilidad(disponibilidad); 
         profesional.setActivo(Boolean.FALSE);
-        profesional.setClave(clave);
+        profesional.setClave(new BCryptPasswordEncoder().encode(clave));
         profesional.setEspecialidad(especialidad);
         profesional.setFechaAlta(new Date());
         profesional.setModalidad(modalidad);
@@ -48,7 +54,7 @@ public class ProfesionalServicio {
     public void modificarProfesional(String id, String nombreCompleto, String email, 
             String clave, Long telefono, Imagen imagen, 
             Double reputacion, String disponibilidad, 
-            String obrasSociales, String modalidad, 
+            Boolean obrasSociales, String modalidad, 
             String especialidad, String ubicacion, 
             Boolean activo, Integer tarifa) {
 
@@ -79,7 +85,9 @@ public class ProfesionalServicio {
             profesionalRepositorio.save(profesional);
         }
     }
-    
+    public Profesional getOne(String id){
+        return profesionalRepositorio.getOne(id);
+    }
     // FALTA GETONE
     
 }
