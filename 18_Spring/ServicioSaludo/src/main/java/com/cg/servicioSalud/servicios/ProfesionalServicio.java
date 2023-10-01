@@ -4,7 +4,9 @@ import com.cg.servicioSalud.entidades.Imagen;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.enumeradores.Rol;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,32 @@ public class ProfesionalServicio {
     public Profesional getOne(String id){
         return profesionalRepositorio.getOne(id);
     }
+    public List<Profesional> listarProfesionales() {
+        
+        List<Profesional> profesionales = new ArrayList();
+
+        profesionales = profesionalRepositorio.findAll();
+
+        return profesionales;
+    }
+    
+    public List<String> listarEspecialidades(){
+        
+        List<String> especialidades = new ArrayList();
+        
+        List<Profesional> profesionales = new ArrayList();
+
+        profesionales = profesionalRepositorio.findAll();
+        
+        for (Profesional profesionale : profesionales) {
+            if(!especialidades.contains(profesionale.getEspecialidad())){
+                especialidades.add(profesionale.getEspecialidad());
+            }
+        }
+        
+        return especialidades;
+    }
+    
     // FALTA GETONE
     
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html>
+    <head>
+        <title>Servicio Salud</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <table>
+            <h4>Listado de profesionales</h4>
+            <thead>
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Modificar
+                    </th>
+                </tr>
+            </thead>
+            <tbody th:each="profesional : ${profesionales}">
+                <tr>
+                    <td th:text="${profesional.nombreCompleto}"></td>
+                    <td>
+                        <a>Modificar</a>
+                    </td>
+                </tr>
+        </table>
+    </body>
+</html>
