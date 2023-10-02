@@ -2,7 +2,8 @@
 <!--
 
 -->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
     <head>
         <title>Servicio Salud</title>
         <meta charset="UTF-8">
@@ -10,19 +11,25 @@
     </head>
     <body>
         <div>Servicio Salud</div>
-        
-        
         <ul>
             <li>
+                
                 <div>
-                    
-                    <button type="button"><a href="/libro/lista" id="boton" >Ver Profesionales</a></button>
+                    <h6>Un total de:</h6>
+                    <span th:text="${#lists.size(especialidades)}"></span>
+                    <h6>especialidades para elegir</h6>
+
+                    <select id="dropDownList">
+                        <option value="0">Elegir especialidad</option>
+                        <option th:each="especialidad : ${especialidades}" th:value="${especialidad}" th:text="${especialidad}"></option>
+                    </select>
                 </div>
-                <span th:text="${#lists.size(profesionales)}"></span>
+                
+                <div>
+                    <button type="button"><a th:href="@{/lista/__${especialidad}__}" id="boton" >Ver Turnos</a></button>
+                </div>
+                
+
             </li>
-                        
         </ul>
-        
-        
-        
 </html>

@@ -25,10 +25,13 @@ public class ProfesionalServicio {
     
     @Transactional
     public void crearProfesional(String nombreCompleto, String email, 
-            String clave, Long telefono, MultipartFile archivo, 
+            String clave, Long telefono, 
+            MultipartFile archivo, 
             String disponibilidad, 
-            Boolean obrasSociales, String modalidad, 
-            String especialidad, String ubicacion,
+            Boolean obrasSociales, 
+            String modalidad, 
+            String especialidad, 
+            String ubicacion,
             Integer tarifa) throws Exception{
        
         //Falta funcion validar
@@ -108,13 +111,15 @@ public class ProfesionalServicio {
         profesionales = profesionalRepositorio.findAll();
         
         for (Profesional profesionale : profesionales) {
-            if(!especialidades.contains(profesionale.getEspecialidad())){
-                especialidades.add(profesionale.getEspecialidad());
+            if(!especialidades.contains(profesionale.getModalidad())){
+                especialidades.add(profesionale.getModalidad());
             }
         }
         
         return especialidades;
     }
+    
+    
     
     // FALTA GETONE
     
