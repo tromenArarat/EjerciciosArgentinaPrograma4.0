@@ -11,6 +11,8 @@
     </head>
     <body>
         <div>Servicio Salud</div>
+        
+        <form th:action="@{/paciente/lista}" method="GET" enctype="multipart/form-data">
         <ul>
             <li>
                 
@@ -19,17 +21,20 @@
                     <span th:text="${#lists.size(especialidades)}"></span>
                     <h6>especialidades para elegir</h6>
 
-                    <select id="dropDownList">
+                    <select id="dropDownList" name="especialidad">
                         <option value="0">Elegir especialidad</option>
                         <option th:each="especialidad : ${especialidades}" th:value="${especialidad}" th:text="${especialidad}"></option>
                     </select>
+                    <button type="submit">Ver Turnos</button>
                 </div>
                 
-                <div>
-                    <button type="button"><a th:href="@{/lista/__${especialidad}__}" id="boton" >Ver Turnos</a></button>
-                </div>
-                
-
             </li>
         </ul>
+            
+            
+            
+            </form>
+        
+    </body>
+        
 </html>

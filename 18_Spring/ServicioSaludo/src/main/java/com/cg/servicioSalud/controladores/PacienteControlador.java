@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,25 +58,11 @@ public class PacienteControlador {
 
     }
     
-    @GetMapping("/lista/{especialidad}")
-    public String turnosDisponibles(@PathVariable String especialidad, ModelMap modelo){
-        List<String> turnos = turnoServicio.listarTurnos(especialidad);
+    @GetMapping("/lista")
+    public String turnosDisponibles(@RequestParam String especialidad, ModelMap modelo){
+      List<String> turnos = turnoServicio.listarTurnos(especialidad);
         modelo.addAttribute("turnos",turnos);
         return "lista_especialidad.html";
-    }
-    
-    @PostMapping("/lista/{especialidad}")
-    public String modificar(@PathVariable String especialidad, ModelMap modelo){
-    
-        try {
-            List<String> turnos = turnoServicio.listarTurnos(especialidad);
-            modelo.addAttribute("turnos",turnos);
-            return "redirect:../lista";
-                    
-        } catch (Exception ex) {
-            return "index.html";
-        }
-        
     }
     
 }
