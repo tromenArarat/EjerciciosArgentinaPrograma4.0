@@ -1,5 +1,6 @@
 package com.cg.servicioSalud.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Profesional extends Usuario {
+public class Profesional extends Usuario implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -22,14 +23,13 @@ public class Profesional extends Usuario {
 
     private Integer tarifa;
 
-    
     private String disponibilidad;
     
     private String modalidad; //telemedicina o presencial
 
     private String ubicacion;
 
-    private Boolean obrasSociales; //con cuáles trabaja
+    private Boolean obrasSociales; // Desarrollar aparte el descuento según qué obra tenga
     
     private String especialidad;
 

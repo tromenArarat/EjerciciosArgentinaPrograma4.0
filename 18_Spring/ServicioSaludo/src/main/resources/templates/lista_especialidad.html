@@ -2,28 +2,36 @@
 <!--
 
 -->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
     <head>
         <title>Servicio Salud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <form th:action="@{/turno/confirmado}" method="GET" enctype="multipart/form-data">
         <table>
-        <h4>Listado de turnos disponibles</h4>
+            <h4 th:text="'Listado de turnos disponibles /// Especialidad: ' + ${especialidad}+' /// Paciente: '+${paciente.nombreCompleto}"></h4>
+        
         <thead>
             <tr>
                 <th>
                     Turno
+                </th>
+                <th>
+                    Confirmación
                 </th>
                
             </tr>
         </thead>
         <tbody th:each="turno : ${turnos}">
             <tr>
-                <td th:text="${turno}"></td>
+                <td th:text="${turno.fecha}+' ' + ${turno.profesional} +' ' + ${turno.paciente} " th:value="${turno}"></td>
                 
+                <td><button type="submit">Confirmar</button></td>
             </tr>
     </table>
+        </form>
     </body>
 </html>

@@ -19,7 +19,7 @@ public class PacienteServicio {
     private ImagenServicio imagenServicio;
     
     @Transactional
-    public void crearPaciente(String nombreCompleto, String email, 
+    public Paciente crearPaciente(String nombreCompleto, String email, 
             String clave, Long telefono, MultipartFile archivo, 
             String obraSocial) throws Exception{
        
@@ -37,5 +37,6 @@ public class PacienteServicio {
         paciente.setEmail(email);
 
         pacienteRepositorio.save(paciente);
+        return paciente;
     }
 }

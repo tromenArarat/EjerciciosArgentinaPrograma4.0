@@ -1,5 +1,6 @@
 package com.cg.servicioSalud.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Paciente extends Usuario {
+public class Paciente extends Usuario implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
