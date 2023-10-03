@@ -28,7 +28,7 @@
         <tbody th:each="turno : ${turnos}">
             <tr>
                 <td th:text="${turno.fecha}+' ' + ${turno.profesional} +' ' + ${turno.paciente} " th:value="${turno}"></td>
-                
+        <input hidden th:value="${turno.profesional.id}" th:name="idProfesional">
                 <td><button type="submit">Confirmar</button></td>
             </tr>
     </table>

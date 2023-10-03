@@ -85,6 +85,7 @@ public class PacienteControlador {
     }   modelo.addAttribute("paciente",paciente);
         modelo.addAttribute("especialidad",especialidad);
         modelo.addAttribute("turnos",turnos);
+        
         return "lista_especialidad.html";
     }
     
