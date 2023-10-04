@@ -39,9 +39,19 @@ public class ProfesionalControlador {
             @RequestParam String especialidad, 
             @RequestParam String ubicacion,
             @RequestParam Integer tarifa,
-            ModelMap modelo) {
+            ModelMap modelo,
+                @RequestParam(required = false) String lunes, 
+                    @RequestParam(required = false) String martes, 
+                    @RequestParam(required = false) String miercoles,
+                    @RequestParam(required = false) String jueves, 
+                    @RequestParam(required = false) String viernes, 
+                    @RequestParam(required = false) String sabado, 
+                    @RequestParam(required = false) String domingo) {
 
         try{
+            
+            disponibilidad = domingo+lunes+martes+miercoles+jueves+viernes+sabado;
+            
             profesionalServicio.crearProfesional(
                     nombreCompleto, email, clave, 
                     telefono, imagen,

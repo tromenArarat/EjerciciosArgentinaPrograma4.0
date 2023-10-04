@@ -35,11 +35,37 @@
                     </div>
                     <div>
                         <label for="dispo">Disponibilidad</label>
+                        <!--
                         <select name="disponibilidad" class="form-select" id="dispo">
                             <option value="">Elige...</option>
                             <option value="Lunes a viernes por la mañana">Lunes a viernes por la mañana</option>
                             <option value="Lunes a viernes por la tarde">Lunes a viernes por la tarde</option>
                         </select>
+                        -->
+                        <input hidden name="disponibilidad" value="">
+                        
+                        <input type="radio" th:value="1m" name="lunes" id="">
+            <input type="radio" th:value="1t" name="lunes" id="">
+            <input type="radio" th:value="1n" name="lunes" id="">
+            <input type="radio" th:value="2m" name="martes" id="">
+            <input type="radio" th:value="2t" name="martes" id="">
+            <input type="radio" th:value="2n" name="martes" id="">
+            <input type="radio" th:value="3m" name="miercoles" id="">
+            <input type="radio" th:value="3t" name="miercoles" id="">
+            <input type="radio" th:value="3n" name="miercoles" id="">
+            <input type="radio" th:value="4m" name="jueves" id="">
+            <input type="radio" th:value="4t" name="jueves" id="">
+            <input type="radio" th:value="4n" name="jueves" id="">
+            <input type="radio" th:value="5m" name="viernes" id="">
+            <input type="radio" th:value="5t" name="viernes" id="">
+            <input type="radio" th:value="5n" name="viernes" id="">
+            <input type="radio" th:value="6m" name="sabado" id="">
+            <input type="radio" th:value="6t" name="sabado" id="">
+            <input type="radio" th:value="6n" name="sabado" id="">
+            <input type="radio" th:value="0m" name="domingo" id="">
+            <input type="radio" th:value="0t" name="domingo" id="">
+            <input type="radio" th:value="0n" name="domingo" id="">
+                        
                     </div>
                     <div>
                         <label for="obras">Obras sociales</label>
