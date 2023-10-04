@@ -3,7 +3,7 @@
 
 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org/"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
     <head>
         <title>Servicio Salud</title>
         <meta charset="UTF-8">
@@ -11,27 +11,27 @@
     </head>
     <body>
         <form th:action="@{/turno/confirmado}" method="GET" enctype="multipart/form-data">
-        <table>
-            <h4 th:text="'Listado de turnos disponibles /// Especialidad: ' + ${especialidad}+' /// Paciente: '+${paciente.nombreCompleto}"></h4>
-        
-        <thead>
-            <tr>
-                <th>
-                    Turno
-                </th>
-                <th>
-                    Confirmación
-                </th>
-               
-            </tr>
-        </thead>
-        <tbody th:each="turno : ${turnos}">
-            <tr>
-                <td th:text="${turno.fecha}+' ' + ${turno.profesional} +' ' + ${turno.paciente} " th:value="${turno}"></td>
-        <input hidden th:value="${turno.profesional.id}" th:name="idProfesional">
-                <td><button type="submit">Confirmar</button></td>
-            </tr>
-    </table>
+            <table>
+                <h4 th:text="'Listado de turnos disponibles /// Especialidad: ' + ${especialidad}+' /// Paciente: '+${paciente.nombreCompleto}"></h4>
+
+                <thead>
+                    <tr>
+                        <th>
+                            Turno
+                        </th>
+                        <th>
+                            Confirmación
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody th:each="turno : ${turnos}">
+                    <tr>
+                        <td th:text="${turno.fecha}+' ' + ${turno.profesional.nombreCompleto} +' ' + ${turno.horario} " th:value="${turno.profesional.id}" 
+                            th:name="idProfesional"></td>
+                        <td><button type="submit">Confirmar</button></td>
+                </tr>
+            </table>
         </form>
     </body>
 </html>

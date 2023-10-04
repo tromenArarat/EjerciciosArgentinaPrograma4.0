@@ -37,6 +37,7 @@ public class TurnoControlador {
         
         Profesional profesional = (Profesional) profesionalServicio.getOne(idProfesional);
         turno.setProfesional(profesional);
+        System.out.println(profesional);
         turnoServicio.confirmarTurno(turno);
         
         

@@ -34,6 +34,8 @@ public class Turno {
     @Enumerated(EnumType.STRING)
     private Estado estado;// PENDIENTE CANCELADO CUMPLIDO
     
+    private String horario; // matinal - vespertino - nocturno
+    
     private String motivo;
     
     private Double precioFinal;

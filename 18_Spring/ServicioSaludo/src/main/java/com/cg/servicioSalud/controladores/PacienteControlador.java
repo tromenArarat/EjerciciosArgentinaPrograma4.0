@@ -76,7 +76,7 @@ public class PacienteControlador {
     }
     
     @GetMapping("/lista")
-    public String turnosDisponibles(@RequestParam String especialidad, HttpSession session, ModelMap modelo){
+    public String turnosDisponibles(@RequestParam String especialidad, HttpSession session, ModelMap modelo) throws Exception{
       Paciente paciente = (Paciente) session.getAttribute("paciente");
       List<Turno> turnos = turnoServicio.listarTurnos(especialidad,paciente);
       if (paciente == null) {
