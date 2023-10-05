@@ -27,11 +27,15 @@
                 </thead>
                 <tbody th:each="turno : ${turnos}">
                     <tr>
-                        <td th:text="${turno.fecha}+' ' + ${turno.profesional.nombreCompleto} +' ' + ${turno.horario} " th:value="${turno.profesional.id}" 
-                            th:name="idProfesional"></td>
-                        <td><button type="submit">Confirmar</button></td>
+                        <td  th:text="${turno.fecha}+' ' + ${turno.profesional.nombreCompleto} +' ' + ${turno.horario}">
+                            
+                        </td>
+                        <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__}">Confirmar</a></td>
                 </tr>
             </table>
+            
+            
+            
         </form>
     </body>
 </html>

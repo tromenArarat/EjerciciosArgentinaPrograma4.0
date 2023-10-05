@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,14 +28,16 @@ public class TurnoControlador {
     @Autowired
     private ProfesionalServicio profesionalServicio;
 
-    @GetMapping("/confirmado")
-    public String registrarTurno(@RequestParam String idProfesional, HttpSession session, ModelMap modelo) throws Exception {
+    // FALTA un requestParam con la fecha del turno seleccionado
+    @GetMapping("/confirmado/{id}")
+    public String registrarTurno(@PathVariable String id, HttpSession session, ModelMap modelo) throws Exception {
         Turno turno = new Turno();
         turno.setFecha(new Date());
         Paciente paciente = (Paciente) session.getAttribute("paciente");
         turno.setPaciente(paciente);
         
-        Profesional profesional = (Profesional) profesionalServicio.getOne(idProfesional);
+        Profesional profesional = (Profesional) profesionalServicio.getOne(id);
+        System.out.println(id);
         turno.setProfesional(profesional);
         System.out.println(profesional);
         turnoServicio.confirmarTurno(turno);

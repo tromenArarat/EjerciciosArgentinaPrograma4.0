@@ -92,7 +92,7 @@ public class TurnoServicio {
                     // 2do pregunta:
                      if(disponibilidad.contains(diaStr)){
                          
-                         Turno turno = crearTurno(fechaActual,paciente,profesional);
+                         Turno turno = crearTurno(calendario[i],paciente,profesional);
                          
                          // Acá hay inmersión profunda para sacar el horario
                          
