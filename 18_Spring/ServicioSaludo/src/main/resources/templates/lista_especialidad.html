@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <form th:action="@{/turno/confirmado}" method="GET" enctype="multipart/form-data">
+        <form th:action="@{/turno/confirmado}" th:object="${turno}" method="GET" enctype="multipart/form-data">
             <table>
                 <h4 th:text="'Listado de turnos disponibles /// Especialidad: ' + ${especialidad}+' /// Paciente: '+${paciente.nombreCompleto}"></h4>
 
@@ -27,10 +27,10 @@
                 </thead>
                 <tbody th:each="turno : ${turnos}">
                     <tr>
-                        <td  th:text="${turno.fecha}+' ' + ${turno.profesional.nombreCompleto} +' ' + ${turno.horario}">
-                            
+                        <td  
+                             th:text="${turno.fecha}+' ' + ${turno.profesional.nombreCompleto} +' ' + ${turno.horario}">
                         </td>
-                        <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__}">Confirmar</a></td>
+                        <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')})}">Confirmar</a></td>
                 </tr>
             </table>
             
