@@ -82,7 +82,6 @@ public class PacienteControlador {
       List<Turno> turnos = turnoServicio.listarTurnos(especialidad,paciente);
       
      
-      
       if (paciente == null) {
         // Handle the case where the Paciente object is not found in the session
         return "redirect:/"; // Redirect to the home page or an error page
@@ -95,7 +94,7 @@ public class PacienteControlador {
     
     @GetMapping("/listaespecial")
     public String turnosDisponiblesPorTarifa(@RequestParam String especialidad, 
-            @RequestParam String listar, 
+            @RequestParam String listar,
             HttpSession session, ModelMap modelo) throws Exception{
       Paciente paciente = (Paciente) session.getAttribute("paciente");
       List<Turno> turnos = turnoServicio.listarTurnos(especialidad,paciente);

@@ -30,8 +30,6 @@
         
         <form th:action="@{/turno/confirmado}" th:object="${turno}" method="GET" enctype="multipart/form-data">
 
-            <label for="textA">Indique el motivo de su consulta</label>
-            <input id="textA" name="motivo" value="">
             
             <table>
                 <h4 th:text="'Listado de turnos disponibles /// Especialidad: ' + ${especialidad}+' /// Paciente: '+${paciente.nombreCompleto}"></h4>
@@ -75,7 +73,7 @@
                         <td  
                             th:text="${turno.horario}">
                         </td>
-                        <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')})}">Confirmar</a></td>
+                        <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, motivo=${motivo})}">Confirmar</a></td>
                     </tr>
             </table>
 

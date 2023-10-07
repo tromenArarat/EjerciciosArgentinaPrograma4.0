@@ -40,6 +40,17 @@ public class TurnoServicio {
             return turno;
     }
     
+     public Turno traeUno(String id){
+        return turnoRepositorio.getOne(id);
+    }
+    
+    public Turno registrarMotivo(String id, String motivo)throws Exception{
+        Turno turno = traeUno(id);    
+        turno.setMotivo(motivo);
+            turnoRepositorio.save(turno);
+            return turno;
+    }
+    
     public List<Turno> ordenarTurnosPorTarifa(List<Turno> turnos)throws Exception{
         
         Collections.sort(turnos, Comparator.comparing(turno -> turno.getProfesional().getTarifa()));

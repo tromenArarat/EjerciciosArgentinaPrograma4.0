@@ -35,7 +35,6 @@ public class TurnoControlador {
     @GetMapping("/confirmado/{id}")
     public String registrarTurno(@PathVariable String id, 
             @RequestParam("fecha") String fechaStr,
-            @RequestParam("motivo") String motivo,
             HttpSession session, 
             ModelMap modelo) throws Exception {
         // Parse the 'fecha' parameter into a Date object
@@ -43,7 +42,7 @@ public class TurnoControlador {
         Date fecha = dateFormat.parse(fechaStr);
 
         Turno turno = new Turno();
-        
+                
         turno.setFecha(fecha);
         
         turno.setEstado(Estado.PENDIENTE);
@@ -57,11 +56,25 @@ public class TurnoControlador {
         
         turno.setProfesional(profesional);
         System.out.println(profesional);
+        
+        turno.setPrecioFinal(profesional.getTarifa());
+        
         turnoServicio.confirmarTurno(turno);
 
         modelo.addAttribute("turno", turno);
+        modelo.addAttribute("id", turno.getId());
 
         return "turno_confirmado.html";
+    }
+    
+    @GetMapping("/reserva/{id}")
+    public String processForm(@PathVariable String id,
+            @RequestParam String motivo) throws Exception {
+        
+        System.out.println("Motivo recibido: " + motivo);
+        turnoServicio.registrarMotivo(id, motivo);
+        
+        return "turno_ficha_paciente.html"; 
     }
     
 }

@@ -32,7 +32,7 @@ public class ProfesionalServicio {
             String modalidad, 
             String especialidad, 
             String ubicacion,
-            Integer tarifa) throws Exception{
+            Double tarifa) throws Exception{
        
         //Falta funcion validar
         Profesional profesional = new Profesional();
@@ -61,7 +61,7 @@ public class ProfesionalServicio {
             Double reputacion, String disponibilidad, 
             Boolean obrasSociales, String modalidad, 
             String especialidad, String ubicacion, 
-            Boolean activo, Integer tarifa) {
+            Boolean activo, Double tarifa) {
 
         //funcion validar
         

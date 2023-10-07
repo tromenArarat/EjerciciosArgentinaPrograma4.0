@@ -12,7 +12,7 @@
     <body>
         <div>Servicio Salud</div>
         
-        <form th:action="@{/paciente/lista}" method="GET" enctype="multipart/form-data">
+        <form th:action="@{/turno/lista}" method="GET" enctype="multipart/form-data">
         <ul>
             <li>
                 
@@ -22,8 +22,6 @@
                     <select id="dropDownList" name="especialidad">
                         <option th:each="especialidad : ${especialidades}" th:value="${especialidad}" th:text="${especialidad}"></option>
                     </select>
-                    
-                    
                     
                     <button type="submit">Ver Turnos disponibles</button>
                     

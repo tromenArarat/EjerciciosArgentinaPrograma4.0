@@ -21,7 +21,7 @@ public class Profesional extends Usuario implements Serializable {
 
     private Double reputacion;
 
-    private Integer tarifa;
+    private Double tarifa;
 
     private String disponibilidad;
     

@@ -10,7 +10,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h4>El turno fue confirmado</h4>
-        <h4 th:text= "${turno.fecha}"></h4>
+        
+        <form th:action="@{/turno/reserva/__${id}__}" method="GET" enctype="multipart/form-data">
+            <h4>Usted solicita un turno para la fecha:</h4>
+            <h4 th:text= "${#dates.format(turno.fecha, 'dd-MM-yyyy')}"></h4>
+            <input hidden type="text" name="id" value="${id}">
+            <label for="texta">Indique el motivo de su consulta</label>
+            <input type="text" id="texta" name="motivo">
+            <button type="submit">Confirmar turno</button>
+        </form>
+        
+        
+        
     </body>
 </html>
