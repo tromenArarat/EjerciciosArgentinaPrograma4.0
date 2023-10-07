@@ -7,6 +7,7 @@ package com.cg.servicioSalud.controladores;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.enumeradores.Estado;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
 import java.text.SimpleDateFormat;
@@ -31,27 +32,36 @@ public class TurnoControlador {
     @Autowired
     private ProfesionalServicio profesionalServicio;
 
-    // FALTA un requestParam con la fecha del turno seleccionado
     @GetMapping("/confirmado/{id}")
-    public String registrarTurno(@PathVariable String id, @RequestParam("fecha") String fechaStr, HttpSession session, ModelMap modelo) throws Exception {
+    public String registrarTurno(@PathVariable String id, 
+            @RequestParam("fecha") String fechaStr,
+            @RequestParam("motivo") String motivo,
+            HttpSession session, 
+            ModelMap modelo) throws Exception {
         // Parse the 'fecha' parameter into a Date object
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = dateFormat.parse(fechaStr);
-        
+
         Turno turno = new Turno();
+        
         turno.setFecha(fecha);
+        
+        turno.setEstado(Estado.PENDIENTE);
+        
         Paciente paciente = (Paciente) session.getAttribute("paciente");
         turno.setPaciente(paciente);
-        
+
         Profesional profesional = (Profesional) profesionalServicio.getOne(id);
-        System.out.println(id);
+        
+        
+        
         turno.setProfesional(profesional);
         System.out.println(profesional);
         turnoServicio.confirmarTurno(turno);
-        
+
         modelo.addAttribute("turno", turno);
-        
+
         return "turno_confirmado.html";
-}
+    }
     
 }

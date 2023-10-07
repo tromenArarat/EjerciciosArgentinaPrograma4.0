@@ -10,6 +10,8 @@ import com.cg.servicioSalud.entidades.Turno;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
 import com.cg.servicioSalud.repositorios.TurnoRepositorio;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,19 @@ public class TurnoServicio {
     public Turno confirmarTurno(Turno turno)throws Exception{
             turnoRepositorio.save(turno);
             return turno;
+    }
+    
+    public List<Turno> ordenarTurnosPorTarifa(List<Turno> turnos)throws Exception{
+        
+        Collections.sort(turnos, Comparator.comparing(turno -> turno.getProfesional().getTarifa()));
+        
+        return turnos;
+    }
+    public List<Turno> ordenarTurnosPorReputacion(List<Turno> turnos)throws Exception{
+        
+        Collections.sort(turnos, Comparator.comparing(turno -> turno.getProfesional().getReputacion()));
+        
+        return turnos;
     }
     
      public List<Turno> listarTurnos(String especialidad, Paciente paciente) throws Exception{

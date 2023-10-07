@@ -76,9 +76,13 @@ public class PacienteControlador {
     }
     
     @GetMapping("/lista")
-    public String turnosDisponibles(@RequestParam String especialidad, HttpSession session, ModelMap modelo) throws Exception{
+    public String turnosDisponibles(@RequestParam String especialidad,
+            HttpSession session, ModelMap modelo) throws Exception{
       Paciente paciente = (Paciente) session.getAttribute("paciente");
       List<Turno> turnos = turnoServicio.listarTurnos(especialidad,paciente);
+      
+     
+      
       if (paciente == null) {
         // Handle the case where the Paciente object is not found in the session
         return "redirect:/"; // Redirect to the home page or an error page
@@ -88,5 +92,27 @@ public class PacienteControlador {
         
         return "lista_especialidad.html";
     }
+    
+    @GetMapping("/listaespecial")
+    public String turnosDisponiblesPorTarifa(@RequestParam String especialidad, 
+            @RequestParam String listar, 
+            HttpSession session, ModelMap modelo) throws Exception{
+      Paciente paciente = (Paciente) session.getAttribute("paciente");
+      List<Turno> turnos = turnoServicio.listarTurnos(especialidad,paciente);
+      if(listar.equals("reputacion")){
+          turnoServicio.ordenarTurnosPorReputacion(turnos);
+      }else if(listar.equals("tarifa")){
+          turnoServicio.ordenarTurnosPorTarifa(turnos);
+      }
+      if (paciente == null) {
+        // Handle the case where the Paciente object is not found in the session
+        return "redirect:/"; // Redirect to the home page or an error page
+    }   modelo.addAttribute("paciente",paciente);
+        modelo.addAttribute("especialidad",especialidad);
+        modelo.addAttribute("turnos",turnos);
+        
+        return "lista_especialidad.html";
+    }
+ 
     
 }

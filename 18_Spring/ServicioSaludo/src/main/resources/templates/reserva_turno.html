@@ -17,16 +17,16 @@
             <li>
                 
                 <div>
-                    <h6>Un total de:</h6>
-                    <span th:text="${#lists.size(especialidades)}"></span>
-                    <h6>especialidades para elegir</h6>
-                    
-                  
+                 
+                    <label>Seleccione especialidad</label>
                     <select id="dropDownList" name="especialidad">
-                        <option value="0">Elegir especialidad</option>
                         <option th:each="especialidad : ${especialidades}" th:value="${especialidad}" th:text="${especialidad}"></option>
                     </select>
-                    <button type="submit">Ver Turnos</button>
+                    
+                    
+                    
+                    <button type="submit">Ver Turnos disponibles</button>
+                    
                 </div>
                 
             </li>

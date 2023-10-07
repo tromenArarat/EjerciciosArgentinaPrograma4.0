@@ -10,17 +10,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        
+        <form th:action="@{/paciente/listaespecial}" method="GET" enctype="multipart/form-data">
+            
+            <select name="listar">
+                <option value="tarifa">
+                    Tarifa
+                </option>
+                <option th:value="reputacion">
+                    Reputacion
+                </option>
+            </select>
+            <input hidden name="especialidad" th:value="${especialidad}">
+            
+            <button type="submit">Listar</button>
+            
+                
+        </form>
+        
         <form th:action="@{/turno/confirmado}" th:object="${turno}" method="GET" enctype="multipart/form-data">
+
+            <label for="textA">Indique el motivo de su consulta</label>
+            <input id="textA" name="motivo" value="">
+            
             <table>
                 <h4 th:text="'Listado de turnos disponibles /// Especialidad: ' + ${especialidad}+' /// Paciente: '+${paciente.nombreCompleto}"></h4>
-
                 <thead>
                     <tr>
                         <th>
-                            Turno
+                            Fecha
                         </th>
                         <th>
-                            Confirmación
+                            Profesional
+                        </th>
+                        <th>
+                            Tarifa
+                        </th>
+                        <th>
+                            Reputación
+                        </th>
+                        <th>
+                            Horario
+                        </th>
+                        <th>
+                            Reservar
                         </th>
 
                     </tr>
@@ -28,14 +61,24 @@
                 <tbody th:each="turno : ${turnos}">
                     <tr>
                         <td  
-                             th:text="${turno.fecha}+' ' + ${turno.profesional.nombreCompleto} +' ' + ${turno.horario}">
+                            th:text="${#dates.format(turno.fecha, 'dd-MM-yyyy')}">
+                        </td>
+                        <td  
+                            th:text="${turno.profesional.nombreCompleto}">
+                        </td>
+                        <td  
+                            th:text="${turno.profesional.tarifa}">
+                        </td>
+                        <td  
+                            th:text="${turno.profesional.reputacion}">
+                        </td>
+                        <td  
+                            th:text="${turno.horario}">
                         </td>
                         <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')})}">Confirmar</a></td>
-                </tr>
+                    </tr>
             </table>
-            
-            
-            
+
         </form>
     </body>
 </html>
