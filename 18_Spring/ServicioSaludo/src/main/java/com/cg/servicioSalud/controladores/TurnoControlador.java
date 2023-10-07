@@ -70,12 +70,21 @@ public class TurnoControlador {
     }
     
     @GetMapping("/reserva/{id}")
-    public String processForm(@PathVariable String id,
+    public String procesarPeticion(@PathVariable String id,
             @RequestParam String motivo) throws Exception {
         
         turnoServicio.registrarMotivo(id, motivo);
         
         return "turno_ficha_paciente.html"; 
+    }
+    
+    @GetMapping("/cancelado/{id}")
+    public String cancelarTurno(@PathVariable String id,
+            @RequestParam String motivo) throws Exception {
+        
+        turnoServicio.cancelarTurno(id);
+        
+        return "turnos_profesional.html"; 
     }
     
 }

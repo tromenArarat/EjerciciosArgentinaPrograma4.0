@@ -24,7 +24,7 @@ public class ProfesionalServicio {
     private ImagenServicio imagenServicio;
     
     @Transactional
-    public void crearProfesional(String nombreCompleto, String email, 
+    public Profesional crearProfesional(String nombreCompleto, String email, 
             String clave, Long telefono, 
             MultipartFile archivo, 
             String disponibilidad, 
@@ -53,6 +53,7 @@ public class ProfesionalServicio {
         profesional.setEmail(email);
 
         profesionalRepositorio.save(profesional);
+        return profesional;
     }
 
     @Transactional

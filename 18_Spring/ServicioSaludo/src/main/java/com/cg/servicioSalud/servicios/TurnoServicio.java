@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class TurnoServicio {
             return turno;
     }
     
+    @Transactional
     public Turno confirmarTurno(Turno turno)throws Exception{
             turnoRepositorio.save(turno);
             return turno;
@@ -44,6 +46,7 @@ public class TurnoServicio {
         return turnoRepositorio.getOne(id);
     }
     
+    @Transactional
     public Turno registrarMotivo(String id, String motivo)throws Exception{
         Turno turno = traeUno(id);    
         turno.setMotivo(motivo);
@@ -53,13 +56,33 @@ public class TurnoServicio {
     
     public List<Turno> ordenarTurnosPorTarifa(List<Turno> turnos)throws Exception{
         
-        Collections.sort(turnos, Comparator.comparing(turno -> turno.getProfesional().getTarifa()));
-        
+        Comparator<Turno> tarifaComparator = Comparator.comparing(turno -> turno.getProfesional().getTarifa());
+        Collections.sort(turnos, tarifaComparator.reversed());
         return turnos;
     }
     public List<Turno> ordenarTurnosPorReputacion(List<Turno> turnos)throws Exception{
         
-        Collections.sort(turnos, Comparator.comparing(turno -> turno.getProfesional().getReputacion()));
+        Comparator<Turno> reputacionComparator = Comparator.comparing(turno -> turno.getProfesional().getReputacion());
+        Collections.sort(turnos, reputacionComparator.reversed());
+        return turnos;
+    }
+    
+    @Transactional
+    public void cancelarTurno(String id){
+        turnoRepositorio.deleteById(id);
+    }
+    
+    public List<Turno> mostrarTurnos(String idProfesional){
+        List<Turno> turnelis = new ArrayList();
+        List<Turno> turnos = new ArrayList();
+        
+        turnelis = turnoRepositorio.findAll();
+        
+        for (Turno turno : turnelis) {
+            if(turno.getProfesional().getId().equalsIgnoreCase(idProfesional)){
+                turnos.add(turno);
+            }
+        }
         
         return turnos;
     }
