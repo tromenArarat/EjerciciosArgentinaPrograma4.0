@@ -38,7 +38,7 @@ public class ProfesionalControlador {
             @RequestParam String modalidad,
             @RequestParam String especialidad, 
             @RequestParam String ubicacion,
-            @RequestParam Integer tarifa,
+            @RequestParam Double tarifa,
             ModelMap modelo,
                 @RequestParam(required = false) String lunes, 
                     @RequestParam(required = false) String martes, 

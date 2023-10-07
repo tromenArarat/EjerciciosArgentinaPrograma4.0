@@ -73,8 +73,7 @@
                         <td  
                             th:text="${turno.horario}">
                         </td>
-                        <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, motivo=${motivo})}">Confirmar</a></td>
-                    </tr>
+                <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, horario=${turno.horario})}">Confirmar</a></td>                    </tr>
             </table>
 
         </form>

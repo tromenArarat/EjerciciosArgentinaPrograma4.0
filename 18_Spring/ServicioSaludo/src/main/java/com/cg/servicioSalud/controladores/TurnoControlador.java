@@ -35,6 +35,7 @@ public class TurnoControlador {
     @GetMapping("/confirmado/{id}")
     public String registrarTurno(@PathVariable String id, 
             @RequestParam("fecha") String fechaStr,
+            @RequestParam("horario") String horario,
             HttpSession session, 
             ModelMap modelo) throws Exception {
         // Parse the 'fecha' parameter into a Date object
@@ -49,15 +50,16 @@ public class TurnoControlador {
         
         Paciente paciente = (Paciente) session.getAttribute("paciente");
         turno.setPaciente(paciente);
+        
+        turno.setHorario(horario);
 
         Profesional profesional = (Profesional) profesionalServicio.getOne(id);
-        
-        
-        
         turno.setProfesional(profesional);
         System.out.println(profesional);
         
         turno.setPrecioFinal(profesional.getTarifa());
+        
+        
         
         turnoServicio.confirmarTurno(turno);
 
@@ -71,7 +73,6 @@ public class TurnoControlador {
     public String processForm(@PathVariable String id,
             @RequestParam String motivo) throws Exception {
         
-        System.out.println("Motivo recibido: " + motivo);
         turnoServicio.registrarMotivo(id, motivo);
         
         return "turno_ficha_paciente.html"; 
