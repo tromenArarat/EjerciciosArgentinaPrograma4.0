@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+    <head>
+        <title>Servicio Salud</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form th:action="@{/paciente/historia/modificado" method="GET" enctype="multipart/form-data">
+            <h4 th:text="Paciente + ${paciente.nombreCompleto}"></h4> 
+            <input hidden type="text" name="id" value="${paciente.id}">
+            <label for="texta">Indique algo</label>
+            <input type="text" id="texta" name="algo">
+            <button type="submit">Guardar</button>
+        </form>
+    </body>
+</html>

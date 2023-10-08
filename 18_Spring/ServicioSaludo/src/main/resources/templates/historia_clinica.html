@@ -5,50 +5,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
     <head>
-        <title>Servicios Salud</title>
+        <title>Servicio Salud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <table>
+        <form th:action="@{/paciente/historia/modificar/__{id}__" method="GET" enctype="multipart/form-data">
+            
+            <table>
                 <thead>
                     <tr>
                         <th>
                             Fecha
                         </th>
                         <th>
-                            Paciente
+                            Motivo de la consulta
                         </th>
                         <th>
-                            Horario
+                            Comentario del profesional
                         </th>
                         <th>
-                            Cancelar
+                            Modificar
                         </th>
-                        <th>
-                            Historia clínica
-                        </th>
-
                     </tr>
                 </thead>
-                <tbody th:each="turno : ${turnos}">
+                <tbody th:each="historia : ${historial}">
                     <tr>
                         <td  
-                            th:text="${#dates.format(turno.fecha, 'dd-MM-yyyy')}">
+                            th:text="${historia.turno.fecha}">
                         </td>
                         <td  
-                            th:text="${turno.paciente.nombreCompleto}">
+                            th:text="${historia.turno.motivo}">
                         </td>
                         <td  
-                            th:text="${turno?.horario}">
+                            th:text="${historia.turno.algo}">
                         </td>
-                        <td>  
-                            <a th:href="@{/turno/cancelado/__${turno.id}__}">Cancelar</a>
+                        <td>
+                            <input hidden type="text" name="id" value="${historial.id}">
+                            <a th:href="@{/paciente/historia/modificar/__${id}__}">Historia Clínica</a>
                         </td>
-                        <td  
-                            <a th:href="@{/paciente/historia/__${turno.paciente.id}__}">HistoriaClínica</a>
-                        </td>
-                    </tr>
             </table>
+        </form>
     </body>
 </html>

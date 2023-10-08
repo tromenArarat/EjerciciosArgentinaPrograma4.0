@@ -8,6 +8,7 @@ import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
 import com.cg.servicioSalud.enumeradores.Estado;
+import com.cg.servicioSalud.servicios.HistorialClinicoServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,8 @@ public class TurnoControlador {
     private TurnoServicio turnoServicio;
     @Autowired
     private ProfesionalServicio profesionalServicio;
+    @Autowired
+    private HistorialClinicoServicio historiaServicio;
 
     @GetMapping("/confirmado/{id}")
     public String registrarTurno(@PathVariable String id, 
@@ -62,6 +65,9 @@ public class TurnoControlador {
         
         
         turnoServicio.confirmarTurno(turno);
+        
+        historiaServicio.crearHistorial(turno);
+        
 
         modelo.addAttribute("turno", turno);
         modelo.addAttribute("id", turno.getId());
@@ -79,8 +85,7 @@ public class TurnoControlador {
     }
     
     @GetMapping("/cancelado/{id}")
-    public String cancelarTurno(@PathVariable String id,
-            @RequestParam String motivo) throws Exception {
+    public String cancelarTurno(@PathVariable String id) throws Exception {
         
         turnoServicio.cancelarTurno(id);
         

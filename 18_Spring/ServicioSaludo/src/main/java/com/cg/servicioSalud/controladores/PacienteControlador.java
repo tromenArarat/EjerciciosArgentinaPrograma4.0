@@ -4,8 +4,10 @@
 
 package com.cg.servicioSalud.controladores;
 
+import com.cg.servicioSalud.entidades.HistorialClinico;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.servicios.HistorialClinicoServicio;
 import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +36,8 @@ public class PacienteControlador {
     private ProfesionalServicio profesionalServicio;
     @Autowired
     private TurnoServicio turnoServicio;
+    @Autowired
+    private HistorialClinicoServicio historiaServicio;
 
     @GetMapping("/registrar")
     public String registrar() {
@@ -57,7 +62,8 @@ public class PacienteControlador {
             @RequestParam String clave,
             @RequestParam Long telefono,
             MultipartFile imagen,
-            @RequestParam String obraSocial, ModelMap modelo, HttpSession session) {
+            @RequestParam String obraSocial, 
+            ModelMap modelo, HttpSession session) {
 
         try{
             Paciente paciente = pacienteServicio.crearPaciente(
@@ -73,6 +79,18 @@ public class PacienteControlador {
         }
        return "reserva_turno.html";
 
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @GetMapping("/inicio")
+    public String reservarTurno(HttpSession session, ModelMap modelo){
+        Paciente paciente = (Paciente) session.getAttribute("usuariosession");
+        
+        session.setAttribute("paciente",paciente);
+        List<String> especialidades = profesionalServicio.listarEspecialidades();
+        modelo.addAttribute("especialidades",especialidades);
+        
+        return "reserva_turno.html";
     }
     
     @GetMapping("/lista")
@@ -112,6 +130,33 @@ public class PacienteControlador {
         
         return "lista_especialidad.html";
     }
- 
     
+    @GetMapping("/historia/{id}")
+        public String verHistoria(@PathVariable String id, 
+                ModelMap modelo) throws Exception{
+            
+            Paciente paciente = (Paciente) pacienteServicio.getOne(id);
+            
+            List<HistorialClinico> historialPaciente = historiaServicio.listarHistorialPorPaciente(id);
+            
+            modelo.addAttribute("historial",historialPaciente);
+            modelo.addAttribute("paciente",paciente);
+            
+            return "historia_clinica.html";
+    }
+ 
+    @GetMapping("/historia/modificar/{id}")
+        public String modificarHistoria(@PathVariable String id,
+                @RequestParam String algo,
+                ModelMap modelo) throws Exception{
+            
+            HistorialClinico historialPaciente = historiaServicio.getOne(id);
+            
+            historiaServicio.registrarAlgo(id, algo);
+            
+            modelo.addAttribute("historial",historialPaciente);
+            
+            return "turnos_profesional.html";
+    }
+ 
 }

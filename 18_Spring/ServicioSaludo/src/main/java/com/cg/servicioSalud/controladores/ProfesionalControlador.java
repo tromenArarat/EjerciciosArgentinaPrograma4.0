@@ -8,6 +8,7 @@ import com.cg.servicioSalud.servicios.TurnoServicio;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,13 +74,27 @@ public class ProfesionalControlador {
             System.out.println(ex);
             return "profesional_form.html";
         }
-       return "inicio.html";
+       return "turnos_profesional.html";
 
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @GetMapping("/inicio")
+    public String reservarTurno(HttpSession session, ModelMap modelo){
+        
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+        session.setAttribute("profesional",profesional);
+        
+        List<Turno> turnos = turnoServicio.mostrarTurnos(profesional.getId());
+        
+        modelo.addAttribute("turnos",turnos);
+        
+        return "turnos_profesional.html";
     }
     
     @GetMapping("/turnos")
     public String verTurnos(HttpSession session, ModelMap modelo) {
-        Profesional profesional = (Profesional) session.getAttribute("profesional");
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
         List<Turno> turnos = turnoServicio.mostrarTurnos(profesional.getId());
         
         if (profesional == null) {
@@ -96,7 +111,7 @@ public class ProfesionalControlador {
     @GetMapping("/checkSession")
     @ResponseBody // This annotation indicates that the method returns plain text
     public String checkSession(HttpSession session) {
-        Profesional profesional = (Profesional) session.getAttribute("profesional");
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
         if (profesional != null) {
             return "Profesional object found in session: " + profesional.getNombreCompleto();
         } else {
