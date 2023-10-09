@@ -7,6 +7,7 @@ package com.cg.servicioSalud.servicios;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.enumeradores.Estado;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
 import com.cg.servicioSalud.repositorios.TurnoRepositorio;
 import java.util.ArrayList;
@@ -179,5 +180,35 @@ public class TurnoServicio {
         
         return turnos;
      }
+     
+    
+
+    @Transactional
+    public void completarTurno(String id){
+        Turno t = traeUno(id);
+        t.setEstado(Estado.COMPLETADO);
+
+        turnoRepositorio.save(t);
+    }
+    
+    public List<Turno> mostrarTurnosPaciente(String idPaciente){
+        /*
+        List<Turno> turnelis = new ArrayList();
+        List<Turno> turnos = new ArrayList();
+        
+        
+        turnelis = turnoRepositorio.findAll();
+        
+        for (Turno turno : turnelis) {
+            if(turno.getPaciente().getId().equalsIgnoreCase(idPaciente)){
+                turnos.add(turno);
+            }
+        }
+        
+        return turnos;
+*/    
+        return turnoRepositorio.buscarPorPaciente(idPaciente);
+}
+    
      
 }

@@ -38,5 +38,7 @@ public class Turno {
     
     private String motivo;
     
+    private Double puntuacion;
+    
     private Double precioFinal;
 }

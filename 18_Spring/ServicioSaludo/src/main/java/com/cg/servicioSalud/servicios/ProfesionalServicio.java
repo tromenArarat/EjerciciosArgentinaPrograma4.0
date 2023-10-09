@@ -2,6 +2,7 @@ package com.cg.servicioSalud.servicios;
 
 import com.cg.servicioSalud.entidades.Imagen;
 import com.cg.servicioSalud.entidades.Profesional;
+import com.cg.servicioSalud.entidades.Turno;
 import com.cg.servicioSalud.enumeradores.Rol;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class ProfesionalServicio implements UserDetailsService {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
+    @Autowired
+    private TurnoServicio turnoServicio;
     
     @Autowired
     private ImagenServicio imagenServicio;
@@ -154,6 +157,21 @@ public class ProfesionalServicio implements UserDetailsService {
             return null;
         }
 }
+    @Transactional
+    public void modificarReputacion(String id){
+        Profesional profesional = getOne(id);
+        List<Turno> turnos = (List<Turno>) turnoServicio.mostrarTurnos(id);
+        double suma = 0.0;
+        for (Turno turno : turnos) {
+            if(turno.getPuntuacion()!=null){
+                suma+=turno.getPuntuacion();
+            }
+        }
+        profesional.setReputacion(suma/turnos.size());
+        
+        profesionalRepositorio.save(profesional);
+        
+    }
     
     
 }

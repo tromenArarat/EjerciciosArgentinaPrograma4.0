@@ -39,6 +39,7 @@
             <span th:unless="${historia.algo != 'vacio'}">
                 <form th:action="@{/historial/modificar/__${historia.id}__}" method="GET">
                     <input type="text" name="algo">
+                    <input hidden type="text" name="historia.turno.id">
                     <input type="submit" value="Confirmar">
                 </form>
             </span>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <title>Servicios Salud</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form th:action="@{/paciente/enviardevolucion}" method="get" enctype="multipart/form-data">
+        <input type="number" name="devolucion" th:value="${devolucion}">
+        <input hidden name="id" th:value="${turno.id}">
+        <button type="submit">PULSAR</button>
+            
+        </form>
+    </body>
+</html>

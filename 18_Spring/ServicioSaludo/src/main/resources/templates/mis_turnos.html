@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Servicio Salud</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Fecha
+                        </th>
+                        <th>
+                            Profesional
+                        </th>
+                        <th>
+                            Horario
+                        </th>
+                        <th>
+                            Puntuar
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody th:each="turno : ${turnos}">
+                    <tr>
+                        <td  
+                            th:text="${#dates.format(turno.fecha, 'dd-MM-yyyy')}">
+                        </td>
+                        <td  
+                            th:text="${turno.profesional.nombreCompleto}">
+                        </td>
+                        <td  
+                            th:text="${turno.horario}">
+                        </td>
+                        <td>  
+                            <a th:href="@{/paciente/devolucion/__${turno.id}__}">Puntuar</a>
+                        </td>
+                    </tr>
+            </table>
+       </body>
+</html>
