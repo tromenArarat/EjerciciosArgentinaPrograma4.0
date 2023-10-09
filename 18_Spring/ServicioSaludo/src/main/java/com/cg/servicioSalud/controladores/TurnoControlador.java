@@ -4,6 +4,7 @@
 
 package com.cg.servicioSalud.controladores;
 
+import com.cg.servicioSalud.entidades.HistorialClinico;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
@@ -13,6 +14,7 @@ import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,9 +87,26 @@ public class TurnoControlador {
     }
     
     @GetMapping("/cancelado/{id}")
-    public String cancelarTurno(@PathVariable String id) throws Exception {
+    public String cancelarTurno(@PathVariable String id, 
+            ModelMap modelo, HttpSession session) throws Exception {
+       
+        HistorialClinico historial = historiaServicio.traePorTurno(id);
         
-        turnoServicio.cancelarTurno(id);
+        historiaServicio.borrarRegistro(historial.getId());
+        
+        Turno turno = turnoServicio.traeUno(id);
+        turnoServicio.cancelarTurno(turno.getId());
+        
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+        List<Turno> turnos = turnoServicio.mostrarTurnos(profesional.getId());
+        
+        if (profesional == null) {
+        // Handle the case where the Paciente object is not found in the session
+        return "redirect:/"; // Redirect to the home page or an error page
+        }   
+            modelo.addAttribute("profesional",profesional);
+            modelo.addAttribute("turnos",turnos);
+
         
         return "turnos_profesional.html"; 
     }

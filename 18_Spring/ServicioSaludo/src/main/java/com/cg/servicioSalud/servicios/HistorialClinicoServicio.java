@@ -36,6 +36,10 @@ public class HistorialClinicoServicio {
         return historiaRepositorio.getOne(id);
     }
      
+     public HistorialClinico traePorTurno(String id){
+        return historiaRepositorio.buscarPorTurno(id);
+    }
+     
      @Transactional
      public void borrarRegistro(String id){
          historiaRepositorio.deleteById(id);
