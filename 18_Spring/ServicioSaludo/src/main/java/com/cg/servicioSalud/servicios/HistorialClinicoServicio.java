@@ -24,6 +24,7 @@ public class HistorialClinicoServicio {
          HistorialClinico historial = new HistorialClinico();
          
          historial.setTurno(turno);
+         historial.setAlgo("vacio");
          
          historiaRepositorio.save(historial);
          

@@ -144,19 +144,4 @@ public class PacienteControlador {
             
             return "historia_clinica.html";
     }
- 
-    @GetMapping("/historia/modificar/{id}")
-        public String modificarHistoria(@PathVariable String id,
-                @RequestParam String algo,
-                ModelMap modelo) throws Exception{
-            
-            HistorialClinico historialPaciente = historiaServicio.getOne(id);
-            
-            historiaServicio.registrarAlgo(id, algo);
-            
-            modelo.addAttribute("historial",historialPaciente);
-            
-            return "turnos_profesional.html";
-    }
- 
 }
