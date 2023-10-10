@@ -137,8 +137,13 @@ public class PacienteControlador {
                 ModelMap modelo) throws Exception{
             
             turnoServicio.completarTurno(idTurno);
-            
+            System.out.println("-+-+-+-+-+-+--+-+-+-+-+-");
+            System.out.println(idTurno);
+            System.out.println("-------------");
             Paciente paciente = (Paciente) pacienteServicio.getOne(id);
+             System.out.println("-+-+-+-+-+-+--+-+-+-+-+-");
+            System.out.println("Paciente:"+paciente.getNombreCompleto());
+            System.out.println("-------------");
             
             List<HistorialClinico> historialPaciente = historiaServicio.listarHistorialPorPaciente(id);
             

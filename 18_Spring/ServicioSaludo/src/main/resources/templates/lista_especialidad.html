@@ -11,6 +11,19 @@
     </head>
     <body>
         
+        <nav>
+        <div >
+            <ul>
+                <li>
+                    <a href="/logout" >Cerrar Sesión</a>
+                </li>
+                <li>
+                    <a th:href="@{/inicio}">Volver</a>
+                </li>
+            </ul>
+        </div>
+     </nav>
+        
         <form th:action="@{/paciente/listaespecial}" method="GET" enctype="multipart/form-data">
             
             <select name="listar">
@@ -73,18 +86,10 @@
                         <td  
                             th:text="${turno.horario}">
                         </td>
-                <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, horario=${turno.horario})}">Confirmar</a></td>                    </tr>
+                <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, horario=${turno.horario})}">Reservar</a></td>                    </tr>
             </table>
 
         </form>
-        
-        <section>
-                <div>
-                    <div >
-                        <a th:href="@{/inicio}">Volver</a>
-                    </div>
-                </div>
-            </section>
         
         </div>
     </body>

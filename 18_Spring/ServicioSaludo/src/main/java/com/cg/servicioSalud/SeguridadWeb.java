@@ -10,7 +10,10 @@ import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,13 +50,30 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     @Autowired
     public ProfesionalServicio profesionalServicio;
 
-
-    @Override
+@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         
         // Configure authentication for Profesional
-        auth.userDetailsService(profesionalServicio)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.authenticationProvider(profesionalAuthenticationProvider());
+
+        // Configure authentication for Paciente
+        auth.authenticationProvider(pacienteAuthenticationProvider());
+    }
+
+    @Bean
+    public AuthenticationProvider profesionalAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(profesionalServicio);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationProvider pacienteAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(pacienteServicio);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
+        return provider;
     }
 
     @Override

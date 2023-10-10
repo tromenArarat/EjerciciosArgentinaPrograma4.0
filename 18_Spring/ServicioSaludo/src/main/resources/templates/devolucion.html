@@ -9,7 +9,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    
     <body>
+        <nav>
+        <div >
+            <ul>
+                <li>
+                    <a href="/logout" >Cerrar Sesión</a>
+                </li>
+                <li>
+                    <a th:href="@{/inicio}">Volver</a>
+                </li>
+            </ul>
+        </div>
+     </nav>
+        
         <form th:action="@{/paciente/enviardevolucion}" method="get" enctype="multipart/form-data">
         <input type="number" name="devolucion" th:value="${devolucion}">
         <input hidden name="id" th:value="${turno.id}">

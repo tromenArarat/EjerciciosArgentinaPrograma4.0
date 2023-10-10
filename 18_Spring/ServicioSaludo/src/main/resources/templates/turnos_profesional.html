@@ -10,6 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <nav>
+            <a href="/logout" >Cerrar Sesión</a>
+        </nav>
+        
         <table>
                 <thead>
                     <tr>
@@ -46,7 +50,10 @@
                             <a th:href="@{/turno/cancelado/__${turno.id}__}">Cancelar</a>
                         </td>
                         <td>
-                            <a th:href="@{/paciente/historia/__${turno.paciente.id}__}">HistoriaClínica</a>
+                            <form th:action="@{/paciente/historia/__${turno.paciente.id}__}" method="GET" enctype="multipart/form-data">
+                                <input hidden type="text" name="idTurno" th:value="${turno.id}">
+                                <button type="submit">Historia Clínica</button>
+                            </form>
                         </td>
                     </tr>
             </table>

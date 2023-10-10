@@ -72,7 +72,7 @@ public class PacienteServicio implements UserDetailsService {
             
             HttpSession session = attr.getRequest().getSession(true);
             
-            session.setAttribute("usuariosession",paciente);
+            session.setAttribute("paciente",paciente);
             
 
             return new User(paciente.getEmail(), paciente.getClave(), permisos);
