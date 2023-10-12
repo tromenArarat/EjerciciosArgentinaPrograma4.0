@@ -31,12 +31,14 @@ public class HistorialClinicoControlador {
     @GetMapping("/modificar/{id}")
         public String modificarHistoria(@PathVariable String id, 
                 @RequestParam String algo,
+                @RequestParam String idTurno,
                 HttpSession session,
                 ModelMap modelo) throws Exception{
             
             HistorialClinico historialPaciente = historiaServicio.getOne(id);
             
             historiaServicio.registrarAlgo(id, algo);
+             turnoServicio.completarTurno(idTurno);
             
             modelo.addAttribute("historial",historialPaciente);
             Profesional profesional = (Profesional) session.getAttribute("usuariosession");

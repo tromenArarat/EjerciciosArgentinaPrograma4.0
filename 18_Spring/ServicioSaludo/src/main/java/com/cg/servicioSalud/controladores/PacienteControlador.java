@@ -136,14 +136,8 @@ public class PacienteControlador {
         public String verHistoria(@PathVariable String id, @RequestParam String idTurno,
                 ModelMap modelo) throws Exception{
             
-            turnoServicio.completarTurno(idTurno);
-            System.out.println("-+-+-+-+-+-+--+-+-+-+-+-");
-            System.out.println(idTurno);
-            System.out.println("-------------");
+           
             Paciente paciente = (Paciente) pacienteServicio.getOne(id);
-             System.out.println("-+-+-+-+-+-+--+-+-+-+-+-");
-            System.out.println("Paciente:"+paciente.getNombreCompleto());
-            System.out.println("-------------");
             
             List<HistorialClinico> historialPaciente = historiaServicio.listarHistorialPorPaciente(id);
             
@@ -157,16 +151,10 @@ public class PacienteControlador {
    public String mostrarTurnos(HttpSession session,
                 ModelMap modelo){
        
-       System.out.println("---------------------");
-       
        Paciente paciente = (Paciente) session.getAttribute("paciente");
        
        List<Turno> turnos = turnoServicio.mostrarTurnosPaciente(paciente.getId());
-       
-       if(paciente==null){
-           System.out.println("puto");
-       }
-       
+      
        modelo.addAttribute("turnos",turnos);
        
        System.out.println(turnos);
