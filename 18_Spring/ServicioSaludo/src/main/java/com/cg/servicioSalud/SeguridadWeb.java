@@ -8,6 +8,7 @@ import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
+import com.cg.servicioSalud.servicios.UsuarioServicio;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,35 +46,12 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    public PacienteServicio pacienteServicio;
+    public UsuarioServicio usuarioServicio;
 
-    @Autowired
-    public ProfesionalServicio profesionalServicio;
-
-@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        
-        // Configure authentication for Profesional
-        auth.authenticationProvider(profesionalAuthenticationProvider());
-
-        // Configure authentication for Paciente
-        auth.authenticationProvider(pacienteAuthenticationProvider());
-    }
-
-    @Bean
-    public AuthenticationProvider profesionalAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(profesionalServicio);
-        provider.setPasswordEncoder(new BCryptPasswordEncoder());
-        return provider;
-    }
-
-    @Bean
-    public AuthenticationProvider pacienteAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(pacienteServicio);
-        provider.setPasswordEncoder(new BCryptPasswordEncoder());
-        return provider;
+@Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(usuarioServicio)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override

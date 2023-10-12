@@ -54,6 +54,9 @@ public class PacienteServicio implements UserDetailsService {
     public Paciente getOne(String id){
         return pacienteRepositorio.getOne(id);
     }
+    public Paciente buscarPorEmail(String email){
+        return pacienteRepositorio.buscarPorEmail(email);
+    }
     
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -64,7 +67,7 @@ public class PacienteServicio implements UserDetailsService {
 
             List<GrantedAuthority> permisos = new ArrayList();
 
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + paciente.getRol().toString());
+            GrantedAuthority p = new SimpleGrantedAuthority("USER" + paciente.getRol().toString());
 
             permisos.add(p);
             
@@ -72,7 +75,7 @@ public class PacienteServicio implements UserDetailsService {
             
             HttpSession session = attr.getRequest().getSession(true);
             
-            session.setAttribute("paciente",paciente);
+            session.setAttribute("usuariosession",paciente);
             
 
             return new User(paciente.getEmail(), paciente.getClave(), permisos);

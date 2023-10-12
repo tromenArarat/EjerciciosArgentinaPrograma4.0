@@ -12,7 +12,7 @@ import lombok.Data;
 
 @MappedSuperclass
 @Data
-public abstract class Usuario{
+public class Usuario{
 
     protected String nombreCompleto;
 
