@@ -174,8 +174,11 @@ public class TurnoServicio {
 
                          turno.setHorario(horario);
                          
-                         // OBJETIVO
-                         turnos.add(turno);
+                         // OBJETIVO la última pregunta es para chequear que no haya sido dado ya el turno
+                         if(buscarPorFechaHorario(turno.getFecha(),turno.getHorario())==null){
+                             turnos.add(turno);
+                         }
+                         
                      }
                  }
              }
@@ -216,6 +219,11 @@ public class TurnoServicio {
     public HistorialClinico buscarRegistro(String id){
         HistorialClinico registroHistorial = historiaServicio.traePorTurno(id);
         return registroHistorial;
+    }
+    
+    public Turno buscarPorFechaHorario(Date fecha, String horario){
+        Turno turno = (Turno) turnoRepositorio.buscarPorFechaHorario(fecha, horario);
+        return turno;
     }
      
 }
