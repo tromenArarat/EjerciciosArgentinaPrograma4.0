@@ -4,10 +4,12 @@
 
 package com.cg.servicioSalud.servicios;
 
+import com.cg.servicioSalud.entidades.HistorialClinico;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
 import com.cg.servicioSalud.enumeradores.Estado;
+import com.cg.servicioSalud.repositorios.HistorialClinicoRepositorio;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
 import com.cg.servicioSalud.repositorios.TurnoRepositorio;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class TurnoServicio {
     private ProfesionalRepositorio profesionalRepositorio;
     @Autowired
     private TurnoRepositorio turnoRepositorio;
+    @Autowired
+    private HistorialClinicoServicio historiaServicio;
 
     
     public Turno crearTurno(Date dia, Paciente paciente, 
@@ -43,7 +47,7 @@ public class TurnoServicio {
             return turno;
     }
     
-     public Turno traeUno(String id){
+    public Turno traeUno(String id){
         return turnoRepositorio.getOne(id);
     }
     
@@ -88,7 +92,7 @@ public class TurnoServicio {
         return turnos;
     }
     
-     public List<Turno> listarTurnos(String especialidad, Paciente paciente) throws Exception{
+    public List<Turno> listarTurnos(String especialidad, Paciente paciente) throws Exception{
         
         // este listado va a ser lo que retorne el método
         List<Turno> turnos = new ArrayList();
@@ -180,10 +184,8 @@ public class TurnoServicio {
         
         return turnos;
      }
-     
-    
-
     @Transactional
+    
     public void completarTurno(String id){
         Turno t = traeUno(id);
         t.setEstado(Estado.COMPLETADO);
@@ -210,5 +212,10 @@ public class TurnoServicio {
         return turnoRepositorio.buscarPorPaciente(idPaciente);
 }
     
+    // Este método está acá porque se usa en paciente_turnos que solo pasa el atributo turnos desde el model
+    public HistorialClinico buscarRegistro(String id){
+        HistorialClinico registroHistorial = historiaServicio.traePorTurno(id);
+        return registroHistorial;
+    }
      
 }

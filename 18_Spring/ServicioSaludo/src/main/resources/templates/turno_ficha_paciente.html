@@ -2,13 +2,28 @@
 <!--
 
 -->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
     <head>
         <title>Servicio Salud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    
     <body>
+        <nav>
+        <div >
+            <ul>
+                <li>
+                    <a href="/logout" >Cerrar Sesión</a>
+                </li>
+                <li>
+                    <a th:href="@{/inicio}">Volver</a>
+                </li>
+            </ul>
+        </div>
+     </nav>
+    
         <div>Éxitos con su consulta</div>
     </body>
 </html>

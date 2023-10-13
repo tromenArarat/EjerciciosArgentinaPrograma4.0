@@ -9,6 +9,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <nav>
+        <div >
+            <ul>
+                <li>
+                    <a href="/logout" >Cerrar Sesión</a>
+                </li>
+                <li>
+                    <a th:href="@{/inicio}">Volver</a>
+                </li>
+            </ul>
+        </div>
+     </nav>
+        
+        <h3 th:text="'Paciente: '
+            +${turnos[0].paciente.nombreCompleto}"></h3>
+        
+        <h2>Turnos</h2>
         
         <table>
                 <thead>
@@ -20,7 +37,10 @@
                             Profesional
                         </th>
                         <th>
-                            Horario
+                            Consulta
+                        </th>
+                        <th>
+                            Devolución
                         </th>
                         <th>
                             Puntuar
@@ -37,7 +57,10 @@
                             th:text="${turno.profesional.nombreCompleto}">
                         </td>
                         <td  
-                            th:text="${turno.horario}">
+                            th:text="${turno.motivo}">
+                        </td>
+                        <td  
+                            th:text="${@turnoServicio.buscarRegistro(turno.id).algo}">
                         </td>
                         <td>  
                             <a th:href="@{/paciente/devolucion/__${turno.id}__}">Puntuar</a>

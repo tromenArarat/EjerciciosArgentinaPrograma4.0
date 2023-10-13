@@ -159,7 +159,7 @@ public class PacienteControlador {
        
        System.out.println(turnos);
        
-       return "mis_turnos.html";
+       return "paciente_turnos.html";
    }
         
    @GetMapping("/devolucion/{id}")
@@ -187,7 +187,7 @@ public class PacienteControlador {
        Paciente paciente = (Paciente) session.getAttribute("usariosession");
        session.setAttribute("paciente", paciente);
        
-       return "mis_turnos.html";
+       return "paciente_turnos.html";
    }
            
            

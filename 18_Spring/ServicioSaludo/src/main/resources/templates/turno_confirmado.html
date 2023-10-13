@@ -5,11 +5,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/"
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
     <head>
-        <title>ServicioSalud</title>
+        <title>Servicio Salud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        
+        <nav>
+        <div >
+            <ul>
+                <li>
+                    <a href="/logout" >Cerrar Sesión</a>
+                </li>
+                <li>
+                    <a th:href="@{/inicio}">Volver</a>
+                </li>
+            </ul>
+        </div>
+     </nav>
         
         <form th:action="@{/turno/reserva/__${id}__}" method="GET" enctype="multipart/form-data">
             <h4>Usted solicita un turno para la fecha:</h4>
