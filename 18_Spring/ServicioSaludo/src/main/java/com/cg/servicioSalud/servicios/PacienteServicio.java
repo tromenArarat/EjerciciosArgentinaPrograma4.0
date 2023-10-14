@@ -83,4 +83,16 @@ public class PacienteServicio implements UserDetailsService {
             return null;
         }
 }
+    
+    public List<String> listarUrlImg(){
+        
+        List<String> listaImg = new ArrayList();
+                
+        listaImg.add("https://i0.pickpik.com/photos/91/681/268/anonymous-aluminum-aluminium-foil-preview.jpg");
+
+        listaImg.add("https://cdn-gfmhl.nitrocdn.com/JtDqtOWnKLCtGwmyHnwRfOFfiuBVgrda/assets/images/optimized/rev-2fc4cfd/russell6437.wpenginepowered.com/wp-content/uploads/2020/04/What-Is-An-Orthopedic-Doctor-In-Brooklyn-1024x832.jpg");
+        
+        return listaImg;
+    }
+    
 }

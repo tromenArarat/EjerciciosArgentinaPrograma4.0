@@ -7,53 +7,46 @@
         <title>Servicios Salud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     </head>
     
-    <body>
-      
-            <form th:action="@{/logincheck}" method="POST">
+    <body class="bg-light">
 
+    <div class="container mt-5">
+        <form th:action="@{/logincheck}" method="POST" class="p-3 border rounded bg-white shadow-sm">
+            <h3 class="mb-4">Accedé a la movida!</h3>
 
-                <div>
-                    <h3>Accedé a la movida!</h3>
-                </div>
-               
-                <div>
-                    <input type="email" name="email" placeholder="EMAIL">
-                </div>
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="EMAIL">
+            </div>
 
-                <div>
-                    <input type="password" name="password" placeholder="CONTRASEÑA">
-                </div>
-                
-                <button type="submit">Ingresar</button>
-            </form>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="CONTRASEÑA">
+            </div>
 
+            <button type="submit" class="btn btn-secondary">Ingresar</button>
+        </form>
 
-            <section>
-                <div>
-                    <div >
-                        <a th:href="@{/}">Volver</a>
-                    </div>
-                </div>
-            </section>
-        
-        </div>
+        <section class="mt-3">
+            <div class="text-center">
+                <a th:href="@{/}" class="btn btn-secondary">Volver</a>
+            </div>
+        </section>
 
- 
-        <div>
-            <div th:if="${error != null}">
-            <div>
+        <div class="mt-3">
+            <div th:if="${error != null}" class="alert alert-danger">
                 <h5>Error!</h5>
                 <p th:text="${error}"></p>
             </div>
-        </div>
-        <div th:if="${exito != null}">
-            <div>
-                <h5>Exito!</h5>
+            <div th:if="${exito != null}" class="alert alert-success">
+                <h5>Éxito!</h5>
                 <p th:text="${exito}"></p>
             </div>
         </div>
+    </div>
 
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
 </html>

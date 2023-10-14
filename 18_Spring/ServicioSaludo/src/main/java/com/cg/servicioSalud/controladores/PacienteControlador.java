@@ -56,7 +56,7 @@ public class PacienteControlador {
     }
    
     
-    @PostMapping("/registro")
+    @GetMapping("/registro")
     public String registro(@RequestParam String nombreCompleto, 
             @RequestParam String email,
             @RequestParam String clave,
@@ -72,7 +72,8 @@ public class PacienteControlador {
             List<String> especialidades = profesionalServicio.listarEspecialidades();
             session.setAttribute("paciente",paciente);
             modelo.addAttribute("especialidades",especialidades);
-        
+            
+            
         } catch (Exception ex) {
             System.out.println(ex);
             return "paciente_form.html";
@@ -85,6 +86,8 @@ public class PacienteControlador {
     @GetMapping("/inicio")
     public String reservarTurno(HttpSession session, ModelMap modelo){
         Paciente paciente = (Paciente) session.getAttribute("usuariosession");
+        
+        
         
         session.setAttribute("paciente",paciente);
         List<String> especialidades = profesionalServicio.listarEspecialidades();
