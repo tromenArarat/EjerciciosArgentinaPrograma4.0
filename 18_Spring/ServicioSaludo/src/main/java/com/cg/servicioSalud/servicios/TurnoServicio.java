@@ -77,14 +77,40 @@ public class TurnoServicio {
         turnoRepositorio.deleteById(id);
     }
     
-    public List<Turno> mostrarTurnos(String idProfesional){
+    public Double calcularPrecioFinal(Profesional profesional, Paciente paciente){
+        Double precioFinal;
+        
+        if(profesional.getObrasSociales()==true&&paciente.getObraSocial()!=null){
+            precioFinal = profesional.getTarifa()/2;
+        }else{
+            precioFinal = profesional.getTarifa();
+        }
+        
+        return precioFinal;
+    }
+    
+    public List<Turno> mostrarTurnosPendientes(String idProfesional){
         List<Turno> turnelis = new ArrayList();
         List<Turno> turnos = new ArrayList();
         
         turnelis = turnoRepositorio.findAll();
         
         for (Turno turno : turnelis) {
-            if(turno.getProfesional().getId().equalsIgnoreCase(idProfesional)){
+            if(turno.getProfesional().getId().equalsIgnoreCase(idProfesional)&&turno.getEstado()!=Estado.COMPLETADO){
+                turnos.add(turno);
+            }
+        }
+        
+        return turnos;
+    }
+    public List<Turno> mostrarTurnosCompletados(String idProfesional){
+        List<Turno> turnelis = new ArrayList();
+        List<Turno> turnos = new ArrayList();
+        
+        turnelis = turnoRepositorio.findAll();
+        
+        for (Turno turno : turnelis) {
+            if(turno.getProfesional().getId().equalsIgnoreCase(idProfesional)&&turno.getEstado()==Estado.COMPLETADO){
                 turnos.add(turno);
             }
         }
@@ -106,7 +132,7 @@ public class TurnoServicio {
         Date fechaActual = new Date();
         
         // Dias a incrementar
-        int incremento = 15;
+        int incremento = 5;
 
         // Vector de Date con dimensión incremento
         Date[] calendario = new Date[incremento];
@@ -131,7 +157,7 @@ public class TurnoServicio {
         
         for (int i = 0; i < calendario.length; i++) {
              
-             // se almacena el valor correspondiente al día actual
+             // se almacena el valor correspondiente al día en la posición de i
              int dia = calendario[i].getDay();
              
              for (Profesional profesional : profesionales) {
@@ -146,9 +172,10 @@ public class TurnoServicio {
                     // 2do pregunta:
                      if(disponibilidad.contains(diaStr)){
                          
-                         Turno turno = crearTurno(calendario[i],paciente,profesional);
-                         
-                         // Acá hay inmersión profunda para sacar el horario
+                         Turno turno1 = crearTurno(calendario[i],paciente,profesional);
+                         Turno turno2 = crearTurno(calendario[i],paciente,profesional);
+                         Turno turno3 = crearTurno(calendario[i],paciente,profesional);
+                         Turno turno4 = crearTurno(calendario[i],paciente,profesional);
                          
                          String horario = String.valueOf(disponibilidad.indexOf(diaStr)+1);
                          
@@ -172,11 +199,23 @@ public class TurnoServicio {
                                     break;
                             }
 
-                         turno.setHorario(horario);
+                         turno1.setHorario("1ero de la "+horario);
+                         turno2.setHorario("2do de la "+horario);
+                         turno3.setHorario("3ero de la "+horario);
+                         turno4.setHorario("4to de la "+horario);
                          
                          // OBJETIVO la última pregunta es para chequear que no haya sido dado ya el turno
-                         if(buscarPorFechaHorario(turno.getFecha(),turno.getHorario())==null){
-                             turnos.add(turno);
+                         if(buscarPorFechaHorario(turno1.getFecha(),turno1.getHorario())==null){
+                             turnos.add(turno1);
+                         }
+                         if(buscarPorFechaHorario(turno2.getFecha(),turno2.getHorario())==null){
+                             turnos.add(turno2);
+                         }
+                         if(buscarPorFechaHorario(turno3.getFecha(),turno3.getHorario())==null){
+                             turnos.add(turno3);
+                         }
+                         if(buscarPorFechaHorario(turno4.getFecha(),turno4.getHorario())==null){
+                             turnos.add(turno4);
                          }
                          
                      }
@@ -188,7 +227,6 @@ public class TurnoServicio {
         return turnos;
      }
     @Transactional
-    
     public void completarTurno(String id){
         Turno t = traeUno(id);
         t.setEstado(Estado.COMPLETADO);

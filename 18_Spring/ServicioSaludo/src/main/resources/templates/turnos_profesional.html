@@ -10,63 +10,90 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-       <nav>
-        <div >
-            <ul>
-                <li>
-                    <a href="/logout" >Cerrar Sesión</a>
-                </li>
-            </ul>
-        </div>
-     </nav>
-        
-        <h4 th:text="'Profesional: ' + ${profesional.nombreCompleto}
-            +' // Especialidad: '+${turnos[0].profesional.modalidad}"></h4>
-        
-        <h3 >Listado de turnos otorgados</h3>
-        
-        <table>
-                <thead>
-                    <tr>
-                        <th>
-                            Fecha
-                        </th>
-                        <th>
-                            Paciente
-                        </th>
-                        <th>
-                            Horario
-                        </th>
-                        <th>
-                            Cancelar
-                        </th>
-                        <th>
-                            Historia clínica
-                        </th>
+        <nav>
+            <div >
+                <ul>
+                    <li>
+                        <a href="/logout" >Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-                    </tr>
-                </thead>
-                <tbody th:each="turno : ${turnos}">
-                    <tr>
-                        <td  
-                            th:text="${#dates.format(turno.fecha, 'dd-MM-yyyy')}">
-                        </td>
-                        <td  
-                            th:text="${turno.paciente.nombreCompleto}">
-                        </td>
-                        <td  
-                            th:text="${turno?.horario}">
-                        </td>
-                        <td>  
-                            <a th:href="@{/turno/cancelado/__${turno.id}__}">Cancelar</a>
-                        </td>
-                        <td>
-                            <form th:action="@{/paciente/historia/__${turno.paciente.id}__}" method="GET" enctype="multipart/form-data">
+        <h4 th:text="'Profesional: ' + ${profesional.nombreCompleto}
+            +' // Especialidad: '+${profesional.modalidad}"></h4>
+
+        <h3 >Turnos pendientes</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Paciente
+                    </th>
+                    <th>
+                        Horario
+                    </th>
+                    <th>
+                        Cancelar
+                    </th>
+                    <th>
+                        Completar
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody th:each="turno : ${turnos}">
+                <tr>
+                    <td  
+                        th:text="${#dates.format(turno.fecha, 'dd-MM-yyyy')}">
+                    </td>
+                    <td>
+                        <a th:href="@{/profesional/historial/__${turno.paciente.id}__}" th:text="${turno.paciente.nombreCompleto}">
+                        </a>
+                    </td>
+                    <td  
+                        th:text="${turno?.horario}">
+                    </td>
+                    <td>  
+                        <a th:href="@{/turno/cancelado/__${turno.id}__}">Cancelar</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/profesional/historial/modificar/__${turno.paciente.id}__}" method="GET" enctype="multipart/form-data">
                                 <input hidden type="text" name="idTurno" th:value="${turno.id}">
-                                <button type="submit">Historia Clínica</button>
+                                <button type="submit">Completar</button>
                             </form>
-                        </td>
-                    </tr>
-            </table>
+                    </td>
+
+                </tr>
+        </table>
+        <h3>Turnos completados</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Paciente
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody th:each="turneli : ${turnelis}">
+                <tr>
+                    <td  
+                        th:text="${#dates.format(turneli.fecha, 'dd-MM-yyyy')}">
+                    </td>
+                    <td>
+                        <a th:href="@{/profesional/historial/__${turneli.paciente.id}__}" th:text="${turneli.paciente.nombreCompleto}">
+                        </a>
+                    </td>
+                </tr>
+        </table>
     </body>
 </html>

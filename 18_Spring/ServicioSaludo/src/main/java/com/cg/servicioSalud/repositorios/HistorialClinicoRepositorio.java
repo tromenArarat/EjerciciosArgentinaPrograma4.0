@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface HistorialClinicoRepositorio extends JpaRepository<HistorialClinico,String>{
     @Query("SELECT h FROM HistorialClinico h WHERE h.turno.id = :id")
     HistorialClinico buscarPorTurno(@Param("id") String id);
+    @Query("SELECT h FROM HistorialClinico h WHERE h.turno.paciente.id = :id")
+    HistorialClinico buscarPorPaciente(@Param("id") String id);
 }

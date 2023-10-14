@@ -60,11 +60,10 @@ public class TurnoControlador {
 
         Profesional profesional = (Profesional) profesionalServicio.getOne(id);
         turno.setProfesional(profesional);
-        System.out.println(profesional);
+        System.out.println(profesional.getNombreCompleto());
+        // llamar a un método que tome 
         
-        turno.setPrecioFinal(profesional.getTarifa());
-        
-        
+        turno.setPrecioFinal(turnoServicio.calcularPrecioFinal(profesional,paciente));
         
         turnoServicio.confirmarTurno(turno);
         
@@ -98,7 +97,7 @@ public class TurnoControlador {
         turnoServicio.cancelarTurno(turno.getId());
         
         Profesional profesional = (Profesional) session.getAttribute("usuariosession");
-        List<Turno> turnos = turnoServicio.mostrarTurnos(profesional.getId());
+        List<Turno> turnos = turnoServicio.mostrarTurnosPendientes(profesional.getId());
         
         if (profesional == null) {
         // Handle the case where the Paciente object is not found in the session

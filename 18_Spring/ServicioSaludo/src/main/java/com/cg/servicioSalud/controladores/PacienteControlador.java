@@ -13,6 +13,7 @@ import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,6 @@ public class PacienteControlador {
     private ProfesionalServicio profesionalServicio;
     @Autowired
     private TurnoServicio turnoServicio;
-    @Autowired
-    private HistorialClinicoServicio historiaServicio;
 
     @GetMapping("/registrar")
     public String registrar() {
@@ -97,7 +96,7 @@ public class PacienteControlador {
     @GetMapping("/lista")
     public String turnosDisponibles(@RequestParam String especialidad,
       HttpSession session, ModelMap modelo) throws Exception{
-      Paciente paciente = (Paciente) session.getAttribute("paciente");
+      Paciente paciente = (Paciente) session.getAttribute("usuariosession");
       List<Turno> turnos = turnoServicio.listarTurnos(especialidad,paciente);
       
      
@@ -132,20 +131,8 @@ public class PacienteControlador {
         return "lista_especialidad.html";
     }
     
-    @GetMapping("/historia/{id}")
-        public String verHistoria(@PathVariable String id, @RequestParam String idTurno,
-                ModelMap modelo) throws Exception{
-            
-           
-            Paciente paciente = (Paciente) pacienteServicio.getOne(id);
-            
-            List<HistorialClinico> historialPaciente = historiaServicio.listarHistorialPorPaciente(id);
-            
-            modelo.addAttribute("historial",historialPaciente);
-            modelo.addAttribute("paciente",paciente);
-            
-            return "historia_clinica.html";
-    }
+    
+    
        
    @GetMapping("/misturnos")
    public String mostrarTurnos(HttpSession session,
@@ -176,7 +163,7 @@ public class PacienteControlador {
    
    @GetMapping("/enviardevolucion")
    public String enviarDevolucion(@RequestParam String id, 
-           @RequestParam Double devolucion,
+           @RequestParam Double devolucion, ModelMap modelo,
            HttpSession session){
        
        Turno turno = turnoServicio.traeUno(id);
@@ -184,12 +171,16 @@ public class PacienteControlador {
        
        profesionalServicio.modificarReputacion(turno.getProfesional().getId());
 
-       Paciente paciente = (Paciente) session.getAttribute("usariosession");
-       session.setAttribute("paciente", paciente);
+       Paciente paciente = (Paciente) session.getAttribute("usuariosession");
+//       session.setAttribute("paciente", paciente);
+       List<Turno> turnos = turnoServicio.mostrarTurnosPaciente(paciente.getId());
+       modelo.addAttribute("turnos", turnos);
        
        return "paciente_turnos.html";
    }
-           
-           
+    
    
-}
+         
+    }
+
+    

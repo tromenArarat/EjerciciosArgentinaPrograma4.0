@@ -27,6 +27,10 @@
         <form th:action="@{/turno/reserva/__${id}__}" method="GET" enctype="multipart/form-data">
             <h4>Usted solicita un turno para la fecha:</h4>
             <h4 th:text= "${#dates.format(turno.fecha, 'dd-MM-yyyy')}"></h4>
+            <h4>Con el profesional:</h4>
+            <h4 th:text= "${turno.profesional.nombreCompleto}"></h4>
+            <h4>En el horario:</h4>
+            <h4 th:text= "${turno.horario}"></h4>
             <input hidden type="text" name="id" value="${id}">
             <label for="texta">Indique el motivo de su consulta</label>
             <input type="text" id="texta" name="motivo">

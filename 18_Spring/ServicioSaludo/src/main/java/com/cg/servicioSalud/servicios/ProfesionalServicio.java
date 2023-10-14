@@ -163,7 +163,7 @@ public class ProfesionalServicio implements UserDetailsService {
     @Transactional
     public void modificarReputacion(String id){
         Profesional profesional = getOne(id);
-        List<Turno> turnos = (List<Turno>) turnoServicio.mostrarTurnos(id);
+        List<Turno> turnos = (List<Turno>) turnoServicio.mostrarTurnosCompletados(id);
         double suma = 0.0;
         for (Turno turno : turnos) {
             if(turno.getPuntuacion()!=null){

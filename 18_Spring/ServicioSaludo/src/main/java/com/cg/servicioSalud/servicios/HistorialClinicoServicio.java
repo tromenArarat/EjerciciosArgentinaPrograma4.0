@@ -7,6 +7,7 @@ package com.cg.servicioSalud.servicios;
 import com.cg.servicioSalud.entidades.HistorialClinico;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.enumeradores.Estado;
 import com.cg.servicioSalud.repositorios.HistorialClinicoRepositorio;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,9 @@ public class HistorialClinicoServicio {
      public HistorialClinico traePorTurno(String id){
         return historiaRepositorio.buscarPorTurno(id);
     }
+     public HistorialClinico traePorPaciente(String id){
+        return historiaRepositorio.buscarPorPaciente(id);
+    }
      
      @Transactional
      public void borrarRegistro(String id){
@@ -58,7 +62,7 @@ public class HistorialClinicoServicio {
          List<HistorialClinico> historias = new ArrayList();
          
          for (HistorialClinico historieta : historietas) {
-             if(historieta.getTurno().getPaciente().getId().equals(idPaciente)){
+             if(historieta.getTurno().getPaciente().getId().equals(idPaciente)&&historieta.getTurno().getEstado()==Estado.COMPLETADO){
                  historias.add(historieta);
              }
          }

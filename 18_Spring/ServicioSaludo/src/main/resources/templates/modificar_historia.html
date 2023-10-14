@@ -10,11 +10,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <form th:action="@{/historial/modificado" method="GET" enctype="multipart/form-data">
-            <h4 th:text="Paciente + ${paciente.nombreCompleto}"></h4> 
-            <input hidden type="text" name="id" value="${paciente.id}">
+        
+        <nav>
+        <div >
+            <ul>
+                <li>
+                    <a href="/logout" >Cerrar Sesión</a>
+                </li>
+                <li>
+                    <a th:href="@{/inicio}">Volver</a>
+                </li>
+            </ul>
+        </div>
+     </nav>
+        
+        <form th:action="@{/profesional/historial/modificar/__${paciente.id}__}" method="POST" enctype="multipart/form-data">
+            <h4 th:text="'Paciente: ' + ${paciente.nombreCompleto}"></h4> 
+            <h5 th:text="'Motivo de la consulta: ' + ${turno.motivo}"></h5> 
             <label for="texta">Indique algo</label>
             <input type="text" id="texta" name="algo">
+            <input hidden type="text" id="texta" name="idTurno" th:value="${turno.id}">
             <button type="submit">Guardar</button>
         </form>
     </body>

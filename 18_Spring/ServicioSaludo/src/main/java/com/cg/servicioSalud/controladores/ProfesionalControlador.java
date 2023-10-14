@@ -1,8 +1,12 @@
 package com.cg.servicioSalud.controladores;
 
+import com.cg.servicioSalud.entidades.HistorialClinico;
 import com.cg.servicioSalud.entidades.Imagen;
+import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.servicios.HistorialClinicoServicio;
+import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
 import java.util.List;
@@ -28,6 +32,10 @@ public class ProfesionalControlador {
     private ProfesionalServicio profesionalServicio;
     @Autowired
     private TurnoServicio turnoServicio;
+    @Autowired
+    private PacienteServicio pacienteServicio;
+    @Autowired
+    private HistorialClinicoServicio historialServicio;
 
     @GetMapping("/registrar")
     public String registrar() {
@@ -85,9 +93,11 @@ public class ProfesionalControlador {
         Profesional profesional = (Profesional) session.getAttribute("usuariosession");
         session.setAttribute("profesional",profesional);
         
-        List<Turno> turnos = turnoServicio.mostrarTurnos(profesional.getId());
+        List<Turno> turnos = turnoServicio.mostrarTurnosPendientes(profesional.getId());
+        List<Turno> turnelis = turnoServicio.mostrarTurnosCompletados(profesional.getId());
         
         modelo.addAttribute("turnos",turnos);
+        modelo.addAttribute("turnelis",turnelis);
         
         return "turnos_profesional.html";
     }
@@ -95,7 +105,8 @@ public class ProfesionalControlador {
     @GetMapping("/turnos")
     public String verTurnos(HttpSession session, ModelMap modelo) {
         Profesional profesional = (Profesional) session.getAttribute("usuariosession");
-        List<Turno> turnos = turnoServicio.mostrarTurnos(profesional.getId());
+        List<Turno> turnos = turnoServicio.mostrarTurnosPendientes(profesional.getId());
+        List<Turno> turnelis = turnoServicio.mostrarTurnosCompletados(profesional.getId());
         
         if (profesional == null) {
         // Handle the case where the Paciente object is not found in the session
@@ -103,6 +114,7 @@ public class ProfesionalControlador {
         }   
             modelo.addAttribute("profesional",profesional);
             modelo.addAttribute("turnos",turnos);
+            modelo.addAttribute("turnelis",turnelis);
 
         return "turnos_profesional.html";
     }
@@ -119,7 +131,65 @@ public class ProfesionalControlador {
         }
     }
     
+    @GetMapping("/historial/{id}")
+    public String verHistorial(@PathVariable String id, ModelMap modelo,
+        HttpSession session) {
+       
+            Paciente paciente = (Paciente) pacienteServicio.getOne(id);
+            Profesional profesional = (Profesional) session.getAttribute("profesional");
+            
+            List<HistorialClinico> historialPaciente = historialServicio.listarHistorialPorPaciente(id);
+            
+            modelo.addAttribute("historial",historialPaciente);
+            modelo.addAttribute("paciente",paciente);
+            modelo.addAttribute("profesional",profesional);
+            
+            return "historia_clinica.html";
+        
+    }
+    
+    @GetMapping("/historial/modificar/{id}")
+        public String modificarHistoria(@PathVariable String id, 
+                @RequestParam String idTurno,
+                ModelMap modelo) throws Exception{
+            
+            Paciente paciente = pacienteServicio.getOne(id);
+            Turno turno = turnoServicio.traeUno(idTurno);
+            
+            modelo.addAttribute("paciente",paciente);
+            modelo.addAttribute("turno",turno);
+            
 
+        return "modificar_historia.html";
+    }
+        
+    @PostMapping("/historial/modificar/{id}")
+        public String modificarHistoria(@PathVariable String id,
+            @RequestParam String algo,
+            @RequestParam String idTurno,
+            HttpSession session,
+            ModelMap modelo) throws Exception {
+
+        HistorialClinico historialPaciente = historialServicio.traePorTurno(idTurno);
+
+        historialServicio.registrarAlgo(historialPaciente.getId(), algo);
+        turnoServicio.completarTurno(idTurno);
+
+        modelo.addAttribute("historial", historialPaciente);
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+        List<Turno> turnos = turnoServicio.mostrarTurnosPendientes(profesional.getId());
+        List<Turno> turnelis = turnoServicio.mostrarTurnosCompletados(profesional.getId());
+
+        if (profesional == null) {
+            // Handle the case where the Paciente object is not found in the session
+            return "redirect:/"; // Redirect to the home page or an error page
+        }
+        modelo.addAttribute("profesional", profesional);
+        modelo.addAttribute("turnos", turnos);
+        modelo.addAttribute("turnelis", turnelis);
+
+        return "turnos_profesional.html";
+    }
 }
 
 

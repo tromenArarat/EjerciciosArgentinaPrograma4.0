@@ -23,7 +23,7 @@
             </ul>
         </div>
      </nav>
-            
+        <h4 th:text="'Historia Clínica de: '+${paciente.nombreCompleto}"></h4>
             <table>
                 <thead>
                     <tr>
@@ -32,6 +32,9 @@
                         </th>
                         <th>
                             Motivo de la consulta
+                        </th>
+                        <th>
+                            Profesional
                         </th>
                         <th>
                             Comentario del profesional
@@ -45,6 +48,9 @@
                         </td>
                         <td  
                             th:text="${historia.turno.motivo}">
+                        </td>
+                        <td  
+                            th:text="${historia.turno.profesional.nombreCompleto}">
                         </td>
                         
                         <td>
