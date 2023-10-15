@@ -199,25 +199,38 @@ public class TurnoServicio {
                                     break;
                             }
 
-                         turno1.setHorario("1ero de la "+horario);
-                         turno2.setHorario("2do de la "+horario);
-                         turno3.setHorario("3ero de la "+horario);
-                         turno4.setHorario("4to de la "+horario);
+                         switch(horario){
+                             case "mañana":
+                                turno1.setHorario("8 a 9");
+                                turno2.setHorario("9 a 10");
+                                turno3.setHorario("10 a 11");
+                                turno4.setHorario("11 a 12");
+                                break;
+                             case "tarde":
+                                turno1.setHorario("15 a 16");
+                                turno2.setHorario("16 a 17");
+                                turno3.setHorario("17 a 18");
+                                turno4.setHorario("18 a 19");
+                                break;
+                             case "noche":
+                                turno1.setHorario("19 a 20");
+                                turno2.setHorario("20 a 21");
+                                turno3.setHorario("21 a 22");
+                                turno4.setHorario("22 a 23");
+                                break;
+                         }   
+                         
                          
                          // OBJETIVO la última pregunta es para chequear que no haya sido dado ya el turno
                          if(buscarPorFechaHorario(turno1.getFecha(),turno1.getHorario())==null){
                              turnos.add(turno1);
-                         }
-                         if(buscarPorFechaHorario(turno2.getFecha(),turno2.getHorario())==null){
+                         }else if(buscarPorFechaHorario(turno2.getFecha(),turno2.getHorario())==null){
                              turnos.add(turno2);
-                         }
-                         if(buscarPorFechaHorario(turno3.getFecha(),turno3.getHorario())==null){
+                         }else if(buscarPorFechaHorario(turno3.getFecha(),turno3.getHorario())==null){
                              turnos.add(turno3);
-                         }
-                         if(buscarPorFechaHorario(turno4.getFecha(),turno4.getHorario())==null){
+                         }else if(buscarPorFechaHorario(turno4.getFecha(),turno4.getHorario())==null){
                              turnos.add(turno4);
                          }
-                         
                      }
                  }
              }
