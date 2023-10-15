@@ -8,6 +8,7 @@ import com.cg.servicioSalud.entidades.HistorialClinico;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.excepciones.MiException;
 import com.cg.servicioSalud.servicios.HistorialClinicoServicio;
 import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
@@ -44,38 +45,29 @@ public class PacienteControlador {
         return "paciente_form.html";
     }
 
-    @GetMapping("/checkSession")
-    @ResponseBody // This annotation indicates that the method returns plain text
-    public String checkSession(HttpSession session) {
-        Paciente paciente = (Paciente) session.getAttribute("paciente");
-        if (paciente != null) {
-            return "Paciente object found in session: " + paciente.getNombreCompleto();
-        } else {
-            return "No Paciente object found in session";
-        }
-    }
-   
-    
-    @GetMapping("/registro")
+    @PostMapping("/registro")
     public String registro(@RequestParam String nombreCompleto, 
             @RequestParam String email,
             @RequestParam String clave,
-            @RequestParam Long telefono,
+            @RequestParam(required = false) Long telefono,
             MultipartFile imagen,
-            @RequestParam String obraSocial, 
-            ModelMap modelo, HttpSession session) {
+            @RequestParam(required = false) String obraSocial, 
+            ModelMap modelo, HttpSession session) throws Exception {
 
         try{
             Paciente paciente = pacienteServicio.crearPaciente(
                     nombreCompleto, email, clave, 
                     telefono, imagen, obraSocial);
+            modelo.put("exito", "Usuario registrado correctamente!");
             List<String> especialidades = profesionalServicio.listarEspecialidades();
             session.setAttribute("paciente",paciente);
             modelo.addAttribute("especialidades",especialidades);
             
             
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombreCompleto", nombreCompleto);
+            modelo.put("telefono", telefono);
             return "paciente_form.html";
         }
        return "reserva_turno.html";
@@ -87,13 +79,49 @@ public class PacienteControlador {
     public String reservarTurno(HttpSession session, ModelMap modelo){
         Paciente paciente = (Paciente) session.getAttribute("usuariosession");
         
-        
-        
         session.setAttribute("paciente",paciente);
         List<String> especialidades = profesionalServicio.listarEspecialidades();
         modelo.addAttribute("especialidades",especialidades);
+        modelo.addAttribute("paciente",paciente);
         
         return "reserva_turno.html";
+    }
+    
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo,HttpSession session){
+        Paciente paciente = (Paciente) session.getAttribute("usuariosession");
+         modelo.put("paciente", paciente);
+         
+        return "paciente_modificar.html";
+    }
+    
+    @PostMapping("/perfil/{id}")
+    public String actualizar(@RequestParam String nombreCompleto, 
+            @RequestParam String email,
+            @RequestParam String clave,
+            @RequestParam(required = false) Long telefono,
+            MultipartFile imagen,
+            @RequestParam(required = false) String obraSocial, 
+            ModelMap modelo, HttpSession session) throws Exception {
+
+        try{
+            Paciente paciente = pacienteServicio.crearPaciente(
+                    nombreCompleto, email, clave, 
+                    telefono, imagen, obraSocial);
+            modelo.put("exito", "Usuario registrado correctamente!");
+            List<String> especialidades = profesionalServicio.listarEspecialidades();
+            session.setAttribute("paciente",paciente);
+            modelo.addAttribute("especialidades",especialidades);
+            
+            
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombreCompleto", nombreCompleto);
+            modelo.put("telefono", telefono);
+            return "paciente_form.html";
+        }
+       return "reserva_turno.html";
+
     }
     
     @GetMapping("/lista")
@@ -183,7 +211,16 @@ public class PacienteControlador {
    }
     
    
-         
+         @GetMapping("/checkSession")
+    @ResponseBody // This annotation indicates that the method returns plain text
+    public String checkSession(HttpSession session) {
+        Paciente paciente = (Paciente) session.getAttribute("paciente");
+        if (paciente != null) {
+            return "Paciente object found in session: " + paciente.getNombreCompleto();
+        } else {
+            return "No Paciente object found in session";
+        }
+    }
     }
 
     

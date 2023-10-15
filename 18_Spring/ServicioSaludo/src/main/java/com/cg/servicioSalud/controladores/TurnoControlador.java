@@ -72,6 +72,7 @@ public class TurnoControlador {
 
         modelo.addAttribute("turno", turno);
         modelo.addAttribute("id", turno.getId());
+        modelo.addAttribute("paciente", paciente);
 
         return "turno_confirmado.html";
     }

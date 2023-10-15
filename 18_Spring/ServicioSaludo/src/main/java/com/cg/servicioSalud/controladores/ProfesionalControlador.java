@@ -125,7 +125,7 @@ public class ProfesionalControlador {
     public String checkSession(HttpSession session) {
         Profesional profesional = (Profesional) session.getAttribute("usuariosession");
         if (profesional != null) {
-            return "Profesional object found in session: " + profesional.getNombreCompleto();
+            return "Profesional object found in session: " + profesional.getNombreCompleto() + profesional.getRol();
         } else {
             return "No Profesional object found in session";
         }

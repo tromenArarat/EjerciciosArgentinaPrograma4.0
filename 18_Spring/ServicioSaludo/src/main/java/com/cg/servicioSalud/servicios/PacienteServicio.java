@@ -3,9 +3,12 @@ package com.cg.servicioSalud.servicios;
 import com.cg.servicioSalud.entidades.Imagen;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.enumeradores.Rol;
+import com.cg.servicioSalud.excepciones.MiException;
 import com.cg.servicioSalud.repositorios.PacienteRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,7 @@ public class PacienteServicio implements UserDetailsService {
             String clave, Long telefono, MultipartFile archivo, 
             String obraSocial) throws Exception{
        
-        //Falta funcion validar
+        validar(nombreCompleto,email,clave,telefono);
         Paciente paciente = new Paciente();
         paciente.setRol(Rol.USER);
         Imagen imagen = imagenServicio.guardar(archivo);
@@ -93,6 +96,23 @@ public class PacienteServicio implements UserDetailsService {
         listaImg.add("https://cdn-gfmhl.nitrocdn.com/JtDqtOWnKLCtGwmyHnwRfOFfiuBVgrda/assets/images/optimized/rev-2fc4cfd/russell6437.wpenginepowered.com/wp-content/uploads/2020/04/What-Is-An-Orthopedic-Doctor-In-Brooklyn-1024x832.jpg");
         
         return listaImg;
+    }
+    
+    private void validar(String nombreCompleto, String email, String clave, Long telefono) throws MiException{
+        
+        if (nombreCompleto.isEmpty() || nombreCompleto == null) {
+           throw new MiException("El nombre no puede ser nulo o estar vacío");
+        }
+        if (email.isEmpty() || email == null) {
+            throw new MiException("El correo electrónico no puede ser nulo o estar vacio");
+        }
+        if (clave.isEmpty() || clave == null || clave.length() <= 2) {
+            throw new MiException("La contraseña no puede estar vacía, y debe tener más de 2 dígitos");
+        }
+        if (telefono == null) {
+            throw new MiException("El teléfono es requisito obligatorio");
+        }
+        
     }
     
 }

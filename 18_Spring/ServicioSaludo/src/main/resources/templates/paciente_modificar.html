@@ -7,15 +7,15 @@
 
     <main>
         <div class="container mt-5">
-            <form action="/paciente/registro" method="POST" enctype="multipart/form-data"
+            <form th:action="@{/perfil/__${paciente.id}__}" method="POST" enctype="multipart/form-data"
                   class="p-3 border rounded bg-white shadow-sm">
-                <h4 class="mb-4">Formulario de registro</h4>
+                <h4 class="mb-4">Actualización de datos</h4>
                 <div class="row mb-3">
                     <div class="col-4">
                         <label for="name">Nombre completo</label>
                     </div>
                     <div class="col-8">
-                        <input name="nombreCompleto" type="text" id="name" class="form-control" placeholder="Zoilo Sagaz">
+                        <input name="nombreCompleto" type="text" id="name" class="form-control" th:value="${paciente.nombreCompleto}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -23,15 +23,15 @@
                         <label for="correo">Correo electrónico</label>
                     </div>
                     <div class="col-8">
-                        <input name="email" type="email" id="correo" class="form-control" placeholder="vos@ejemplo.edu">
+                        <input name="email" type="email" id="correo" class="form-control" th:value="${paciente.email}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4">
-                        <label for="pass">Invente una clave</label>
+                        <label for="pass">Actualice su clave</label>
                     </div>
                     <div class="col-8">
-                        <input name="clave" type="password" id="pass" class="form-control" placeholder="*******">
+                        <input name="clave" type="password" id="pass" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -47,7 +47,7 @@
                         <label for="obras">Obra social (opcional)</label>
                     </div>
                     <div class="col-8">
-                        <input name="obraSocial" type="checkbox" value="Personal De Instituciones Fantasmas" id="obras">
+                        <input name="obraSocial" type="checkbox" value="${paciente.obraSocial}" id="obras">
                         <label for="obras">Personal De Instituciones Fantasmas</label>
                         <input type="checkbox" name="obrasSociales" value="PDIF" id="obras">
                         <label for="obras">ISSN</label>
@@ -66,13 +66,13 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-secondary btn-md">Registrar</button>
+                        <button type="submit" class="btn btn-secondary btn-md">Guardar</button>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-12">
-                        <a th:href="@{/}" class="btn btn-light btn-sm">Volver</a>
+                        <a th:href="@{/paciente/inicio}" class="btn btn-light btn-sm">Volver</a>
                     </div>
                 </div>
             </form>

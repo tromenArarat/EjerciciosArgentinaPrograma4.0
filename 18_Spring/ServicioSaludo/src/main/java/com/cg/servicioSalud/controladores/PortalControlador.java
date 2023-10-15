@@ -6,6 +6,7 @@ package com.cg.servicioSalud.controladores;
 
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
+import com.cg.servicioSalud.enumeradores.Rol;
 import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
 import com.cg.servicioSalud.servicios.TurnoServicio;
@@ -48,12 +49,15 @@ public class PortalControlador {
     
     @GetMapping("/inicio")
     public String commonHome(HttpSession session, ModelMap modelo) {
-        Object userObject = session.getAttribute("usuariosession");
-
-        if (userObject instanceof Profesional) {
-            return "redirect:/profesional/turnos";
+        Object usuario = session.getAttribute("usuariosession");
+        if (usuario instanceof Profesional) {
+            if(((Profesional) usuario).getRol().equals(Rol.ADMIN)){
+                return "redirect:/admin/dashboard";
+            }else{
+                return "redirect:/profesional/turnos";
+            }
             
-        } else if (userObject instanceof Paciente) {
+        } else if (usuario instanceof Paciente) {
             return "redirect:/paciente/inicio";
         
         } else {
