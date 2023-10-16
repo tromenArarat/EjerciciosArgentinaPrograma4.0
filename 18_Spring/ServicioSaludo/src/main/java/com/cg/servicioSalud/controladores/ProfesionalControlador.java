@@ -5,6 +5,7 @@ import com.cg.servicioSalud.entidades.Imagen;
 import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
+import com.cg.servicioSalud.excepciones.MiException;
 import com.cg.servicioSalud.servicios.HistorialClinicoServicio;
 import com.cg.servicioSalud.servicios.PacienteServicio;
 import com.cg.servicioSalud.servicios.ProfesionalServicio;
@@ -48,8 +49,8 @@ public class ProfesionalControlador {
             @RequestParam String clave,
             @RequestParam Long telefono,
             MultipartFile imagen,
-            @RequestParam String disponibilidad, 
-            @RequestParam Boolean obrasSociales, 
+            @RequestParam(required = false) String disponibilidad, 
+            @RequestParam(name = "obrasSociales", required = false, defaultValue = "false") Boolean obrasSociales, 
             @RequestParam String modalidad,
             @RequestParam String especialidad, 
             @RequestParam String ubicacion,
@@ -62,11 +63,11 @@ public class ProfesionalControlador {
                     @RequestParam(required = false) String jueves, 
                     @RequestParam(required = false) String viernes, 
                     @RequestParam(required = false) String sabado, 
-                    @RequestParam(required = false) String domingo) {
+                    @RequestParam(required = false) String domingo) throws Exception {
 
         try{
             
-            disponibilidad = domingo+lunes+martes+miercoles+jueves+viernes+sabado;
+            disponibilidad = domingo+lunes+martes+miercoles+jueves+viernes+sabado.replaceAll("null", "");
             
             Profesional profesional = profesionalServicio.crearProfesional(
                     nombreCompleto, email, clave, 
@@ -74,12 +75,15 @@ public class ProfesionalControlador {
                     disponibilidad, obrasSociales, 
                     especialidad, ubicacion, 
                     modalidad, tarifa);
-        
+            modelo.put("exito", "Usuario registrado correctamente!");
             List<Profesional> profesionales = profesionalServicio.listarProfesionales();
             session.setAttribute("profesional",profesional);
             modelo.addAttribute("profesionales",profesionales);
-        } catch (Exception ex) {
-            System.out.println(ex);
+            modelo.addAttribute("profesional",profesional);
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombreCompleto", nombreCompleto);
+            modelo.put("telefono", telefono);
             return "profesional_form.html";
         }
        return "turnos_profesional.html";
@@ -102,6 +106,60 @@ public class ProfesionalControlador {
         return "turnos_profesional.html";
     }
     
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo,HttpSession session){
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+         modelo.put("profesional", profesional);
+         
+        return "profesional_modificar.html";
+    }
+    
+    @PostMapping("/perfil/{id}")
+    public String actualizar(@PathVariable String id, @RequestParam String nombreCompleto, 
+            @RequestParam String email,
+            @RequestParam String clave,
+            @RequestParam Long telefono,
+            MultipartFile imagen,
+            @RequestParam(required = false) String disponibilidad, 
+            @RequestParam(name = "obrasSociales", required = false, defaultValue = "false") Boolean obrasSociales, 
+            @RequestParam String modalidad,
+            @RequestParam String especialidad, 
+            @RequestParam String ubicacion,
+            @RequestParam Double tarifa,
+            ModelMap modelo,
+            HttpSession session,
+                @RequestParam(required = false) String lunes, 
+                    @RequestParam(required = false) String martes, 
+                    @RequestParam(required = false) String miercoles,
+                    @RequestParam(required = false) String jueves, 
+                    @RequestParam(required = false) String viernes, 
+                    @RequestParam(required = false) String sabado, 
+                    @RequestParam(required = false) String domingo) throws Exception {
+
+        try{
+            
+            disponibilidad = domingo+lunes+martes+miercoles+jueves+viernes+sabado.replaceAll("null", "");
+            
+            profesionalServicio.actualizarProfesional(
+                    id,nombreCompleto, email, clave, 
+                    telefono, imagen,
+                    disponibilidad, obrasSociales,modalidad,  
+                    especialidad, ubicacion, 
+                    tarifa);
+            modelo.put("exito", "Usuario actualizado correctamente!");
+            List<Profesional> profesionales = profesionalServicio.listarProfesionales();
+            Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+            modelo.addAttribute("profesionales",profesionales);
+            modelo.addAttribute("profesional",profesional);
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombreCompleto", nombreCompleto);
+            modelo.put("telefono", telefono);
+            return "profesional_form.html";
+        }
+       return "turnos_profesional.html";
+
+    }
     @GetMapping("/turnos")
     public String verTurnos(HttpSession session, ModelMap modelo) {
         Profesional profesional = (Profesional) session.getAttribute("usuariosession");

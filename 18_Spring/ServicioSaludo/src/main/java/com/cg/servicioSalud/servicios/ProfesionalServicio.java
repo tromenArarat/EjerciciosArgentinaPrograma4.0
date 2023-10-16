@@ -4,6 +4,7 @@ import com.cg.servicioSalud.entidades.Imagen;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
 import com.cg.servicioSalud.enumeradores.Rol;
+import com.cg.servicioSalud.excepciones.MiException;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class ProfesionalServicio implements UserDetailsService {
             String especialidad, 
             String ubicacion,
             Double tarifa) throws Exception{
-       
+        validar(nombreCompleto,email,clave,telefono,ubicacion,tarifa);
         //Falta funcion validar
         Profesional profesional = new Profesional();
         profesional.setRol(Rol.ADMIN);
@@ -67,33 +68,32 @@ public class ProfesionalServicio implements UserDetailsService {
         profesionalRepositorio.save(profesional);
         return profesional;
     }
-
+   
     @Transactional
-    public void modificarProfesional(String id, String nombreCompleto, String email, 
-            String clave, Long telefono, Imagen imagen, 
-            Double reputacion, String disponibilidad, 
+    public void actualizarProfesional(String id, String nombreCompleto, 
+            String email, 
+            String clave, Long telefono, MultipartFile archivo, String disponibilidad, 
             Boolean obrasSociales, String modalidad, 
-            String especialidad, String ubicacion, 
-            Boolean activo, Double tarifa) {
+            String especialidad, String ubicacion, Double tarifa) throws MiException, Exception {
 
-        //funcion validar
+        validar(nombreCompleto,email,clave,telefono,ubicacion,tarifa);
         
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
        
         if (respuesta.isPresent()) {
-
+            
             Profesional profesional = respuesta.get();
+            profesional.setRol(Rol.USER);
+            Imagen imagen = imagenServicio.guardar(archivo);
             profesional.setImagen(imagen);
             profesional.setNombreCompleto(nombreCompleto);
+            profesional.setClave(new BCryptPasswordEncoder().encode(clave));
+            
             profesional.setTarifa(tarifa);
 
             profesional.setDisponibilidad(disponibilidad);
 
-            profesional.setActivo(Boolean.FALSE);
-            profesional.setClave(clave);
             profesional.setEspecialidad(especialidad);
-            profesional.setFechaAlta(new Date());
-            profesional.setReputacion(reputacion);
             profesional.setModalidad(modalidad);
             profesional.setObrasSociales(obrasSociales);
             profesional.setUbicacion(ubicacion);
@@ -176,5 +176,27 @@ public class ProfesionalServicio implements UserDetailsService {
         
     }
     
+    private void validar(String nombreCompleto, String email, String clave, Long telefono, String ubicacion, Double tarifa) throws MiException{
+        
+        if (nombreCompleto.isEmpty() || nombreCompleto == null) {
+           throw new MiException("El nombre no puede ser nulo o estar vacío");
+        }
+        if (email.isEmpty() || email == null) {
+            throw new MiException("El correo electrónico no puede ser nulo o estar vacio");
+        }
+        if (clave.isEmpty() || clave == null || clave.length() <= 2) {
+            throw new MiException("La contraseña no puede estar vacía, y debe tener más de 2 dígitos");
+        }
+        if (telefono == null) {
+            throw new MiException("El teléfono es requisito obligatorio");
+        }
+        if (ubicacion.isEmpty() || ubicacion == null) {
+            throw new MiException("El teléfono es requisito obligatorio");
+        }
+        if (tarifa == null) {
+            throw new MiException("El teléfono es requisito obligatorio");
+        }
+        
+    }
     
 }

@@ -37,54 +37,7 @@ public class TurnoControlador {
     @Autowired
     private HistorialClinicoServicio historiaServicio;
 
-    @GetMapping("/confirmado/{id}")
-    public String registrarTurno(@PathVariable String id, 
-            @RequestParam("fecha") String fechaStr,
-            @RequestParam("horario") String horario,
-            HttpSession session, 
-            ModelMap modelo) throws Exception {
-        // Parse the 'fecha' parameter into a Date object
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date fecha = dateFormat.parse(fechaStr);
-
-        Turno turno = new Turno();
-                
-        turno.setFecha(fecha);
-        
-        turno.setEstado(Estado.PENDIENTE);
-        
-        Paciente paciente = (Paciente) session.getAttribute("paciente");
-        turno.setPaciente(paciente);
-        
-        turno.setHorario(horario);
-
-        Profesional profesional = (Profesional) profesionalServicio.getOne(id);
-        turno.setProfesional(profesional);
-        System.out.println(profesional.getNombreCompleto());
-        // llamar a un método que tome 
-        
-        turno.setPrecioFinal(turnoServicio.calcularPrecioFinal(profesional,paciente));
-        
-        turnoServicio.confirmarTurno(turno);
-        
-        historiaServicio.crearHistorial(turno);
-        
-
-        modelo.addAttribute("turno", turno);
-        modelo.addAttribute("id", turno.getId());
-        modelo.addAttribute("paciente", paciente);
-
-        return "turno_confirmado.html";
-    }
     
-    @GetMapping("/reserva/{id}")
-    public String procesarPeticion(@PathVariable String id,
-            @RequestParam String motivo) throws Exception {
-        
-        turnoServicio.registrarMotivo(id, motivo);
-        
-        return "turno_ficha_paciente.html"; 
-    }
     
     @GetMapping("/cancelado/{id}")
     public String cancelarTurno(@PathVariable String id, 

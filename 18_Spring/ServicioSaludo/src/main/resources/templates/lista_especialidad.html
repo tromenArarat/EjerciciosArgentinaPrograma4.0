@@ -31,9 +31,9 @@
 
     <nav class="navbar navbar-expand-lg navBar">
         <div class="containerImg">
-            <a href="/paciente/listaespecial" class="navbar-brand d-flex align-items-center">
+            <<div class="navbar-brand d-flex align-items-center">
                 <img class="logo" src="/img/logo.jfif" alt="Img logo">
-            </a>
+            </div>
         </div>
         
         
@@ -64,7 +64,7 @@
         <button type="submit" name="listar" value="fecha" class="btn btn-secondary">Ordenar por Fecha</button>
     </form>
 
-    <form th:action="@{/turno/confirmado}" th:object="${turno}" method="GET" enctype="multipart/form-data" class="mt-4">
+    <form method="GET" enctype="multipart/form-data" class="mt-4">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -95,7 +95,7 @@
                     <td th:text="${turno.profesional.tarifa}"></td>
                     <td th:text="${turno.profesional.reputacion}"></td>
                     <td th:text="${turno.horario}"></td>
-                    <td><a th:href="@{/turno/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, horario=${turno.horario})}" class="btn btn-secondary">Reservar</a></td>
+                    <td><a th:href="@{/paciente/confirmado/__${turno.profesional.id}__(fecha=${#dates.format(turno.fecha, 'yyyy-MM-dd')}, horario=${turno.horario})}" class="btn btn-secondary">Reservar</a></td>
                 </tr>
             </tbody>
         </table>

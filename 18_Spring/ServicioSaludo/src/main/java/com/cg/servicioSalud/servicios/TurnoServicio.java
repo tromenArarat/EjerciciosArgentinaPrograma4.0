@@ -57,6 +57,8 @@ public class TurnoServicio {
         Turno turno = traeUno(id);    
         turno.setMotivo(motivo);
             turnoRepositorio.save(turno);
+            
+            historiaServicio.crearHistorial(turno);
             return turno;
     }
     

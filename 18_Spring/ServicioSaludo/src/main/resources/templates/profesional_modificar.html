@@ -62,7 +62,7 @@
            }
            
            .switch-input {
-    display: none; /* Hide the checkbox */
+                display: none; /* Hide the checkbox */
 }
 
 .switch-label {
@@ -109,7 +109,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <a th:href="@{/}" class="btn btn-light btn-sm">Volver</a>
+                    <a th:href="@{/profesional/turnos}" class="btn btn-light btn-sm">Volver</a>
                 </div>
             </div>
         </nav>
@@ -120,32 +120,32 @@
             
             <div class="container mt-5">
                 <h4 class="mb-4  text-center">Formulario de registro</h4>
-                <form action="/profesional/registro" method="POST" enctype="multipart/form-data"
+                <form action="/profesional/perfil/{id}" method="POST" enctype="multipart/form-data"
                       class="p-3 border rounded bg-white shadow-sm">
                     <div>
                         
                         <div class="mb-3">
                             <label for="name" class="bold-label">Nombre completo</label>
-                            <input name="nombreCompleto" type="text" id="name" class="form-control" placeholder="Zoilo Sagaz">
+                            <input name="nombreCompleto" type="text" id="name" class="form-control" th:value="${profesional.nombreCompleto}">
                         </div>
                         <div class="mb-4">
                             <label for="correo" class="bold-label">Correo electrónico</label>
-                            <input name="email" type="email" id="correo" class="form-control" placeholder="vos@ejemplo.edu">
+                            <input name="email" type="email" id="correo" class="form-control" th:value="${profesional.email}">
                         </div>
                         <div class="mb-4">
-                            <label for="pass" class="bold-label">Clave</label>
+                            <label for="pass" class="bold-label">Actualice su clave</label>
                             <input name="clave" type="password" id="pass" class="form-control" placeholder="*******">
                         </div>
                         <div class="mb-3">
                             <label for="tel" class="bold-label">Teléfono</label>
-                            <input name="telefono" type="number" id="tel" class="form-control" placeholder="444555">
+                            <input name="telefono" type="number" id="tel" class="form-control" th:value="${profesional.telefono}">
                         </div>
                         <div class="mb-3">
                             <label for="img" class="bold-label">Imagen<span> (Opcional)</span></label>
                             <input name="imagen" type="file" id="img" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="dispo" class="bold-label">Disponibilidad</label>
+                            <label for="dispo" class="bold-label">Actualice su isponibilidad</label>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -224,14 +224,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="address" class="bold-label">Ubicación</label>
-                            <input name="ubicacion" type="text" id="address" class="form-control" placeholder="Chos Malal">
+                            <input name="ubicacion" type="text" id="address" class="form-control" th:value="${profesional.especialidad}">
                         </div>
                         <div class="mb-3">
                             <label for="cash" class="bold-label">Tarifa</label>
-                            <input name="tarifa" type="number" id="cash" class="form-control" placeholder="1000">
+                            <input name="tarifa" type="number" id="cash" class="form-control" th:value="${profesional.tarifa}">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Registrar</button>
+                    <button type="submit" class="btn btn-secondary">Actualizar</button>
                 </form>
             </div>
         </main>
