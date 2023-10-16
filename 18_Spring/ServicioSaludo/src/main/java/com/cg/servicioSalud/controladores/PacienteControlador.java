@@ -162,9 +162,6 @@ public class PacienteControlador {
         return "lista_especialidad.html";
     }
     
-    
-    
-       
    @GetMapping("/misturnos")
    public String mostrarTurnos(HttpSession session,
                 ModelMap modelo){
@@ -174,8 +171,7 @@ public class PacienteControlador {
        List<Turno> turnos = turnoServicio.mostrarTurnosPaciente(paciente.getId());
       
        modelo.addAttribute("turnos",turnos);
-       
-       System.out.println(turnos);
+       modelo.addAttribute("paciente",paciente);
        
        return "paciente_turnos.html";
    }
@@ -186,8 +182,10 @@ public class PacienteControlador {
        
        Turno turno = turnoServicio.traeUno(id);
        
-       modelo.addAttribute("turno",turno);
+       Paciente paciente = (Paciente) session.getAttribute("usuariosession");
        
+       modelo.addAttribute("turno",turno);
+       modelo.addAttribute("paciente",paciente);
        
        return "devolucion.html";
    }
@@ -203,9 +201,11 @@ public class PacienteControlador {
        profesionalServicio.modificarReputacion(turno.getProfesional().getId());
 
        Paciente paciente = (Paciente) session.getAttribute("usuariosession");
-//       session.setAttribute("paciente", paciente);
+       
        List<Turno> turnos = turnoServicio.mostrarTurnosPaciente(paciente.getId());
        modelo.addAttribute("turnos", turnos);
+       modelo.addAttribute("paciente",paciente);
+
        
        return "paciente_turnos.html";
    }

@@ -9,6 +9,7 @@ import com.cg.servicioSalud.entidades.Paciente;
 import com.cg.servicioSalud.entidades.Profesional;
 import com.cg.servicioSalud.entidades.Turno;
 import com.cg.servicioSalud.enumeradores.Estado;
+import com.cg.servicioSalud.excepciones.MiException;
 import com.cg.servicioSalud.repositorios.HistorialClinicoRepositorio;
 import com.cg.servicioSalud.repositorios.ProfesionalRepositorio;
 import com.cg.servicioSalud.repositorios.TurnoRepositorio;
@@ -179,48 +180,40 @@ public class TurnoServicio {
                          
                          String horario = String.valueOf(disponibilidad.indexOf(diaStr)+1);
                          
+                         String horario1 ="";
+                         String horario2 ="";
+                         String horario3 ="";
+                         String horario4="";
+                         
                          int indice = Integer.parseInt(horario);
                          
                          char horarioChar = disponibilidad.charAt(indice);
 
                             switch (horarioChar) {
                                 case 'm':
-                                    horario = "mañana";
+                                    horario1 = "8 a 9";
+                                    horario2 = "9 a 10";
+                                    horario3 = "10 a 11";
+                                    horario4 = "11 a 12";
                                     break;
                                 case 't':
-                                    horario = "tarde";
+                                    horario1 = "15 a 16";
+                                    horario2 = "16 a 17";
+                                    horario3 = "17 a 18";
+                                    horario4 = "18 a 19";
                                     break;
                                 case 'n':
-                                    horario = "noche";
-                                    break;
-                                default:
-                                    // En caso de que el carácter no sea reconocido
-                                    horario = "desconocido";
+                                    horario1 = "19 a 20";
+                                    horario2 = "20 a 21";
+                                    horario3 = "21 a 22";
+                                    horario4 = "22 a 23";
                                     break;
                             }
+                            turno1.setHorario(horario1);
+                            turno2.setHorario(horario2);
+                            turno3.setHorario(horario3);
+                            turno4.setHorario(horario4);
 
-                         switch(horario){
-                             case "mañana":
-                                turno1.setHorario("8 a 9");
-                                turno2.setHorario("9 a 10");
-                                turno3.setHorario("10 a 11");
-                                turno4.setHorario("11 a 12");
-                                break;
-                             case "tarde":
-                                turno1.setHorario("15 a 16");
-                                turno2.setHorario("16 a 17");
-                                turno3.setHorario("17 a 18");
-                                turno4.setHorario("18 a 19");
-                                break;
-                             case "noche":
-                                turno1.setHorario("19 a 20");
-                                turno2.setHorario("20 a 21");
-                                turno3.setHorario("21 a 22");
-                                turno4.setHorario("22 a 23");
-                                break;
-                         }   
-                         
-                         
                          // OBJETIVO la última pregunta es para chequear que no haya sido dado ya el turno
                          if(buscarPorFechaHorario(turno1.getFecha(),turno1.getHorario())==null){
                              turnos.add(turno1);
@@ -248,29 +241,26 @@ public class TurnoServicio {
     }
     
     public List<Turno> mostrarTurnosPaciente(String idPaciente){
-        /*
+       
         List<Turno> turnelis = new ArrayList();
         List<Turno> turnos = new ArrayList();
         
+        turnelis = turnoRepositorio.buscarPorPaciente(idPaciente);
         
-        turnelis = turnoRepositorio.findAll();
-        
-        for (Turno turno : turnelis) {
-            if(turno.getPaciente().getId().equalsIgnoreCase(idPaciente)){
-                turnos.add(turno);
+        for (Turno turneli : turnelis) {
+            if(turneli.getEstado()==Estado.COMPLETADO){
+                turnos.add(turneli);
             }
         }
         
         return turnos;
-*/    
-        return turnoRepositorio.buscarPorPaciente(idPaciente);
 }
     
     // Este método está acá porque se usa en paciente_turnos que solo pasa el atributo turnos desde el model
-    public HistorialClinico buscarRegistro(String id){
+    public HistorialClinico buscarRegistro(String id) throws Exception {
         HistorialClinico registroHistorial = historiaServicio.traePorTurno(id);
         return registroHistorial;
-    }
+}
     
     public Turno buscarPorFechaHorario(Date fecha, String horario){
         Turno turno = (Turno) turnoRepositorio.buscarPorFechaHorario(fecha, horario);
