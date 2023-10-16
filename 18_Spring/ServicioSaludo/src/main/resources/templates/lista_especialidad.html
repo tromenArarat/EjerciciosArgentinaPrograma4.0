@@ -31,7 +31,7 @@
 
     <nav class="navbar navbar-expand-lg navBar">
         <div class="containerImg">
-            <a href="/paciente/inicio" class="navbar-brand d-flex align-items-center">
+            <a href="/paciente/listaespecial" class="navbar-brand d-flex align-items-center">
                 <img class="logo" src="/img/logo.jfif" alt="Img logo">
             </a>
         </div>
@@ -61,6 +61,7 @@
         <input type="hidden" name="especialidad" th:value="${especialidad}">
         <button type="submit" name="listar" value="tarifa" class="btn btn-secondary">Ordenar por Tarifa</button>
         <button type="submit" name="listar" value="reputacion" class="btn btn-secondary">Ordenar por Reputación</button>
+        <button type="submit" name="listar" value="fecha" class="btn btn-secondary">Ordenar por Fecha</button>
     </form>
 
     <form th:action="@{/turno/confirmado}" th:object="${turno}" method="GET" enctype="multipart/form-data" class="mt-4">

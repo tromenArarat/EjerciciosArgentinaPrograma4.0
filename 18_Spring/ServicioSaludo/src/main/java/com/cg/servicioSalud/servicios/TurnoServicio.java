@@ -72,6 +72,12 @@ public class TurnoServicio {
         Collections.sort(turnos, reputacionComparator.reversed());
         return turnos;
     }
+    public List<Turno> ordenarTurnosPorFecha(List<Turno> turnos)throws Exception{
+        
+        Comparator<Turno> reputacionComparator = Comparator.comparing(turno -> turno.getFecha());
+        Collections.sort(turnos, reputacionComparator);
+        return turnos;
+    }
     
     @Transactional
     public void cancelarTurno(String id){

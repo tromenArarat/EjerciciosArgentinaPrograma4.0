@@ -96,7 +96,7 @@ public class PacienteControlador {
     }
     
     @PostMapping("/perfil/{id}")
-    public String actualizar(@RequestParam String nombreCompleto, 
+    public String actualizar(@PathVariable String id, @RequestParam String nombreCompleto, 
             @RequestParam String email,
             @RequestParam String clave,
             @RequestParam(required = false) Long telefono,
@@ -105,13 +105,14 @@ public class PacienteControlador {
             ModelMap modelo, HttpSession session) throws Exception {
 
         try{
-            Paciente paciente = pacienteServicio.crearPaciente(
-                    nombreCompleto, email, clave, 
+            pacienteServicio.actualizarPaciente(
+                    id, nombreCompleto, email, clave, 
                     telefono, imagen, obraSocial);
             modelo.put("exito", "Usuario registrado correctamente!");
             List<String> especialidades = profesionalServicio.listarEspecialidades();
-            session.setAttribute("paciente",paciente);
+            Paciente paciente = (Paciente) session.getAttribute("usuariosession");
             modelo.addAttribute("especialidades",especialidades);
+            modelo.addAttribute("paciente",paciente);
             
             
         } catch (MiException ex) {
@@ -151,6 +152,8 @@ public class PacienteControlador {
           turnoServicio.ordenarTurnosPorReputacion(turnos);
       }else if(listar.equals("tarifa")){
           turnoServicio.ordenarTurnosPorTarifa(turnos);
+      }else if(listar.equals("fecha")){
+          turnoServicio.ordenarTurnosPorFecha(turnos);
       }
       if (paciente == null) {
         // Handle the case where the Paciente object is not found in the session

@@ -7,6 +7,7 @@ import com.cg.servicioSalud.excepciones.MiException;
 import com.cg.servicioSalud.repositorios.PacienteRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -52,6 +53,32 @@ public class PacienteServicio implements UserDetailsService {
 
         pacienteRepositorio.save(paciente);
         return paciente;
+    }
+    @Transactional
+    public void actualizarPaciente(String id, String nombreCompleto, String email, 
+            String clave, Long telefono, MultipartFile archivo, 
+            String obraSocial) throws Exception{
+       
+        validar(nombreCompleto,email,clave,telefono);
+        
+        Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+
+        Paciente paciente = respuesta.get();
+        paciente.setRol(Rol.USER);
+        Imagen imagen = imagenServicio.guardar(archivo);
+        paciente.setImagen(imagen);
+        paciente.setNombreCompleto(nombreCompleto);
+        
+        paciente.setClave(new BCryptPasswordEncoder().encode(clave));
+      
+        paciente.setObraSocial(obraSocial);
+        paciente.setTelefono(telefono);
+        paciente.setEmail(email);
+
+        pacienteRepositorio.save(paciente);
+        }
+        
     }
     
     public Paciente getOne(String id){
