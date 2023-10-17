@@ -9,13 +9,14 @@
     <style>
         body {
             background-image: url("img/frontIndex.jpg");
-            background-size:content;
+            background-size: 50%; /* Adjust the percentage to control the size */
             background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; /* Center the background image */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 150vh; /* Use min-height to ensure centered content */
-            background-color: #f0f0f0; /* Set a background color for readability */
+            min-height: 100vh;
         }
 
         .list-group {
@@ -31,21 +32,21 @@
         <li class="list-group-item">
             <div class="d-grid">
                 <a href="/profesional/registrar" class="btn btn-secondary" id="boton">
-                    Registrate como profesional
+                    Regístrate como profesional
                 </a>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-grid">
                 <a href="/paciente/registrar" class="btn btn-secondary" id="boton">
-                    Registrate como paciente
+                    Regístrate como paciente
                 </a>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-grid">
                 <a href="/login" class="btn btn-secondary" id="boton">
-                    Ingresá
+                    Ingresa
                 </a>
             </div>
         </li>

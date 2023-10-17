@@ -109,6 +109,9 @@ public class ProfesionalServicio implements UserDetailsService {
     public Profesional buscarPorEmail(String email){
         return profesionalRepositorio.buscarPorEmail(email);
     }
+    public Profesional guardarCambios(Profesional doc){
+        return profesionalRepositorio.save(doc);
+    }
     public List<Profesional> listarProfesionales() {
         
         List<Profesional> profesionales = new ArrayList();

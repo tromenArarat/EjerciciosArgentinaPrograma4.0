@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<!--
-
--->
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
-    <head>
-        <title>Servicio Salud</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-      
-    </head>
-    <body>
-        
-
-                <div>turno Admin</div>  
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    </body>
+<head>
+    <title>Servicio Salud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   
+</head>
+<body>
+    <div class="container">
+       
+        <div th:if="${profesionales != null}">
+            <div class="d-flex justify-content-between">
+                <h2>Lista de profesionales</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use Thymeleaf to iterate through the list and create rows for each profesional -->
+                    <tr th:each="profesional : ${profesionales}">
+                        <td th:text="${profesional.nombreCompleto}"></td>
+                        <td th:text="${profesional.email}"></td>
+                        <td th:text="${profesional.telefono}"></td>
+                        <td>        
+                <form th:action="@{/admin/roles}" method="GET">
+                                <div class="input-group">
+                                    <input hidden name="id" th:value="${profesional.id}">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="dropdown">
+                                        <span th:text="${profesional.rol}"></span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="submit" name="rol" value="USER" class="dropdown-item">USER</button>
+                                        <button type="submit" name="rol" value="ADMIN" class="dropdown-item">ADMIN</button>
+                                    </div>
+                                </div>
+                            </form>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${pacientes != null}">
+            <div class="d-flex justify-content-between">
+                <h2>Lista de pacientes</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use Thymeleaf to iterate through the list and create rows for each profesional -->
+                    <tr th:each="paciente : ${pacientes}">
+                        <td th:text="${paciente.nombreCompleto}"></td>
+                        <td th:text="${paciente.email}"></td>
+                        <td th:text="${paciente.telefono}"></td>
+                        <td th:text="${paciente.rol}"></td>
+                        <td>
+                            <a th:href="@{/}" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
 </html>

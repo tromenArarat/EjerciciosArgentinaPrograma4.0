@@ -52,8 +52,7 @@ public class PortalControlador {
         Object usuario = session.getAttribute("usuariosession");
         if (usuario instanceof Profesional) {
             if(((Profesional) usuario).getRol().equals(Rol.ADMIN)){
-//              return "redirect:/admin/dashboard";
-                return "redirect:/profesional/turnos";
+              return "redirect:/admin/dashboard";
             }else{
                 return "redirect:/profesional/turnos";
             }

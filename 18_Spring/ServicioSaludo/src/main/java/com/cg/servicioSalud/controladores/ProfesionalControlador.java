@@ -194,7 +194,7 @@ public class ProfesionalControlador {
         HttpSession session) {
        
             Paciente paciente = (Paciente) pacienteServicio.getOne(id);
-            Profesional profesional = (Profesional) session.getAttribute("profesional");
+            Profesional profesional = (Profesional) session.getAttribute("usuariosession");
             
             List<HistorialClinico> historialPaciente = historialServicio.listarHistorialPorPaciente(id);
             
@@ -209,10 +209,14 @@ public class ProfesionalControlador {
     @GetMapping("/historial/modificar/{id}")
         public String modificarHistoria(@PathVariable String id, 
                 @RequestParam String idTurno,
-                ModelMap modelo) throws Exception{
+                ModelMap modelo, HttpSession session) throws Exception{
             
             Paciente paciente = pacienteServicio.getOne(id);
             Turno turno = turnoServicio.traeUno(idTurno);
+            
+            Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+            modelo.addAttribute("profesional",profesional);
+
             
             modelo.addAttribute("paciente",paciente);
             modelo.addAttribute("turno",turno);

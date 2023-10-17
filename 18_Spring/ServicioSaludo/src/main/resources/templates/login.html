@@ -9,23 +9,31 @@
     <style>
         body {
             background-image: url("/img/logia.jpg");
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 140vh;
-        }
-
-        .container {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+            min-height: 100vh; /* Vertically center the content */
         }
 
         form {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 4px 4px 0px #ccc;
             text-align: center;
+            max-width: 400px;
+            margin: auto;
+        }
+        
+        form {
+            text-align: center;
+            max-width: 400px;
+            margin: auto;
         }
     </style>
 </head>

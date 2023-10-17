@@ -75,12 +75,9 @@
         
     </nav>
 
-        <h4 th:text="'Profesional: ' + ${profesional.nombreCompleto}
-            +' // Especialidad: '+${profesional.modalidad}"></h4>
+        <h3 th:if="${not #lists.isEmpty(turnos)}" class="text-gray">Turnos pendientes</h3>
 
-        <h3 >Turnos pendientes</h3>
-
-        <table>
+        <table th:if="${not #lists.isEmpty(turnos)}" class="table table-gray">
             <thead>
                 <tr>
                     <th>
@@ -107,7 +104,7 @@
                         th:text="${#dates.format(turno.fecha, 'dd-MM-yyyy')}">
                     </td>
                     <td>
-                        <a th:href="@{/profesional/historial/__${turno.paciente.id}__}" th:text="${turno.paciente.nombreCompleto}">
+                        <a class="btn btn-secondary" th:href="@{/profesional/historial/__${turno.paciente.id}__}" th:text="${turno.paciente.nombreCompleto}">
                         </a>
                     </td>
                     <td  
@@ -125,9 +122,9 @@
 
                 </tr>
         </table>
-        <h3>Turnos completados</h3>
+    <h3 th:if="${not #lists.isEmpty(turnelis)}" class="text-gray">Turnos completados</h3>
 
-        <table>
+        <table th:if="${not #lists.isEmpty(turnelis)}" class="table table-gray">
             <thead>
                 <tr>
                     <th>

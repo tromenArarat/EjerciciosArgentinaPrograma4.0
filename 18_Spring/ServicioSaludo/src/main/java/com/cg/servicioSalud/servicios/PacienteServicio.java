@@ -88,6 +88,15 @@ public class PacienteServicio implements UserDetailsService {
         return pacienteRepositorio.buscarPorEmail(email);
     }
     
+     public List<Paciente> listarPacientes() {
+        
+        List<Paciente> pacientes = new ArrayList();
+
+        pacientes = pacienteRepositorio.findAll();
+
+        return pacientes;
+    }
+    
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
