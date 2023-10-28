@@ -1,0 +1,47 @@
+Proveedor o Fabricante: es el fabricante o intermediario entre el fabricante y la tienda.
+Queda registrado como un atributo de producto. Cuando falta el producto, llamamos al fabricante.
+Proveedor o Fabricante tiene que ser una entidad para poder acceder a sus datos. Sin login.
+
+Manolo
+
+crearInventario() --> ordernarPorFaltantes--> trae productos que tienen cantidad cero
+tock: hace referencia a nuestro inventario o existencias. Esto sale de listar los productos y 
+asignarles un valor según estén o no en la tienda. 
+
+Producto
+idProducto / EAN1 / Cantidad
+
+
+Usuario
+
+OrdenDeCompra
+
+	buscarDisponibilidad()
+
+Factura
+
+
+
+Para ver luego:
+	Remito
+	Nota de débito
+
+	Nota de crédito
+		para cuando le facturamos de más.
+
+
+
+PowerStock dispone de gestión de almacén. Se organiza con artículos
+que se componen de atributos como la referencia, código interno y EAN1.
+También tiene la posibilidad de trabajar con tallas y colores. Esto significa que
+con la creación de un artículo se generan los subartículos por talla y color.
+Soporta la introducción de datos descriptivos en 4 idiomas diferentes. Tiene
+soporte para la generación de etiquetas de códigos de barras en cualquier
+dispositivo, desde impresora Windows hasta impresora industrial, desde
+Artículos o cualquier documento de movimientos del sistema. Para poder
+realizar la gestión de cada artículo se realiza mediante una única pantalla de
+visualización de stocks y si tiene tallas y/o colores se puede ver también el
+stock de cada uno de ellos en esta misma pantalla. Finalmente se obtiene
+información histórica de movimientos de cualquier artículo (de PROYECTO ECOMMERCE CON
+SINCRONIZACIÓN CON ERP, Francesc Guardiola Gonzalo)
+

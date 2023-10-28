@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head th:replace= "/fragments/head :: head"> </head>
+    <body>
+        
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <form th:action="@{/libro/modificar/__${libro.isbn}__}" method="POST">
+                    
+                    <input hidden th:value="${isbn}" name="isbn">
+                    
+                    <div class="form-group my-3">
+                    
+                        <label class="mb-2">Título</label> 
+
+                        <input th:value="${libro.titulo}" type="text" class="form-control" name="titulo" placeholder="Titulo">
+                
+                    </div>
+
+                <div class="form-group my-3">
+                    
+                    <label class="mb-2">Ejemplares</label> 
+                    
+                    <input th:value="${libro.ejemplares}" type="number" class="form-control" name="ejemplares" placeholder="Cantidad de Ejemplares">
+                
+                </div>
+                
+                    <div class="form-group my-3">
+                    <select name="idAutor">
+                        <option>Seleccionar Autor</option>
+                        <option th:each="autor : ${autores}"
+                                th:value="${autor.id}" 
+                                th:text="${autor.nombre}"
+                                />
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <select name="idEditorial">
+                        <option>Seleccionar Editorial</option>
+                        <option th:each="editorial : ${editoriales}"
+                                th:value="${editorial.id}" 
+                                th:text="${editorial.nombre}"
+                                />
+                    </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/libro/lista}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+            </section>
+                </form>
+            </div>
+        </div>
+                
+        
+        </div>
+        <div th:if="${error!=null}" class="alert alert-danger" role="alert">
+            <div>
+                <h5>Error</h5>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito!= null}" class="alert alert-success" role="alert">
+            <div>
+                <h5>Éxito</h5>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>

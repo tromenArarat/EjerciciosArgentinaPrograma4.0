@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,10 +19,15 @@ import javax.persistence.TemporalType;
 public class Libro {
 @Id
     @Column(name="id")
-    private Long isbn;
+    private String isbn;
     private String titulo;
     private Integer ejemplares;
-   
+    private String tematica;
+    
+    @OneToOne
+    private Imagen tapa;
+    
+    
     @Temporal(TemporalType.DATE)
     private Date alta;
     
@@ -34,11 +40,27 @@ public class Libro {
     public Libro() {
     }
 
-    public Long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public String getTematica() {
+        return tematica;
+    }
+
+    public void setTematica(String tematica) {
+        this.tematica = tematica;
+    }
+
+    public Imagen getTapa() {
+        return tapa;
+    }
+
+    public void setTapa(Imagen tapa) {
+        this.tapa = tapa;
+    }
+
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
