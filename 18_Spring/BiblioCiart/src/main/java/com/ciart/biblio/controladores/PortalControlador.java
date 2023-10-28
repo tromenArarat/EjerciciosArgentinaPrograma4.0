@@ -42,6 +42,7 @@ public class PortalControlador {
         List<Autor> autores = autorServicio.listarAutores();
            List<Editorial> editoriales = editorialServicio.listarEditoriales();
            List<Libro> libros = libroServicio.listarLibro();
+           
            modelo.addAttribute("autores",autores);
            modelo.addAttribute("editoriales",editoriales);
            modelo.addAttribute("libros",libros);
@@ -137,6 +138,7 @@ public class PortalControlador {
             modelo.put("exito", "Usuario actualizado correctamente!");
 
             return "inicio.html";
+            
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());
