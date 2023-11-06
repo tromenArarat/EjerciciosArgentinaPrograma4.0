@@ -15,6 +15,16 @@
 
                         <input th:value="${titulo}" type="text" class="form-control" name="titulo" placeholder="Titulo">
                     </div>
+                    <div class="form-group my-3">
+                        <label class="mb-2">Temática</label> 
+
+                        <input th:value="${tematica}" type="text" class="form-control" name="tematica" placeholder="Temática">
+                    </div>
+                    <div class="form-group my-3">
+                        <label class="mb-2">Descripción</label> 
+
+                        <textarea th:text="${descripcion}" type="text" name="descripcion"> </textarea>
+                    </div>
 
                     <div class="form-group my-3">
                         <label class="mb-2">Ejemplares</label> 

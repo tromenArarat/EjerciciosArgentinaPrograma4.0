@@ -4,18 +4,18 @@
 
 package com.ciart.biblio.controladores;
 
-import com.ciart.biblio.api.assembler.VolumeInfoAssembler;
-import com.ciart.biblio.api.model.VolumeInfoModel;
-import com.ciart.biblio.domain.model.VolumeInfo;
-import com.ciart.biblio.domain.service.IsbnService;
+import com.ciart.biblio.isbnapi.assembler.VolumeInfoAssembler;
+import com.ciart.biblio.isbnapi.modelo.VolumeInfoModel;
+import com.ciart.biblio.isbnapi.domain.model.VolumeInfo;
+import com.ciart.biblio.isbnapi.domain.service.IsbnService;
 import com.ciart.biblio.entidades.Autor;
 import com.ciart.biblio.entidades.Editorial;
 import com.ciart.biblio.entidades.Imagen;
 import com.ciart.biblio.entidades.Libro;
 import com.ciart.biblio.excepciones.MiException;
-import com.ciart.biblio.servicios.AutorServicio;
-import com.ciart.biblio.servicios.EditorialServicio;
-import com.ciart.biblio.servicios.LibroServicio;
+import com.ciart.biblio.isbnapi.servicios.AutorServicio;
+import com.ciart.biblio.isbnapi.servicios.EditorialServicio;
+import com.ciart.biblio.isbnapi.servicios.LibroServicio;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +41,7 @@ public class LibroControlador {
     @Autowired
     private IsbnService isbnService;
     @Autowired
-	private VolumeInfoAssembler volumeInfoAssembler;
+    private VolumeInfoAssembler volumeInfoAssembler;
     
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo){
@@ -49,20 +49,23 @@ public class LibroControlador {
            List<Autor> autores = autorServicio.listarAutores();
            List<Editorial> editoriales = editorialServicio.listarEditoriales();
            List<Libro> libros = libroServicio.listarLibro();
+           
            modelo.addAttribute("autores",autores);
            modelo.addAttribute("editoriales",editoriales);
            modelo.addAttribute("libros",libros);
            
            return "libro_form.html";
     }
+    
     @PostMapping("/registro")
-    public String registro(@RequestParam(required=false) String isbn, @RequestParam String titulo,
+    public String registro(@RequestParam(required=false) String isbn, 
+            @RequestParam String titulo,
             @RequestParam(required=false) Integer ejemplares, 
             @RequestParam String tematica,
             @RequestParam String idAutor,
             @RequestParam String idEditorial, ModelMap modelo){
         try {
-            libroServicio.crearLibro(isbn,titulo,ejemplares,idAutor,idEditorial);
+            libroServicio.crearLibro(isbn,titulo,tematica,ejemplares,idAutor,idEditorial);
             List<Autor> autores = autorServicio.listarAutores();
             List<Editorial> editoriales = editorialServicio.listarEditoriales();
             List<Libro> libros = libroServicio.listarLibro();
@@ -90,7 +93,7 @@ public class LibroControlador {
     public String list(ModelMap modelo){
         List<Libro> libros = libroServicio.listarLibro();
         modelo.addAttribute("libros", libros);
-        return "libro_list.html";
+        return "lista.html";
     }
     
     @GetMapping("/modificar/{isbn}")
@@ -98,19 +101,19 @@ public class LibroControlador {
       
         modelo.put("libro", libroServicio.traeUno(isbn));
         
-        System.out.println("que onda");
-        
         List<Autor> autores = autorServicio.listarAutores();
         List<Editorial> editoriales = editorialServicio.listarEditoriales();
         
         VolumeInfo volume = isbnService.findIsbnManual(isbn);
 		VolumeInfoModel libro = (VolumeInfoModel) volumeInfoAssembler.toModel(volume);
                 String titulo = libro.getTitle();
-                System.out.println(titulo);
-                
+               String tematica = libro.getCategories().get(0);
+               String descripcion = libro.getDescription();
+               
                 
         modelo.addAttribute("titulo", titulo);
-        
+        modelo.addAttribute("descripcion", descripcion);
+        modelo.addAttribute("tematica", tematica);
         modelo.addAttribute("autores", autores);
         modelo.addAttribute("editoriales", editoriales);
         
@@ -119,7 +122,8 @@ public class LibroControlador {
 
     @PostMapping("/modificar/{isbn}")
     public String modificar(@PathVariable String isbn, 
-            @RequestParam String titulo, Integer ejemplares, String idAutor, 
+            @RequestParam String titulo, @RequestParam String tematica,
+            Integer ejemplares, String idAutor, 
             String idEditorial, ModelMap modelo) {
         try {
             List<Autor> autores = autorServicio.listarAutores();
@@ -128,9 +132,8 @@ public class LibroControlador {
             modelo.addAttribute("autores", autores);
             modelo.addAttribute("editoriales", editoriales);
 
-            libroServicio.modificarLibro(isbn, titulo, ejemplares,idAutor, idEditorial);
+            libroServicio.modificarLibro(isbn, titulo, tematica, ejemplares,idAutor, idEditorial);
             
-                        
             return "redirect:../lista";
 
         } catch (MiException ex) {

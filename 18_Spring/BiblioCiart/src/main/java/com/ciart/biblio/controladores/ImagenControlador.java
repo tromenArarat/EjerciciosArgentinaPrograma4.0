@@ -5,7 +5,7 @@
 package com.ciart.biblio.controladores;
 
 import com.ciart.biblio.entidades.Usuario;
-import com.ciart.biblio.servicios.UsuarioServicio;
+import com.ciart.biblio.isbnapi.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

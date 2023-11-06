@@ -4,7 +4,7 @@
 
 package com.ciart.biblio;
 
-import com.ciart.biblio.servicios.UsuarioServicio;
+import com.ciart.biblio.isbnapi.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
