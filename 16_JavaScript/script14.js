@@ -91,16 +91,108 @@ function palindrome(str) {
 
 //console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1));
 
-function bouncer(arr) {
-  let arr2=[...arr]
-  for(let i=0;i<arr2.length;i++){
-    console.log(arr2[i])
-    if(arr2[i]==false||arr2[i]==null||arr2[i]==0||arr2[i]==""||arr2[i]==undefined||arr2[i]===NaN){
-      arr2.splice(i,arr2[i]);
+function isFalsy(value) {
+    if(isNaN(value)||value==false||value==null||value==0
+    ||value===undefined){
+      return true;
+    }else{
+      return false;
     }
-  }
-  
-  return arr2;
 }
 
-console.log(bouncer([7, "ate", "", false, 9]));
+function bouncer(arr) {
+const trulyValues = arr.filter(function(value){
+return !isFalsy(value);
+});
+return trulyValues;
+}
+
+//console.log(bouncer([7, "atefsdfsd", 10, "", false, 9]));
+
+function compareNumeric(a, b) {
+  if (a > b) return 1;
+  if (a == b) return 0;
+  if (a < b) return -1;
+  }
+
+function getIndexToIns(arr, num) {
+  let ind = 0;
+  const arrSort = arr.sort(compareNumeric);
+  console.log(arrSort)
+  for (let i=0;i<arr.length;i++){
+    if(arrSort[i]==num){
+      ind = i;
+      return ind;
+    }
+    if(arrSort[i]<num&&(arrSort[i+1]>=num||!arrSort[i+1])){
+        ind = i+1;
+    }
+  } 
+  return ind;
+}
+
+//console.log(getIndexToIns([3, 10, 5], 3));
+
+function extirpa(cadena,posicion){
+  const letras = [];
+    if(posicion===cadena.length){
+      return letras;
+    }else{
+      letras.unshift(cadena.substring(posicion,(posicion+1)));
+      return letras.concat(extirpa(cadena,posicion+1))
+    }
+  }
+
+  function mutation(arr) {
+    const a = extirpa(arr[1],0)
+    for (let i=0;i<a.length;i++){
+
+      if(arr[0].indexOf(a[i])===(-1)){
+        return false;
+      }
+    }
+    return true;
+   }  
+  
+ // console.log(mutation(["Tiger", "Zebra"]));
+
+//  function chunkArrayInGroups(arr, size) {
+//   let num = Math.ceil(arr.length / size); 
+//   let newArr = [];
+
+//   for (let i = 0; i < num; i++) {
+//     newArr.push(arr.slice(i * size, i * size + size));
+//   }
+
+//   return newArr;
+// }
+
+//ESTA ES LA MEJOR SOLUCIÓN QUE VI
+//ES LA DE LA NAVAJA SUIZA
+function chunkArrayInGroups(arr, size) {
+  const newArr = [];
+  while (arr.length > 0) {
+    newArr.push(arr.splice(0, size));
+  }
+  return newArr;
+}
+
+chunkArrayInGroups(["a", "b", "c", "d","e"], 2);
+
+
+
+
+const h2 = document.getElementById("h2")
+const h3 = document.getElementById("h3")
+const h4 = document.getElementById("h4")
+const h5 = document.getElementById("h5")
+
+h2.innerHTML = chunkArrayInGroups(["a", "b", "c", "d"], 2);
+
+console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2))
+
+let arr = ["t", "e", "s", "t"];
+
+
+h3.textContent = arr.slice(1, 3)
+
