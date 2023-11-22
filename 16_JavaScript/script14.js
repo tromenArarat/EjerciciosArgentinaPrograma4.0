@@ -179,20 +179,119 @@ function chunkArrayInGroups(arr, size) {
 
 chunkArrayInGroups(["a", "b", "c", "d","e"], 2);
 
-
-
-
 const h2 = document.getElementById("h2")
 const h3 = document.getElementById("h3")
 const h4 = document.getElementById("h4")
 const h5 = document.getElementById("h5")
 
-h2.innerHTML = chunkArrayInGroups(["a", "b", "c", "d"], 2);
+h2.innerHTML = chunkArrayInGroups(["a", "b", "d"], 2);
 
-console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2))
+// console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2))
 
 let arr = ["t", "e", "s", "t"];
 
-
 h3.textContent = arr.slice(1, 3)
 
+
+const switcher =(num,i,j,f)=>{
+  switch(num){
+        case 0:
+        return i;
+        case 1:
+        return i.concat(j);
+        case 2:
+        return i.concat(j).concat(j);
+        case 3:
+        return i.concat(j).concat(j).concat(j);
+        case 4:
+        return j.concat(f)
+        }
+  }
+const conversor = (num) =>{
+  if(num<5){
+    return switcher(num,"","I","V")
+  }
+  if(num>=5&&num<10){
+    return switcher(num-5,"V","I","X")
+  }
+  if(num>=10&&num<15){
+    return switcher(num-10,"X","I","V")
+  }
+}
+
+//console.log(conversor(3))
+
+
+
+const switchealo = (este,uno,penta,diez) => {
+  switch (este){
+    case 1:
+      return uno;
+    case 2:
+      return uno.concat(uno);
+    case 3:
+      return uno.concat(uno).concat(uno);
+    case 4:
+      return uno.concat(penta);
+    case 5:
+      return penta;
+    case 6:
+      return penta.concat(uno);
+    case 7:
+      return penta.concat(uno).concat(uno);
+    case 8:
+      return penta.concat(uno).concat(uno).concat(uno);
+    case 9:
+      return uno.concat(diez);
+  }
+}
+
+const vivaNeron = (arabigo) => {
+
+  let palito = "I"
+  let victoria = "V"
+  let equis = "X"
+  let cincuenta = "L"
+  let cien = "C"
+  let quinientos = "D"
+  let mil = "M"
+
+  let milena = Math.floor(arabigo/1000);
+  let centena = Math.floor(arabigo%1000/100);
+  let decena = Math.floor(((arabigo%1000)%100)/10);
+  let unidad = ((arabigo%1000)%100)%10;
+
+  let primero = ""
+  let segundo = ""
+  let tercero = ""
+  let cuarto = ""
+
+  
+  // if (milena!=0){
+  //   switch(milena){
+  //     case 1:
+  //       primero = mil;
+  //     case 2:
+  //       primero = mil.concat(mil);
+  //     case 3:
+  //       primero = mil.concat(mil).concat(mil);
+  //   } 
+  
+  // }
+  if(milena!=0){
+    primero = switchealo(milena, mil, "K", "W");
+  }
+  if(centena!=0){
+    segundo = switchealo(centena, cien, quinientos, mil);
+  }
+  if(decena!=0){
+    tercero = switchealo(decena, equis, cincuenta, cien);
+  }
+  if(unidad!=0){
+    cuarto = switchealo(unidad, palito, victoria, equis);
+  }
+  return primero.concat(segundo).concat(tercero).concat(cuarto)
+}
+console.log(vivaNeron(2500))
+
+h4.textContent = vivaNeron(100);
