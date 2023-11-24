@@ -266,18 +266,6 @@ const vivaNeron = (arabigo) => {
   let tercero = ""
   let cuarto = ""
 
-  
-  // if (milena!=0){
-  //   switch(milena){
-  //     case 1:
-  //       primero = mil;
-  //     case 2:
-  //       primero = mil.concat(mil);
-  //     case 3:
-  //       primero = mil.concat(mil).concat(mil);
-  //   } 
-  
-  // }
   if(milena!=0){
     primero = switchealo(milena, mil, "K", "W");
   }
@@ -294,4 +282,4 @@ const vivaNeron = (arabigo) => {
 }
 console.log(vivaNeron(2500))
 
-h4.textContent = vivaNeron(100);
+h4.textContent = vivaNeron(2500);
